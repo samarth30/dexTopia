@@ -349,7 +349,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function EnhancedTable({ gauges, setParentSliderValues, defaultVotes, veToken, token,poolReward }) {
+export default function EnhancedTable({ gauges, setParentSliderValues, defaultVotes, veToken, token,poolReward , poolStaked }) {
   const classes = useStyles();
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('totalVotes');
@@ -510,20 +510,23 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                   <TableCell className={classes.cell} align="right">
                     <div className={ classes.inlineEnd }>
                       <Typography variant='h2' className={classes.textSpaced}>
-                        {formatCurrency(BigNumber(row?.gauge?.balance).div(row?.gauge?.totalSupply).times(row?.reserve0))}
+                        {/* {console.log(index,"pip")}
+                        {console.log(poolReward,"pip")} */}
+                        {formatCurrency(BigNumber(poolStaked).div(10**18))}
+                        
                       </Typography>
                       <Typography variant='h5' className={classes.textSpaced} color='textSecondary'>
-                        {row?.token0?.symbol}
+                        {/* {row?.token0?.symbol} */}
                       </Typography>
                     </div>
-                    <div className={ classes.inlineEnd }>
+                    {/* <div className={ classes.inlineEnd }>
                       <Typography variant='h5' className={classes.textSpaced}>
                         {formatCurrency(BigNumber(row?.gauge?.balance).div(row?.gauge?.totalSupply).times(row?.reserve1))}
                       </Typography>
                       <Typography variant='h5' className={classes.textSpaced} color='textSecondary'>
                         {row?.token1?.symbol}
                       </Typography>
-                    </div>
+                    </div> */}
                   </TableCell>
                   <TableCell className={classes.cell} align="right">
                     <div className={ classes.inlineEnd }>
@@ -574,6 +577,7 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                   </TableCell>
                 
                   <TableCell className={classes.cell} align="right">
+
                     <Typography variant="h2" className={classes.textSpaced}>
                       { formatCurrency(BigNumber(sliderValue).div(100).times(token?.lockValue)) }
                     </Typography>

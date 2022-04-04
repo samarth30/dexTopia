@@ -110,7 +110,8 @@ class Store {
         fees: [],
         rewards: [],
       },
-      poolRewards:[]
+      poolRewards:[],
+      poolStakedBalance:[]
     };
 
     dispatcher.register(
@@ -234,7 +235,10 @@ class Store {
           //POOLS
           case ACTIONS.POOLREWARDS:
             this.getPoolRewards(payload);
-            break;    
+            break; 
+          case ACTIONS.POOLSTAKED:
+            this.getPoolStaked(payload);
+            break;   
             case ACTIONS.DEPOSITPOOL:
             this.depositLpDepositor(payload);
               break;
@@ -324,6 +328,55 @@ class Store {
       })
     )
     this.setStore({poolsRewards:ps});
+   return ps;
+      
+  }
+
+  getPoolStaked = async(address) =>{
+    const poolStakedBalances = this.store.poolStakedBalance;
+    const multicall = await stores.accountStore.getMulticall();
+    const web3 = await stores.accountStore.getWeb3Provider();
+    if (!web3) {
+      console.warn("web3 not found");
+      return null;
+    }
+    const account = stores.accountStore.getStore("account");
+    if (!account) {
+      console.warn("account not found");
+      return null;
+    }
+
+    let poolReward = [];
+
+    if (poolStakedBalances) {
+      poolReward = poolStakedBalances;
+    } else {
+      poolReward = this.getStore("poolRewards");
+    }
+    
+  
+    
+    const ps = await Promise.all(
+      address.content.filteredAssets.map(async (pair) => {
+        try {
+          const lpDepositorContract = new web3.eth.Contract(
+            CONTRACTS.LP_DEPOSITER_ABI,
+            CONTRACTS.LP_DEPOSITER
+          );
+          const solid =
+            await multicall.aggregate([
+              lpDepositorContract.methods.userBalances(account.address,pair.address)
+            ]);
+            
+            return solid
+        }
+        catch(e){
+          console.log(e ,"allsetbro");
+        }
+      })
+    )
+    this.setStore({poolStakedBalances:ps});
+    // console.log(ps,"pip")
    return ps;
       
   }

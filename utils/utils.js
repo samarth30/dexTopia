@@ -8,7 +8,7 @@ import BigNumber from "bignumber.js";
 //   return window.navigator.language;
 // }
 
-export function formatCurrency(amount, decimals = 2) {
+export function formatCurrency(amount, decimals = 13) {
   if (!isNaN(amount)) {
 
     if(BigNumber(amount).gt(0) && BigNumber(amount).lt(0.01)) {
