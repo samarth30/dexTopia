@@ -4,7 +4,8 @@ import { makeStyles, withStyles } from '@mui/styles';
 import Skeleton from '@mui/lab/Skeleton';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, TablePagination, Typography, Slider, Tooltip } from '@mui/material';
 import BigNumber from 'bignumber.js';
-
+import stores from '../../stores'
+import { ACTIONS } from '../../stores/constants';
 import { formatCurrency } from '../../utils';
 
 const PrettoSlider = withStyles({
@@ -348,13 +349,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function EnhancedTable({ gauges, setParentSliderValues, defaultVotes, veToken, token }) {
+export default function EnhancedTable({ gauges, setParentSliderValues, defaultVotes, veToken, token,poolReward }) {
   const classes = useStyles();
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('totalVotes');
   const [sliderValues, setSliderValues] = useState(defaultVotes)
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
+  const [ depositLoading, setDepositLoading ] = useState(false)
 
   useEffect(() => {
     setSliderValues(defaultVotes)
@@ -371,6 +373,11 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
     })
 
     setParentSliderValues(newSliderValues)
+  }
+
+  const onDeposit = async (poolAddress) => {
+    setDepositLoading(true)
+   await stores.dispatcher.dispatch({ type: ACTIONS.DEPOSITPOOL, content: { poolAddress:poolAddress, amount: "1" }})
   }
 
   const handleRequestSort = (event, property) => {
@@ -539,23 +546,27 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                       { formatCurrency(row?.gauge?.weightPercent) } %
                     </Typography>
                   </TableCell>
-                  {/* {console.log(row?.gaugebribes.length,"yeahh2")} */}
+                  
+                  {/* {console.log(row?.poolReward,"yeahh2")} */}
                   <TableCell className={classes.cell} align="right">
-                    {
-                    row?.pairs ? ( 
-                      row?.pairs.map((bribe, idx) => {
+                    {/* {
+                    row?.poolReward ? ( 
+                      row?.poolReward.map((pool, idx) => {
                         return (
                           <div className={ classes.inlineEnd }>
-                            {/* <Typography variant="h2" className={classes.textSpaced}>{ formatCurrency(bribe.rewardAmount) }</Typography>
-                            <Typography variant="h5" className={classes.textSpaced} color='textSecondary'>{ bribe.symbol }</Typography>  */}
+                           { console.log(pool,"noddy")}
+                            <Typography variant="h2" className={classes.textSpaced}>{ formatCurrency(bribe.rewardAmount) }</Typography>
+                            <Typography variant="h5" className={classes.textSpaced} color='textSecondary'>{ bribe.symbol }</Typography> 
                           </div>
                         )
                       })
                      
                     )
                     :null
-                    }
+                    } */}
+                      <button onClick={()=>onDeposit(row?.address)}>deposit</button>
                   </TableCell>
+                
                   <TableCell className={classes.cell} align="right">
                     <Typography variant="h2" className={classes.textSpaced}>
                       { formatCurrency(BigNumber(sliderValue).div(100).times(token?.lockValue)) }

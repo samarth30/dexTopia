@@ -19,6 +19,7 @@ export default function ssPools() {
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [ gauges, setGauges ] = useState([])
+  const [ poolReward, setPoolReward ] = useState([])
   const [ voteLoading, setVoteLoading ] = useState(false)
   const [ votes, setVotes ] = useState([])
   const [ veToken, setVeToken ] = useState(null)
@@ -34,7 +35,8 @@ export default function ssPools() {
     const filteredAssets = as
     setGauges(filteredAssets)
 
-    stores.dispatcher.dispatch({ type: ACTIONS.POOLREWARDS, content: {filteredAssets}})
+    const poolRewards =  stores.dispatcher.dispatch({ type: ACTIONS.POOLREWARDS, content: {filteredAssets}})
+    setPoolReward(poolRewards)
 
     const nfts = stores.stableSwapStore.getStore('vestNFTs');
     setVestNFTs(nfts)
@@ -219,7 +221,7 @@ export default function ssPools() {
 
           return false
 
-        }) } setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={ token } />
+        }) } setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={ token } poolReward={poolReward} />
       </Paper>
       <Paper elevation={10} className={ classes.actionButtons }>
         <Grid container spacing={2}>

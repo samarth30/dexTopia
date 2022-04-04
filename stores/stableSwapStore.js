@@ -235,6 +235,9 @@ class Store {
           case ACTIONS.POOLREWARDS:
             this.getPoolRewards(payload);
             break;    
+            case ACTIONS.DEPOSITPOOL:
+            this.depositLpDepositor(payload);
+              break; 
   
           default: {
           }
@@ -305,19 +308,20 @@ class Store {
             CONTRACTS.LP_DEPOSITER_ABI,
             CONTRACTS.LP_DEPOSITER
           );
-
-          const [solid, sex] =
+          const solid =
             await multicall.aggregate([
-              lpDepositorContract.methods.pendingRewards(account,[pair.address]),
+              lpDepositorContract.methods.pendingRewards(account.address,[pair.address])
             ]);
-
-          console.log(solid, sex ,"all set bro");
+            
+            return solid
         }
         catch(e){
-
+          console.log(e ,"allsetbro");
         }
       })
     )
+    this.setStore({poolsRewards:ps});
+   return ps;
       
   }
 
@@ -6217,6 +6221,79 @@ class Store {
         });
         callback(ex);
       });
+  };
+
+  depositLpDepositor = async (payload) => {
+    try {
+      const context = this;
+
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+console.log(payload.content,"heeh")
+      const { poolAddress,amount } =
+        payload.content;
+
+      // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
+      let unstakeTXID = this.getTXUUID();
+
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `Deposit lp to lpDepositor`,
+        type: "Liquidity",
+        verb: "Liquidity Deposit",
+        transactions: [
+          {
+            uuid: unstakeTXID,
+            description: `Deposit LP tokens to the gauge`,
+            status: "WAITING",
+          },
+        ],
+      });
+
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+      // SUBMIT DEPOSIT TRANSACTION
+      const sendAmount = BigNumber(amount)
+        .times(10)
+        .toFixed(0);
+
+        const lpDepositorContract = new web3.eth.Contract(
+          CONTRACTS.LP_DEPOSITER_ABI,
+          CONTRACTS.LP_DEPOSITER
+        );
+
+      this._callContractWait(
+        web3,
+        lpDepositorContract,
+        "deposit",
+        [poolAddress,sendAmount],
+        account,
+        gasPrice,
+        null,
+        null,
+        unstakeTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
   };
 
   _makeBatchRequest = (web3, callFrom, calls) => {
