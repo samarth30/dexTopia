@@ -6,14 +6,14 @@ import { NetworkConnector } from "@web3-react/network-connector";
 const POLLING_INTERVAL = 12000;
 const RPC_URLS = {
   137: "https://polygon-mainnet.g.alchemy.com/v2/z31K9anv5tvGi7AxPhtSSD2FCBJvK0Wj",
-  80001: "https://polygon-mumbai.g.alchemy.com/v2/z31K9anv5tvGi7AxPhtSSD2FCBJvK0Wj"
+  4002: "https://rpc.testnet.fantom.network/"
 };
 
 let obj = {}
 if(process.env.NEXT_PUBLIC_CHAINID == 137) {
   obj = { 137: RPC_URLS[137] }
 } else {
-  obj = { 80001: RPC_URLS[80001] }
+  obj = { 4002: RPC_URLS[4002] }
 }
 
 export const network = new NetworkConnector({ urls: obj });
@@ -25,7 +25,7 @@ export const injected = new InjectedConnector({
 export const walletconnect = new WalletConnectConnector({
   rpc: {
     137: RPC_URLS[137],
-    80001: RPC_URLS[80001]
+    4002: RPC_URLS[4002]
   },
   chainId: parseInt(process.env.NEXT_PUBLIC_CHAINID),
   bridge: "https://bridge.walletconnect.org",

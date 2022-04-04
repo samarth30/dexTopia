@@ -1,20 +1,20 @@
 import abis from "../abis";
 
-export const GOV_TOKEN_ADDRESS = '0x8a78e8F5784bD604687478475C59F85f468d35c3'
+export const GOV_TOKEN_ADDRESS = '0xea4AFdD0aeCE596468beC02922ca6f25F8148De8'
 export const GOV_TOKEN_NAME = 'DYSTOPIA'
 export const GOV_TOKEN_SYMBOL = 'DYST'
 export const GOV_TOKEN_DECIMALS = 18
 export const GOV_TOKEN_LOGO = 'https://dystopia-swap-seven.vercel.app/logo.svg'
 export const GOV_TOKEN_ABI = abis.tokenABI
 
-export const VE_TOKEN_ADDRESS = '0x73a8bC1aF2A391c7485BC6635A5bAf718e20A5D2'
+export const VE_TOKEN_ADDRESS = '0xA4d64a69179A2De4623De9e2aaf6918198a87842'
 export const VE_TOKEN_NAME = 'veNFT'
 export const VE_TOKEN_SYMBOL = 'veNFT'
 export const VE_TOKEN_DECIMALS = 18
 export const VE_TOKEN_LOGO = 'https://dystopia-swap-seven.vercel.app/logo.svg'
 export const VE_TOKEN_ABI = abis.veTokenABI
 
-export const WFTM_ADDRESS = '0xe02f20BB33F8Bfb48eB907523435CA886e139A08'
+export const WFTM_ADDRESS = '0x07B9c47452C41e8E00f98aC4c075F5c443281d2A'
 export const WFTM_NAME = 'Wrapped MATIC'
 export const WFTM_SYMBOL = 'WMATIC'
 export const WFTM_DECIMALS = 18
@@ -27,16 +27,16 @@ export const FTM_SYMBOL = 'MATIC'
 export const FTM_DECIMALS = 18
 export const FTM_LOGO = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0/logo.png'
 
-export const FACTORY_ADDRESS = '0x56fd832724AAC62a58f84De09f4CccB434f6fa61'
+export const FACTORY_ADDRESS = '0x710EccF77bFBd5FAf69D5D0ae36c2457859b1823'
 export const FACTORY_ABI = abis.factoryABI
 
-export const ROUTER_ADDRESS = '0xe824C25F89A9F95306B2A3Cf0c7Ce4d39712433E'
+export const ROUTER_ADDRESS = '0x582Bc23902AF09186815549D44F3BA89214788BD'
 export const ROUTER_ABI = abis.routerABI
 
-export const VE_DIST_ADDRESS = '0x4EF5B51288075a41cADB54989424a26D7735C3f0'
+export const VE_DIST_ADDRESS = '0x1C9E86FF0dfB437c0b1080CAFbDBeEa1589438DF'
 export const VE_DIST_ABI = abis.veDistABI
 
-export const VOTER_ADDRESS = '0x7fd740A2422Bc2c01A62A4525b69E92C2f5582d3'
+export const VOTER_ADDRESS = '0x1Df565C43eDBe77eb4e854059fD369a478B68fdC'
 export const VOTER_ABI = abis.voterABI
 
 export const ERC20_ABI = abis.erc20ABI
@@ -45,4 +45,4 @@ export const GAUGE_ABI = abis.gaugeABI
 export const BRIBE_ABI = abis.bribeABI
 export const TOKEN_ABI = abis.tokenABI
 
-export const MULTICALL_ADDRESS = '0x08411ADd0b5AA8ee47563b146743C13b3556c9Cc'
+export const MULTICALL_ADDRESS = '0xa6a0c0409fdddE2E66FBee64b09Bfca9f95C18EF'

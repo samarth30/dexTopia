@@ -304,7 +304,7 @@ function Header(props) {
         <Navigation />
 
         <div className={classes.userBlock}>
-          {process.env.NEXT_PUBLIC_CHAINID == "80001" && (
+          {process.env.NEXT_PUBLIC_CHAINID == "4002" && (
             <div className={classes.testnetDisclaimer}>
               <Typography className={[classes.testnetDisclaimerText, classes[`testnetDisclaimerText--${appTheme}`]].join(' ')}>
                 Mumbai Testnet
@@ -445,7 +445,7 @@ function Header(props) {
               onClick={() => switchChain()}
             >
               Switch to{" "}
-              {process.env.NEXT_PUBLIC_CHAINID == "80001"
+              {process.env.NEXT_PUBLIC_CHAINID == "4002"
                 ? "Matic Testnet"
                 : "Matic Mainnet"}
             </Button>
