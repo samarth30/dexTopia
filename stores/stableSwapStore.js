@@ -110,6 +110,7 @@ class Store {
         fees: [],
         rewards: [],
       },
+      poolRewards:[]
     };
 
     dispatcher.register(
@@ -229,6 +230,12 @@ class Store {
           case ACTIONS.WHITELIST_TOKEN:
             this.whitelistToken(payload);
             break;
+
+          //POOLS
+          case ACTIONS.POOLREWARDS:
+            this.getPoolRewards(payload);
+            break;    
+  
           default: {
           }
         }
@@ -266,6 +273,53 @@ class Store {
 
     return theAsset[0];
   };
+
+  getPoolRewards = async(address) =>{
+    const poolsRewards = this.store.poolRewards;
+    const multicall = await stores.accountStore.getMulticall();
+    const web3 = await stores.accountStore.getWeb3Provider();
+    if (!web3) {
+      console.warn("web3 not found");
+      return null;
+    }
+    const account = stores.accountStore.getStore("account");
+    if (!account) {
+      console.warn("account not found");
+      return null;
+    }
+
+    let poolReward = [];
+
+    if (poolsRewards) {
+      poolReward = poolsRewards;
+    } else {
+      poolReward = this.getStore("poolRewards");
+    }
+    
+  
+    
+    const ps = await Promise.all(
+      address.content.filteredAssets.map(async (pair) => {
+        try {
+          const lpDepositorContract = new web3.eth.Contract(
+            CONTRACTS.LP_DEPOSITER_ABI,
+            CONTRACTS.LP_DEPOSITER
+          );
+
+          const [solid, sex] =
+            await multicall.aggregate([
+              lpDepositorContract.methods.pendingRewards(account,[pair.address]),
+            ]);
+
+          console.log(solid, sex ,"all set bro");
+        }
+        catch(e){
+
+        }
+      })
+    )
+      
+  }
 
   getNFTByID = async (id) => {
     try {

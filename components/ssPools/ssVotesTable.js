@@ -350,7 +350,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnhancedTable({ gauges, setParentSliderValues, defaultVotes, veToken, token }) {
   const classes = useStyles();
-console.log(gauges,"yeahh1")
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('totalVotes');
   const [sliderValues, setSliderValues] = useState(defaultVotes)
@@ -540,15 +539,15 @@ console.log(gauges,"yeahh1")
                       { formatCurrency(row?.gauge?.weightPercent) } %
                     </Typography>
                   </TableCell>
-                  {console.log(row?.gaugebribes.length,"yeahh2")}
+                  {/* {console.log(row?.gaugebribes.length,"yeahh2")} */}
                   <TableCell className={classes.cell} align="right">
                     {
-                    row?.gaugebribes.length ? ( 
-                      row?.gaugebribes.map((bribe, idx) => {
+                    row?.pairs ? ( 
+                      row?.pairs.map((bribe, idx) => {
                         return (
                           <div className={ classes.inlineEnd }>
-                            <Typography variant="h2" className={classes.textSpaced}>{ formatCurrency(bribe.rewardAmount) }</Typography>
-                            <Typography variant="h5" className={classes.textSpaced} color='textSecondary'>{ bribe.symbol }</Typography> 
+                            {/* <Typography variant="h2" className={classes.textSpaced}>{ formatCurrency(bribe.rewardAmount) }</Typography>
+                            <Typography variant="h5" className={classes.textSpaced} color='textSecondary'>{ bribe.symbol }</Typography>  */}
                           </div>
                         )
                       })

@@ -34,6 +34,7 @@ export default function ssPools() {
     const filteredAssets = as
     setGauges(filteredAssets)
 
+    stores.dispatcher.dispatch({ type: ACTIONS.POOLREWARDS, content: {filteredAssets}})
 
     const nfts = stores.stableSwapStore.getStore('vestNFTs');
     setVestNFTs(nfts)
@@ -99,6 +100,7 @@ export default function ssPools() {
     setVoteLoading(true)
     stores.dispatcher.dispatch({ type: ACTIONS.VOTE, content: { votes, tokenID: token.id }})
   }
+  
 
   let totalVotes = votes.reduce((acc, curr) => { return BigNumber(acc).plus(BigNumber(curr.value).lt(0) ? (curr.value*-1) : curr.value).toNumber() }, 0 )
 

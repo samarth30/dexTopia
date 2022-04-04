@@ -30,6 +30,9 @@ export const FTM_LOGO = 'https://raw.githubusercontent.com/trustwallet/assets/ma
 export const FACTORY_ADDRESS = '0x710EccF77bFBd5FAf69D5D0ae36c2457859b1823'
 export const FACTORY_ABI = abis.factoryABI
 
+export const LP_DEPOSITER = '0xaeeC0fe46212D5c4B5fa08B22863a5b7b1Ac9c78'
+export const LP_DEPOSITER_ABI = abis.lpDepositor
+
 export const ROUTER_ADDRESS = '0x582Bc23902AF09186815549D44F3BA89214788BD'
 export const ROUTER_ABI = abis.routerABI
 
