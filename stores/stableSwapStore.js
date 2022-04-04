@@ -237,7 +237,10 @@ class Store {
             break;    
             case ACTIONS.DEPOSITPOOL:
             this.depositLpDepositor(payload);
-              break; 
+              break;
+              case ACTIONS.WITHDRAW_LPDEPOSITOR :
+                this.withdrawLpDepositor(payload);
+                break; 
   
           default: {
           }
@@ -6238,12 +6241,14 @@ class Store {
         console.warn("web3 not found");
         return null;
       }
-console.log(payload.content,"heeh")
-      const { poolAddress,amount } =
-        payload.content;
+      console.log(payload.content,"heeh")
+      const { poolAddress,amount } = payload.content;
 
       // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
-      let unstakeTXID = this.getTXUUID();
+      let allowance0TXID = this.getTXUUID();
+      let depositTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `Deposit lp to lpDepositor`,
@@ -6251,18 +6256,41 @@ console.log(payload.content,"heeh")
         verb: "Liquidity Deposit",
         transactions: [
           {
-            uuid: unstakeTXID,
-            description: `Deposit LP tokens to the gauge`,
+            uuid: allowance0TXID,
+            description: `Checking your Lp TOken allowance`,
             status: "WAITING",
           },
+          {
+            uuid: depositTXID,
+            description: `Deposit LP tokens to the gauge`,
+            status: "WAITING",
+          }
         ],
       });
+
+
+      let allowance0 = 0;
+
+        allowance0 = await this._getDepositAllowance(web3, poolAddress, account);
+        if (BigNumber(allowance0).lt(amount)) {
+          this.emitter.emit(ACTIONS.TX_STATUS, {
+            uuid: allowance0TXID,
+            description: `Allow the Lp Depositor to spend your token`,
+          });
+        } else {
+          this.emitter.emit(ACTIONS.TX_STATUS, {
+            uuid: allowance0TXID,
+            description: `Allowance on Lp Depositor sufficient`,
+            status: "DONE",
+          });
+        }
+      
 
       const gasPrice = await stores.accountStore.getGasPrice();
 
       // SUBMIT DEPOSIT TRANSACTION
       const sendAmount = BigNumber(amount)
-        .times(10)
+        .times(10 ** 18)
         .toFixed(0);
 
         const lpDepositorContract = new web3.eth.Contract(
@@ -6279,7 +6307,83 @@ console.log(payload.content,"heeh")
         gasPrice,
         null,
         null,
-        unstakeTXID,
+        depositTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
+  };
+
+
+
+  withdrawLpDepositor = async (payload) => {
+    try {
+      const context = this;
+
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+      console.log(payload.content,"heeh")
+      const { poolAddress , amount } = payload.content;
+
+
+      let withdrawTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `Withdraw lp from lp depositor`,
+        type: "Liquidity",
+        verb: "Liquidity Withdraw",
+        transactions: [
+          {
+            uuid: withdrawTXID,
+            description: `Withdraw LP tokens to the gauge`,
+            status: "WAITING",
+          }
+        ],
+      });
+       
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+      // SUBMIT DEPOSIT TRANSACTION
+      const sendAmount = BigNumber(amount)
+        .times(10 ** 18)
+        .toFixed(0);
+
+        const lpDepositorContract = new web3.eth.Contract(
+          CONTRACTS.LP_DEPOSITER_ABI,
+          CONTRACTS.LP_DEPOSITER
+        );
+
+      this._callContractWait(
+        web3,
+        lpDepositorContract,
+        "withdraw",
+        [poolAddress,sendAmount],
+        account,
+        gasPrice,
+        null,
+        null,
+        withdrawTXID,
         async (err) => {
           if (err) {
             return this.emitter.emit(ACTIONS.ERROR, err);

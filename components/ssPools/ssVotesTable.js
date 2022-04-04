@@ -380,6 +380,11 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
    await stores.dispatcher.dispatch({ type: ACTIONS.DEPOSITPOOL, content: { poolAddress:poolAddress, amount: "1" }})
   }
 
+  const onWithdraw = async (poolAddress) => {
+    setDepositLoading(true)
+   await stores.dispatcher.dispatch({ type: ACTIONS.WITHDRAW_LPDEPOSITOR, content: { poolAddress:poolAddress, amount: "0.000000000001" }})
+  }
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -565,6 +570,7 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                     :null
                     } */}
                       <button onClick={()=>onDeposit(row?.address)}>deposit</button>
+                      <button onClick={()=>onWithdraw(row?.address)}>Withdraw</button>
                   </TableCell>
                 
                   <TableCell className={classes.cell} align="right">
