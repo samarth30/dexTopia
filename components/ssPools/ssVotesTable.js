@@ -7,6 +7,7 @@ import BigNumber from 'bignumber.js';
 import stores from '../../stores'
 import { ACTIONS } from '../../stores/constants';
 import { formatCurrency } from '../../utils';
+import styles from "./ssVotes.module.css";
 
 const PrettoSlider = withStyles({
   root: {
@@ -163,7 +164,7 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead>
+    <TableHead className={classes.votes__tablesContainer}>
       <TableRow>
         {headCells.map((headCell) => (
           <TableCell className={classes.overrideTableHead} key={headCell.id} align={headCell.numeric ? 'right' : 'left'} padding={'normal'} sortDirection={orderBy === headCell.id ? order : false}>
@@ -302,14 +303,17 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '12px'
   },
   tableContainer: {
-    overflowX: 'hidden'
+    overflowX: 'hidden',
+    background: '#20272B'
   },
   overrideTableHead: {
     borderBottom: '1px solid rgba(104,108,122,0.2) !important',
+    color: '#fff'
   },
   headerText: {
     fontWeight: '200',
-    fontSize: '12px'
+    fontSize: '12px',
+    color: '#fff'
   },
   tooltipContainer: {
     minWidth: '240px',
@@ -476,7 +480,7 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
               }
 
               return (
-                <TableRow key={row?.gauge?.address}>
+                <TableRow key={row?.gauge?.address} className={styles.votes__tableRow}>
                   <TableCell className={classes.cell}>
                     <div className={ classes.inline }>
                       <div className={ classes.doubleImages}>
@@ -504,10 +508,10 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                         />
                       </div>
                       <div>
-                        <Typography variant="h2" className={classes.textSpaced}>
+                        <Typography variant="h2" className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                           { row?.symbol }
                         </Typography>
-                        <Typography variant="h5" className={classes.textSpaced} color='textSecondary'>
+                        <Typography variant="h5" className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                           { row?.isStable ? 'Stable Pool' : 'Volatile Pool' }
                         </Typography>
                       </div>
@@ -515,13 +519,13 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                   </TableCell>
                   <TableCell className={classes.cell} align="right">
                     <div className={ classes.inlineEnd }>
-                      <Typography variant='h2' className={classes.textSpaced}>
+                      <Typography variant='h2' className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                         {/* {console.log(index,"pip")}
                         {console.log(poolStaked[index][0],"pip")} */}
                         {poolStaked[index]&& formatCurrency(BigNumber(poolStaked[index][0]).div(10**18))}
                         
                       </Typography>
-                      <Typography variant='h5' className={classes.textSpaced} color='textSecondary'>
+                      <Typography variant='h5' className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                         {/* {row?.token0?.symbol} */}
                       </Typography>
                     </div>
@@ -540,27 +544,27 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                     {/* {console.log(poolReward[index][0][0][0]?.sex,"pipppp")}
                     {console.log(poolReward[index][0][0][0]?.solid,"pipppp")} */}
                     {/* {console.log(poolReward[index][0],"pipppp")} */}
-                      <Typography variant='h2' className={classes.textSpaced}>
+                      <Typography variant='h2' className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                         {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.solid).div(10**18))}
                       </Typography>
-                      <Typography variant='h5' className={classes.textSpaced} color='textSecondary'>
+                      <Typography variant='h5' className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                         DYSTOPIA token
                       </Typography>
                     </div>
                     <div className={ classes.inlineEnd }>
-                      <Typography variant='h5' className={classes.textSpaced}>
+                      <Typography variant='h5' className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                         {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.sex).div(10**18))}
                       </Typography>
-                      <Typography variant='h5' className={classes.textSpaced} color='textSecondary'>
+                      <Typography variant='h5' className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                         Topia TOken
                       </Typography>
                     </div>
                   </TableCell>
                   <TableCell className={classes.cell} align="right">
-                    <Typography variant="h2" className={classes.textSpaced}>
+                    <Typography variant="h2" className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                       { formatCurrency(row?.gauge?.weight) }
                     </Typography>
-                    <Typography variant="h5" className={classes.textSpaced} color='textSecondary'>
+                    <Typography variant="h5" className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                       { formatCurrency(row?.gauge?.weightPercent) } %
                     </Typography>
                   </TableCell>
@@ -585,20 +589,21 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                      <input
                   type="number"
                   value={depositInput}
+                  className={styles.votes__depositWithdrawInput}
                   placeholder="enter amount"
                   
                   onChange={onInputField}
                 />
-                      <button onClick={()=>onDeposit(row?.address)}>deposit</button>
-                      <button onClick={()=>onWithdraw(row?.address)}>Withdraw</button>
+                      <button onClick={()=>onDeposit(row?.address)} className={styles.votes__depositWithdrawBtn}>deposit</button>
+                      <button onClick={()=>onWithdraw(row?.address)} className={styles.votes__depositWithdrawBtn}>Withdraw</button>
                   </TableCell>
                 
                   <TableCell className={classes.cell} align="right">
 
-                    <Typography variant="h2" className={classes.textSpaced}>
+                    <Typography variant="h2" className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                       { formatCurrency(BigNumber(sliderValue).div(100).times(token?.lockValue)) }
                     </Typography>
-                    <Typography variant="h5" className={classes.textSpaced} color='textSecondary'>
+                    <Typography variant="h5" className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                       { formatCurrency(sliderValue) } %
                     </Typography>
                   </TableCell>
@@ -631,6 +636,7 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        style={{ background: "#20272B", color: "#fff" }}
       />
     </div>
   );
