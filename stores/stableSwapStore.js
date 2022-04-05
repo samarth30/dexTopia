@@ -112,7 +112,8 @@ class Store {
       },
       poolRewards:[],
       poolStakedBalance:[],
-      stakingRewardStakedBalance : []
+      stakingRewardStakedBalance : [],
+      tockenLockerData : []
     };
 
     dispatcher.register(
@@ -246,6 +247,9 @@ class Store {
           case ACTIONS.WITHDRAW_LPDEPOSITOR :
             this.withdrawLpDepositor(payload);
             break;
+          case ACTIONS.LP_DEPOSITOR_GET_REWARD:
+            this.getRewardLpDepositor(payload);
+            break;
             
           // dextopia Vedepositor
           case ACTIONS.VE_DEPOSITOR_DEPOSIT: 
@@ -268,6 +272,9 @@ class Store {
           // dextopia tocken Locker
           case ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DEPOSIT:
             this.dexTopiaTockenLockerDeposit(payload);
+            break;
+          case ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA:
+            this.getDexTopiaTockenLockerData(payload);
             break;
 
           default: {
@@ -429,27 +436,100 @@ class Store {
     }
     
   
-    let balancestaked = 0
+     let stakedBalance = 0;
+     let dysTopiaEarning=0;
+     let topiaEarning = 0;
+
 
         try {
           const dexTopiaStakingRewardContract = new web3.eth.Contract(
             CONTRACTS.DEXTOPIA_STAKINGREWARDS_ABI,
             CONTRACTS.DEXTOPIA_STAKINGREWARDS
           );
-           balancestaked =
-               await dexTopiaStakingRewardContract.methods.balanceOf(account.address).call();
+           
+         
+               stakedBalance = await  dexTopiaStakingRewardContract.methods.balanceOf(account.address).call();
+               topiaEarning  = await dexTopiaStakingRewardContract.methods.earned(account.address,CONTRACTS.DEXTOPIA_TOKEN).call();
+               dysTopiaEarning =  await dexTopiaStakingRewardContract.methods.earned(account.address,CONTRACTS.GOV_TOKEN_ADDRESS).call();
+           
+
+              // await multicall.aggregate([
+              //   dexTopiaStakingRewardContract.methods.balanceOf(account.address),
+              //   dexTopiaStakingRewardContract.methods.earned(account.address,CONTRACTS.DEXTOPIA_TOKEN),
+              //   dexTopiaStakingRewardContract.methods.earned(account.address,CONTRACTS.GOV_TOKEN_ADDRESS),
+              // ]);
            
         }
         catch(e){
           console.log(e ,"allsetbro");
         }
    
-    this.setStore({StakingRewardStakedBalances:balancestaked});
-    console.log(balancestaked,"pippppp")
-   return balancestaked;
+    this.setStore({StakingRewardStakedBalances:{stakedBalance ,
+      dysTopiaEarning,
+      topiaEarning }});
+    console.log({stakedBalance ,
+      dysTopiaEarning,
+      topiaEarning },"pippppp")
+   return {stakedBalance ,
+    dysTopiaEarning,
+    topiaEarning };
       
   }
 
+  getDexTopiaTockenLockerData = async(address) =>{
+    const TockenLockerDatas = this.store.tockenLockerData;
+    const multicall = await stores.accountStore.getMulticall();
+    const web3 = await stores.accountStore.getWeb3Provider();
+    if (!web3) {
+      console.warn("web3 not found");
+      return null;
+    }
+    const account = stores.accountStore.getStore("account");
+    if (!account) {
+      console.warn("account not found");
+      return null;
+    }
+
+    let poolReward = [];
+
+    if (TockenLockerDatas) {
+      poolReward = TockenLockerDatas;
+    } else {
+      poolReward = this.getStore("tockenLockerData");
+    }
+    
+  
+     let lockedBalance = 0;
+     let activeUserLocks=[];
+
+
+        try {
+          const dexTopiaStakingRewardContract = new web3.eth.Contract(
+            CONTRACTS.DEXTOPIA_STAKINGREWARDS_ABI,
+            CONTRACTS.DEXTOPIA_STAKINGREWARDS
+          );
+           
+         
+               lockedBalance = await  dexTopiaStakingRewardContract.methods.userBalance(account.address).call();
+               activeUserLocks  = await dexTopiaStakingRewardContract.methods.getActiveUserLocks(account.address).call();
+           
+
+              // await multicall.aggregate([
+              //   dexTopiaStakingRewardContract.methods.balanceOf(account.address),
+              //   dexTopiaStakingRewardContract.methods.earned(account.address,CONTRACTS.DEXTOPIA_TOKEN),
+              //   dexTopiaStakingRewardContract.methods.earned(account.address,CONTRACTS.GOV_TOKEN_ADDRESS),
+              // ]);
+           
+        }
+        catch(e){
+          console.log(e ,"allsetbro");
+        }
+   
+    this.setStore({TockenLockerDatas: {lockedBalance , activeUserLocks}});
+    console.log({lockedBalance , activeUserLocks},"pippppp")
+   return {lockedBalance , activeUserLocks};
+      
+  }
   getNFTByID = async (id) => {
     try {
       const vestNFTs = this.getStore("vestNFTs");
@@ -6625,7 +6705,79 @@ class Store {
     }
   };
 
+  getRewardLpDepositor= async (payload) => {
+    try {
+      const context = this;
 
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+      console.log(payload.content,"heeh")
+      const { poolAddresses } = payload.content;
+
+      let getRewardTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `claim reward lpDepositor`,
+        type: "Liquidity",
+        verb: "Liquidity Deposit",
+        transactions: [
+          {
+            uuid: getRewardTXID,
+            description: `claim reward lpDepositor`,
+            status: "WAITING",
+          }
+        ],
+      });
+      
+
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+      // SUBMIT DEPOSIT TRANSACTION
+      const sendAmount = BigNumber(amount)
+        .times(10 ** 18)
+        .toFixed(0);
+
+        const lpDepositorContract = new web3.eth.Contract(
+          CONTRACTS.LP_DEPOSITER_ABI,
+          CONTRACTS.LP_DEPOSITER
+        );
+
+      this._callContractWait(
+        web3,
+        lpDepositorContract,
+        "getReward",
+        [poolAddresses],
+        account,
+        gasPrice,
+        null,
+        null,
+        getRewardTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
+  };
 
   // dextopia staking reward deposit token
   dexTopiastakingRewardDeposit = async (payload) => {

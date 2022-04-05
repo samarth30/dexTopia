@@ -48,7 +48,8 @@ export default function ssPools() {
 
     const poolStakedBalances =  stores.dispatcher.dispatch({ type: ACTIONS.POOLSTAKED, content: {filteredAssets}})
     const stakingRewardsStakedBalance = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT, content: {}})
-
+    
+    const tockenLockerDatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA, content: {}})
     
     const nfts = stores.stableSwapStore.getStore('vestNFTs');
     setVestNFTs(nfts)
