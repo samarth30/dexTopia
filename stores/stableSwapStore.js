@@ -239,13 +239,29 @@ class Store {
           case ACTIONS.POOLSTAKED:
             this.getPoolStaked(payload);
             break;   
-            case ACTIONS.DEPOSITPOOL:
+          case ACTIONS.DEPOSITPOOL:
             this.depositLpDepositor(payload);
-              break;
-              case ACTIONS.WITHDRAW_LPDEPOSITOR :
-                this.withdrawLpDepositor(payload);
-                break; 
-  
+            break;
+          case ACTIONS.WITHDRAW_LPDEPOSITOR :
+            this.withdrawLpDepositor(payload);
+            break;
+            
+          // dextopia Vedepositor
+          case ACTIONS.VE_DEPOSITOR_DEPOSIT: 
+            this.veDepositorDeposit(payload);
+            break;
+          
+          // dextopia StakingReward
+          case ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT:
+            this.dexTopiastakingRewardDeposit(payload);
+            break;
+          case ACTIONS.DEXTOPIA_STAKING_REWARD_WITHDRAW:
+            this.dexTopiastakingRewardDeposit(payload);
+            break;
+          case ACTIONS.DEXTOPIA_STAKING_REWARD_GETREWARD:
+            this.dexTopiastakingRewardDeposit(payload);
+            break;
+
           default: {
           }
         }
@@ -6279,6 +6295,185 @@ class Store {
       });
   };
 
+  // ve depositor deposit token
+  veDepositorDeposit = async (payload) => {
+    try {
+      const context = this;
+
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+      console.log(payload.content,"heeh")
+      const { amount } = payload.content;
+
+      // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
+      let allowance0TXID = this.getTXUUID();
+      let depositTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `Deposit Dystopia token to veDepositor`,
+        type: "Liquidity",
+        verb: "Liquidity Deposit",
+        transactions: [
+          {
+            uuid: allowance0TXID,
+            description: `Checking your Dystopia token allowance`,
+            status: "WAITING",
+          },
+          {
+            uuid: depositTXID,
+            description: `Deposit Dystopia token to the veDepositor`,
+            status: "WAITING",
+          }
+        ],
+      });
+
+
+      let allowance0 = 0;
+
+        allowance0 = await this._getDepositAllowance(web3,   CONTRACTS.GOV_TOKEN_ADDRESS, account);
+        if (BigNumber(allowance0).lt(amount)) {
+          this.emitter.emit(ACTIONS.TX_STATUS, {
+            uuid: allowance0TXID,
+            description: `Allow the veDepositor to spend your token`,
+          });
+        } else {
+          this.emitter.emit(ACTIONS.TX_STATUS, {
+            uuid: allowance0TXID,
+            description: `Allowance on veDepositor sufficient`,
+            status: "DONE",
+          });
+        }
+      
+
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+      // SUBMIT DEPOSIT TRANSACTION
+      const sendAmount = BigNumber(amount)
+        .times(10 ** 18)
+        .toFixed(0);
+
+        const veDepositorContract = new web3.eth.Contract(
+          CONTRACTS.DEXTOPIA_VE_DEPOSITER_ABI,
+          CONTRACTS.DEXTOPIA_VE_DEPOSITER
+        );
+
+      this._callContractWait(
+        web3,
+        veDepositorContract,
+        "depositTokens",
+        [sendAmount],
+        account,
+        gasPrice,
+        null,
+        null,
+        depositTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
+  };
+
+
+
+  withdrawLpDepositor = async (payload) => {
+    try {
+      const context = this;
+
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+      console.log(payload.content,"heeh")
+      const { poolAddress , amount } = payload.content;
+
+
+      let withdrawTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `Withdraw lp from lp depositor`,
+        type: "Liquidity",
+        verb: "Liquidity Withdraw",
+        transactions: [
+          {
+            uuid: withdrawTXID,
+            description: `Withdraw LP tokens to the gauge`,
+            status: "WAITING",
+          }
+        ],
+      });
+       
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+      // SUBMIT DEPOSIT TRANSACTION
+      const sendAmount = BigNumber(amount)
+        .times(10 ** 18)
+        .toFixed(0);
+
+        const lpDepositorContract = new web3.eth.Contract(
+          CONTRACTS.LP_DEPOSITER_ABI,
+          CONTRACTS.LP_DEPOSITER
+        );
+
+      this._callContractWait(
+        web3,
+        lpDepositorContract,
+        "withdraw",
+        [poolAddress,sendAmount],
+        account,
+        gasPrice,
+        null,
+        null,
+        withdrawTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
+  };
+
+
+
+
+  
   depositLpDepositor = async (payload) => {
     try {
       const context = this;
@@ -6379,7 +6574,8 @@ class Store {
 
 
 
-  withdrawLpDepositor = async (payload) => {
+  // dextopia staking reward deposit token
+  dexTopiastakingRewardDeposit = async (payload) => {
     try {
       const context = this;
 
@@ -6395,26 +6591,50 @@ class Store {
         return null;
       }
       console.log(payload.content,"heeh")
-      const { poolAddress , amount } = payload.content;
+      const { amount } = payload.content;
 
-
-      let withdrawTXID = this.getTXUUID();
+      // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
+      let allowance0TXID = this.getTXUUID();
+      let depositTXID = this.getTXUUID();
 
       //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
-        title: `Withdraw lp from lp depositor`,
+        title: `Deposit VeTopia token to staking reward`,
         type: "Liquidity",
-        verb: "Liquidity Withdraw",
+        verb: "Liquidity Deposit",
         transactions: [
           {
-            uuid: withdrawTXID,
-            description: `Withdraw LP tokens to the gauge`,
+            uuid: allowance0TXID,
+            description: `Checking your VeTopia token allowance`,
+            status: "WAITING",
+          },
+          {
+            uuid: depositTXID,
+            description: `Deposit VeTopia token to the dextopia staking reward`,
             status: "WAITING",
           }
         ],
       });
-       
+
+
+      let allowance0 = 0;
+
+        allowance0 = await this._getDepositAllowance(web3,CONTRACTS.DEXTOPIA_VE_DEPOSITER, account);
+        if (BigNumber(allowance0).lt(amount)) {
+          this.emitter.emit(ACTIONS.TX_STATUS, {
+            uuid: allowance0TXID,
+            description: `Allow the dextopia staking reward to spend your token`,
+          });
+        } else {
+          this.emitter.emit(ACTIONS.TX_STATUS, {
+            uuid: allowance0TXID,
+            description: `Allowance on dextopia staking reward sufficient`,
+            status: "DONE",
+          });
+        }
+      
+
       const gasPrice = await stores.accountStore.getGasPrice();
 
       // SUBMIT DEPOSIT TRANSACTION
@@ -6422,21 +6642,167 @@ class Store {
         .times(10 ** 18)
         .toFixed(0);
 
-        const lpDepositorContract = new web3.eth.Contract(
-          CONTRACTS.LP_DEPOSITER_ABI,
-          CONTRACTS.LP_DEPOSITER
+        const dexTopiaStakingRewardContract = new web3.eth.Contract(
+          CONTRACTS.DEXTOPIA_STAKINGREWARDS_ABI,
+          CONTRACTS.DEXTOPIA_STAKINGREWARDS
         );
 
       this._callContractWait(
         web3,
-        lpDepositorContract,
+        dexTopiaStakingRewardContract,
+        "stake",
+        [sendAmount],
+        account,
+        gasPrice,
+        null,
+        null,
+        depositTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
+  };
+
+
+   // dextopia withdraw reward deposit token
+   dexTopiastakingRewardWithdraw= async (payload) => {
+    try {
+      const context = this;
+
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+      console.log(payload.content,"heeh")
+      const { amount } = payload.content;
+
+      // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
+      let withdrawTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `Withdraw VeTopia token from staking reward`,
+        type: "Liquidity",
+        verb: "Liquidity withdraw",
+        transactions: [
+          {
+            uuid: withdrawTXID,
+            description: `withdraw VeTopia token to the dextopia staking reward`,
+            status: "WAITING",
+          }
+        ],
+      });
+
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+      // SUBMIT DEPOSIT TRANSACTION
+      const sendAmount = BigNumber(amount)
+        .times(10 ** 18)
+        .toFixed(0);
+
+        const dexTopiaStakingRewardContract = new web3.eth.Contract(
+          CONTRACTS.DEXTOPIA_STAKINGREWARDS_ABI,
+          CONTRACTS.DEXTOPIA_STAKINGREWARDS
+        );
+
+      this._callContractWait(
+        web3,
+        dexTopiaStakingRewardContract,
         "withdraw",
-        [poolAddress,sendAmount],
+        [sendAmount],
         account,
         gasPrice,
         null,
         null,
         withdrawTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
+  };
+
+
+   // dextopia withdraw reward deposit token
+   dexTopiastakingRewardgetReward = async (payload) => {
+    try {
+      const context = this;
+
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+
+      // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
+      let rewardTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `get reward from staking reward`,
+        type: "Liquidity",
+        verb: "Liquidity withdraw",
+        transactions: [
+          {
+            uuid: rewardTXID,
+            description: `get reward from the dextopia staking reward`,
+            status: "WAITING",
+          }
+        ],
+      });
+
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+
+        const dexTopiaStakingRewardContract = new web3.eth.Contract(
+          CONTRACTS.DEXTOPIA_STAKINGREWARDS_ABI,
+          CONTRACTS.DEXTOPIA_STAKINGREWARDS
+        );
+
+      this._callContractWait(
+        web3,
+        dexTopiaStakingRewardContract,
+        "getReward",
+        [],
+        account,
+        gasPrice,
+        null,
+        null,
+        rewardTXID,
         async (err) => {
           if (err) {
             return this.emitter.emit(ACTIONS.ERROR, err);

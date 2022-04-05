@@ -377,7 +377,7 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
 
   const onDeposit = async (poolAddress) => {
     setDepositLoading(true)
-   await stores.dispatcher.dispatch({ type: ACTIONS.DEPOSITPOOL, content: { poolAddress:poolAddress, amount: "1" }})
+   await stores.dispatcher.dispatch({ type: ACTIONS.DEPOSITPOOL, content: { poolAddress:poolAddress, amount: "0.000000000001" }})
   }
 
   const onWithdraw = async (poolAddress) => {

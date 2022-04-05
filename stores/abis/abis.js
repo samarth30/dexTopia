@@ -11,7 +11,9 @@ import { veDistABI } from './veDistABI'
 import { minterABI } from './minterABI'
 import { wftmABI } from './wftmABI'
 import { lpDepositor } from './lpDepositor'
-
+import {dexTopiaVeDepositor} from './dexTopiaVeDepositor';
+import {dexTopiaTockenLocker} from "./dexTopiaTockenLocker";
+import {dexTopiaStakingRewards} from "./dexTopiaStakingRewards";
 export default {
   erc20ABI,
   veTokenABI,
@@ -25,5 +27,8 @@ export default {
   tokenABI,
   minterABI,
   wftmABI,
-  lpDepositor
+  lpDepositor,
+  dexTopiaVeDepositor,
+  dexTopiaTockenLocker,
+  dexTopiaStakingRewards
 }
