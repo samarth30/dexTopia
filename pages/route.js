@@ -9,6 +9,7 @@ import Whitelist from "./whitelist";
 import Bribe from "./bribe/create";
 
 import { useRouter } from "next/router";
+import Convert from "./convert";
 
 function Route({ changeTheme, ...props }) {
   const router = useRouter();
@@ -26,6 +27,8 @@ function Route({ changeTheme, ...props }) {
   }
   else if (activePath.includes("/pools")) {
     return <Vote props={props} changeTheme={changeTheme} />;
+  }else if (activePath.includes("/convert")) {
+    return <Convert props={props} changeTheme={changeTheme} />;
   } else if (activePath.includes("/migrate")) {
     return <Migrate props={props} changeTheme={changeTheme} />;
   } else if (activePath.includes("/vote")) {

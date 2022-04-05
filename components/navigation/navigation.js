@@ -129,6 +129,9 @@ function Navigation(props) {
     if (activePath.includes("pools")) {
       setActive("pools");
     }
+    if (activePath.includes("convert")) {
+      setActive("convert");
+    }
     if (activePath.includes("bribe")) {
       setActive("bribe");
     }
@@ -162,6 +165,7 @@ function Navigation(props) {
         {renderSubNav("Whitelist", "whitelist")}
         {renderSubNav("Migrate", "migrate")}
         {renderSubNav("Pool", "pools")}
+        {renderSubNav("Convert", "convert")}
       </ToggleButtonGroup>
     );
   };
