@@ -511,8 +511,8 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                     <div className={ classes.inlineEnd }>
                       <Typography variant='h2' className={classes.textSpaced}>
                         {/* {console.log(index,"pip")}
-                        {console.log(poolReward,"pip")} */}
-                        {formatCurrency(BigNumber(poolStaked).div(10**18))}
+                        {console.log(poolStaked[index][0],"pip")} */}
+                        {formatCurrency(BigNumber(poolStaked[index][0]).div(10**18))}
                         
                       </Typography>
                       <Typography variant='h5' className={classes.textSpaced} color='textSecondary'>
@@ -530,19 +530,23 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                   </TableCell>
                   <TableCell className={classes.cell} align="right">
                     <div className={ classes.inlineEnd }>
+                    {console.log(index,"pipppp")}
+                    {console.log(poolReward[index][0][0][0]?.sex,"pipppp")}
+                    {console.log(poolReward[index][0][0][0]?.solid,"pipppp")}
+                    {/* {console.log(poolReward[index][0],"pipppp")} */}
                       <Typography variant='h2' className={classes.textSpaced}>
-                        {formatCurrency(BigNumber(row?.reserve0))}
+                        {formatCurrency(BigNumber(poolReward[index][0][0][0]?.solid).div(10**18))}
                       </Typography>
                       <Typography variant='h5' className={classes.textSpaced} color='textSecondary'>
-                        {row?.token0?.symbol}
+                        DYSTOPIA token
                       </Typography>
                     </div>
                     <div className={ classes.inlineEnd }>
                       <Typography variant='h5' className={classes.textSpaced}>
-                        {formatCurrency(BigNumber(row?.reserve1))}
+                        {formatCurrency(BigNumber(poolReward[index][0][0][0]?.sex).div(10**18))}
                       </Typography>
                       <Typography variant='h5' className={classes.textSpaced} color='textSecondary'>
-                        {row?.token1?.symbol}
+                        Topia TOken
                       </Typography>
                     </div>
                   </TableCell>

@@ -111,7 +111,8 @@ class Store {
         rewards: [],
       },
       poolRewards:[],
-      poolStakedBalance:[]
+      poolStakedBalance:[],
+      stakingRewardStakedBalance : []
     };
 
     dispatcher.register(
@@ -256,10 +257,13 @@ class Store {
             this.dexTopiastakingRewardDeposit(payload);
             break;
           case ACTIONS.DEXTOPIA_STAKING_REWARD_WITHDRAW:
-            this.dexTopiastakingRewardDeposit(payload);
+            this.dexTopiastakingRewardWithdraw(payload);
             break;
           case ACTIONS.DEXTOPIA_STAKING_REWARD_GETREWARD:
-            this.dexTopiastakingRewardDeposit(payload);
+            this.dexTopiastakingRewardgetReward(payload);
+            break;
+          case ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT:
+            this.getDexTopiaStakingRewardStaked(payload);
             break;
 
           default: {
@@ -300,6 +304,7 @@ class Store {
     return theAsset[0];
   };
 
+  // dextopia get functions
   getPoolRewards = async(address) =>{
     const poolsRewards = this.store.poolRewards;
     const multicall = await stores.accountStore.getMulticall();
@@ -343,7 +348,7 @@ class Store {
         }
       })
     )
-    this.setStore({poolsRewards:ps});
+    this.setStore({poolRewards:ps});
    return ps;
       
   }
@@ -391,9 +396,53 @@ class Store {
         }
       })
     )
-    this.setStore({poolStakedBalances:ps});
-    // console.log(ps,"pip")
+    this.setStore({poolStakedBalance:ps});
+    // console.log(ps,"pipp")
    return ps;
+      
+  }
+
+  getDexTopiaStakingRewardStaked = async(address) =>{
+    const StakingRewardStakedBalances = this.store.stakingRewardStakedBalance;
+    const multicall = await stores.accountStore.getMulticall();
+    const web3 = await stores.accountStore.getWeb3Provider();
+    if (!web3) {
+      console.warn("web3 not found");
+      return null;
+    }
+    const account = stores.accountStore.getStore("account");
+    if (!account) {
+      console.warn("account not found");
+      return null;
+    }
+
+    let poolReward = [];
+
+    if (StakingRewardStakedBalances) {
+      poolReward = StakingRewardStakedBalances;
+    } else {
+      poolReward = this.getStore("stakingRewardStakedBalance");
+    }
+    
+  
+    let balancestaked = 0
+
+        try {
+          const dexTopiaStakingRewardContract = new web3.eth.Contract(
+            CONTRACTS.DEXTOPIA_STAKINGREWARDS_ABI,
+            CONTRACTS.DEXTOPIA_STAKINGREWARDS
+          );
+           balancestaked =
+               await dexTopiaStakingRewardContract.methods.balanceof(account.address)
+           
+        }
+        catch(e){
+          console.log(e ,"allsetbro");
+        }
+   
+    this.setStore({StakingRewardStakedBalances:balancestaked});
+    console.log(ps,"pippp")
+   return balancestaked;
       
   }
 

@@ -37,11 +37,17 @@ export default function ssPools() {
     setGauges(filteredAssets)
 
     const poolRewards =  stores.dispatcher.dispatch({ type: ACTIONS.POOLREWARDS, content: {filteredAssets}})
-    console.log(poolRewards,"pip")
-    setPoolReward(poolRewards)
+
+    const ass = stores.stableSwapStore.getStore('poolRewards')
+    console.log(ass,"pipppp")
+    setPoolReward(ass)
+
+    const asss = stores.stableSwapStore.getStore("poolStakedBalance");
+    console.log(asss,"pipp")
+    setPoolStaked(asss);
 
     const poolStakedBalances =  stores.dispatcher.dispatch({ type: ACTIONS.POOLSTAKED, content: {filteredAssets}})
-    setPoolStaked(poolStakedBalances);
+   
 
     const nfts = stores.stableSwapStore.getStore('vestNFTs');
     setVestNFTs(nfts)
