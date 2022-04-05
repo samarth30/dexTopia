@@ -157,6 +157,25 @@
   font-size: 12px !important;
 }
 
+/* style additions  */
+.votes__tableRow{
+  background-color: #20272B;
+  border: 2px solid #0277FA;
+}
+
+.votes__colorTypography {
+  color: #fff;
+}
+
+.votes__depositWithdrawInput, .votes__depositWithdrawBtn {
+  background: none;
+  border: 2px solid #0277FA;
+  border-radius: 10px;
+  color: #fff;
+  padding: 0.4rem;
+  margin: 0.4rem 0.4rem;
+}
+
 @media screen and (max-width: 1200px) {
   .container {
     width: calc(100% - 80px);
