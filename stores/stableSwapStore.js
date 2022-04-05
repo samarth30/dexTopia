@@ -269,9 +269,6 @@ class Store {
           case ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DEPOSIT:
             this.dexTopiaTockenLockerDeposit(payload);
             break;
-          case ACTIONS.DEXTOPIA_TOCKEN_LOCKER_WITHDRAW:
-            this.dexTopiaTockenLockerWithdraw(payload);
-            break;
 
           default: {
           }
@@ -440,7 +437,7 @@ class Store {
             CONTRACTS.DEXTOPIA_STAKINGREWARDS
           );
            balancestaked =
-               await dexTopiaStakingRewardContract.methods.balanceof(account.address)
+               await dexTopiaStakingRewardContract.methods.balanceOf(account.address).call();
            
         }
         catch(e){
@@ -448,7 +445,7 @@ class Store {
         }
    
     this.setStore({StakingRewardStakedBalances:balancestaked});
-    console.log(ps,"pippp")
+    console.log(balancestaked,"pippppp")
    return balancestaked;
       
   }
