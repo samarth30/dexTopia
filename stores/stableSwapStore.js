@@ -265,6 +265,13 @@ class Store {
           case ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT:
             this.getDexTopiaStakingRewardStaked(payload);
             break;
+          // dextopia tocken Locker
+          case ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DEPOSIT:
+            this.dexTopiaTockenLockerDeposit(payload);
+            break;
+          case ACTIONS.DEXTOPIA_TOCKEN_LOCKER_WITHDRAW:
+            this.dexTopiaTockenLockerWithdraw(payload);
+            break;
 
           default: {
           }
@@ -6867,6 +6874,107 @@ class Store {
       this.emitter.emit(ACTIONS.ERROR, ex);
     }
   };
+
+
+  // dextopia Tocken Locker deposit token
+  dexTopiaTockenLockerDeposit = async (payload) => {
+    try {
+      const context = this;
+
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+      console.log(payload.content,"heeh")
+      const { amount , weeks } = payload.content;
+
+      // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
+      let allowance0TXID = this.getTXUUID();
+      let depositTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `Deposit Topia token to tocken Locker`,
+        type: "Liquidity",
+        verb: "Liquidity Deposit",
+        transactions: [
+          {
+            uuid: allowance0TXID,
+            description: `Checking your Topia token allowance`,
+            status: "WAITING",
+          },
+          {
+            uuid: depositTXID,
+            description: `Deposit Topia token to the dextopia tocken Locker`,
+            status: "WAITING",
+          }
+        ],
+      });
+
+
+      let allowance0 = 0;
+
+        allowance0 = await this._getDepositAllowance(web3,CONTRACTS.DEXTOPIA_TOKEN, account);
+        if (BigNumber(allowance0).lt(amount)) {
+          this.emitter.emit(ACTIONS.TX_STATUS, {
+            uuid: allowance0TXID,
+            description: `Allow the dextopia tocken locker to spend your token`,
+          });
+        } else {
+          this.emitter.emit(ACTIONS.TX_STATUS, {
+            uuid: allowance0TXID,
+            description: `Allowance on dextopia tocken locker sufficient`,
+            status: "DONE",
+          });
+        }
+      
+
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+      // SUBMIT DEPOSIT TRANSACTION
+      const sendAmount = BigNumber(amount)
+        .times(10 ** 18)
+        .toFixed(0);
+
+        const dexTopiaTockenLockerContract = new web3.eth.Contract(
+          CONTRACTS.DEXTOPIA_TOKENLOCKER_ABI,
+          CONTRACTS.DEXTOPIA_TOKENLOCKER
+        );
+
+      this._callContractWait(
+        web3,
+        dexTopiaTockenLockerContract,
+        "lock",
+        [account.address,sendAmount , weeks],
+        account,
+        gasPrice,
+        null,
+        null,
+        depositTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
+  };
+
 
   _makeBatchRequest = (web3, callFrom, calls) => {
     let batch = new web3.BatchRequest();

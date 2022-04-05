@@ -357,6 +357,7 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
   const [ depositLoading, setDepositLoading ] = useState(false)
+  const [depositInput,setDepositInput] = useState(false);
 
   useEffect(() => {
     setSliderValues(defaultVotes)
@@ -375,14 +376,19 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
     setParentSliderValues(newSliderValues)
   }
 
+   
+  const onInputField = async (e)=>{
+    setDepositInput(e.target.value)
+  }
+
   const onDeposit = async (poolAddress) => {
     setDepositLoading(true)
-   await stores.dispatcher.dispatch({ type: ACTIONS.DEPOSITPOOL, content: { poolAddress:poolAddress, amount: "0.000000000001" }})
+   await stores.dispatcher.dispatch({ type: ACTIONS.DEPOSITPOOL, content: { poolAddress:poolAddress, amount: depositInput }})
   }
 
   const onWithdraw = async (poolAddress) => {
     setDepositLoading(true)
-   await stores.dispatcher.dispatch({ type: ACTIONS.WITHDRAW_LPDEPOSITOR, content: { poolAddress:poolAddress, amount: "0.000000000001" }})
+   await stores.dispatcher.dispatch({ type: ACTIONS.WITHDRAW_LPDEPOSITOR, content: { poolAddress:poolAddress, amount: depositInput }})
   }
 
   const handleRequestSort = (event, property) => {
@@ -512,7 +518,7 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                       <Typography variant='h2' className={classes.textSpaced}>
                         {/* {console.log(index,"pip")}
                         {console.log(poolStaked[index][0],"pip")} */}
-                        {formatCurrency(BigNumber(poolStaked[index][0]).div(10**18))}
+                        {poolStaked[index]&& formatCurrency(BigNumber(poolStaked[index][0]).div(10**18))}
                         
                       </Typography>
                       <Typography variant='h5' className={classes.textSpaced} color='textSecondary'>
@@ -531,11 +537,11 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                   <TableCell className={classes.cell} align="right">
                     <div className={ classes.inlineEnd }>
                     {console.log(index,"pipppp")}
-                    {console.log(poolReward[index][0][0][0]?.sex,"pipppp")}
-                    {console.log(poolReward[index][0][0][0]?.solid,"pipppp")}
+                    {/* {console.log(poolReward[index][0][0][0]?.sex,"pipppp")}
+                    {console.log(poolReward[index][0][0][0]?.solid,"pipppp")} */}
                     {/* {console.log(poolReward[index][0],"pipppp")} */}
                       <Typography variant='h2' className={classes.textSpaced}>
-                        {formatCurrency(BigNumber(poolReward[index][0][0][0]?.solid).div(10**18))}
+                        {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.solid).div(10**18))}
                       </Typography>
                       <Typography variant='h5' className={classes.textSpaced} color='textSecondary'>
                         DYSTOPIA token
@@ -543,7 +549,7 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                     </div>
                     <div className={ classes.inlineEnd }>
                       <Typography variant='h5' className={classes.textSpaced}>
-                        {formatCurrency(BigNumber(poolReward[index][0][0][0]?.sex).div(10**18))}
+                        {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.sex).div(10**18))}
                       </Typography>
                       <Typography variant='h5' className={classes.textSpaced} color='textSecondary'>
                         Topia TOken
@@ -576,6 +582,13 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                     )
                     :null
                     } */}
+                     <input
+                  type="number"
+                  value={depositInput}
+                  placeholder="enter amount"
+                  
+                  onChange={onInputField}
+                />
                       <button onClick={()=>onDeposit(row?.address)}>deposit</button>
                       <button onClick={()=>onWithdraw(row?.address)}>Withdraw</button>
                   </TableCell>
