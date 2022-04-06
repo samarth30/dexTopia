@@ -132,6 +132,9 @@ function Navigation(props) {
     if (activePath.includes("convert")) {
       setActive("convert");
     }
+    if (activePath.includes("lock")) {
+      setActive("lock");
+    }
     if (activePath.includes("bribe")) {
       setActive("bribe");
     }
@@ -166,6 +169,7 @@ function Navigation(props) {
         {renderSubNav("Migrate", "migrate")}
         {renderSubNav("Pool", "pools")}
         {renderSubNav("Convert", "convert")}
+        {renderSubNav("Lock", "lock")}
       </ToggleButtonGroup>
     );
   };

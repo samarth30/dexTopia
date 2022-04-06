@@ -9,6 +9,7 @@ import Whitelist from "./whitelist";
 import Bribe from "./bribe/create";
 
 import { useRouter } from "next/router";
+import Lock from "./lock"
 import Convert from "./convert";
 
 function Route({ changeTheme, ...props }) {
@@ -29,6 +30,8 @@ function Route({ changeTheme, ...props }) {
     return <Vote props={props} changeTheme={changeTheme} />;
   }else if (activePath.includes("/convert")) {
     return <Convert props={props} changeTheme={changeTheme} />;
+  }else if (activePath.includes("/lock")) {
+    return <Lock props={props} changeTheme={changeTheme} />;
   } else if (activePath.includes("/migrate")) {
     return <Migrate props={props} changeTheme={changeTheme} />;
   } else if (activePath.includes("/vote")) {
