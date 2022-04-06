@@ -1,3 +1,4 @@
+import { calendarPickerSkeletonClasses } from '@mui/lab';
 import React, { useState, useEffect } from 'react';
 import classes from './convert.module.css';
 
@@ -65,6 +66,22 @@ function Convert({ changeTheme }) {
             </div>
                 )
             }
+            <div className={classes.footerContainer} style={{color: "#fff", display: "flex", fontWeight: "bolder"}}>
+                <div className={classes.stakedName}>Staked SolidSEX </div>
+                <div className={classes.tvl}>78112286.2</div>
+                <div className={classes.apr}>127.9%</div>
+                <div className={classes.stake}>0</div>
+                <div className={classes.earnings}>
+                    <p style={{margin: "0"}}>0 SEX</p>
+                    <p style={{margin: "0"}}>0 SOLID</p>
+                </div>
+                <div className={classes.manage}>
+                    <button>Manage</button>
+                </div>
+                <div className={classes.claim}>
+                    <button>Claim</button>
+                </div>
+            </div>
         </div>
     </div>
   );

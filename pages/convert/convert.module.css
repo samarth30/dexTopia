@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin: 0 10rem;
+    padding: 0 10rem;
     padding-top: 102px;
     position: relative;
 }
@@ -53,4 +53,12 @@
 .inputBtn label {
     color: #fff;
     font-weight: bolder;
+}
+
+.stakedName, .tvl, .apr, .stake, .earnings, .manage, .claim {
+    margin: 0 0.5rem;
+}
+
+.stakedName {
+    margin: 0;
 }
