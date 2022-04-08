@@ -36,6 +36,7 @@ export default function ssLock() {
 stakedBalance: "0",
 topiaEarning: "0"
   });
+  const [tockenLockerDataRedux,settockenLockerDataRedux] = useState({lockedBalance:"0" , activeUserLocks:"0"})
   const [voteLoading, setVoteLoading] = useState(false);
   const [votes, setVotes] = useState([]);
   const [veToken, setVeToken] = useState(null);
@@ -79,7 +80,10 @@ topiaEarning: "0"
       type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA,
       content: {},
     });
-
+    const tockenLockerData = stores.stableSwapStore.getStore("tockenLockerData");
+    console.log(tockenLockerData)
+    settockenLockerDataRedux(tockenLockerData)
+    
     const nfts = stores.stableSwapStore.getStore("vestNFTs");
     setVestNFTs(nfts);
 
@@ -454,17 +458,17 @@ topiaEarning: "0"
             <button>Manage</button>
           </div> */}
         
-{/*         
+        
           <div className={classes.claim}>
-          dysTopiaEarning : {stakingRewardStaked && stakingRewardStaked?.dysTopiaEarning}
+          lockedBalance : {tockenLockerDataRedux && tockenLockerDataRedux?.lockedBalance}
           </div>
           <div className={classes.claim}>
-          stakedBalance : {stakingRewardStaked?.stakedBalance}
+          activeUserLocks : {tockenLockerDataRedux?.activeUserLocks}
           </div>
-          <div className={classes.claim}>
+          {/* <div className={classes.claim}>
           topiaEarning : {stakingRewardStaked?.topiaEarning}
-          </div>
-      */}
+          </div> */}
+     
         </div>
       </div>
     </div>
