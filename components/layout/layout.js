@@ -4,6 +4,7 @@ import Header from "../header";
 import Navigation from "../navigation";
 import AppWrapper from "../../ui/AppWrapper";
 import SnackbarController from "../snackbar";
+import Footer from "../footer/footer"
 
 export default function Layout({
   children,
@@ -32,13 +33,19 @@ export default function Layout({
         <meta name="og:title" content="Dystopia" />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <div className={classes.content}>
+      {/* <>
+            <Header />
+            {props.children}
+            <Footer />
+      </> */}
+      <>
         {!configure && (
           <Header backClicked={backClicked} changeTheme={changeTheme} title={ title } />
         )}
         <SnackbarController />
-        <main className={classes.main}>{children}</main>
-      </div>
+        {children}
+        <Footer />
+        </>
     </AppWrapper>
   );
 }
