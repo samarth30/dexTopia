@@ -18,4 +18,11 @@
 
   --input-font-color-dark: #5688A5;
   --input-font-color-light: #5688A5;
+
+  --sr-annote-color-0: #b4d9fb;
+  --sr-annote-color-1: #ffeb3b;
+  --sr-annote-color-2: #a2e9f2;
+  --sr-annote-color-3: #a1e0ff;
+  --sr-annote-color-4: #a8ea68;
+  --sr-annote-color-5: #ffb7da;
 }

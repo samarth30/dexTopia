@@ -7,10 +7,10 @@ import Vote from "./vote";
 import Rewards from "./rewards";
 import Whitelist from "./whitelist";
 import Bribe from "./bribe/create";
-
-import { useRouter } from "next/router";
 import Lock from "./lock"
 import Convert from "./convert";
+
+import { useRouter } from "next/router";
 
 function Route({ changeTheme, ...props }) {
   const router = useRouter();
