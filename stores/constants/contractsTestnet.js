@@ -49,3 +49,17 @@ export const BRIBE_ABI = abis.bribeABI
 export const TOKEN_ABI = abis.tokenABI
 
 export const MULTICALL_ADDRESS = '0xa6a0c0409fdddE2E66FBee64b09Bfca9f95C18EF'
+
+
+
+export const DEXTOPIA_VE_DEPOSITER = '0xE22eBB4E9fb0613Eb95A33FC811D44d64c11FFe3'
+export const DEXTOPIA_VE_DEPOSITER_ABI = abis.dexTopiaVeDepositor
+
+export const DEXTOPIA_TOKEN = '0x4BC8FFBabaa7706fCA20cEEb6c2C1050d4f338aD'
+export const DEXTOPIA_TOKEN_ABI = abis.erc20ABI
+
+export const DEXTOPIA_TOKENLOCKER = "0xEeF2F3a39525F509474e63996cFB04EA3589E140";
+export const DEXTOPIA_TOKENLOCKER_ABI = abis.dexTopiaTockenLocker;
+
+export const DEXTOPIA_STAKINGREWARDS = "0xA1E477D8Aec51C19f70c7DD426d579191758A969";
+export const DEXTOPIA_STAKINGREWARDS_ABI = abis.dexTopiaStakingRewards;

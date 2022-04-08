@@ -3437,6 +3437,25 @@ class Store {
     }
   };
 
+  _getUniversalAllowance = async (web3, tokenAddress, account , smartContractAddress) => {
+    console.log({web3, tokenAddress, account , smartContractAddress})
+    try {
+      const tokenContract = new web3.eth.Contract(
+        CONTRACTS.ERC20_ABI,
+        tokenAddress
+      );
+      const allowance = await tokenContract.methods
+        .allowance(account.address, smartContractAddress)
+        .call();
+      return BigNumber(allowance)
+        .div(10 ** parseInt(18))
+        .toFixed(parseInt(18));
+    } catch (ex) {
+      console.error(ex);
+      return null;
+    }
+  };
+
   quoteAddLiquidity = async (payload) => {
     try {
       const account = stores.accountStore.getStore("account");
@@ -6433,6 +6452,7 @@ class Store {
     try {
       const context = this;
 
+     
       const account = stores.accountStore.getStore("account");
       if (!account) {
         console.warn("account not found");
@@ -6444,7 +6464,8 @@ class Store {
         console.warn("web3 not found");
         return null;
       }
-      console.log(payload.content,"heeh")
+      // console.log(payload.content,"heeh")
+     
       const { amount } = payload.content;
 
       // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
@@ -6452,7 +6473,7 @@ class Store {
       let depositTXID = this.getTXUUID();
 
       //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
-
+    
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `Deposit Dystopia token to veDepositor`,
         type: "Liquidity",
@@ -6471,15 +6492,20 @@ class Store {
         ],
       });
 
-
+     
       let allowance0 = 0;
-
-        allowance0 = await this._getDepositAllowance(web3,   CONTRACTS.GOV_TOKEN_ADDRESS, account);
+     console.log( CONTRACTS.DEXTOPIA_VE_DEPOSITER.toString())
+        allowance0 = await this._getUniversalAllowance(web3,CONTRACTS.GOV_TOKEN_ADDRESS, account, CONTRACTS.DEXTOPIA_VE_DEPOSITER);
+        console.log("allowance0",allowance0)
         if (BigNumber(allowance0).lt(amount)) {
-          this.emitter.emit(ACTIONS.TX_STATUS, {
-            uuid: allowance0TXID,
-            description: `Allow the veDepositor to spend your token`,
-          });
+         
+  
+          
+            this.emitter.emit(ACTIONS.TX_STATUS, {
+              uuid: allowance0TXID,
+              description: `Allow the veDepositor to spend your token`,
+            });
+          
         } else {
           this.emitter.emit(ACTIONS.TX_STATUS, {
             uuid: allowance0TXID,
@@ -6490,7 +6516,38 @@ class Store {
       
 
       const gasPrice = await stores.accountStore.getGasPrice();
+      const allowanceCallsPromises = [];
+      if (BigNumber(allowance0).lt(amount)) {
+      const tokenContract = new web3.eth.Contract(
+        CONTRACTS.ERC20_ABI,
+        CONTRACTS.GOV_TOKEN_ADDRESS
+      );
+      console.log(CONTRACTS.DEXTOPIA_VE_DEPOSITER, MAX_UINT256 , CONTRACTS.GOV_TOKEN_ADDRESS)
+      const tokenPromise = new Promise((resolve, reject) => {
+        this._callContractWait(
+          web3,
+          tokenContract,
+          "approve",
+          [CONTRACTS.DEXTOPIA_VE_DEPOSITER, MAX_UINT256],
+          account,
+          gasPrice,
+          null,
+          null,
+          allowance0TXID,
+          (err) => {
+            if (err) {
+              reject(err);
+              return;
+            }
 
+            resolve();
+          }
+        );
+      });
+
+      allowanceCallsPromises.push(tokenPromise);
+    }
+    const done = await Promise.all(allowanceCallsPromises);
       // SUBMIT DEPOSIT TRANSACTION
       const sendAmount = BigNumber(amount)
         .times(10 ** 18)
@@ -6544,7 +6601,7 @@ class Store {
         console.warn("web3 not found");
         return null;
       }
-      console.log(payload.content,"heeh")
+      // console.log(payload.content,"heeh")
       const { poolAddress , amount } = payload.content;
 
 
@@ -6622,7 +6679,7 @@ class Store {
         console.warn("web3 not found");
         return null;
       }
-      console.log(payload.content,"heeh")
+      // console.log(payload.content,"heeh")
       const { poolAddress,amount } = payload.content;
 
       // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
@@ -6720,7 +6777,7 @@ class Store {
         console.warn("web3 not found");
         return null;
       }
-      console.log(payload.content,"heeh")
+      // console.log(payload.content,"heeh")
       const { poolAddresses } = payload.content;
 
       let getRewardTXID = this.getTXUUID();
@@ -6795,7 +6852,7 @@ class Store {
         console.warn("web3 not found");
         return null;
       }
-      console.log(payload.content,"heeh")
+      // console.log(payload.content,"heeh")
       const { amount } = payload.content;
 
       // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
@@ -6895,7 +6952,7 @@ class Store {
         console.warn("web3 not found");
         return null;
       }
-      console.log(payload.content,"heeh")
+      // console.log(payload.content,"heeh")
       const { amount } = payload.content;
 
       // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
@@ -7041,7 +7098,7 @@ class Store {
         console.warn("web3 not found");
         return null;
       }
-      console.log(payload.content,"heeh")
+      // console.log(payload.content,"heeh")
       const { amount , weeks } = payload.content;
 
       // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
@@ -7071,7 +7128,7 @@ class Store {
 
       let allowance0 = 0;
 
-        allowance0 = await this._getDepositAllowance(web3,CONTRACTS.DEXTOPIA_TOKEN, account);
+        allowance0 = await this._getUniversalAllowance(web3,CONTRACTS.DEXTOPIA_TOKEN, account, CONTRACTS.DEXTOPIA_TOKENLOCKER);
         if (BigNumber(allowance0).lt(amount)) {
           this.emitter.emit(ACTIONS.TX_STATUS, {
             uuid: allowance0TXID,
@@ -7087,6 +7144,38 @@ class Store {
       
 
       const gasPrice = await stores.accountStore.getGasPrice();
+
+      const allowanceCallsPromises = [];
+      if (BigNumber(allowance0).lt(amount)) {
+      const tokenContract = new web3.eth.Contract(
+        CONTRACTS.ERC20_ABI,
+        CONTRACTS.GOV_TOKEN_ADDRESS
+      );
+      const tokenPromise = new Promise((resolve, reject) => {
+        this._callContractWait(
+          web3,
+          tokenContract,
+          "approve",
+          [CONTRACTS.DEXTOPIA_TOKENLOCKER, MAX_UINT256],
+          account,
+          gasPrice,
+          null,
+          null,
+          allowance0TXID,
+          (err) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+
+            resolve();
+          }
+        );
+      });
+
+      allowanceCallsPromises.push(tokenPromise);
+    }
+    const done = await Promise.all(allowanceCallsPromises);
 
       // SUBMIT DEPOSIT TRANSACTION
       const sendAmount = BigNumber(amount)
