@@ -1,90 +1,72 @@
 import { calendarPickerSkeletonClasses } from '@mui/lab';
 import React, { useState, useEffect } from 'react';
 import classes from './lock.module.css';
+import CCLock from '../../components/ssLock';
+import { Typography, Button, Paper, SvgIcon } from "@mui/material";
+import Unlock from '../../components/unlock';
 
+import stores from '../../stores';
+import { ACTIONS } from '../../stores/constants';
 function Lock({ changeTheme }) {
+
+    const accountStore = stores.accountStore.getStore('account');
+    const [account, setAccount] = useState(accountStore);
+    const [unlockOpen, setUnlockOpen] = useState(false);
+  
+    useEffect(() => {
+      const accountConfigure = () => {
+        const accountStore = stores.accountStore.getStore('account');
+        setAccount(accountStore);
+        closeUnlock();
+      };
+      const connectWallet = () => {
+        onAddressClicked();
+      };
+  
+      stores.emitter.on(ACTIONS.ACCOUNT_CONFIGURED, accountConfigure);
+      stores.emitter.on(ACTIONS.CONNECT_WALLET, connectWallet);
+      return () => {
+        stores.emitter.removeListener(ACTIONS.ACCOUNT_CONFIGURED, accountConfigure);
+        stores.emitter.removeListener(ACTIONS.CONNECT_WALLET, connectWallet);
+      };
+    }, []);
+
+    const onAddressClicked = () => {
+        setUnlockOpen(true);
+      };
+    
+      const closeUnlock = () => {
+        setUnlockOpen(false);
+      };
     const [tab, setTab] = useState("token")
 
   return (
     <div className={classes.container}>
-        <div className={classes.title}>
-            <div className={classes.heading}>
-                <h1>Lock Sex</h1>
-            </div>
-            <div className={classes.depositBox}>
-                <p>Total Deposits</p>
-                <p>$0.00</p>
-            </div>
-            <div className={classes.claimableRewards}>
-                <p>Claimable Rewards</p>
-                <p>$0.00</p>
-            </div>
-        </div>
-        <div className={classes.convertStakeContainer}>
-            {/* <h1>Convert and Stake Solidity NFTs/Tokens Into SOLIDsex</h1>
-            <div className={classes.tabs}>
-                <p onClick={() => {setTab("token")}}>SOLID TOKEN</p>
-                <p onClick={() => {setTab("nft")}}>SOLID NFT</p>
-            </div>
-            {
-                tab === "token" && (
-                    <div className={classes.formWrapper}>
-                <p>Balance: 0 SOLID</p>
-                <form className={classes.form}>
-                    <div className={classes.inputBtn}>
-                        <input type="Text" placeholder="Enter Amount"/>
-                        <button id="clear">Max</button>
-                    </div>
-                    <div className={classes.approveConvertBtn}>
-                        <button id="approve">Approve</button>
-                        <button id="convert">Convert</button>
-                    </div>
-                </form>
-                <p>Converting 0 SOLID Tokens to 0 SOLIDsex</p>
-            </div>
-                )
-            }
-            {
-                tab === "nft" && (
-                    <div className={classes.formWrapper}>
-                <p>Balance: 0 SOLID</p>
-                <form className={classes.form}>
-                    <div className={classes.inputBtn}>
-                        <label for="cars">Choose a car:</label>
-                        <select id="cars" name="cars">
-                            <option value="volvo">Volvo XC90</option>
-                            <option value="saab">Saab 95</option>
-                            <option value="mercedes">Mercedes SLK</option>
-                            <option value="audi">Audi TT</option>
-                        </select>
-                    </div>
-                    <div className={classes.approveConvertBtn}>
-                        <button id="convert">Convert NFT</button>
-                    </div>
-                </form>
-                <p>Converting 0 SOLID Tokens to 0 SOLIDsex</p>
-            </div>
-                )
-            } */}
-            <div className={classes.footerContainer} style={{color: "#fff", display: "flex", fontWeight: "bolder"}}>
-                <div className={classes.stakedName}>Staked SolidSEX </div>
-                <div className={classes.tvl}>78112286.2</div>
-                <div className={classes.apr}>127.9%</div>
-                <div className={classes.stake}>0</div>
-                <div className={classes.earnings}>
-                    <p style={{margin: "0"}}>0 SEX</p>
-                    <p style={{margin: "0"}}>0 SOLID</p>
-                </div>
-                <div className={classes.manage}>
-                    <button>Manage</button>
-                </div>
-                <div className={classes.claim}>
-                    <button>Claim</button>
-                </div>
-            </div>
-        </div>
+       {account && account.address ?
+        <div className={classes.connected}>
+          <CCLock />
+        </div> :  <Paper className={classes.notConnectedContent}>
+          <div className={classes.sphere}></div>
+          <div className={classes.contentFloat}>
+          <Typography className={classes.mainHeadingNC} variant='h1'>Vote</Typography>
+          <Typography className={classes.mainDescNC} variant='body2'>
+            Use your veSolid to vote for your selected liquidity pair’s rewards distribution or create a bribe to encourage others to do the same.
+          </Typography>
+          <Button
+            disableElevation
+            className={classes.buttonConnect}
+            variant="contained"
+            onClick={onAddressClicked}>
+              {account && account.address && <div className={`${classes.accountIcon} ${classes.metamask}`}></div>}
+              <Typography>Connect Wallet to Continue</Typography>
+          </Button>
+          </div>
+        </Paper>}
+        {unlockOpen && <Unlock modalOpen={unlockOpen} closeModal={closeUnlock} />}
+       
     </div>
   );
 }
 
 export default Lock;
+

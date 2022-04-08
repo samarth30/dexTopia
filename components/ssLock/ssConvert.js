@@ -22,7 +22,7 @@ import GaugesTable from "./ssVotesTable.js";
 import stores from "../../stores";
 import { ACTIONS } from "../../stores/constants/constants";
 
-export default function ssConvert() {
+export default function ssLock() {
   const router = useRouter();
 
   const [, updateState] = useState();
@@ -103,44 +103,28 @@ topiaEarning: "0"
     forceUpdate();
   };
 
-  const [depositInput, setDepositInput] = useState("false");
+  const [depositInput, setDepositInput] = useState("");
+  const [depositInputWeeks, setDepositInputWeeks] = useState("");
 
   const onInputField = async (e) => {
     setDepositInput(e.target.value);
+  };
+  const onInputFieldWeeks = async (e) => {
+    setDepositInputWeeks(e.target.value);
   };
 
   const onDeposit = async () => {
     // setDepositLoading(true)
     await stores.dispatcher.dispatch({
-      type: ACTIONS.VE_DEPOSITOR_DEPOSIT,
-      content: { amount: depositInput },
+      type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DEPOSIT,
+      content: { amount: depositInput ,  weeks:depositInputWeeks },
     });
   };
 
-  const onDepositVeTopia = async ()=>{
-    
-    await stores.dispatcher.dispatch({
-      type: ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT,
-      content: { amount: "1" },
-    });
-  }
+ 
 
 
-  const onWithdrawVeTopia = async ()=>{
-    
-    await stores.dispatcher.dispatch({
-      type: ACTIONS.DEXTOPIA_STAKING_REWARD_WITHDRAW,
-      content: { amount: "1" },
-    });
-  }
-  
-  const onClaimVeTopia = async ()=>{
-    
-    await stores.dispatcher.dispatch({
-      type: ACTIONS.DEXTOPIA_STAKING_REWARD_GETREWARD,
-      content: {  },
-    });
-  }
+
 
   useEffect(() => {
     const vestVotesReturned = (vals) => {
@@ -411,6 +395,13 @@ topiaEarning: "0"
                   placeholder="enter amount"
                   onChange={onInputField}
                 />
+                <input
+                  type="number"
+                  value={depositInputWeeks}
+                  // className={styles.votes__depositWithdrawInput}
+                  placeholder="enter weeks"
+                  onChange={onInputFieldWeeks}
+                />
                 <button id="clear">Max</button>
               </div>
               <div className={classes.approveConvertBtn}>
@@ -419,7 +410,7 @@ topiaEarning: "0"
                   onClick={() => onDeposit()}
                   // className={styles.votes__depositWithdrawBtn}
                 >
-                  deposit
+                  LOCK
                 </button>
                 {/* <button >Convert</button> */}
               </div>
@@ -444,59 +435,26 @@ topiaEarning: "0"
                 <button id="convert">Convert NFT</button>
               </div>
             </form>
-            <p>Converting 0 SOLID Tokens to 0 SOLIDsex</p>
+            {/* <p>Converting 0 SOLID Tokens to 0 SOLIDsex</p> */}
           </div>
         )}
         <div
           className={classes.footerContainer}
           style={{ color: "#fff", display: "flex", fontWeight: "bolder" }}
         >
-          <div className={classes.stakedName}>Staked SolidSEX </div>
+          {/* <div className={classes.stakedName}>Staked SolidSEX </div>
           <div className={classes.tvl}>78112286.2</div>
           <div className={classes.apr}>127.9%</div>
           <div className={classes.stake}>0</div>
           <div className={classes.earnings}>
             <p style={{ margin: "0" }}>0 SEX</p>
             <p style={{ margin: "0" }}>0 SOLID</p>
-          </div>
+          </div> */}
           {/* <div className={classes.manage}>
             <button>Manage</button>
           </div> */}
-          <div className={classes.form}>
-              <div className={classes.inputBtn}>
-                <input
-                  type="number"
-                  value={depositInput}
-                  // className={styles.votes__depositWithdrawInput}
-                  placeholder="enter amount"
-                  onChange={onInputField}
-                />
-                {/* <button id="clear">Max</button> */}
-              </div>
-              <div className={classes.approveConvertBtn}>
-                {/* <button id="approve">Approve</button> */}
-                <button
-                  onClick={() => onDepositVeTopia()}
-                  // className={styles.votes__depositWithdrawBtn}
-                >
-                  deposit
-                </button>
-                {/* <button >Convert</button> */}
-              </div>
-              <div className={classes.approveConvertBtn}>
-                {/* <button id="approve">Approve</button> */}
-                <button
-                  onClick={() => onWithdrawVeTopia()}
-                  // className={styles.votes__depositWithdrawBtn}
-                >
-                  withdraw
-                </button>
-                {/* <button >Convert</button> */}
-              </div>
-            </div>
-          <div className={classes.claim}>
-            <button onClick={()=>onClaimVeTopia()}>Claim</button>
-          </div>
+        
+{/*         
           <div className={classes.claim}>
           dysTopiaEarning : {stakingRewardStaked && stakingRewardStaked?.dysTopiaEarning}
           </div>
@@ -506,7 +464,7 @@ topiaEarning: "0"
           <div className={classes.claim}>
           topiaEarning : {stakingRewardStaked?.topiaEarning}
           </div>
-     
+      */}
         </div>
       </div>
     </div>
