@@ -1,27 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
 
-import {
-  Typography,
-  Switch,
-  Button,
-  SvgIcon,
-  Badge,
-  IconButton,
-  Menu,
-  MenuItem,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import SvgIcon from '@mui/material/SvgIcon';
+import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
+import DashboardOutlined from '@material-ui/icons/DashboardOutlined';
+import AccountBalanceWalletOutlined from '@material-ui/icons/AccountBalanceWalletOutlined';
+import NotificationsNoneOutlined from '@material-ui/icons/NotificationsNoneOutlined';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import { withStyles, withTheme } from "@mui/styles";
-import {
-  ArrowDropDown,
-  AccountBalanceWalletOutlined,
-  DashboardOutlined,
-  NotificationsNoneOutlined,
-} from "@mui/icons-material";
-
-import Navigation from "../navigation";
 import Unlock from "../unlock";
 import TransactionQueue from "../transactionQueue";
 
@@ -29,12 +28,15 @@ import { ACTIONS } from "../../stores/constants";
 
 import stores from "../../stores";
 import { formatAddress } from "../../utils";
-
-import classes from "./header.module.css";
-import TopHeader from "../../ui/TopHeader";
-import Logo from "../../ui/Logo";
-import ThemeSwitcher from "../../ui/ThemeSwitcher";
 import { useAppThemeContext } from '../../ui/AppThemeProvider';
+
+import style from './header.module.css';
+// import logo from '../../public/images/logo.svg';
+// import starLogo from '../../public/images/star.svg';
+
+
+const pages = ['home', 'pools', 'convert solid', 'lock sex', 'vote', 'whitelist', 'stats', 'doca', 'convert'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const {
   CONNECT_WALLET,
@@ -131,79 +133,13 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-const StyledSwitch = withStyles((theme) => ({
-  root: {
-    width: 45,
-    height: 26,
-    padding: 0,
-    margin: theme.spacing(1),
-  },
-  switchBase: {
-    paddingTop: 1.5,
-    width: "70%",
-    margin: "auto",
-    borderRadius: "20px",
-    "&$checked": {
-      paddingTop: "6px",
-      transform: "translateX(18px)",
-      color: "rgba(128,128,128, 1)",
-      width: "25px",
-      height: "25px",
-      "& + $track": {
-        backgroundColor: "rgba(0,0,0, 0.3)",
-        opacity: 1,
-      },
-    },
-    "&$focusVisible $thumb": {
-      color: "#ffffff",
-      border: "6px solid #fff",
-    },
-  },
-  track: {
-    borderRadius: 32 / 2,
-    border: "1px solid rgba(104,108,122, 0.25)",
-    backgroundColor: "rgba(0,0,0, 0)",
-    opacity: 1,
-    transition: theme.transitions.create(["background-color", "border"]),
-  },
-  checked: {},
-  focusVisible: {},
-}))(({ classes, ...props }) => {
-  return (
-    <Switch
-      focusVisibleClassName={classes.focusVisible}
-      disableRipple
-      classes={{
-        root: classes.root,
-        switchBase: classes.switchBase,
-        thumb: classes.thumb,
-        track: classes.track,
-        checked: classes.checked,
-      }}
-      {...props}
-    />
-  );
-});
-
-const StyledBadge = withStyles((theme) => ({
-  badge: {
-    background: "#15B525",
-    color: "#ffffff",
-    width: 12,
-    height: 12,
-    minWidth: 12,
-    fontSize: 8,
-  },
-}))(Badge);
-
-function Header(props) {
+const Header = () => {
   const accountStore = stores.accountStore.getStore("account");
   const router = useRouter();
 
   const [account, setAccount] = useState(accountStore);
-  const [darkMode, setDarkMode] = useState(
-    props.theme.palette.mode === "dark" ? true : false
-  );
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const [unlockOpen, setUnlockOpen] = useState(false);
   const [chainInvalid, setChainInvalid] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -244,13 +180,6 @@ function Header(props) {
     setUnlockOpen(false);
   };
 
-  useEffect(function () {
-    const localStorageDarkMode = window.localStorage.getItem(
-      "dystopia.finance-dark-mode"
-    );
-    setDarkMode(localStorageDarkMode ? localStorageDarkMode === "dark" : false);
-  }, []);
-
   const navigate = (url) => {
     router.push(url);
   };
@@ -289,41 +218,115 @@ function Header(props) {
     setAnchorEl(null);
   };
 
+  // const { appTheme } = useAppThemeContext();
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = (page) => {
+    setAnchorElNav(null);
+    router.push(`/${page}`);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   const { appTheme } = useAppThemeContext();
 
   return (
-    <TopHeader>
-      <div className={classes.headerContainer}>
-        <div className={classes.logoContainer}>
-          <a className={classes.logoLink} onClick={() => router.push("/home")}>
-            <Logo />
-          </a>
-          {/*<Typography className={ classes.version}>version 0.0.30</Typography>*/}
-        </div>
+    <AppBar position="static" className={style.headermenu}>
+      <Container maxWidth="xl" className={style.headerContainer}>
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            onClick={() => router.push("/home")}
+          >
+            {/* <img src={logo} alt="logo header" /> */}
+            DexTopia
+          </Typography>
 
-        <Navigation />
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+          >
+            {/* <img src={logo} alt="logo header" /> */}
+            LogoHeader
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={() => {router.push(`/${page}`)}}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
 
-        <div className={classes.userBlock}>
-          {process.env.NEXT_PUBLIC_CHAINID == "4002" && (
-            <div className={classes.testnetDisclaimer}>
-              <Typography className={[classes.testnetDisclaimerText, classes[`testnetDisclaimerText--${appTheme}`]].join(' ')}>
-                Mumbai Testnet
-              </Typography>
-            </div>
-          )}
-          {process.env.NEXT_PUBLIC_CHAINID == "137" && (
-            <div className={classes.testnetDisclaimer}>
-              <Typography className={[classes.testnetDisclaimerText, classes[`testnetDisclaimerText--${appTheme}`]].join(' ')}>
-                Matic Mainnet
-              </Typography>
-            </div>
-          )}
-
-          {account && account.address ? (
+          <Box sx={{ flexGrow: 0 }} className={style.navbarRight}>
+            <Box className={style.navBarRightTextMain}>
+              <Box className={style.navBarRightTextInner}>
+                <Box className={style.navBarRightLogo}>
+                  {/* <img src={starLogo} alt="starLogo" /> */}
+                  star logo
+                </Box>
+              </Box>
+              <Typography className={style.navBarRightTextInnerp}>Fantom Opera</Typography>
+            </Box>
+            <Box>
+              {/* <Button variant="contained" className={style.buttonNavbar}>Connect wallet</Button> */}
+              {account && account.address ? (
             <div>
               <Button
                 disableElevation
-                className={[classes.accountButton, classes[`accountButton--${appTheme}`]].join(' ')}
+                className={style.buttonNavbar}
                 variant="contained"
                 aria-controls="simple-menu"
                 aria-haspopup="true"
@@ -331,15 +334,13 @@ function Header(props) {
               >
                 {account && account.address && (
                   <div
-                    className={`${classes.accountIcon} ${classes.metamask}`}
+                    // className={`${style.accountIcon} ${cstylemetamask}`}
                   ></div>
                 )}
-                <Typography className={classes.headBtnTxt}>
                   {account && account.address
                     ? formatAddress(account.address)
                     : "Connect Wallet"}
-                </Typography>
-                <ArrowDropDown className={classes.ddIcon} />
+                <ArrowDropDown />
               </Button>
 
               <StyledMenu
@@ -348,26 +349,26 @@ function Header(props) {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                className={classes.userMenu}
+                // className={style.userMenu}
               >
                 <StyledMenuItem
-                  className={classes.hidden}
+                  className={style.hidden}
                   onClick={() => router.push("/dashboard")}
                 >
-                  <ListItemIcon className={classes.userMenuIcon}>
+                  <ListItemIcon className={style.userMenuIcon}>
                     <DashboardOutlined fontSize="small" />
                   </ListItemIcon>
                   <ListItemText
-                    className={classes.userMenuText}
+                    className={style.userMenuText}
                     primary="Dashboard"
                   />
                 </StyledMenuItem>
                 <StyledMenuItem onClick={onAddressClicked}>
-                  <ListItemIcon className={classes.userMenuIcon}>
+                  <ListItemIcon className={style.userMenuIcon}>
                     <AccountBalanceWalletOutlined fontSize="small" />
                   </ListItemIcon>
                   <ListItemText
-                    className={classes.userMenuText}
+                    className={style.userMenuText}
                     primary="Switch Wallet Provider"
                   />
                 </StyledMenuItem>
@@ -376,84 +377,60 @@ function Header(props) {
           ) : (
             <Button
               disableElevation
-              className={[classes.accountButton, classes[`accountButton--${appTheme}`]].join(' ')}
+              className={style.buttonNavbar}
               variant="contained"
               onClick={onAddressClicked}
             >
               {account && account.address && (
                 <div
-                  className={`${classes.accountIcon} ${classes.metamask}`}
+                  className={`${style.accountIcon} ${style.metamask}`}
                 ></div>
               )}
 
               {!account?.address && (
-                <img src="/images/ui/icon-wallet.svg" className={classes.walletIcon}/>
+                <img src="/images/ui/icon-wallet.svg" className={style.walletIcon} />
               )}
 
-              <div className={classes.walletPointContainer}>
-                <div className={classes.walletPoint}>
+              <div className={style.walletPointContainer}>
+                <div className={style.walletPoint}>
                 </div>
               </div>
 
-              <Typography className={classes.headBtnTxt}>
+              <Typography className={style.headBtnTxt}>
                 {account && account.address
                   ? formatAddress(account.address)
                   : "Connect Wallet"}
               </Typography>
             </Button>
           )}
-          <ThemeSwitcher />
+            </Box>
 
-          {transactionQueueLength > 0 && (
-            <IconButton
-              className={[classes.notificationsButton, classes[`notificationsButton--${appTheme}`]].join(' ')}
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                stores.emitter.emit(ACTIONS.TX_OPEN);
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
               }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
             >
-              <StyledBadge
-                badgeContent={transactionQueueLength}
-                overlap="circular"
-              >
-                <NotificationsNoneOutlined style={{
-                  width: 20,
-                  height: 20,
-                  color: appTheme === "dark" ? '#4CADE6' : '#0B5E8E',
-                }} />
-              </StyledBadge>
-            </IconButton>
-          )}
-        </div>
-        {unlockOpen && (
-          <Unlock modalOpen={unlockOpen} closeModal={closeUnlock} />
-        )}
-        <TransactionQueue setQueueLength={setQueueLength} />
-      </div>
-      {chainInvalid ? (
-        <div className={classes.chainInvalidError}>
-          <div className={classes.ErrorContent}>
-            <WrongNetworkIcon className={classes.networkIcon} />
-            <Typography className={classes.ErrorTxt}>
-              The chain you're connected to isn't supported. Please check that
-              your wallet is connected to MATIC Testnet.
-            </Typography>
-            <Button
-              className={classes.switchNetworkBtn}
-              variant="contained"
-              onClick={() => switchChain()}
-            >
-              Switch to{" "}
-              {process.env.NEXT_PUBLIC_CHAINID == "4002"
-                ? "Matic Testnet"
-                : "Matic Mainnet"}
-            </Button>
-          </div>
-        </div>
-      ) : null}
-    </TopHeader>
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
-}
-
-export default withTheme(Header);
+};
+export default Header;

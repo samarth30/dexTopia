@@ -10,7 +10,7 @@ const AppWrapper = ({ children }) => {
     classes[`app-wrapper--${appTheme}`],
   ].join(" ");
 
-  return <div className={className}>{children}</div>;
+  return <div>{children}</div>;
 };
 
 AppWrapper.displayName = "AppWrapper";

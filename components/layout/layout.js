@@ -14,7 +14,7 @@ export default function Layout({
   title
 }) {
   return (
-    <AppWrapper>
+    <>
       <Head>
         <link rel="icon" href="/favicon.png" />
         <link
@@ -44,8 +44,8 @@ export default function Layout({
         )}
         <SnackbarController />
         {children}
-        {/* <Footer /> */}
+        <Footer />
         </>
-    </AppWrapper>
+    </>
   );
 }

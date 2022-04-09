@@ -11,6 +11,7 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="/fonts/Inter/Inter.css" />
           <link rel="stylesheet" href="/fonts/MonumentExt/Monument.css" />
           <link rel="stylesheet" href="/fonts/Druk/Druk.css" />
+          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Nunito:wght@400;700&family=Open+Sans:wght@500&family=Titillium+Web:wght@600&display=swap" rel="stylesheet" />
         </Head>
         <body>
           <Main />
