@@ -1,0 +1,259 @@
+  .bottomContainer .btn {
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    outline: currentcolor none 0px;
+    margin: 0px 8px 0px 17px;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: "Titillium Web", sans-serif;
+    line-height: 1.75;
+    padding: 5px 15px;
+    border-radius: 4px;
+    min-width: 90px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.2s ease 0s;
+    backface-visibility: hidden;
+    text-transform: none;
+    border: 1px solid rgb(32, 39, 43);
+    background: rgb(2, 119, 250) none repeat scroll 0% 0%;
+    color: rgb(255, 255, 255);
+  }
+  
+  .bottomContainer {
+    margin-left: -20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bottomContainer .bottomTopBar {
+    margin-bottom: 16px;
+    display: flex;
+    -moz-box-align: center;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .bottomContainer .bottomTopBar .left {
+    display: flex;
+    align-items: center;
+    margin-left: -50px;
+    margin: 0px 8px 0px 0px;
+    font-size: 24px;
+    font-family: "Changa", sans-serif;
+    font-weight: 600;
+    color: rgb(255, 255, 255) !important;
+    line-height: 1.167;
+  }
+  
+  .bottomContainer .bottomTopBar .right {
+    display: flex;
+    align-items: center;
+  }
+  .bottomContainer .bottomTopBar .right {
+    display: flex;
+    -moz-box-align: center;
+    align-items: center;
+  }
+  
+  .bottomContainer .bottomTopBar .right .rightInput {
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+    min-width: 0px;
+    padding: 0px;
+    margin: 0px;
+    border: 0px none;
+    vertical-align: top;
+  }
+  
+  .bottomContainer .bottomTopBar .right .rightInput .inputBox {
+    font-weight: normal;
+    font-family: "Titillium Web", sans-serif;
+    line-height: 1.4375em;
+    color: rgba(0, 0, 0, 0.87);
+    box-sizing: border-box;
+    cursor: text;
+    outline: none;
+    display: inline-flex;
+    width: 210px;
+    align-items: center;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 6px;
+    border: 1px solid rgb(2, 119, 250);
+    position: relative;
+    color: #fff;
+  }
+  
+  .bottomContainer .bottomTopBar .right .inputBox input::focus {
+    outline: none;
+  }
+  
+  .bottomContainer .bottomTopBar .right .inputBox input::placeholder {
+    padding-left: 8px;
+  }
+  
+  .rightInput .searchIcon {
+    position: absolute;
+    right: 7px;
+    top: 8px;
+    color: #fff;
+  }
+  
+  .bottomContainer .tableMainBox > .MuiGrid-item {
+    padding-top: 8px;
+  }
+  
+  .tableMainBox{
+    margin-top: 15px;
+  }
+  
+  .bottomContainer .tableMainBox > div {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .tableMainBox > div:first-of-type {
+    margin-top: unset;
+    margin-bottom: unset;
+  }
+  
+  .tableHeader .tableHeaderInner {
+    display: flex;
+    margin-top: 15px;
+    flex-direction: row;
+    -moz-box-align: center;
+    align-items: center;
+    border: unset;
+    box-shadow: unset;
+    padding: 0px 32px;
+  }
+  
+  .tableHeaderInner .tableHeaderInnerBoxes {
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    margin-top: -8px;
+  }
+  
+  .tableHeaderInnerBoxes .box1 {
+    box-sizing: border-box;
+    margin: 0px;
+    flex-direction: row;
+    flex-basis: 20.8333%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 20.8333%;
+  }
+  
+  .tableHeaderInnerBoxes .box2 {
+    box-sizing: border-box;
+    margin: 0px;
+    flex-direction: row;
+    flex-basis: 12.5%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 12.5%;
+  }
+  
+  .tableHeaderInnerBoxes .box2 .h3text {
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  
+  
+  .pagination {
+    overflow: auto;
+    color: rgb(255,255,255);
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 16px;
+  }
+  
+  /* media query */
+  
+  @media only screen and(min-width: 0px) {
+    .bottomContainer {
+      margin-top: 24px;
+    }
+    .bottomContainer .bottomTopBar {
+      flex-direction: column;
+    }
+    .bottomTopBar {
+      width: 100%;
+      margin-bottom: 24px;
+    }
+    .tableMainBox > .MuiGrid-item {
+      padding-left: 24px;
+    }
+    .tableHeader {
+      display: none;
+    }
+  }
+  
+  @media only screen and (min-width: 900px) {
+    .tableMainBox > .MuiGrid-item {
+      padding-left: 24px;
+    }
+    .tableHeaderInner .tableHeaderInnerBoxes {
+      width: calc(100% + 24px);
+      margin-left: -24px;
+    }
+  }
+  
+  @media only screen and(min-width: 600px) {
+    .bottomContainer {
+      margin-top: 0px;
+    }
+    .bottomContainer .bottomTopBar {
+      flex-direction: row;
+    }
+    .bottomTopBar {
+      width: 50%;
+      margin-bottom: 0px;
+    }
+    .bottomContainer .bottomTopBar .left {
+      width: 50%;
+      margin-bottom: 0px;
+    }
+  
+    .bottomContainer .bottomTopBar .right {
+      width: 50%;
+    }
+    .tableMainBox > .MuiGrid-item {
+      padding-left: 24px;
+    }
+    .tableHeader {
+      display: block;
+    }
+    .tableHeaderInner .tableHeaderInnerBoxes {
+      width: calc(100% + 16px);
+      margin-left: -16px;
+    }
+  }
+  
+  @media only screen and(min-width: 1200px) {
+    .tableMainBox .tableHeader {
+      flex-basis: 100%;
+      max-width: 100%;
+    }
+  }
+  
+  @media only screen and(min-width: 1536px) {
+    .tableMainBox .tableHeader {
+      flex-basis: 100%;
+      -moz-box-flex: 0;
+      flex-grow: 0;
+      max-width: 100%;
+    }
+  }
+  

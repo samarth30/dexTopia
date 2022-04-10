@@ -18,7 +18,7 @@
     box-sizing: border-box;
     display: flex !important;
     flex-flow: row wrap !important;
-    width: 100%;
+    max-width: 1500opx !important;
   }
   
   .footer1 {

@@ -1,224 +1,267 @@
-.container {
-  max-width: 1400px;
-  width: calc(100% - 180px);
+/* button {
+  border: medium none;
+  background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%;
+  outline: currentcolor none medium;
+  cursor: pointer;
+  transition: all 0.2s ease 0s;
+  font-family: "roboto-font", sans-serif;
+} */
+
+.bottomContainer .btn {
+  display: inline-flex;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  outline: currentcolor none 0px;
+  margin: 0px 8px 0px 17px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.75;
+  padding: 5px 15px;
+  border-radius: 4px;
+  min-width: 90px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.2s ease 0s;
+  backface-visibility: hidden;
+  text-transform: none;
+  border: 1px solid rgb(32, 39, 43);
+  background: rgb(2, 119, 250) none repeat scroll 0% 0%;
+  color: rgb(255, 255, 255);
+}
+
+.bottomContainer {
+  margin-left: -20px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  margin: auto;
-  margin-bottom: 60px;
-  padding: 0 0 70px 0px;
 }
 
-.smallText {
-  color: rgba(126,153,176,0.9);
-  margin: 0 15px 0 0 !important;
-  padding: 18px 0;
-}
-
-.tableContainer {
-  border: 1px solid rgba(126, 153, 176, 0.2);
-  width: 100%;
+.bottomContainer .bottomTopBar {
+  margin-bottom: 16px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.actionButtons {
-  padding: 10px 0;
-  min-width: 560px !important;
-  background: #11172a !important;
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translatex(-50%);
-  border-radius: 12 !important;
-  border: 1px solid rgba(126, 153, 176, 0.2);
-  z-index: 20 !important;
-}
-
-.actionButton {
-  width: 200px;
-}
-
-.actionButtonText {
-  font-size: 15px !important;
-  text-transform: capitalize !important;
-  font-weight: 700 !important;
-}
-
-.loadingCircle {
-  margin-left: 6px !important;
-}
-
-.infoSection {
-  display: flex;
-  padding: 10px 24px;
+  -moz-box-align: center;
   align-items: center;
-  justify-content: flex-end;
-}
-
-.helpText {
-  margin-left: 6px !important;
-  font-size: 20px !important;
-  color: #52af77 !important;
-}
-
-.errorText {
-  margin-left: 6px !important;
-  font-size: 20px !important;
-  color: #da0052 !important;
-}
-
-.buttonOverride {
-  background: rgb(23, 52, 72) !important;
-  color: rgb(6, 211, 215) !important;
-  font-weight: 700 !important;
-  width: 100%;
-  min-width: 200px !important;
-}
-
-.buttonOverride:hover {
-  background: rgb(19, 44, 60) !important;
-}
-
-
-.buttonOverrideFixed {
-  background: rgb(23, 52, 72) !important;
-  color: rgb(6, 211, 215) !important;
-  font-weight: 700 !important;
-  min-width: 200px !important;
-  max-height: 48px;
-}
-
-.buttonOverrideFixed:hover {
-  background: rgb(19, 44, 60) !important;
-}
-
-.tokenIDContainer {
-  border: 1px solid rgba(104, 108, 122, 0.25);
-  border-radius: 12px;
-}
-
-.searchContainer {
-  flex: 1;
-  display: flex;
-  width: 100%;
-  padding: 0px 24px !important;
-}
-
-.topBarContainer {
-  padding: 24px 0px;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-  width: 100%;
 }
 
-.mediumInputContainer {
+.bottomContainer .bottomTopBar .left {
   display: flex;
-  flex-wrap: wrap;
-  border-radius: 10px;
-  width: 100%;
   align-items: center;
-  background: rgb(33, 43, 72);
-  padding: 0 20px;
+  margin-left: -50px;
+  margin: 0px 8px 0px 0px;
+  font-size: 24px;
+  font-family: "Changa", sans-serif;
+  font-weight: 600;
+  color: rgb(255, 255, 255) !important;
+  line-height: 1.167;
 }
 
-.mediumInputAssetSelect {
-  width: 74px;
-  min-height: 50px;
-  height: 100%;
+.bottomContainer .bottomTopBar .right {
+  display: flex;
+  align-items: center;
+}
+.bottomContainer .bottomTopBar .right {
+  display: flex;
+  -moz-box-align: center;
+  align-items: center;
 }
 
-.mediumInputAmount {
-  flex: 1;
-  height: 100%;
-  width: 300px;
+.bottomContainer .bottomTopBar .right .rightInput {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  min-width: 0px;
+  padding: 0px;
+  margin: 0px;
+  border: 0px none;
+  vertical-align: top;
 }
 
-.mediumInputAddress {
-  min-width: 100%;
-  border-top: 1px solid rgba(128, 128, 128, 0.5);
-}
-
-.mediumInput {
-  font-size: 32px !important;
-}
-
-.menuOption {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  width: calc(100% - 24px);
-  padding: 6px 12px;
-}
-
-.smallerText {
-  font-size: 12px !important;
-}
-
-/* style additions  */
-.votes__tableRow{
-  background-color: #20272B;
-  border: 2px solid #0277FA;
-}
-
-.votes__colorTypography {
+.bottomContainer .bottomTopBar .right .rightInput .inputBox {
+  font-weight: normal;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.4375em;
+  color: rgba(0, 0, 0, 0.87);
+  box-sizing: border-box;
+  cursor: text;
+  outline: none;
+  display: inline-flex;
+  width: 210px;
+  align-items: center;
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 6px;
+  border: 1px solid rgb(2, 119, 250);
+  position: relative;
   color: #fff;
 }
 
-.votes__depositWithdrawInput, .votes__depositWithdrawBtn {
-  background: none;
-  border: 2px solid #0277FA;
-  border-radius: 10px;
-  color: #fff;
-  padding: 0.4rem;
-  margin: 0.4rem 0.4rem;
+.bottomContainer .bottomTopBar .right .inputBox input::focus {
+  outline: none;
 }
 
-@media screen and (max-width: 1200px) {
-  .container {
-    width: calc(100% - 80px);
-    display: flex;
+.bottomContainer .bottomTopBar .right .inputBox input::placeholder {
+  padding-left: 8px;
+}
+
+.rightInput .searchIcon {
+  position: absolute;
+  right: 7px;
+  top: 8px;
+  color: #fff;
+}
+
+.bottomContainer .tableMainBox > .MuiGrid-item {
+  padding-top: 8px;
+}
+
+.tableMainBox{
+  margin-top: 15px;
+}
+
+.bottomContainer .tableMainBox > div {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.tableMainBox > div:first-of-type {
+  margin-top: unset;
+  margin-bottom: unset;
+}
+
+.tableHeader .tableHeaderInner {
+  display: flex;
+  margin-top: 15px;
+  flex-direction: row;
+  -moz-box-align: center;
+  align-items: center;
+  border: unset;
+  box-shadow: unset;
+  padding: 0px 32px;
+}
+
+.tableHeaderInner .tableHeaderInnerBoxes {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  margin-top: -8px;
+}
+
+.tableHeaderInnerBoxes .box1 {
+  box-sizing: border-box;
+  margin: 0px;
+  flex-direction: row;
+  flex-basis: 20.8333%;
+  -moz-box-flex: 0;
+  flex-grow: 0;
+  max-width: 20.8333%;
+}
+
+.tableHeaderInnerBoxes .box2 {
+  box-sizing: border-box;
+  margin: 0px;
+  flex-direction: row;
+  flex-basis: 12.5%;
+  -moz-box-flex: 0;
+  flex-grow: 0;
+  max-width: 12.5%;
+}
+
+.tableHeaderInnerBoxes .box2 .h3text {
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+
+.pagination {
+  overflow: auto;
+  color: rgb(255,255,255);
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+/* media query */
+
+@media only screen and(min-width: 0px) {
+  .bottomContainer {
+    margin-top: 24px;
+  }
+  .bottomContainer .bottomTopBar {
     flex-direction: column;
-    align-items: flex-end;
-    margin: auto;
-    margin-bottom: 60px;
-    margin-top: 80px;
-    padding: 0 0 10px 0px;
+  }
+  .bottomTopBar {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  .tableMainBox > .MuiGrid-item {
+    padding-left: 24px;
+  }
+  .tableHeader {
+    display: none;
   }
 }
 
-@media screen and (max-width: 960px) {
-  .container {
-    padding: 0 0 60px 0px;
+@media only screen and (min-width: 900px) {
+  .tableMainBox > .MuiGrid-item {
+    padding-left: 24px;
   }
-
-  .actionButtons {
-    padding: 10px 0;
-    min-width: 100% !important;
-    background: #11172a !important;
-    position: fixed;
-    bottom: 0px;
-    left: 0;
-    transform: translatex(0);
-    border-radius: 0 !important;
-    border-top: 1px solid rgba(126, 153, 176, 0.2);
-  }
-
-  .searchContainer {
-    padding: 0px !important;
+  .tableHeaderInner .tableHeaderInnerBoxes {
+    width: calc(100% + 24px);
+    margin-left: -24px;
   }
 }
 
-@media screen and (max-width: 560px) {
-  .buttonOverrideFixed {
-    min-width: 100% !important;
-    max-height: 48px;
+@media only screen and(min-width: 600px) {
+  .bottomContainer {
+    margin-top: 0px;
+  }
+  .bottomContainer .bottomTopBar {
+    flex-direction: row;
+  }
+  .bottomTopBar {
+    width: 50%;
+    margin-bottom: 0px;
+  }
+  .bottomContainer .bottomTopBar .left {
+    width: 50%;
+    margin-bottom: 0px;
   }
 
-  .container {
-    width: calc(100% - 40px);
-    padding: 0 0 30px 0px;
+  .bottomContainer .bottomTopBar .right {
+    width: 50%;
+  }
+  .tableMainBox > .MuiGrid-item {
+    padding-left: 24px;
+  }
+  .tableHeader {
+    display: block;
+  }
+  .tableHeaderInner .tableHeaderInnerBoxes {
+    width: calc(100% + 16px);
+    margin-left: -16px;
+  }
+}
+
+@media only screen and(min-width: 1200px) {
+  .tableMainBox .tableHeader {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
+
+@media only screen and(min-width: 1536px) {
+  .tableMainBox .tableHeader {
+    flex-basis: 100%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 100%;
   }
 }

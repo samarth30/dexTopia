@@ -1,0 +1,42 @@
+.boxInner {
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+    border-radius: 4px;
+    color: rgb(255, 255, 255) !important;
+    background: rgb(32, 39, 43) none repeat scroll 0% 0% !important;
+    padding: 24px 32px;
+    box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px !important;
+    border: 1px solid rgb(2, 119, 250) !important;
+  }
+  
+  .topContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .h3text {
+    margin: 0px 0px 15px;
+    font-size: 20px !important;
+    font-family: "Changa", sans-serif;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    margin-bottom: 10px !important;
+    line-height: 1.167;
+    text-align: left;
+  }
+  
+  .bottomContainer {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .pagenation {
+    background-color: rgb(32, 39, 43);
+    color: #fff !important;
+  }
+  
+  .buttonDiv {
+    margin-top: 10px;
+    padding: 10px;
+  }
+  

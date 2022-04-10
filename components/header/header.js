@@ -318,7 +318,6 @@ const Header = () => {
                   star logo
                 </Box>
               </Box>
-              <Typography className={style.navBarRightTextInnerp}>Fantom Opera</Typography>
             </Box>
             <Box>
               {/* <Button variant="contained" className={style.buttonNavbar}>Connect wallet</Button> */}

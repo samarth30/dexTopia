@@ -101,9 +101,14 @@ export default function MyApp({ Component, pageProps }) {
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline/>
           {validateConfigured() && (
+            <>
             <Layout>
+            <div className="jss7"></div>
+            <div className="jss8">
               <Component {...pageProps} changeTheme={changeTheme}/>
+            </div>
             </Layout>
+            </>
           )}
           {!validateConfigured() && <Configure {...pageProps} />}
         </AppThemeProvider>

@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Paper, Typography, Button, CircularProgress, InputAdornment, TextField, MenuItem, Select, Grid } from '@mui/material';
+import { Paper, Typography, Button, CircularProgress, InputAdornment, TextField, MenuItem, Select, Grid, Container, Box, Input, TablePagination } from '@mui/material';
 import BigNumber from 'bignumber.js';
 import { Search } from '@mui/icons-material';
 import { useRouter } from "next/router";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
-import classes from './ssVotes.module.css';
+import style from './convert.module.css';
+import style1 from './ssVotes.module.css';
 import { formatCurrency } from '../../utils';
+import PoolsRow from '../poolsRow/poolsRow';
 
 import GaugesTable from './ssVotesTable.js'
 
@@ -18,14 +20,14 @@ export default function ssPools() {
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
 
-  const [ gauges, setGauges ] = useState([])
-  const [ poolReward, setPoolReward ] = useState([])
-  const [ poolStaked , setPoolStaked] = useState([])
-  const [ voteLoading, setVoteLoading ] = useState(false)
-  const [ votes, setVotes ] = useState([])
-  const [ veToken, setVeToken ] = useState(null)
-  const [ token, setToken ] = useState(null)
-  const [ vestNFTs, setVestNFTs ] = useState([])
+  const [gauges, setGauges] = useState([])
+  const [poolReward, setPoolReward] = useState([])
+  const [poolStaked, setPoolStaked] = useState([])
+  const [voteLoading, setVoteLoading] = useState(false)
+  const [votes, setVotes] = useState([])
+  const [veToken, setVeToken] = useState(null)
+  const [token, setToken] = useState(null)
+  const [vestNFTs, setVestNFTs] = useState([])
   const [search, setSearch] = useState('');
 
 
@@ -36,30 +38,30 @@ export default function ssPools() {
     const filteredAssets = as
     setGauges(filteredAssets)
 
-    const poolRewards =  stores.dispatcher.dispatch({ type: ACTIONS.POOLREWARDS, content: {filteredAssets}})
+    const poolRewards = stores.dispatcher.dispatch({ type: ACTIONS.POOLREWARDS, content: { filteredAssets } })
 
     const ass = stores.stableSwapStore.getStore('poolRewards')
-    console.log(ass,"pipppp")
+    console.log(ass, "pipppp")
     setPoolReward(ass)
 
     const asss = stores.stableSwapStore.getStore("poolStakedBalance");
-    console.log(asss,"pipp")
+    console.log(asss, "pipp")
     setPoolStaked(asss);
 
-    const poolStakedBalances =  stores.dispatcher.dispatch({ type: ACTIONS.POOLSTAKED, content: {filteredAssets}})
-    const stakingRewardsStakedBalance = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT, content: {}})
-    
-    const tockenLockerDatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA, content: {}})
-    
+    const poolStakedBalances = stores.dispatcher.dispatch({ type: ACTIONS.POOLSTAKED, content: { filteredAssets } })
+    const stakingRewardsStakedBalance = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT, content: {} })
+
+    const tockenLockerDatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA, content: {} })
+
     const nfts = stores.stableSwapStore.getStore('vestNFTs');
     setVestNFTs(nfts)
 
-    if(nfts && nfts.length > 0) {
+    if (nfts && nfts.length > 0) {
       setToken(nfts[0]);
     }
 
-    if(nfts && nfts.length > 0 && filteredAssets && filteredAssets.length > 0) {
-       stores.dispatcher.dispatch({ type: ACTIONS.GET_VEST_VOTES, content: { tokenID: nfts[0].id } })
+    if (nfts && nfts.length > 0 && filteredAssets && filteredAssets.length > 0) {
+      stores.dispatcher.dispatch({ type: ACTIONS.GET_VEST_VOTES, content: { tokenID: nfts[0].id } })
       // stores.dispatcher.dispatch({ type: ACTIONS.GET_VEST_BALANCES, content: { tokenID: nfts[0].id } })
     }
 
@@ -113,11 +115,11 @@ export default function ssPools() {
 
   const onVote = () => {
     setVoteLoading(true)
-    stores.dispatcher.dispatch({ type: ACTIONS.VOTE, content: { votes, tokenID: token.id }})
+    stores.dispatcher.dispatch({ type: ACTIONS.VOTE, content: { votes, tokenID: token.id } })
   }
-  
 
-  let totalVotes = votes.reduce((acc, curr) => { return BigNumber(acc).plus(BigNumber(curr.value).lt(0) ? (curr.value*-1) : curr.value).toNumber() }, 0 )
+
+  let totalVotes = votes.reduce((acc, curr) => { return BigNumber(acc).plus(BigNumber(curr.value).lt(0) ? (curr.value * -1) : curr.value).toNumber() }, 0)
 
   const handleChange = (event) => {
     setToken(event.target.value);
@@ -134,31 +136,31 @@ export default function ssPools() {
 
   const renderMediumInput = (value, options) => {
     return (
-      <div className={ classes.textField}>
-        <div className={ classes.mediumInputContainer}>
+      <div className={classes.textField}>
+        <div className={classes.mediumInputContainer}>
           <Grid container>
             <Grid item lg='auto' md='auto' sm={12} xs={12}>
-              <Typography variant="body2" className={ classes.smallText }>Please select your veNFT:</Typography>
+              <Typography variant="body2" className={classes.smallText}>Please select your veNFT:</Typography>
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <div className={ classes.mediumInputAmount }>
+              <div className={classes.mediumInputAmount}>
                 <Select
                   fullWidth
-                  value={ value }
+                  value={value}
                   onChange={handleChange}
                   inputProps={{
                     className: classes.mediumInput,
                   }}
                 >
-                  { options && options.map((option) => {
+                  {options && options.map((option) => {
                     return (
                       <MenuItem key={option.id} value={option}>
-                        <div className={ classes.menuOption }>
+                        <div className={classes.menuOption}>
                           <Typography>Token #{option.id}</Typography>
                           <div>
-                            <Typography align='right' className={ classes.smallerText }>{ formatCurrency(option.lockValue) }</Typography>
-                            <Typography color='textSecondary' className={ classes.smallerText }>{veToken?.symbol}</Typography>
+                            <Typography align='right' className={classes.smallerText}>{formatCurrency(option.lockValue)}</Typography>
+                            <Typography color='textSecondary' className={classes.smallerText}>{veToken?.symbol}</Typography>
                           </div>
                         </div>
                       </MenuItem>
@@ -174,91 +176,117 @@ export default function ssPools() {
   }
 
   return (
-    <div className={ classes.container }>
-      <div className={ classes.topBarContainer }>
+    <Container id="main" className={style.mainContainer}>
+      <Box id="mainContainer" className={style.mainContainerInner}>
+        <Box className={style.containerTop}>
+          <Box className={style.topContainer}>
+            <Grid item className={style.topGrid1} lg={4}>
+              <Typography variant="h1" className={style.mainText}>Pools</Typography>
+            </Grid>
+            <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+              <Paper elevation={1} className={style.topGrid2Inner}>
+                <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+                <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+              </Paper>
+            </Grid>
+            <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+              <Paper elevation={1} className={style.topGrid2Inner}>
+                <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+                <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+              </Paper>
+            </Grid>
+          </Box>
+          <Box className={style1.bottomContainer}>
+            <Box className={style1.bottomTopBar}>
+              <Box className={style1.left}>
+                <Typography variant="h3">Filter</Typography>
+                <Button className={style1.btn}>ALL</Button>
+                <Button className={style1.btn}>STABLE</Button>
+                <Button className={style1.btn}>Volatile</Button>
+                <Button className={style1.btn}>My Deposits</Button>
+              </Box>
+              <Box className={style1.right}>
+                <Box className={style1.rightInput}>
+                  <Input placeholder="Search Pools" className={style1.inputBox}></Input>
+                  <img src={search} className={style1.searchIcon} alt="search" />
+                </Box>
+                <Button className={style1.btn}>Claim All Earnings</Button>
+              </Box>
+            </Box>
+            {/* // main */}
 
-        <Grid container spacing={1}>
-          <Grid item lg='auto' lg='auto' sm={12} xs={12}>
-            
-              <Button
-                variant="contained"
-                color="secondary"
-                className={classes.button}
-                startIcon={<AddCircleOutlineIcon />}
-                size='large'
-                className={ classes.buttonOverride }
-                color='primary'
-                onClick={ onBribe }
-              >
-                <Typography className={ classes.actionButtonText }>{ `Create Bribe` }</Typography>
-              </Button>
-           
-          </Grid>
-          <Grid item lg={true} md={true} sm={12} xs={12}>
-            <TextField
-              className={classes.searchContainer}
-              variant="outlined"
-              fullWidth
-              placeholder="MATIC, MIM, 0x..."
-              value={search}
-              onChange={onSearchChanged}
-              inputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid item lg='auto' lg='auto' sm={12} xs={12}>
-            <div className={ classes.tokenIDContainer }>
-              { renderMediumInput(token, vestNFTs) }
-            </div>
-          </Grid>
-        </Grid>
-      </div>
-      <Paper elevation={0} className={ classes.tableContainer }>
-        <GaugesTable gauges={ gauges.filter((pair) => {
-          if(!search || search === '') {
-            return true
-          }
+            <Container item xs={12} className={style1.tableMainBox}>
+              <Grid xs={12} item className={style1.tableHeader}>
+                <Box className={style1.tableHeaderInner}>
+                  <Container className={style1.tableHeaderInnerBoxes}>
+                    <Grid item xs={2.5} className={style1.box1}></Grid>
+                    <Grid item xs={1.5} className={style1.box2}>
+                      <Button>
+                        <Typography variant="h6" className={style1.h3text}>
+                          TVL
+                        </Typography>
+                      </Button>
 
-          const searchLower = search.toLowerCase()
+                    </Grid>
+                    <Grid item xs={1.5} className={style1.box2}>
+                      <Button>
+                        <Typography variant="h6" className={style1.h3text}>
+                          APR
+                        </Typography>
+                      </Button>
+                    </Grid>
+                    <Grid item xs={1.5} className={style1.box2}>
+                      <Button>
+                        <Typography variant="h6" className={style1.h3text}>
+                          Your Deposits
+                        </Typography>
+                      </Button>
+                    </Grid>
+                    <Grid item xs={2} className={style1.box2}>
+                      <Button>
+                        <Typography variant="h6" className={style1.h3text}>
+                          Your Earnings
+                        </Typography>
+                      </Button>
+                    </Grid>
+                  </Container>
+                </Box>
+              </Grid>
 
-          if(pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
-            pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
-            pair.token1.symbol.toLowerCase().includes(searchLower) || pair.token1.address.toLowerCase().includes(searchLower) ||  pair.token1.name.toLowerCase().includes(searchLower)) {
-            return true
-          }
+              <PoolsRow
+                gauges={gauges.filter((pair) => {
+                  if (!search || search === '') {
+                    return true
+                  }
 
-          return false
+                  const searchLower = search.toLowerCase()
 
-        }) } setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={ token } poolReward={poolReward} poolStaked={poolStaked} />
-      </Paper>
-      <Paper elevation={10} className={ classes.actionButtons }>
-        <Grid container spacing={2}>
-          <Grid item lg={6}>
-            <div className={ classes.infoSection }>
-              <Typography>Voting Power Used: </Typography>
-              <Typography className={ `${BigNumber(totalVotes).gt(100) ? classes.errorText : classes.helpText}` }>{ totalVotes } %</Typography>
-            </div>
-          </Grid>
-          <Grid item lg={6}>
-            <Button
-              className={ classes.buttonOverrideFixed }
-              variant='contained'
-              size='large'
-              color='primary'
-              disabled={ voteLoading || BigNumber(totalVotes).eq(0) || BigNumber(totalVotes).gt(100) }
-              onClick={ onVote }
-              >
-              <Typography className={ classes.actionButtonText }>{ voteLoading ? `Casting Votes` : `Cast Votes` }</Typography>
-              { voteLoading && <CircularProgress size={10} className={ classes.loadingCircle } /> }
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
-    </div>
+                  if (pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
+                    pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
+                    pair.token1.symbol.toLowerCase().includes(searchLower) || pair.token1.address.toLowerCase().includes(searchLower) || pair.token1.name.toLowerCase().includes(searchLower)) {
+                    return true
+                  }
+
+                  return false
+
+                })}
+                setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked} />
+              />
+
+              <TablePagination
+                component="div"
+                className={style1.pagination}
+                count={10}
+                page={10}
+                onPageChange={null}
+                rowsPerPage={10}
+                onRowsPerPageChange={null}
+              />
+
+            </Container>
+          </Box>
+        </Box>
+      </Box>
+    </Container>
   );
 }

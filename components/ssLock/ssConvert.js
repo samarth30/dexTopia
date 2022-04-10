@@ -9,18 +9,31 @@ import {
   MenuItem,
   Select,
   Grid,
+  Container,
+  Box,
 } from "@mui/material";
 import BigNumber from "bignumber.js";
 import { Search } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import classes from "./ssVotes.module.css";
+import style from "./ssVotes.module.css";
+import style1 from "./pool.module.css"
 import { formatCurrency } from "../../utils/utils";
+import PoolsRow from "../poolsRow/poolsRow"
+import CustomBox from "../customBox/customBox"
+import { styled } from '@mui/material/styles';
 
 import GaugesTable from "./ssVotesTable.js";
 
 import stores from "../../stores";
 import { ACTIONS } from "../../stores/constants/constants";
+
+const Item = styled(Paper)(({ theme }) => ({
+  marginTop:'20px',
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
 
 export default function ssLock() {
   const router = useRouter();
@@ -270,207 +283,92 @@ topiaEarning: "0"
   };
 
   return (
-    <div className={classes.container}>
-      {/* <div className={ classes.topBarContainer }>
+    <Container id="main" className={style.mainContainer}>
+    <Box id="mainContainer" className={style.mainContainerInner}>
+        <Box className={style.containerTop}>
+            <Box className={style.topContainer}>
+                <Grid item className={style.topGrid1} lg={4}>
+                    <Typography variant="h1" className={style.mainText}>Locks</Typography>
+                </Grid>
+                <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+                    <Paper elevation={1} className={style.topGrid2Inner}>
+                        <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+                        <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+                    </Paper>
+                </Grid>
+                <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+                    <Paper elevation={1} className={style.topGrid2Inner}>
+                        <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+                        <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+                    </Paper>
+                </Grid>
+            </Box>
 
-        <Grid container spacing={1}>
-          <Grid item lg='auto' lg='auto' sm={12} xs={12}>
-            
-              <Button
-                variant="contained"
-                color="secondary"
-                className={classes.button}
-                startIcon={<AddCircleOutlineIcon />}
-                size='large'
-                className={ classes.buttonOverride }
-                color='primary'
-                onClick={ onBribe }
-              >
-                <Typography className={ classes.actionButtonText }>{ `Create Bribe` }</Typography>
-              </Button>
-           
-          </Grid>
-          <Grid item lg={true} md={true} sm={12} xs={12}>
-            <TextField
-              className={classes.searchContainer}
-              variant="outlined"
-              fullWidth
-              placeholder="MATIC, MIM, 0x..."
-              value={search}
-              onChange={onSearchChanged}
-              inputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid item lg='auto' lg='auto' sm={12} xs={12}>
-            <div className={ classes.tokenIDContainer }>
-              { renderMediumInput(token, vestNFTs) }
-            </div>
-          </Grid>
-        </Grid>
-      </div>
-      <Paper elevation={0} className={ classes.tableContainer }>
-        <GaugesTable gauges={ gauges.filter((pair) => {
-          if(!search || search === '') {
-            return true
-          }
+            <Box className={style1.bottomContainer}>
+                <Container item xs={12} className={style1.tableMainBox}>
+                    <Grid xs={12} item className={style1.tableHeader}>
+                        <Box className={style1.tableHeaderInner}>
+                            <Container className={style1.tableHeaderInnerBoxes}>
+                                <Grid item xs={2.5} className={style1.box1}></Grid>
+                                <Grid item xs={1.5} className={style1.box2}>
+                                    <Button>
+                                        <Typography variant="h6" className={style1.h3text}>
+                                            TVL
+                                        </Typography>
+                                    </Button>
 
-          const searchLower = search.toLowerCase()
+                                </Grid>
+                                <Grid item xs={1.5} className={style1.box2}>
+                                    <Button>
+                                        <Typography variant="h6" className={style1.h3text}>
+                                            APR
+                                        </Typography>
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={1.5} className={style1.box2}>
+                                    <Button>
+                                        <Typography variant="h6" className={style1.h3text}>
+                                            Your Deposits
+                                        </Typography>
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={2} className={style1.box2}>
+                                    <Button>
+                                        <Typography variant="h6" className={style1.h3text}>
+                                            Your Earnings
+                                        </Typography>
+                                    </Button>
+                                </Grid>
+                            </Container>
+                        </Box>
+                    </Grid>
+                    
+                    <PoolsRow />
 
-          if(pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
-            pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
-            pair.token1.symbol.toLowerCase().includes(searchLower) || pair.token1.address.toLowerCase().includes(searchLower) ||  pair.token1.name.toLowerCase().includes(searchLower)) {
-            return true
-          }
+                    {/* Bottom boxes */}
 
-          return false
+                    <Box>
+                        <Grid style={{marginTop:'50px'}} container spacing={2}>
+                            <Grid item xs={7}>
+                                <CustomBox tableSize="400" text="Your SEX locks - 0% of vlSEX" />
+                            </Grid>
+                            <Grid item xs={5}>
+                            <CustomBox text="Current Week Claimable Earnings " />
+                            </Grid>
+                            <Grid item xs={7}></Grid>
+                            <Grid item xs={5}>
+                            <CustomBox tableSize="400" text="Next Weeks Total Earnings" />
+                            </Grid>
+                        </Grid>
+                    </Box>
 
-        }) } setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={ token } poolReward={poolReward} poolStaked={poolStaked} />
-      </Paper>
-      <Paper elevation={10} className={ classes.actionButtons }>
-        <Grid container spacing={2}>
-          <Grid item lg={6}>
-            <div className={ classes.infoSection }>
-              <Typography>Voting Power Used: </Typography>
-              <Typography className={ `${BigNumber(totalVotes).gt(100) ? classes.errorText : classes.helpText}` }>{ totalVotes } %</Typography>
-            </div>
-          </Grid>
-          <Grid item lg={6}>
-            <Button
-              className={ classes.buttonOverrideFixed }
-              variant='contained'
-              size='large'
-              color='primary'
-              disabled={ voteLoading || BigNumber(totalVotes).eq(0) || BigNumber(totalVotes).gt(100) }
-              onClick={ onVote }
-              >
-              <Typography className={ classes.actionButtonText }>{ voteLoading ? `Casting Votes` : `Cast Votes` }</Typography>
-              { voteLoading && <CircularProgress size={10} className={ classes.loadingCircle } /> }
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper> */}
+                </Container>
 
-      <div className={classes.title}>
-        <div className={classes.heading}>
-          <h1>Convert</h1>
-        </div>
-        <div className={classes.depositBox}>
-          <p>Total Deposits</p>
-          <p>$0.00</p>
-        </div>
-        <div className={classes.claimableRewards}>
-          <p>Claimable Rewards</p>
-          <p>$0.00</p>
-        </div>
-      </div>
-      <div className={classes.convertStakeContainer}>
-        <h1>Convert and Stake Solidity NFTs/Tokens Into SOLIDsex</h1>
-        <div className={classes.tabs}>
-          <p
-            onClick={() => {
-              setTab("token");
-            }}
-          >
-            SOLID TOKEN
-          </p>
-          <p
-            onClick={() => {
-              setTab("nft");
-            }}
-          >
-            SOLID NFT
-          </p>
-        </div>
-        {tab === "token" && (
-          <div className={classes.formWrapper}>
-            <p>Balance: 0 SOLID</p>
-            <div className={classes.form}>
-              <div className={classes.inputBtn}>
-                <input
-                  type="number"
-                  value={depositInput}
-                  // className={styles.votes__depositWithdrawInput}
-                  placeholder="enter amount"
-                  onChange={onInputField}
-                />
-                <input
-                  type="number"
-                  value={depositInputWeeks}
-                  // className={styles.votes__depositWithdrawInput}
-                  placeholder="enter weeks"
-                  onChange={onInputFieldWeeks}
-                />
-                <button id="clear">Max</button>
-              </div>
-              <div className={classes.approveConvertBtn}>
-                {/* <button id="approve">Approve</button> */}
-                <button
-                  onClick={() => onDeposit()}
-                  // className={styles.votes__depositWithdrawBtn}
-                >
-                  LOCK
-                </button>
-                {/* <button >Convert</button> */}
-              </div>
-            </div>
-            <p>Converting 0 SOLID Tokens to 0 SOLIDsex</p>
-          </div>
-        )}
-        {tab === "nft" && (
-          <div className={classes.formWrapper}>
-            <p>Balance: 0 SOLID</p>
-            <form className={classes.form}>
-              <div className={classes.inputBtn}>
-                <label for="cars">Choose a car:</label>
-                <select id="cars" name="cars">
-                  <option value="volvo">Volvo XC90</option>
-                  <option value="saab">Saab 95</option>
-                  <option value="mercedes">Mercedes SLK</option>
-                  <option value="audi">Audi TT</option>
-                </select>
-              </div>
-              <div className={classes.approveConvertBtn}>
-                <button id="convert">Convert NFT</button>
-              </div>
-            </form>
-            {/* <p>Converting 0 SOLID Tokens to 0 SOLIDsex</p> */}
-          </div>
-        )}
-        <div
-          className={classes.footerContainer}
-          style={{ color: "#fff", display: "flex", fontWeight: "bolder" }}
-        >
-          {/* <div className={classes.stakedName}>Staked SolidSEX </div>
-          <div className={classes.tvl}>78112286.2</div>
-          <div className={classes.apr}>127.9%</div>
-          <div className={classes.stake}>0</div>
-          <div className={classes.earnings}>
-            <p style={{ margin: "0" }}>0 SEX</p>
-            <p style={{ margin: "0" }}>0 SOLID</p>
-          </div> */}
-          {/* <div className={classes.manage}>
-            <button>Manage</button>
-          </div> */}
-        
-        
-          <div className={classes.claim}>
-          lockedBalance : {tockenLockerDataRedux && tockenLockerDataRedux?.lockedBalance}
-          </div>
-          <div className={classes.claim}>
-          activeUserLocks : {tockenLockerDataRedux?.activeUserLocks}
-          </div>
-          {/* <div className={classes.claim}>
-          topiaEarning : {stakingRewardStaked?.topiaEarning}
-          </div> */}
-     
-        </div>
-      </div>
-    </div>
+
+            </Box>
+
+        </Box>
+    </Box>
+</Container>
   );
 }

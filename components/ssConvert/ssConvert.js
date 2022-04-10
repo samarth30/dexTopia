@@ -9,12 +9,17 @@ import {
   MenuItem,
   Select,
   Grid,
+  Box,
+  Container,
+  Tab,
+  Tabs,
+  Input
 } from "@mui/material";
 import BigNumber from "bignumber.js";
 import { Search } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import classes from "./ssVotes.module.css";
+import style from "./ssVotes.module.css";
 import { formatCurrency } from "../../utils/utils";
 
 import GaugesTable from "./ssVotesTable.js";
@@ -43,6 +48,19 @@ topiaEarning: "0"
   const [vestNFTs, setVestNFTs] = useState([]);
   const [search, setSearch] = useState("");
   const [tab, setTab] = useState("token");
+
+  const [value, setValue] = useState(0);
+  
+  const handleChanges = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
 
   const ssUpdated = () => {
     setVeToken(stores.stableSwapStore.getStore("veToken"));
@@ -281,234 +299,174 @@ topiaEarning: "0"
     );
   };
 
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
   return (
-    <div className={classes.container}>
-      {/* <div className={ classes.topBarContainer }>
-
-        <Grid container spacing={1}>
-          <Grid item lg='auto' lg='auto' sm={12} xs={12}>
-            
-              <Button
-                variant="contained"
-                color="secondary"
-                className={classes.button}
-                startIcon={<AddCircleOutlineIcon />}
-                size='large'
-                className={ classes.buttonOverride }
-                color='primary'
-                onClick={ onBribe }
-              >
-                <Typography className={ classes.actionButtonText }>{ `Create Bribe` }</Typography>
-              </Button>
-           
+    <Container id="main" className={style.mainContainer}>
+    <Box id="mainContainer" className={style.mainContainerInner}>
+      <Box className={style.containerTop}>
+        <Container className={style.topContainer}>
+          <Grid item className={style.topGrid1} lg={4}>
+            <Typography variant="h1" className={style.mainText}>Convert</Typography>
           </Grid>
-          <Grid item lg={true} md={true} sm={12} xs={12}>
-            <TextField
-              className={classes.searchContainer}
-              variant="outlined"
-              fullWidth
-              placeholder="MATIC, MIM, 0x..."
-              value={search}
-              onChange={onSearchChanged}
-              inputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search />
-                  </InputAdornment>
-                ),
-              }}
-            />
+          <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+            <Paper elevation={1} className={style.topGrid2Inner}>
+              <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+              <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+            </Paper>
           </Grid>
-          <Grid item lg='auto' lg='auto' sm={12} xs={12}>
-            <div className={ classes.tokenIDContainer }>
-              { renderMediumInput(token, vestNFTs) }
-            </div>
+          <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+            <Paper elevation={1} className={style.topGrid2Inner}>
+              <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+              <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+            </Paper>
           </Grid>
-        </Grid>
-      </div>
-      <Paper elevation={0} className={ classes.tableContainer }>
-        <GaugesTable gauges={ gauges.filter((pair) => {
-          if(!search || search === '') {
-            return true
-          }
+        </Container>
 
-          const searchLower = search.toLowerCase()
+        <Container className={style.bottomContainer}>
+          <Grid item xs={12} lg={9.5} className={style.bottomContainerLeft}>
+            <Paper elevation={1} className={style.bottomContainerLeftInner}>
+              <Box className={style.bottomContainerLeftInnerTop}>
+                <Typography variant='h3' className={style.h3text}>
+                  Convert & stake Solidly NFTs/Tokens into SOLIDsex
+                </Typography>
+              </Box>
 
-          if(pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
-            pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
-            pair.token1.symbol.toLowerCase().includes(searchLower) || pair.token1.address.toLowerCase().includes(searchLower) ||  pair.token1.name.toLowerCase().includes(searchLower)) {
-            return true
-          }
+              <Box className={style.bottomContainerLeftBottom}>
+                <Box className={style.bottomContainerpannelTop}>
+                  <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
+                    <Tabs value={value} onChange={handleChanges} className={style.tabs}>
+                      <Tab label="Solid Token" {...a11yProps(0)} className={style.tab} />
+                      <Tab label="Solid NFT" {...a11yProps(1)} className={style.tab} />
+                    </Tabs>
+                  </Box>
+                </Box>
+                <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={value} index={0}>
+                  <Box className={style.tabPannel1}>
+                    <Box className={style.tabPannelrow1}>
+                      <Typography variant="h6" className={style.h6Text}>
+                        This process is irreversible
+                      </Typography>
+                    </Box>
+                    <Box className={style.tabPannelrow2}>
+                      <Typography variant='p' className={style.balancep}>
+                        Balance: 0 SOLID
+                      </Typography>
+                    </Box>
+                    <Box className={style.tabPannelrow3}>
+                      <Box className={style.tabPannelrow3Left}>
+                        <Box className={style.tabPannelrow3LeftInner}>
+                          <Box className={style.tabinputFields}>
 
-          return false
+                            <Input placeholder='Enter Amount' className={style.AmountInput} />
+                            <Button className={style.buttontop}>Max</Button>
+                          </Box>
 
-        }) } setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={ token } poolReward={poolReward} poolStaked={poolStaked} />
-      </Paper>
-      <Paper elevation={10} className={ classes.actionButtons }>
-        <Grid container spacing={2}>
-          <Grid item lg={6}>
-            <div className={ classes.infoSection }>
-              <Typography>Voting Power Used: </Typography>
-              <Typography className={ `${BigNumber(totalVotes).gt(100) ? classes.errorText : classes.helpText}` }>{ totalVotes } %</Typography>
-            </div>
+                        </Box>
+
+                      </Box>
+                      <Box className={style.tabPannelrow3Right}>
+                        <Button className={style.approveBtn}>
+                          Approve
+                        </Button>
+                        <Button className={style.approveBtn}>
+                          Convert tokens
+                        </Button>
+                      </Box>
+                    </Box>
+                    <Box className={style.tabPannelrow4}>
+                      <Typography variant='p' className={style.balancep}>
+                        Converting 0 SOLID Tokens to 0 SOLIDsex
+                      </Typography>
+                    </Box>
+                  </Box>
+                </TabPanel>
+                <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={value} index={1}>
+                  Item Two
+                </TabPanel>
+              </Box>
+            </Paper>
           </Grid>
-          <Grid item lg={6}>
-            <Button
-              className={ classes.buttonOverrideFixed }
-              variant='contained'
-              size='large'
-              color='primary'
-              disabled={ voteLoading || BigNumber(totalVotes).eq(0) || BigNumber(totalVotes).gt(100) }
-              onClick={ onVote }
-              >
-              <Typography className={ classes.actionButtonText }>{ voteLoading ? `Casting Votes` : `Cast Votes` }</Typography>
-              { voteLoading && <CircularProgress size={10} className={ classes.loadingCircle } /> }
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper> */}
 
-      <div className={classes.title}>
-        <div className={classes.heading}>
-          <h1>Convert</h1>
-        </div>
-        <div className={classes.depositBox}>
-          <p>Total Deposits</p>
-          <p>$0.00</p>
-        </div>
-        <div className={classes.claimableRewards}>
-          <p>Claimable Rewards</p>
-          <p>$0.00</p>
-        </div>
-      </div>
-      <div className={classes.convertStakeContainer}>
-        <h1>Convert and Stake Solidity NFTs/Tokens Into SOLIDsex</h1>
-        <div className={classes.tabs}>
-          <p
-            onClick={() => {
-              setTab("token");
-            }}
-          >
-            SOLID TOKEN
-          </p>
-          <p
-            onClick={() => {
-              setTab("nft");
-            }}
-          >
-            SOLID NFT
-          </p>
-        </div>
-        {tab === "token" && (
-          <div className={classes.formWrapper}>
-            <p>Balance: 0 SOLID</p>
-            <div className={classes.form}>
-              <div className={classes.inputBtn}>
-                <input
-                  type="number"
-                  value={depositInput}
-                  // className={styles.votes__depositWithdrawInput}
-                  placeholder="enter amount"
-                  onChange={onInputField}
-                />
-                <button id="clear">Max</button>
-              </div>
-              <div className={classes.approveConvertBtn}>
-                {/* <button id="approve">Approve</button> */}
-                <button
-                  onClick={() => onDeposit()}
-                  // className={styles.votes__depositWithdrawBtn}
-                >
-                  deposit
-                </button>
-                {/* <button >Convert</button> */}
-              </div>
-            </div>
-            <p>Converting 0 SOLID Tokens to 0 SOLIDsex</p>
-          </div>
-        )}
-        {tab === "nft" && (
-          <div className={classes.formWrapper}>
-            <p>Balance: 0 SOLID</p>
-            <form className={classes.form}>
-              <div className={classes.inputBtn}>
-                <label for="cars">Choose a car:</label>
-                <select id="cars" name="cars">
-                  <option value="volvo">Volvo XC90</option>
-                  <option value="saab">Saab 95</option>
-                  <option value="mercedes">Mercedes SLK</option>
-                  <option value="audi">Audi TT</option>
-                </select>
-              </div>
-              <div className={classes.approveConvertBtn}>
-                <button id="convert">Convert NFT</button>
-              </div>
-            </form>
-            <p>Converting 0 SOLID Tokens to 0 SOLIDsex</p>
-          </div>
-        )}
-        <div
-          className={classes.footerContainer}
-          style={{ color: "#fff", display: "flex", fontWeight: "bolder" }}
-        >
-          <div className={classes.stakedName}>Staked SolidSEX </div>
-          <div className={classes.tvl}>78112286.2</div>
-          <div className={classes.apr}>127.9%</div>
-          <div className={classes.stake}>0</div>
-          <div className={classes.earnings}>
-            <p style={{ margin: "0" }}>0 SEX</p>
-            <p style={{ margin: "0" }}>0 SOLID</p>
-          </div>
-          {/* <div className={classes.manage}>
-            <button>Manage</button>
-          </div> */}
-          <div className={classes.form}>
-              <div className={classes.inputBtn}>
-                <input
-                  type="number"
-                  value={depositInput}
-                  // className={styles.votes__depositWithdrawInput}
-                  placeholder="enter amount"
-                  onChange={onInputField}
-                />
-                {/* <button id="clear">Max</button> */}
-              </div>
-              <div className={classes.approveConvertBtn}>
-                {/* <button id="approve">Approve</button> */}
-                <button
-                  onClick={() => onDepositVeTopia()}
-                  // className={styles.votes__depositWithdrawBtn}
-                >
-                  deposit
-                </button>
-                {/* <button >Convert</button> */}
-              </div>
-              <div className={classes.approveConvertBtn}>
-                {/* <button id="approve">Approve</button> */}
-                <button
-                  onClick={() => onWithdrawVeTopia()}
-                  // className={styles.votes__depositWithdrawBtn}
-                >
-                  withdraw
-                </button>
-                {/* <button >Convert</button> */}
-              </div>
-            </div>
-          <div className={classes.claim}>
-            <button onClick={()=>onClaimVeTopia()}>Claim</button>
-          </div>
-          <div className={classes.claim}>
-          dysTopiaEarning : {stakingRewardStaked && stakingRewardStaked?.dysTopiaEarning}
-          </div>
-          <div className={classes.claim}>
-          stakedBalance : {stakingRewardStaked?.stakedBalance}
-          </div>
-          <div className={classes.claim}>
-          topiaEarning : {stakingRewardStaked?.topiaEarning}
-          </div>
-     
-        </div>
-      </div>
-    </div>
+          {/* <Grid item xs={2.5}>
+          <Paper elevation={1} className={style.topGrid2Inner}>
+              <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+              <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+            </Paper>
+          </Grid> */}
+
+          <Grid item xs={12} className={style.bottomTable}>
+            <Container className={style.bottomTableInner}>
+              <Grid lg={2.1} item className={style.tableheaderGText}></Grid>
+              <Grid lg={1.85} item>
+                <Typography variant="h6" className={style.tableheaderGText}>TVL</Typography>
+              </Grid>
+              <Grid lg={1.5} item>
+                <Typography variant="h6">APR</Typography>
+
+              </Grid>
+              <Grid lg={1.7} item>
+                <Typography variant="h6">Your Staked SOLIDsex</Typography>
+
+              </Grid>
+              <Grid lg={1.7} item>
+                <Typography variant="h6">Your Earning</Typography>
+              </Grid>
+            </Container>
+            <Paper elevation={1} className={style.tableRow}>
+              <Box className={style.tableRowInner}>
+                <Container className={style.tableBoxes}>
+                  <Grid item xs={12} lg={2}>
+                    <Typography variant="p">
+                      Staked SOLIDsex
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} lg={1.75}>
+                    <Typography variant="p">6,656,064.4</Typography>
+                  </Grid>
+                  <Grid item xs={12} lg={1.75}>
+                    <Typography variant="p">26.1%</Typography>
+                  </Grid>
+                  <Grid item xs={12} lg={1.75}>
+                    <Typography variant="p">0</Typography>
+                  </Grid>
+                  <Grid item xs={6} lg={1.5}>
+                    <Typography variant="p">0 SEX</Typography>
+                    <Typography variant="p">0 SOLID</Typography>
+                  </Grid>
+                  <Grid item xs={6} lg={1.5}>
+                    <Button className={style.approveBtn}>Manage</Button>
+                  </Grid>
+                  <Grid item xs={6} lg={1.5}>
+                    <Button className={style.approveBtn}>Claim Earnings</Button>
+                  </Grid>
+
+                </Container>
+              </Box>
+            </Paper>
+          </Grid>
+        </Container>
+
+      </Box>
+    </Box>
+  </Container>
   );
 }

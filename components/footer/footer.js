@@ -14,7 +14,6 @@ export default function Footer() {
     <footer className={style.footerMain}>
       <Box className={style.footerInner}>
         <Container className={style.footerDataContainer}>
-          <Grid item md={1.25} lg={0.25} className={style.footer1}></Grid>
 
           <Grid item lg={1.75} className={style.footer2}>
             <Box className={style.footer2Inner}>
