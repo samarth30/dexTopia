@@ -35,8 +35,48 @@ import style from './header.module.css';
 // import starLogo from '../../public/images/star.svg';
 
 
-const pages = ['home', 'pools', 'convert solid', 'lock sex', 'vote', 'whitelist', 'stats', 'doca', 'convert'];
+const pages = ['HOME', 'SWAP', 'POOLS', 'CONVERT SOLID', 'LOCK SEX', 'VOTE', 'WHITELIST', 'STATS', 'DOCA', 'DASHBOARD', 'MIGRATE'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const returnPage = (page) => {
+  switch (page) {
+    case 'HOME':
+      return 'home'
+      break;
+    case 'SWAP':
+      return 'swap'
+      break;
+    case 'POOLS':
+      return 'pools'
+      break;
+    case 'CONVERT SOLID':
+      return 'convert'
+      break;
+    case 'LOCK SEX':
+      return 'lock'
+      break;
+    case 'VOTE':
+      return 'vote'
+      break;
+    case 'WHITELIST':
+      return 'whitelist'
+      break;
+    case 'STATS':
+      return 'stats'
+      break;
+    case 'DOCA':
+      return 'doca'
+      break;
+    case 'DASHBOARD':
+      return 'dashboard'
+      break;
+    case 'MIGRATE':
+      return 'migrate'
+      break;
+    default:
+      break;
+  }
+}
 
 const {
   CONNECT_WALLET,
@@ -302,7 +342,11 @@ const Header = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={() => {router.push(`/${page}`)}}
+                onClick={
+                  () => {
+                    const pg = returnPage(page);
+                    router.push(`/${pg}`)
+                  }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
