@@ -19,7 +19,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import style from "./ssVotes.module.css";
 import style1 from "./pool.module.css"
 import { formatCurrency } from "../../utils/utils";
-import PoolsRow from "../poolsRow/poolsRow"
+import PoolsRow from "./poolsRow"
 import CustomBox from "../customBox/customBox"
 import { styled } from '@mui/material/styles';
 
