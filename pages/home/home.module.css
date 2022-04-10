@@ -1,248 +1,404 @@
-.ffContainer {
-  height: 100%;
-  width: auto;
-  margin-top: 0px;
+.btn {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
   position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  outline: 0px;
+  border: 0px;
+  margin: 0px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.75;
+  padding: 6px 16px;
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px,
+    rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+  min-width: 90px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  transition: all 0.2s ease 0s;
+  backface-visibility: hidden;
+  background: linear-gradient(
+    91.59deg,
+    rgb(2, 119, 250) -2.14%,
+    rgb(255, 78, 147) 101.38%
+  );
+  text-transform: none;
+  width: 320px;
+  font-size: 22px;
 }
 
-.contentContainerFull,
-.contentContainerFullTwo {
-  height: 100vh;
+.mainContainerInner {
   width: 100%;
-  position: relative;
 }
 
-.homeContentMain {
-  text-align: center !important;
-  max-width: 50vw;
-  height: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+.section1 {
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
-.mainTitle {
-  font-family: 'Monument' !important;
-  font-size: 60px !important;
-  margin-bottom: 30px !important;
-  animation: mainTitleAnim 1s ease 1;
-  animation-delay: 200ms;
-  animation-fill-mode: forwards;
-  position: relative;
-  bottom: 0;
-  opacity: 0;
-  text-align: center !important;
-  }
-
-  @keyframes mainTitleAnim {
-  0% {
-    bottom: -100px;
-    opacity: 0;
-  }
-  100% {
-    bottom: 0;
-    opacity: 1;
-  }
-  }
-
-.appLogo {
-  transform: scale(6);
-  position: fixed;
-  left: 100px;
-  top: 30px;
+.section1Inner {
+  display: flex;
+  flex-direction: column;
 }
 
-.preTitle {
-  font-family: 'Monument' !important;
-  font-size: 18px !important;
-  text-transform: uppercase;
-  color: #06D3D7 !important;
-  margin-bottom: 20px !important;
-  font-weight: 100 !important;
-  letter-spacing: 3px;
-  animation: preTitleAnim 1s ease 1;
-  animation-delay: 0s;
-  animation-fill-mode: forwards;
-  position: relative;
-  bottom: 0;
-  opacity: 0;
+.section1Inner .section1Col1 {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
 }
 
-@keyframes preTitleAnim {
-0% {
-  bottom: -100px;
-  opacity: 0;
-}
-100% {
-  bottom: 0;
-  opacity: 1;
-}
+.section1Inner .section1Col1 .left {
+  width: 100%;
 }
 
-.secTitle {
-  font-family: 'Monument' !important;
-  font-size: 30px !important;
-  margin-bottom: 20px !important;
-  text-align: center !important;
+.section1Inner .section1Col1 .left .section1text {
+  margin: 0px;
+  font-size: 78px;
+  text-align: left;
+  font-family: "Titillium Web", sans-serif;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  line-height: 125%;
 }
 
-.mainDescription {
-  font-size: 20px !important;
-  margin-bottom: 20px !important;
-  line-height: 1.7rem !important;
-  color: rgba(255,255,255,0.7) !important;
+.section1Inner .section1Col1 .right {
+  height: 400px;
+  margin-top: -78px;
 }
 
-.secDescription {
-  font-size: 16px !important;
-  margin-bottom: 20px !important;
-  line-height: 1.7rem !important;
-  color: #7E99B0 !important;
+.section1Col2 {
+  display: flex;
+  color: #fff;
 }
 
-.buttonInfo {
-  background: #212B48 !important;
-  font-family: 'Monument' !important;
-  padding: 12px 20px 10px 20px !important;
-  min-width: 100% !important;
-  text-transform: capitalize !important;
-  color: #7E99B0 !important;
-  animation: buttonInfoAnim 1s ease 1;
-  animation-delay: 400ms;
-  animation-fill-mode: forwards;
-  position: relative;
-  bottom: 0;
-  opacity: 0;
-  }
-
-  @keyframes buttonInfoAnim {
-    0% {
-    bottom: -100px;
-    opacity: 0;
-    }
-    100% {
-    bottom: 0;
-    opacity: 1;
-    }
-  }
-
-.buttonEnter {
-  animation: buttonInfoAnim 1s ease 1;
-  animation-delay: 600ms;
-  animation-fill-mode: forwards;
-  position: relative;
-  bottom: 0;
-  opacity: 0;
+.section2 {
+  margin-top: 160px;
+  margin-bottom: 160px;
 }
 
-.buttonEnter,
-.buttonEnterSingle {
-  background: rgba(6,211,215,0.1) !important;
-  font-family: 'Monument' !important;
-  padding: 12px 20px 10px 20px !important;
-  min-width: 100% !important;
-  text-transform: capitalize !important;
-  color: #06D3D7 !important;
+.section3 div {
+  display: block;
 }
 
-.floatingSphere {
-    height: 600px;
-    width: 600px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-image: url('/images/sphere_001.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    z-index: 1;
-    mix-blend-mode: lighten;
-    opacity: 0.5;
+.section3 .section3Inner {
+  display: flex !important;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between !important;
 }
 
-@media screen and (max-width: 960px) {
-  .floatingSphere { display: none; }
+.section3Left .para1 {
+  color: #ffffff;
+  opacity: 0.6;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 140%;
+  letter-spacing: 0.17em;
+  text-align: left !important;
+}
 
-  .homeContentMain {
-    text-align: center;
-    max-width: 80vw;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
+.section3Left .para2 {
+  margin: 16px 0px 0px !important;
+  font-weight: normal;
+  font-size: 18px;
+  text-align: left;
+  font-family: "Titillium Web", sans-serif;
+}
+
+.doWhite {
+  line-height: 1.5 !important;
+  color: #ffffff;
+  font-size: 38px !important;
+  font-weight: 600 !important;
+  line-height: 140% !important;
+}
+
+.para3 a {
+  margin: 0px;
+  text-decoration: none;
+  transition: all 0.2s ease 0s;
+  color: rgb(2, 119, 250);
+}
+
+.section3Right .section3RightInner {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  column-gap: 8px;
+}
+
+.section3Right .section3RightInner .boxes {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  column-gap: 8px;
+  margin-left: 100px;
+}
+
+.boxes .boxCompany {
+  box-sizing: border-box;
+  margin: 8px 0px;
+  flex-direction: row;
+  flex-basis: 41.6667%;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  max-width: 41.6667%;
+  padding: 8px 8px 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  width: 180px;
+  transition: all 0.2s ease 0s;
+}
+
+.boxes .boxCompany .boxLink {
+  margin: 0px;
+  text-decoration: none;
+  transition: all 0.2s ease 0s;
+  color: rgb(255, 255, 255);
+}
+
+.boxLinkImage svg {
+  height: inherit;
+  width: inherit;
+}
+
+.section4 {
+  margin-top: 160px;
+  margin-bottom: 160px;
+}
+
+.section4 .innerSection4 {
+  display: flex;
+  flex-direction: column;
+}
+
+.section4 .innerSection4 .innerSection4Partetions {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.section4 .innerSection4 .innerSection4Partetions .innerSection4Left {
+  display: block;
+}
+
+.innerSection4Left .para1 {
+  margin: 0px;
+  text-align: left;
+  font-family: "Titillium Web", sans-serif;
+  color: rgb(255, 255, 255);
+  letter-spacing: 0.17em;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 140%;
+  opacity: 0.6;
+}
+
+.innerSection4Left .para2 {
+  margin: 16px 0px 0px;
+  text-align: left;
+  font-family: "Titillium Web", sans-serif;
+  color: rgb(255, 255, 255);
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+.innerSection4Right {
+  height: 400px;
+}
+
+.section5 {
+  margin-top: 160px;
+  margin-bottom: 160px;
+}
+
+.section5 .section5Inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.section5 .section5Inner .maintextContainer {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.section5 .para1 {
+  margin: 0px;
+  font-family: "Titillium Web", sans-serif;
+  color: rgb(255, 255, 255);
+  letter-spacing: 0.17em;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 140%;
+  opacity: 0.6;
+}
+
+.section5 .para2 {
+  margin: 16px 0px 0px;
+  font-family: "Titillium Web", sans-serif;
+  color: rgb(255, 255, 255);
+  font-size: 38px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 140%;
+}
+
+.section6 {
+  margin-top: 240px;
+  margin-bottom: 240px;
+}
+
+.section6 .section6Inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.section6Inner .section6InnerBoxes {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.section6Inner .section6InnerBoxes .section6left {
+  display: flex;
+  flex-direction: column;
+}
+
+.section6Inner .section6InnerBoxes .section6Right {
+  display: flex;
+  flex-direction: column;
+}
+
+.titleSocial {
+  color: #ffffff;
+  opacity: 0.6;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 140%;
+  margin-bottom: 32px;
+  letter-spacing: 0.17em;
+}
+
+.boxSocial {
+  width: fit-content;
+  display: flex;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding-right: unset;
+  flex-direction: row;
+}
+
+.boxSocial .boxInner {
+  width: 180px;
+  padding-left: 32px;
+  padding-right: 32px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.boxSocial .boxtext {
+  margin: 0px;
+  font-size: 24px;
+  font-family: Changa, sans-serif;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  line-height: 1.167;
+}
+
+.section6RightBottom{
+    margin-top: 240px;
+    display: flex;
+    flex-direction: column;
+}
+
+.section6RightBottomLeft,.section6RightBottomRight {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+/* media query */
+
+@media only screen and(min-width: 0px) {
+  .section1Inner .section1Col1 {
+    flex-direction: column;
   }
-
-  .mainDescription {
-    font-size: 16px !important;
-    margin-bottom: 20px !important;
-    line-height: 1.7rem !important;
-    color: rgba(255,255,255,0.7) !important;
+  .section3 .section3Inner {
+    flex-direction: column;
   }
-
-  .secDescription {
-    font-size: 14px !important;
-    margin-bottom: 20px !important;
-    line-height: 1.2rem !important;
-    color: #7E99B0 !important;
+  .section3Right .section3RightInner {
+    margin-top: -8px;
   }
-
-  .buttonInfo,
-  .buttonEnter {
-    width: 100% !important;
-    margin: 0 !important;
-    float: none !important;
-  }
-
-  .buttonEnterSingle {
-    width: 100% !important;
-  }
-
-  .mainTitle {
-    font-size: 38px !important;
-    margin-bottom: 25px !important;
+  .section5 .section5Inner .maintextContainer {
+    flex-direction: column;
   }
 }
 
-@media screen and (max-width: 600px) {
-  .viewCollateral {
-    margin: 80px 0 0px 15px !important;
-    float: right;
+@media only screen and (min-width: 900px) {
+  .section6Inner .section6InnerBoxes {
+    flex-direction: row;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .section1Inner .section1Col1 {
+    flex-direction: column !important;
+  }
+  .section1Col1 .right {
+    margin-top: -10px !important;
+    margin-bottom: 10px !important;
   }
 
-  .mainTitle {
-    font-size: 32px !important;
-    margin-bottom: 25px !important;
+  .section1Col2 {
+    margin-top: 20px;
   }
+  .section3Right .section3RightInner {
+    margin-top: -24px;
+  }
+}
 
-  .secTitle {
-    font-size: 20px !important;
+@media only screen and(min-width: 600px) {
+  .section3 .section3Inner {
+    flex-direction: row;
   }
+  .section3Right {
+    margin-top: 0px;
+  }
+  .section3Right .section3RightInner {
+    margin-top: -16px;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+  }
+  .section4 .innerSection4 .innerSection4Partetions {
+    flex-direction: row;
+  }
+  .section5 .section5Inner .maintextContainer {
+    flex-direction: row;
+  }
+  .section6Inner .section6InnerBoxes {
+    flex-direction: column;
+  }
+}
 
-  .mainDescription {
-    font-size: 14px !important;
-    margin-bottom: 20px !important;
-    line-height: 1.4rem !important;
-    color: rgba(255,255,255,0.7) !important;
-  }
+@media only screen and(min-width: 1200px) {
+}
 
-  .secDescription {
-    font-size: 13px !important;
-    margin-bottom: 20px !important;
-    line-height: 1.2rem !important;
-    color: #7E99B0 !important;
-  }
-
-  .mainHeading {
-    margin: 0px 0 0px 0 !important;
-    text-align: left !important;
-    font-size: 20px !important;
-  }
-
-  .accountInfo {
-    display: none;
-  }
+@media only screen and(min-width: 1536px) {
 }

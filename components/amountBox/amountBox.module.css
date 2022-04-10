@@ -1,0 +1,41 @@
+.statsBox {
+    border-radius: 4px !important;
+    color: rgb(255, 255, 255) !important;
+    box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px !important;
+    background: rgb(6, 8, 8) none repeat scroll 0% 0% !important;
+    border: unset;
+    padding: 12px 20px !important;
+    display: flex;
+    align-items: flex-start !important;
+    flex-direction: column;
+    justify-content: left !important;
+    margin-left: 25px;
+  }
+  
+  .statsBox .text1 {
+    font-size: 18px !important;
+    font-family: "Titillium Web", sans-serif;
+    line-height: 1.5 !important;
+    text-align: left;
+    font-weight: 700 !important;
+    opacity: 0.6 !important;
+  }
+  
+  .statsBox .text2 {
+    margin: 0px !important;
+    font-family: "Titillium Web", sans-serif;
+    line-height: 1.5 !important;
+    text-align: left !important;
+    font-weight: 700 !important;
+    font-size: 36px !important;
+  }
+  
+  .statsBox .text3 {
+    margin: 0px;
+    font-weight: normal;
+    font-size: 18px;
+    font-family: "Titillium Web", sans-serif;
+    line-height: 1.5;
+    text-align: left;
+  }
+  

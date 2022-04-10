@@ -1,100 +1,213 @@
-import { Typography, Button, Paper, SvgIcon, Grid, Avatar } from "@mui/material";
+import React from 'react'
+import style from './convert.module.css';
 
-import { useScrollTo } from 'react-use-window-scroll';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 
-import classes from './home.module.css';
+import homeStyle from './home.module.css';
+import AmountBox from "../../components/amountBox/amountBox";
+// import guthubLogo from '../../public/images/github.svg';
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from "next/router";
+// import boxImageLogo from '../../public/images/boxImage.svg';
+// import monkerrewardLogo from '../../public/images/monkerreward.svg';
+// import monkerdrinkLogo from '../../public/images/monkerdrink.svg';
+// import rightArrowLogo from '../../public/images/rightArrow.svg';
 
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
+import { Link } from '@mui/material';
 
-function SiteLogo(props) {
-  const { color, className } = props;
+export default function Home() {
+  let arr = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
-    <SvgIcon viewBox="0 0 147.7 17.5" className={className}>
-      <g>
-        <path id="Path_3507" fill="#FFFFFF" d="M142.5,0.5l-3.4,6.1l-3.4-6.1h-5.3l6.3,10.4v6.2h4.6v-6.3l6.3-10.3H142.5z"/>
-        <path id="Path_3506" fill="#FFFFFF" d="M110.9,0.5v16.6h12.7v-4h-8.1V0.5H110.9z"/>
-        <path id="Path_5" fill="#FFFFFF" d="M85.9,17.1V0.5h6.4c2.5-0.1,5,0.7,6.9,2.3c1.7,1.5,2.6,3.7,2.5,6c0.1,2.3-0.9,4.5-2.5,6
-        c-1.9,1.6-4.4,2.5-6.9,2.3L85.9,17.1z M90.5,13h1.9c1.2,0.1,2.4-0.3,3.3-1.1c0.9-0.8,1.3-2,1.2-3.1c0.1-1.2-0.4-2.3-1.2-3.1
-        c-0.9-0.8-2.1-1.2-3.3-1.1h-1.9L90.5,13z"/>
-        <rect id="Rectangle_13" x="72.2" y="0.5" fill="#FFFFFF" width="4.6" height="16.6"/>
-        <path id="Path_6" fill="#FFFFFF" d="M50.3,17.1V0.5H55v12.6H63v4L50.3,17.1z"/>
-        <circle fill="#06D3D7" cx="32.4" cy="8.8" r="8.8"/>
-        <path id="Path_7" fill="#FFFFFF" d="M7.8,17.4c-2.9,0.1-5.6-0.9-7.8-2.8l2.6-3.1c1.5,1.3,3.4,2,5.4,2c1.3,0,1.9-0.4,1.9-1.2
-        c0-0.4-0.2-0.7-0.6-0.9c-0.7-0.3-1.5-0.6-2.2-0.7c-0.8-0.2-1.7-0.4-2.5-0.7C3.9,9.8,3.2,9.5,2.6,9.2C2,8.8,1.6,8.3,1.2,7.7
-        C0.9,7,0.8,6.2,0.8,5.5c0-1.5,0.6-2.9,1.7-3.8c1.3-1,3-1.6,4.7-1.5c2.5-0.1,4.9,0.7,6.8,2.2l-2.3,3.3c-1.3-1-3-1.6-4.7-1.6
-        C6.7,4,6.2,4.1,5.9,4.3C5.6,4.5,5.4,4.8,5.4,5.1C5.5,5.5,5.7,5.8,6,6c0.7,0.3,1.5,0.6,2.3,0.7C10,7,11.6,7.6,13,8.6
-        c1,0.8,1.6,2.1,1.5,3.4c0.1,1.5-0.6,3-1.8,4C11.3,17,9.6,17.5,7.8,17.4"/>
-      </g>
-    </SvgIcon>
-  );
-}
+      <Container id="main" className={style.mainContainer}>
+        <Box className={homeStyle.mainContainerInner}>
+          <Box className={homeStyle.section1}>
+            <Box className={homeStyle.section1Inner}>
+              <Box className={homeStyle.section1Col1}>
+                <Box className={homeStyle.left}>
+                  <p class={homeStyle.section1text}>
+                    A yield optimizer
+                    <br />
+                    for Solidly&nbsp;
+                    <span style={{ fontWeight: 'normal' }}>built<br style={{ display: 'block' }} /> on Fantom</span>
+                  </p>
+                </Box>
+                <Box className={homeStyle.right}>
+                  {/* <img src={monkerdrinkLogo} alt="monkerrewardLogo" /> */}
 
-function Home({ changeTheme }) {
+                </Box>
 
-  function handleNavigate(route) {
-    router.push(route);
-  }
+              </Box>
+              <Box className={homeStyle.section1Col2}>
+                <button className={homeStyle.btn}>Stake liquidity</button>
+              </Box>
+            </Box>
+          </Box>
 
-  const router = useRouter();
-
-  const scrollTo = useScrollTo();
-
-  return (
-    <div className={classes.ffContainer}>
-
-      <div className={classes.contentContainerFull}>
-
-      <SiteLogo className={classes.appLogo} />
-
-        <Grid container spacing={2} className={classes.homeContentMain}>
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <Typography variant="h1" className={classes.preTitle}>0.01% fee</Typography>
-          </Grid>
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <Typography variant="h1" className={classes.mainTitle}>Low cost stable coin swaps</Typography>
-          </Grid>
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <Grid container spacing={2}>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
-                <Button className={classes.buttonInfo} onClick={() => scrollTo({ top: 1000, left: 0, behavior: 'smooth' })}>Learn More</Button>
-              </Grid>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
-                <Button className={classes.buttonEnter} onClick={() => router.push('/swap')}>Enter App</Button>
-              </Grid>
+          <Box className={homeStyle.section2}>
+            <Grid container style={{ marginTop: '50px' }} >
+              <AmountBox text1="Solidex TVL" text2="$535.95m" text3="63% dominance" />
+              <AmountBox text1="Total SOLID locked on Solidex" text2="13.79m" text3="31.7% of total locked" />
+              <AmountBox text1="Total SEX locked" text2="5.08m" text3="74% of total supply locked" />
             </Grid>
-          </Grid>
-        </Grid>
-      </div>
+          </Box>
 
-      <div id="info" className={classes.contentContainerFullTwo}>
+          {/* company */}
+          <Box className={`${homeStyle.section2} ${homeStyle.section3}`}>
+            <Box className={homeStyle.section3Inner}>
+              <Box className={homeStyle.section3Left}>
+                <p className={homeStyle.para1}>SEX PARTNERS</p>
+                <p className={`${homeStyle.para2} ${homeStyle.doWhite}`}>
+                  Enjoy more voting
+                  <br style={{ display: 'block' }} />
+                  power and higher rewards.
+                </p>
+                <p className={`${homeStyle.para2} ${homeStyle.para3}`}>
+                  <Link>
+                    Find out more
+                  </Link>
+                </p>
 
-        <div className={classes.floatingSphere}></div>
+              </Box>
+              <Box className={homeStyle.section3Right}>
+                <Box className={homeStyle.section3RightInner}>
+                  <Grid container spacing={2} className={homeStyle.boxes}>
+                    {
+                      arr.map((element, i) => (
+                        <Grid key={i} item xs={5} md={5} className={homeStyle.boxCompany}>
+                          <Link className={`${homeStyle.boxLink}`}>
+                            <Box className={homeStyle.boxLinkImage}>
+                              {/* <img src={boxImageLogo} alt="boxImageLogo" srcset="" /> */}
+                            </Box>
+                          </Link>
+                        </Grid>
+                      ))
+                    }
 
-        <Grid container spacing={3} className={classes.homeContentMain}>
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <Typography variant="h1" className={classes.secTitle}>Welcome to Dystopia</Typography>
-          </Grid>
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <Typography variant="body1" className={classes.mainDescription}>
-              Dystopia officially launched in April 2022 with a collective goal of fair and balanced access to DeFi. Dystopia is a decentralized exchange that has launched on the Matic network with low fees, near 0 slippage on correlated assets and a strong focus on secondary markets for tokenized locks as NFT’s (veToken = lpNFTs).
-            </Typography>
-            <Typography variant="body2" className={classes.secDescription}>
-              One segment of the cryptocurrency landscape that has shown incredible potential is the swapping of stablecoins and volatile assets. Dystopia Swap offers users quick, seamless and cheap transactions while utilizing strategies to maximize their yield.
-            </Typography>
-          </Grid>
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <Button className={classes.buttonEnterSingle} onClick={() => router.push('/swap')}>Enter App</Button>
-          </Grid>
-        </Grid>
-      </div>
+                  </Grid>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
 
-    </div>
-  );
+          <Box className={homeStyle.section4}>
+            <Box className={homeStyle.innerSection4}>
+              <Box className={homeStyle.innerSection4Partetions}>
+                <Box className={homeStyle.innerSection4Left}>
+                  <p className={homeStyle.para1}>LIQUIDITY PROVIDERS</p>
+                  <p className={homeStyle.para2}>
+                    Get a bigger boost and earn
+                    <br style={{ display: 'block' }} />
+                    higher yield on your liquidity.
+                  </p>
+                </Box>
+                <Box className={homeStyle.innerSection4Right}>
+                  {/* <img src={monkerrewardLogo} alt="monkerrewardLogo" /> */}
+                </Box>
+
+              </Box>
+            </Box>
+          </Box>
+
+          <Box className={homeStyle.section4}>
+            <Box className={homeStyle.innerSection4}>
+              <Box className={homeStyle.innerSection4Partetions}>
+                <Box className={homeStyle.innerSection4Right}>
+                  <Box className={homeStyle.innerSection4Right}>
+                    {/* <img src={monkerrewardLogo} alt="monkerrewardLogo" /> */}
+                  </Box>
+
+                </Box>
+
+                <Box className={homeStyle.innerSection4Left}>
+                  <p className={homeStyle.para1}>LIQUIDITY PROVIDERS</p>
+                  <p className={homeStyle.para2}>
+                    Get a bigger boost and earn
+                    <br style={{ display: 'block' }} />
+                    higher yield on your liquidity.
+                  </p>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+
+          <Box className={homeStyle.section5}>
+            <Box className={homeStyle.section5Inner}>
+              <p className={homeStyle.para1}>SEX HOLDERS</p>
+              <p className={homeStyle.para2}>
+                Control voting power, decide on SOLID emissions,
+                <br style={{ display: 'block' }} />
+                earn protocol fees and Solidly expansion.
+              </p>
+            </Box>
+          </Box>
+
+          <Box className={homeStyle.section6}>
+            <Box className={homeStyle.section6Inner}>
+              <Box className={homeStyle.section6InnerBoxes}>
+                <Box className={homeStyle.section6left}>
+                  <p className={homeStyle.titleSocial}>AUDITED BY</p>
+                  <Box className={homeStyle.boxSocial}>
+                    <Box className={homeStyle.boxInner}>
+                      <h3 className={homeStyle.boxtext}>Coming Soon</h3>
+                    </Box>
+                    {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+                  </Box>
+                </Box>
+                <Box className={homeStyle.section6Right}>
+                  <p className={homeStyle.titleSocial}>GITHUB</p>
+                  <Box style={{ marginLeft: '100px' }} className={homeStyle.boxSocial}>
+                    <Box className={homeStyle.boxInner}>
+                      {/* <img src={guthubLogo} alt="guthubLogo" /> */}
+                    </Box>
+                    {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+                  </Box>
+
+                  <Box className={homeStyle.section6RightBottom}>
+                    <p className={homeStyle.titleSocial}>COMMUNITY</p>
+
+                    <Box className={homeStyle.section6RightBottomLeft}>
+                      <Box className={homeStyle.boxSocial}>
+                        <Box className={homeStyle.boxInner}>
+                          {/* <img src={guthubLogo} alt="guthubLogo" /> */}
+                        </Box>
+                        {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+                      </Box>
+
+                      <Box style={{ marginRight: '14px' }} className={homeStyle.boxSocial}>
+                        <Box className={homeStyle.boxInner}>
+                          {/* <img src={guthubLogo} alt="guthubLogo" /> */}
+                        </Box>
+                        {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+                      </Box>
+                    </Box>
+
+                    <Box className={homeStyle.section6RightBottomRight}>
+                      <Box className={homeStyle.boxSocial}>
+                        <Box className={homeStyle.boxInner}>
+                          {/* <img src={guthubLogo} alt="guthubLogo" /> */}
+                        </Box>
+                        {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+                      </Box>
+
+                      <Box style={{ marginRight: '14px' }} className={homeStyle.boxSocial}>
+                        <Box className={homeStyle.boxInner}>
+                          {/* <img src={guthubLogo} alt="guthubLogo" /> */}
+                        </Box>
+                        {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+                      </Box>
+                    </Box>
+
+                  </Box>
+
+
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+
+
+        </Box>
+      </Container>
+  )
 }
-
-export default Home;
