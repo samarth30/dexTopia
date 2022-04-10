@@ -270,7 +270,7 @@ export default function ssPools() {
                   return false
 
                 })}
-                setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked} />
+                setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked}
               />
 
               <TablePagination

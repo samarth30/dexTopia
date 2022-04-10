@@ -320,10 +320,10 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                     <Grid xs={12} lg={2} className={style.tableBox2}>
                       <Box style={{ marginLeft: '50px' }}>
                         <Typography variant="p" className={style.tableBox2text}>
-                        {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.solid).div(10**18))} 0 Sex
+                        {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.solid).div(10**18))} Sex
                         </Typography>
                         <Typography variant="p" className={style.tableBox2text}>
-                        {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.sex).div(10**18))} 0 Solid
+                        {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.sex).div(10**18))} Solid
                         </Typography>
                       </Box>
                     </Grid>

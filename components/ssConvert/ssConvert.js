@@ -376,7 +376,7 @@ topiaEarning: "0"
                         <Box className={style.tabPannelrow3LeftInner}>
                           <Box className={style.tabinputFields}>
 
-                            <Input placeholder='Enter Amount' className={style.AmountInput} />
+                            <Input placeholder='Enter Amount' className={style.AmountInput} value={depositInput} onChange={onInputField} />
                             <Button className={style.buttontop}>Max</Button>
                           </Box>
 
@@ -384,7 +384,7 @@ topiaEarning: "0"
 
                       </Box>
                       <Box className={style.tabPannelrow3Right}>
-                        <Button className={style.approveBtn}>
+                        <Button className={style.approveBtn} onClick={() => onDeposit()}>
                           Approve
                         </Button>
                         <Button className={style.approveBtn}>
@@ -456,7 +456,7 @@ topiaEarning: "0"
                     <Button className={style.approveBtn}>Manage</Button>
                   </Grid>
                   <Grid item xs={6} lg={1.5}>
-                    <Button className={style.approveBtn}>Claim Earnings</Button>
+                    <Button className={style.approveBtn} onClick={()=>onClaimVeTopia()}>Claim Earnings</Button>
                   </Grid>
 
                 </Container>
