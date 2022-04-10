@@ -23,7 +23,7 @@
 .top {
   width: 464px;
   height: 17px;
-  background-image: url("/images/ui/swap-popup-top-slice.svg");
+  /* background-image: url("/images/ui/swap-popup-top-slice.svg"); */
 }
 
 .bottom {
@@ -31,7 +31,7 @@
   height: 93px;
   margin-top: -1px;
   margin-left: 1px;
-  background-image: url("/images/ui/swap-popup-bottom-slice.svg");
+  /* background-image: url("/images/ui/swap-popup-bottom-slice.svg"); */
 }
 
 .top--dark {
@@ -43,11 +43,14 @@
 }
 
 .form--dark {
-  background: var(--background-dark);
-  border-color: var(--border-dark);
+  /* background: var(--background-dark);
+  border-color: var(--border-dark); */
+  background: #202B35;
+  border: none;
 }
 
 .form--light {
-  background: var(--background-light);
-  border-color: var(--border-light);
+  /* background: var(--background-light); */
+  background: #202B35;
+  border: none;
 }
