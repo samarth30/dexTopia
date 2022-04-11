@@ -339,6 +339,7 @@ const Header = () => {
                     router.push(`/${pg}`)
                   }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                style={{color: "#fff !important"}}
               >
                 {page}
               </Button>
