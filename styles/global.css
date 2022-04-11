@@ -23,6 +23,10 @@ body {
   position: relative;
 }
 
+.MuiPaper-root {
+  background-color: transparent !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

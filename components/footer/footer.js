@@ -32,7 +32,7 @@ export default function Footer() {
           <Grid item xs={5} md={2.4} lg={4} className={style.footer4}>
             <Box className={style.footer4Inner}>
               <Typography className={style.footer4Innerp1}>
-                Gaslyy Voting Power &nbsp;
+                &nbsp; Gaslyy Voting Power &nbsp;
               </Typography>
               <Typography className={style.footer4Innerp2}>
                 <Link className={style.footer4Innerp2Link}>

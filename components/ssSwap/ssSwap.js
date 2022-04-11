@@ -1,14 +1,13 @@
-import Form from '../../ui/Form';
+import { Paper } from '@material-ui/core';
 import Setup from './setup'
 import classes from './ssSwap.module.css'
 
 function Swap() {
   return (
     <div className={ classes.newSwapContainer }>
-      <Form>
+      <Paper elevation={ 0 } className={ classes.swapContainer }>
         <Setup />
-      </Form>
-
+      </Paper>
     </div>
   )
 }
