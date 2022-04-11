@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import Mymodel from './Mymodel'
 import {
   Paper,
   Typography,
@@ -13,7 +14,9 @@ import {
   Container,
   Tab,
   Tabs,
-  Input
+  Input,
+  InputLabel,
+  FormControl
 } from "@mui/material";
 import BigNumber from "bignumber.js";
 import { Search } from "@mui/icons-material";
@@ -50,9 +53,25 @@ topiaEarning: "0"
   const [tab, setTab] = useState("token");
 
   const [value, setValue] = useState(0);
+  const [modelTabs, setModeltabs] = useState(0);
+
+  const [open, setOpen] = useState(false);
+
+  const openModel = () => {
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
   
   const handleChanges = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleChangeModeltab = (event, newValue) => {
+    setModeltabs(newValue);
   };
 
   function a11yProps(index) {
@@ -320,6 +339,7 @@ topiaEarning: "0"
   }
 
   return (
+    <>
     <Container id="main" className={style.mainContainer}>
     <Box id="mainContainer" className={style.mainContainerInner}>
       <Box className={style.containerTop}>
@@ -346,7 +366,7 @@ topiaEarning: "0"
             <Paper elevation={1} className={style.bottomContainerLeftInner}>
               <Box className={style.bottomContainerLeftInnerTop}>
                 <Typography variant='h3' className={style.h3text}>
-                  Convert & stake Solidly NFTs/Tokens into SOLIDsex
+                  Convert & stake gaslyy NFTs/Tokens into GASsex
                 </Typography>
               </Box>
 
@@ -354,8 +374,8 @@ topiaEarning: "0"
                 <Box className={style.bottomContainerpannelTop}>
                   <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
                     <Tabs value={value} onChange={handleChanges} className={style.tabs}>
-                      <Tab label="Solid Token" {...a11yProps(0)} className={style.tab} />
-                      <Tab label="Solid NFT" {...a11yProps(1)} className={style.tab} />
+                        <Tab label="Solid Token" {...a11yProps(0, "page")} className={style.tab} />
+                        <Tab label="Solid NFT" {...a11yProps(1, "page")} className={style.tab} />
                     </Tabs>
                   </Box>
                 </Box>
@@ -384,7 +404,7 @@ topiaEarning: "0"
 
                       </Box>
                       <Box className={style.tabPannelrow3Right}>
-                        <Button className={style.approveBtn} onClick={() => onDeposit()}>
+                        <Button className={style.approveBtn} style={{ marginRight: '10px' }} onClick={() => onDeposit()}>
                           Approve
                         </Button>
                         <Button className={style.approveBtn}>
@@ -394,13 +414,56 @@ topiaEarning: "0"
                     </Box>
                     <Box className={style.tabPannelrow4}>
                       <Typography variant='p' className={style.balancep}>
-                        Converting 0 SOLID Tokens to 0 SOLIDsex
+                        Converting 0 SOLID Tokens to 0 GASsex
                       </Typography>
                     </Box>
                   </Box>
                 </TabPanel>
                 <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={value} index={1}>
-                  Item Two
+                <Box className={style.tabPannel1}>
+                        <Box className={style.tabPannelrow1}>
+                          <Typography variant="h6" className={style.h6Text}>
+                            This process is irreversible
+                          </Typography>
+                        </Box>
+                        <Box className={style.tabPannelrow2}>
+                          <Typography variant='p' className={style.balancep}>
+                            Balance: 0 SOLID
+                          </Typography>
+                        </Box>
+                        <Box className={style.tabPannelrow3}>
+                          <Box className={style.tabPannelrow3Left}>
+                            <Box className={style.tabPannelrow3LeftInner}>
+                              <Box className={style.marginTop}>
+                                <FormControl sx={{ m: 1, minWidth: 300 }}>
+                                  <InputLabel style={{color: '#fff'}} id="demo-multiple-chip-label">Select Token ID</InputLabel>
+                                  <Select
+                                    labelId="demo-multiple-chip-label"
+                                    id="demo-multiple-chip"
+                                    className={style.tabinputFieldsSelection}
+                                    value={null}
+                                    onChange={null}
+                                  >
+                                    <MenuItem value={10}>Ten</MenuItem>
+                                    <MenuItem value={20}>Twenty</MenuItem>
+                                    <MenuItem value={30}>Thirty</MenuItem>
+                                  </Select>
+                                </FormControl>
+                              </Box>
+                            </Box>
+                          </Box>
+                          <Box className={style.tabPannelrow3Right}>
+                            <Button className={style.approveBtn}>
+                              Convert tokens
+                            </Button>
+                          </Box>
+                        </Box>
+                        <Box className={style.tabPannelrow4}>
+                          <Typography variant='p' className={style.balancep}>
+                            Converting 0 SOLID Tokens From the selected SOLID NFT to 0 SOLIDDsex
+                          </Typography>
+                        </Box>
+                      </Box>
                 </TabPanel>
               </Box>
             </Paper>
@@ -424,7 +487,7 @@ topiaEarning: "0"
 
               </Grid>
               <Grid lg={1.7} item>
-                <Typography variant="h6">Your Staked SOLIDsex</Typography>
+                <Typography variant="h6">Your Staked GASsex</Typography>
 
               </Grid>
               <Grid lg={1.7} item>
@@ -436,7 +499,7 @@ topiaEarning: "0"
                 <Container className={style.tableBoxes}>
                   <Grid item xs={12} lg={2}>
                     <Typography variant="p">
-                      Staked SOLIDsex
+                      Staked GASsex
                     </Typography>
                   </Grid>
                   <Grid item xs={12} lg={1.75}>
@@ -449,11 +512,11 @@ topiaEarning: "0"
                     <Typography variant="p">0</Typography>
                   </Grid>
                   <Grid item xs={6} lg={1.5}>
-                    <Typography variant="p">0 SEX</Typography>
+                    <Typography variant="p">0 SEX </Typography>
                     <Typography variant="p">0 SOLID</Typography>
                   </Grid>
                   <Grid item xs={6} lg={1.5}>
-                    <Button className={style.approveBtn}>Manage</Button>
+                    <Button className={style.approveBtn} onClick={openModel}>Manage</Button>
                   </Grid>
                   <Grid item xs={6} lg={1.5}>
                     <Button className={style.approveBtn} onClick={()=>onClaimVeTopia()}>Claim Earnings</Button>
@@ -464,9 +527,77 @@ topiaEarning: "0"
             </Paper>
           </Grid>
         </Container>
-
       </Box>
     </Box>
   </Container>
+        {
+          open &&
+          <Mymodel text="Manage SOLIDsex" open={open} handleClose={handleClose}>
+  
+            <Box className={style.bottomContainerLeftBottom}>
+              <Box className={style.bottomContainerpannelTop}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
+  
+                  <Tabs value={modelTabs} onChange={handleChangeModeltab} className={style.tabs}>
+                    <Tab label="Stake" {...a11yProps(0, "model")} className={style.tab} />
+                    <Tab label="Withdraw" {...a11yProps(1, "model")} className={style.tab} />
+                  </Tabs>
+  
+                </Box>
+              </Box>
+  
+              <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={modelTabs} index={0}>
+                <Box className={style.tabPannel1}>
+                  <Box className={style.tabPannelrow3}>
+                    <Box className={style.tabPannelrow3Left}>
+                      <Box className={style.tabPannelrow3LeftInner}>
+                        <Box className={style.tabinputFields}>
+                          <Input placeholder='Enter Amount' className={style.AmountInput} />
+                          <Button className={style.buttontop}>Max</Button>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box className={`${style.modelButtons}`} style={{display: "flex", flexFlow: "row wrap", marginLeft: "0px !important", marginTop: "20px"}}>
+                    <Button className={style.approveBtn} style={{ marginRight: '10px' }}>
+                      Approve
+                    </Button>
+                    <Button className={style.approveBtn} style={{background: "rgb(2, 119, 250)", color: "#fff"}}>
+                      Convert tokens
+                    </Button>
+                  </Box>
+                </Box>
+              </TabPanel>
+              <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={modelTabs} index={1}>
+                <Box className={`${style.tabPannel1} ${style.tabPannel1Modell}`}>
+                  <Box className={style.tabPannelrow3}>
+                    <Box className={style.tabPannelrow3Left}>
+                      <Box className={style.tabPannelrow3LeftInner}>
+                        <Box className={style.marginTop}>
+                          <Box className={style.tabPannelrow3LeftInner}>
+                            <Box className={style.tabinputFields}>
+                              <Input placeholder='Enter Amount' className={style.AmountInput} />
+                              <Button className={style.buttontop}>Max</Button>
+                            </Box>
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box className={`${style.modelButtons}`} style={{display: "flex", flexFlow: "row wrap", marginLeft: "0px !important", marginTop: "20px"}}>
+                    <Button className={style.approveBtn} style={{background: "rgb(2, 119, 250)", color: "#fff"}}>
+                      Withdraw
+                    </Button>
+                  </Box>
+                </Box>
+              </TabPanel>
+            </Box>
+  
+            <Typography id="modal-modal-description" style={{ textAlign: 'center', borderTop: '1px solid rgb(2, 119, 250)', paddingTop: '10px' }} sx={{ mt: 2 }}>
+              Please Approve the contract
+            </Typography>
+          </Mymodel>
+        }
+        </>
   );
 }

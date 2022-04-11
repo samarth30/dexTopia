@@ -28,7 +28,7 @@ export default function Home() {
                   <p class={homeStyle.section1text}>
                     A yield optimizer
                     <br />
-                    for Solidly&nbsp;
+                    for gaslyy&nbsp;
                     <span style={{ fontWeight: 'normal' }}>built<br style={{ display: 'block' }} /> on Fantom</span>
                   </p>
                 </Box>
@@ -46,8 +46,8 @@ export default function Home() {
 
           <Box className={homeStyle.section2}>
             <Grid container style={{ marginTop: '50px' }} >
-              <AmountBox text1="Solidex TVL" text2="$535.95m" text3="63% dominance" />
-              <AmountBox text1="Total SOLID locked on Solidex" text2="13.79m" text3="31.7% of total locked" />
+              <AmountBox text1="Gaslyy TVL" text2="$535.95m" text3="63% dominance" />
+              <AmountBox text1="Total SOLID locked on Gaslyy" text2="13.79m" text3="31.7% of total locked" />
               <AmountBox text1="Total SEX locked" text2="5.08m" text3="74% of total supply locked" />
             </Grid>
           </Box>
@@ -137,7 +137,7 @@ export default function Home() {
               <p className={homeStyle.para2}>
                 Control voting power, decide on SOLID emissions,
                 <br style={{ display: 'block' }} />
-                earn protocol fees and Solidly expansion.
+                earn protocol fees and gaslyy expansion.
               </p>
             </Box>
           </Box>

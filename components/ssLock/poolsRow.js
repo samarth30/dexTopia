@@ -283,7 +283,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                         <Grid xs={12} lg={2} className={style.tableBox2}>
                             <Box style={{ marginLeft: '50px' }}>
                                 <Typography variant="p" className={style.tableBox2text}>
-                                    0 Sex
+                                    0 Sex 
                                 </Typography>
                                 <Typography variant="p" className={style.tableBox2text}>
                                     0 Solid

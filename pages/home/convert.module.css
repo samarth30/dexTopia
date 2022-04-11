@@ -1,636 +1,659 @@
 .mainContainer {
-    width: 100%;
-    margin: 80px auto 24px;
-    box-sizing: border-box;
-    display: block;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 32px;
-  }
-  
-  .mainContainerInner {
-    width: 100%;
-    margin-top: 24px;
-    margin-bottom: 24px;
-  }
-  
-  .containerTop {
-    flex-direction: row;
-    -moz-box-align: center;
-    align-items: center;
-  }
-  
-  .containerTopInner {
-    display: flex;
-    flex-direction: row;
-    -moz-box-align: center;
-    align-items: center;
-  }
-  
+  width: 100%;
+  margin: 80px auto 24px;
+  box-sizing: border-box;
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 32px;
+}
+
+.mainContainerInner {
+  width: 100%;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.containerTop {
+  flex-direction: row;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+.containerTopInner {
+  display: flex;
+  flex-direction: row;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+.topContainer {
+  box-sizing: border-box;
+  flex-flow: row wrap;
+  width: 100%;
+  margin-top: -8px;
+  display: flex !important;
+  flex-direction: row !important;
+  -moz-box-align: center;
+  align-items: center;
+  -moz-box-pack: justify;
+  justify-content: space-between;
+}
+
+.topContainer > .MuiGrid-item {
+  padding-top: 8px;
+}
+.topContainer > div {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.topGrid1 {
+  box-sizing: border-box;
+  margin: 0px;
+  flex-direction: row;
+}
+
+.mainText {
+  margin: 0px;
+  font-family: "Changa", sans-serif;
+  font-weight: 600;
+  color: rgb(245, 253, 255);
+  text-shadow: rgb(32 39 41) 6.48936px 6.48936px 0px;
+  font-size: 6rem;
+  line-height: 1.167;
+  text-align: left;
+  padding-top: 16px;
+}
+
+.topGrid2 {
+  box-sizing: border-box;
+  margin: 0px;
+  flex-direction: row;
+  flex-basis: 50%;
+  -moz-box-flex: 0;
+  flex-grow: 0;
+  max-width: 50%;
+}
+
+.topGrid2Inner {
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  background: rgb(32, 39, 43) none repeat scroll 0% 0% !important;
+  box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px !important;
+  border: unset;
+  margin-top: 15px;
+  padding: 12px 20px !important;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: left;
+  color: #fff !important;
+}
+
+.topGrid2Innertext1 {
+  margin: 0px;
+  font-size: 18px;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.5;
+  text-align: left;
+  font-weight: 700;
+  opacity: 0.6;
+}
+
+.topGrid2InnerPrice {
+  margin: 0px;
+  font-size: 20px !important;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.5;
+  text-align: left;
+  font-weight: 700;
+}
+
+.bottomContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  margin-top: 23px !important;
+}
+
+.bottomContainerLeft {
+  box-sizing: border-box;
+  margin: 0px;
+  flex-direction: row;
+  flex-basis: 100%;
+  -moz-box-flex: 0;
+  flex-grow: 0;
+  max-width: 100%;
+}
+
+.bottomContainerLeftInner {
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  background: rgb(32, 39, 43) none repeat scroll 0% 0%;
+  box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px;
+  border: 1px solid rgb(2, 119, 250);
+  padding: unset;
+}
+
+.bottomContainerLeftInnerTop {
+  display: flex;
+  flex-direction: row;
+  -moz-box-align: center;
+  align-items: center;
+  background: rgb(30, 46, 58) none repeat scroll 0% 0%;
+  padding: 16px 32px 12px 32px !important;
+  border-radius: 4px;
+}
+
+.h3text {
+  margin: 0px 8px 0px 0px !important;
+  font-size: 24px !important;
+  color: rgb(255, 255, 255);
+  font-family: Titillium Web !important;
+  line-height: 37px;
+  font-weight: 700;
+}
+
+.balancep {
+  margin: 0px;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.43;
+}
+
+.bottomContainerLeftBottom {
+  width: 100%;
+}
+
+.bottomContainerpannelTop {
+  border-radius: 4px;
+}
+
+.tabBox {
+  overflow: hidden;
+  min-height: 48px;
+  display: flex;
+  background: rgb(30, 46, 58) none repeat scroll 0% 0%;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.tabs {
+  position: relative;
+  display: inline-block;
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.tab {
+  text-transform: unset;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.tab.Mui-selected {
+  opacity: 1 !important;
+  color: rgb(255, 255, 255) !important;
+}
+.tabPannel1 {
+  margin-bottom: 16px;
+  display: flex;
+  color: #fff !important;
+  flex-direction: column;
+  padding-right: 32px;
+  padding-left: 15px;
+  padding-bottom: 24px;
+}
+
+.tabPannel1 .tabPannelrow1 {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 8px;
+}
+
+.tabPannelrow1 .h6Text {
+  margin: 0px;
+  font-size: 15px;
+  font-family: "Changa", sans-serif;
+  font-weight: normal;
+  line-height: 1.57;
+  color: rgb(255, 78, 147);
+  text-align: center;
+}
+
+.tabPannel1 .tabPannelrow2 {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 8px;
+}
+.tabPannel1 .tabPannelrow3 {
+  display: flex;
+}
+
+.tabPannelrow3Left {
+  width: 300px;
+}
+
+.tabPannelrow3 button {
+  min-width: 120px;
+  height: 100%;
+}
+
+.tabPannelrow3Right {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: 20px;
+}
+
+.tabPannelrow3LeftInner {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.tabPannelrow3LeftInner .AmountInput {
+  font-weight: normal;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.4375em;
+  color: rgba(0, 0, 0, 0.87);
+  box-sizing: border-box;
+  cursor: text;
+  display: inline-flex;
+  -moz-box-align: center;
+  align-items: center;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid rgb(2, 119, 250);
+  position: relative;
+  padding: 5px 0px;
+  position: relative;
+}
+
+.approveBtn {
+  display: inline-flex;
+  -moz-box-align: center;
+  align-items: center;
+  -moz-box-pack: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  outline: currentcolor none 0px;
+  margin: 0px 8px 0px 0px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  font-family: "Titillium Web sans-serif";
+  line-height: 1.75;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  background: rgb(2, 119, 250) none repeat scroll 0% 0% !important;
+  border: 1px solid rgb(2, 119, 250) !important;
+  color: rgb(255, 255, 255) !important;
+  transition: all 0.2s ease 0s;
+  backface-visibility: hidden;
+  text-transform: none;
+}
+
+.tabPannelrow3LeftInner .AmountInput input[type="number"] {
+  appearance: textfield;
+}
+
+.tabPannelrow3LeftInner .AmountInput input {
+  min-width: 160px;
+}
+
+.tabPannelrow3LeftInner .AmountInput input {
+  color: rgb(255, 255, 255);
+}
+
+.tabPannelrow3LeftInner .AmountInput input::placeholder {
+  padding-left: 10px;
+}
+
+.tabPannelrow3LeftInner .tabinputFields {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  min-width: 0px;
+  padding: 0px;
+  margin: 0px;
+  border: 0px none;
+  vertical-align: top;
+  background: rgb(20, 24, 25) none repeat scroll 0% 0%;
+}
+
+.marginTop {
+  margin-top: 10px !important;
+}
+
+.modelButtons {
+  margin-top: 20px;
+  margin-left: 0px !important;
+}
+
+.tabPannel1Modell {
+  padding-left: 0px !important;
+}
+
+.tabPannelrow3LeftInner .tabinputFieldsSelection {
+  color: #fff !important;
+  border: 1px solid rgb(2, 119, 250) !important;
+}
+
+.tabPannelrow3LeftInner .buttontop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  background-color: transparent;
+  outline: currentcolor none 0px;
+  margin: 0px 8px;
+  cursor: pointer;
+  user-select: none;
+  appearance: none;
+  text-decoration: none;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.75;
+  border-radius: 4px;
+  font-size: 14px;
+  border: 1px solid rgb(2, 119, 250);
+  color: rgb(2, 119, 250);
+  transition: all 0.2s ease 0s;
+  backface-visibility: hidden;
+  text-transform: none;
+  padding: 0px 10px;
+  min-width: unset !important;
+  font-weight: 600;
+  position: absolute;
+  right: 1px;
+  height: 30px;
+  top: 5px;
+}
+
+.tabPannelrow4 {
+  display: flex;
+  flex-direction: row;
+  margin-top: 24px;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+.bottomContainer .bottomTable {
+  box-sizing: border-box;
+  padding-top: 24px;
+  flex-direction: row;
+  flex-basis: 100%;
+  -moz-box-flex: 0;
+  flex-grow: 0;
+  max-width: 100%;
+}
+
+.bottomTable .bottomTableInner {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  padding-bottom: 8px;
+  justify-content: space-around;
+  color: #fff;
+}
+
+.bottomTableInner > .MuiGrid-item {
+  padding-left: 24px;
+}
+
+.bottomTable .tableRow {
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+  border-radius: 4px !important;
+  color: rgb(255, 255, 255) !important;
+  background: rgb(32, 39, 43) none repeat scroll 0% 0% !important;
+  padding: 24px 32px !important;
+  box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px !important;
+  border: 1px solid rgb(2, 119, 250) !important;
+}
+
+.bottomTable .tableRowInner {
+  display: flex;
+  flex-direction: column;
+}
+
+.bottomTable .tableBoxes {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  margin-top: -8px;
+  -moz-box-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* media query */
+
+@media only screen and(min-width: 0px) {
   .topContainer {
-    box-sizing: border-box;
-    flex-flow: row wrap;
-    width: 100%;
-    margin-top: -8px;
-    display: flex !important;
-    flex-direction: row !important;
-    -moz-box-align: center;
-    align-items: center;
-    -moz-box-pack: justify;
-    justify-content: space-between;
+    width: calc(100% + 24px);
+    margin-left: -24px;
   }
-  
   .topContainer > .MuiGrid-item {
-    padding-top: 8px;
+    padding-left: 24px;
   }
-  .topContainer > div {
-    margin-top: 12px;
-    margin-bottom: 12px;
-  }
-  
-  .topGrid1 {
-    box-sizing: border-box;
-    margin: 0px;
-    flex-direction: row;
-  }
-  
   .mainText {
-    margin: 0px;
-    font-family: "Changa", sans-serif;
-    font-weight: 600;
-    color: rgb(245, 253, 255);
-    text-shadow: rgb(32 39 41) 6.48936px 6.48936px 0px;
-    font-size: 6rem;
-    line-height: 1.167;
-    text-align: left;
-    padding-top: 16px;
+    padding-bottom: 0px;
   }
-  
+  .topGrid2Inner {
+    min-height: 60px;
+  }
+  .topGrid2Innertext1 {
+    font-size: 14px;
+  }
+
+  .topGrid2InnerPrice {
+    font-size: 24px;
+  }
+  .bottomContainer {
+    margin-top: -24px;
+  }
+  .bottomContainer {
+    width: calc(100% + 8px);
+    margin-left: -8px;
+  }
+  .tabPannel1 .tabPannelrow3 {
+    flex-direction: column;
+  }
+  .tabPannelrow3Left {
+    margin-right: 0px;
+    margin-bottom: 16px;
+  }
+  .tabPannelrow3Right {
+    width: 100%;
+    justify-content: space-evenly;
+  }
+  .tabPannelrow3 .MuiFormControl-root {
+    min-width: 292px;
+  }
+  .bottomTable .bottomTableInner {
+    margin-top: -8px;
+  }
+  .bottomTableInner > .MuiGrid-item {
+    padding-left: 8px;
+  }
+  .bottomTable .tableBoxes {
+    width: calc(100% + 24px);
+    margin-left: -24px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .bottomTable .bottomTableInner {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .topContainer {
+    width: calc(100% + 24px);
+    margin-left: -24px;
+  }
+  .topContainer > .MuiGrid-item {
+    padding-left: 24px;
+  }
   .topGrid2 {
-    box-sizing: border-box;
-    margin: 0px;
-    flex-direction: row;
     flex-basis: 50%;
     -moz-box-flex: 0;
     flex-grow: 0;
-    max-width: 50%;
+    max-width: 30%;
   }
-  
-  .topGrid2Inner {
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
-    border-radius: 4px;
-    color: rgb(255, 255, 255);
-    background: rgb(32, 39, 43) none repeat scroll 0% 0% !important;
-    box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px !important;
-    border: unset;
-    margin-top: 15px;
-    padding: 12px 20px !important;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: left;
-    color: #fff !important;
-  }
-  
-  .topGrid2Innertext1 {
-    margin: 0px;
-    font-size: 18px;
-    font-family: "Titillium Web", sans-serif;
-    line-height: 1.5;
-    text-align: left;
-    font-weight: 700;
-    opacity: 0.6;
-  }
-  
-  .topGrid2InnerPrice {
-    margin: 0px;
-    font-size: 20px !important;
-    font-family: "Titillium Web", sans-serif;
-    line-height: 1.5;
-    text-align: left;
-    font-weight: 700;
-  }
-  
   .bottomContainer {
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    margin-top: 23px !important;
+    margin-top: -24px;
+    width: calc(100% + 24px);
   }
-  
-  .bottomContainerLeft {
-    box-sizing: border-box;
-    margin: 0px;
-    flex-direction: row;
-    flex-basis: 100%;
-    -moz-box-flex: 0;
-    flex-grow: 0;
-    max-width: 100%;
-  }
-  
-  .bottomContainerLeftInner {
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    border-radius: 4px;
-    color: rgb(255, 255, 255);
-    background: rgb(32, 39, 43) none repeat scroll 0% 0%;
-    box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px;
-    border: 1px solid rgb(2, 119, 250);
-    padding: unset;
-  }
-  
-  .bottomContainerLeftInnerTop {
-    display: flex;
-    flex-direction: row;
-    -moz-box-align: center;
-    align-items: center;
-    background: rgb(30, 46, 58) none repeat scroll 0% 0%;
-    padding: 16px 32px 12px 32px !important;
-    border-radius: 4px;
-  }
-  
-  .h3text {
-    margin: 0px 8px 0px 0px !important;
-    font-size: 24px !important;
-    color: rgb(255, 255, 255);
-    font-family: Titillium Web !important;
-    line-height: 37px;
-    font-weight: 700;
-  }
-  
-  .balancep {
-    margin: 0px;
-    font-weight: bold;
-    font-size: 14px;
-    font-family: "Titillium Web", sans-serif;
-    line-height: 1.43;
-  }
-  
-  .bottomContainerLeftBottom {
-    width: 100%;
-  }
-  
-  .bottomContainerpannelTop {
-    border-radius: 4px;
-  }
-  
-  .tabBox {
-    overflow: hidden;
-    min-height: 48px;
-    display: flex;
-    background: rgb(30, 46, 58) none repeat scroll 0% 0%;
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-  
-  .tabs {
-    position: relative;
-    display: inline-block;
-    flex: 1 1 auto;
-    white-space: nowrap;
-    overflow-x: hidden;
-    width: 100%;
-  }
-  
-  .tab {
-    text-transform: unset;
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff !important;
-    font-weight: 700;
-  }
-  
-  .tab.Mui-selected {
-    opacity: 1 !important;
-    color: rgb(255, 255, 255) !important;
-  }
-  .tabPannel1 {
-    margin-bottom: 16px;
-    display: flex;
-    color: #fff !important;
-    flex-direction: column;
-    padding-right: 32px;
-    padding-left: 15px;
-    padding-bottom: 24px;
-  }
-  
-  .tabPannel1 .tabPannelrow1 {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 8px;
-  }
-  
-  .tabPannelrow1 .h6Text {
-    margin: 0px;
-    font-size: 15px;
-    font-family: "Changa", sans-serif;
-    font-weight: normal;
-    line-height: 1.57;
-    color: rgb(255, 78, 147);
-    text-align: center;
-  }
-  
-  .tabPannel1 .tabPannelrow2 {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 8px;
-  }
-  .tabPannel1 .tabPannelrow3 {
-    display: flex;
-  }
-  
-  .tabPannelrow3Left {
-    width: 300px;
-  }
-  
-  .tabPannelrow3 button {
-    min-width: 120px;
-    height: 100%;
-  }
-  
-  .tabPannelrow3Right {
-    display: flex;
-    flex-flow: row wrap;
-    margin-left: 20px;
-  }
-  
-  .tabPannelrow3LeftInner {
-    display: flex;
-    flex-flow: column wrap;
-  }
-  
-  .tabPannelrow3LeftInner .AmountInput {
-    font-weight: normal;
-    font-family: "Titillium Web", sans-serif;
-    line-height: 1.4375em;
-    color: rgba(0, 0, 0, 0.87);
-    box-sizing: border-box;
-    cursor: text;
-    display: inline-flex;
-    -moz-box-align: center;
-    align-items: center;
-    font-size: 14px;
-    border-radius: 4px;
-    border: 1px solid rgb(2, 119, 250);
-    position: relative;
-    padding: 5px 0px;
-    position: relative;
-  }
-  
-  .tabPannelrow3Right .approveBtn {
-    display: inline-flex;
-    -moz-box-align: center;
-    align-items: center;
-    -moz-box-pack: center;
-    justify-content: center;
-    position: relative;
-    box-sizing: border-box;
-    outline: currentcolor none 0px;
-    margin: 0px 8px 0px 0px;
-    cursor: pointer;
-    user-select: none;
-    vertical-align: middle;
-    appearance: none;
-    text-decoration: none;
-    font-family: "Titillium Web", sans-serif;
-    line-height: 1.75;
-    padding: 6px 16px;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: bold;
-    background: rgb(2, 119, 250) none repeat scroll 0% 0% !important;
-    border: 1px solid rgb(2, 119, 250) !important;
-    color: rgb(255, 255, 255);
-    transition: all 0.2s ease 0s;
-    backface-visibility: hidden;
-    text-transform: none;
-  }
-  
-  .tabPannelrow3LeftInner .AmountInput input[type="number"] {
-    appearance: textfield;
-  }
-  
-  .tabPannelrow3LeftInner .AmountInput input {
-    min-width: 160px;
-  }
-  
-  .tabPannelrow3LeftInner .AmountInput input {
-    color: rgb(255, 255, 255);
-  }
-  
-  .tabPannelrow3LeftInner .AmountInput input::placeholder {
-    padding-left: 10px;
-  }
-  
-  .tabPannelrow3LeftInner .tabinputFields {
-    display: inline-flex;
-    flex-direction: column;
-    position: relative;
-    min-width: 0px;
-    padding: 0px;
-    margin: 0px;
-    border: 0px none;
-    vertical-align: top;
-    background: rgb(20, 24, 25) none repeat scroll 0% 0%;
-  }
-  
-  .tabPannelrow3LeftInner .buttontop {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-sizing: border-box;
-    background-color: transparent;
-    outline: currentcolor none 0px;
-    margin: 0px 8px;
-    cursor: pointer;
-    user-select: none;
-    appearance: none;
-    text-decoration: none;
-    font-family: "Titillium Web", sans-serif;
-    line-height: 1.75;
-    border-radius: 4px;
-    font-size: 14px;
-    border: 1px solid rgb(2, 119, 250);
-    color: rgb(2, 119, 250);
-    transition: all 0.2s ease 0s;
-    backface-visibility: hidden;
-    text-transform: none;
-    padding: 0px 10px;
-    min-width: unset !important;
-    font-weight: 600;
-    position: absolute;
-    right: 1px;
-    height: 30px;
-    top: 5px;
-  }
-  
-  .tabPannelrow4 {
-    display: flex;
-    flex-direction: row;
-    margin-top: 24px;
-    -moz-box-align: center;
-    align-items: center;
-  }
-  
   .bottomContainer .bottomTable {
-    box-sizing: border-box;
-    padding-top: 24px;
-    flex-direction: row;
     flex-basis: 100%;
-    -moz-box-flex: 0;
-    flex-grow: 0;
     max-width: 100%;
   }
-  
-  .bottomTable .bottomTableInner {
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    padding-bottom: 8px;
-    justify-content: space-around;
-    color: #fff;
+  .bottomTable .tableBoxes {
+    width: calc(100% + 24px);
+    margin-left: -24px;
   }
-  
-  .bottomTableInner > .MuiGrid-item {
+}
+@media only screen and(min-width: 600px) {
+  .mainContainer {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .topContainer {
+    width: calc(100% + 24px);
+    margin-left: -24px;
+  }
+  .topContainer > .MuiGrid-item {
     padding-left: 24px;
   }
-  
-  .bottomTable .tableRow {
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
-    border-radius: 4px !important;
-    color: rgb(255, 255, 255) !important;
-    background: rgb(32, 39, 43) none repeat scroll 0% 0% !important;
-    padding: 24px 32px !important;
-    box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px !important;
-    border: 1px solid rgb(2, 119, 250) !important;
+
+  .mainText {
+    padding-bottom: 32px;
   }
-  
-  .bottomTable .tableRowInner {
-    display: flex;
-    flex-direction: column;
+  .topGrid2 {
+    flex-basis: 50%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 50% !important;
   }
-  
+  .topGrid2Inner {
+    min-height: 80px;
+  }
+  .topGrid2Innertext1 {
+    font-size: 18px;
+  }
+  .topGrid2InnerPrice {
+    font-size: 36px;
+  }
+  .bottomContainer {
+    margin-top: -24px;
+    width: calc(100% + 16px);
+    margin-left: -16px;
+  }
+  .bottomContainerLeft {
+    flex-basis: 100%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+  .tabPannel1 .tabPannelrow3 {
+    flex-direction: row;
+  }
+  .tabPannelrow3Left {
+    margin-right: 16px;
+    margin-bottom: 0px;
+  }
+  .tabPannelrow3Right {
+    width: unset;
+    -moz-box-pack: unset;
+    justify-content: unset;
+  }
+  .tabPannelrow3 .MuiFormControl-root {
+    min-width: 300px;
+  }
+  .bottomContainer .bottomTable {
+    flex-basis: 100%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+  .bottomTable .bottomTableInner {
+    margin-top: -16px;
+  }
+  .bottomTableInner > .MuiGrid-item {
+    padding-left: 16px;
+  }
+
   .bottomTable .tableBoxes {
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    margin-top: -8px;
-    -moz-box-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: space-around;
+    width: calc(100% + 24px);
+    margin-left: -24px;
   }
-  
-  /* media query */
-  
-  @media only screen and(min-width: 0px) {
-    .topContainer {
-      width: calc(100% + 24px);
-      margin-left: -24px;
-    }
-    .topContainer > .MuiGrid-item {
-      padding-left: 24px;
-    }
-    .mainText {
-      padding-bottom: 0px;
-    }
-    .topGrid2Inner {
-      min-height: 60px;
-    }
-    .topGrid2Innertext1 {
-      font-size: 14px;
-    }
-  
-    .topGrid2InnerPrice {
-      font-size: 24px;
-    }
-    .bottomContainer {
-      margin-top: -24px;
-    }
-    .bottomContainer {
-      width: calc(100% + 8px);
-      margin-left: -8px;
-    }
-    .tabPannel1 .tabPannelrow3 {
-      flex-direction: column;
-    }
-    .tabPannelrow3Left {
-      margin-right: 0px;
-      margin-bottom: 16px;
-    }
-    .tabPannelrow3Right {
-      width: 100%;
-      justify-content: space-evenly;
-    }
-    .tabPannelrow3 .MuiFormControl-root {
-      min-width: 292px;
-    }
-    .bottomTable .bottomTableInner {
-      margin-top: -8px;
-    }
-    .bottomTableInner > .MuiGrid-item {
-      padding-left: 8px;
-    }
-    .bottomTable .tableBoxes {
-      width: calc(100% + 24px);
-      margin-left: -24px;
-    }
+}
+
+@media only screen and(min-width: 1200px) {
+  .mainContainer {
+    max-width: 1200px;
   }
-  
-  @media only screen and (min-width: 900px) {
-    .topContainer {
-      width: calc(100% + 24px);
-      margin-left: -24px;
-    }
-    .topContainer > .MuiGrid-item {
-      padding-left: 24px;
-    }
-    .topGrid2 {
-      flex-basis: 50%;
-      -moz-box-flex: 0;
-      flex-grow: 0;
-      max-width: 30%;
-    }
-    .bottomContainer {
-      margin-top: -24px;
-      width: calc(100% + 24px);
-    }
-    .bottomContainer .bottomTable {
-      flex-basis: 100%;
-      max-width: 100%;
-    }
-    .bottomTable .tableBoxes {
-      width: calc(100% + 24px);
-      margin-left: -24px;
-    }
+  .topGrid1 {
+    flex-basis: 33.3333%;
+    max-width: 33.3333%;
   }
-  @media only screen and(min-width: 600px) {
-    .mainContainer {
-      padding-left: 24px;
-      padding-right: 24px;
-    }
-    .topContainer {
-      width: calc(100% + 24px);
-      margin-left: -24px;
-    }
-    .topContainer > .MuiGrid-item {
-      padding-left: 24px;
-    }
-  
-    .mainText {
-      padding-bottom: 32px;
-    }
-    .topGrid2 {
-      flex-basis: 50%;
-      -moz-box-flex: 0;
-      flex-grow: 0;
-      max-width: 50% !important;
-    }
-    .topGrid2Inner {
-      min-height: 80px;
-    }
-    .topGrid2Innertext1 {
-      font-size: 18px;
-    }
-    .topGrid2InnerPrice {
-      font-size: 36px;
-    }
-    .bottomContainer {
-      margin-top: -24px;
-      width: calc(100% + 16px);
-      margin-left: -16px;
-    }
-    .bottomContainerLeft {
-      flex-basis: 100%;
-      -moz-box-flex: 0;
-      flex-grow: 0;
-      max-width: 100%;
-    }
-    .tabPannel1 .tabPannelrow3 {
-      flex-direction: row;
-    }
-    .tabPannelrow3Left {
-      margin-right: 16px;
-      margin-bottom: 0px;
-    }
-    .tabPannelrow3Right {
-      width: unset;
-      -moz-box-pack: unset;
-      justify-content: unset;
-    }
-    .tabPannelrow3 .MuiFormControl-root {
-      min-width: 300px;
-    }
-    .bottomContainer .bottomTable {
-      flex-basis: 100%;
-      -moz-box-flex: 0;
-      flex-grow: 0;
-      max-width: 100%;
-    }
-    .bottomTable .bottomTableInner {
-      margin-top: -16px;
-    }
-    .bottomTableInner > .MuiGrid-item {
-      padding-left: 16px;
-    }
-  
-    .bottomTable .tableBoxes {
-      width: calc(100% + 24px);
-      margin-left: -24px;
-    }
+  .topGrid2 {
+    flex-basis: 18.75% !important;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 18.75% !important;
   }
-  
-  @media only screen and(min-width: 1200px) {
-    .mainContainer {
-      max-width: 1200px;
-    }
-    .topGrid1 {
-      flex-basis: 33.3333%;
-      max-width: 33.3333%;
-    }
-    .topGrid2 {
-      flex-basis: 18.75% !important;
-      -moz-box-flex: 0;
-      flex-grow: 0;
-      max-width: 18.75% !important;
-    }
-    .bottomContainerLeft {
-      flex-basis: 79.1667%;
-      max-width: 79.1667%;
-    }
-    .bottomContainer .bottomTable {
-      flex-basis: 100%;
-      -moz-box-flex: 0;
-      flex-grow: 0;
-      max-width: 100%;
-    }
+  .bottomContainerLeft {
+    flex-basis: 79.1667%;
+    max-width: 79.1667%;
   }
-  
-  @media only screen and(min-width: 1536) {
-    .topGrid1 {
-      flex-basis: 33.3333%;
-      -moz-box-flex: 0;
-      flex-grow: 0;
-      max-width: 33.3333%;
-    }
-    .topGrid2 {
-      flex-basis: 18.75% !important;
-      -moz-box-flex: 0;
-      flex-grow: 0;
-      max-width: 18.75% !important;
-    }
-    .bottomContainerLeft {
-      flex-basis: 79.1667%;
-      -moz-box-flex: 0;
-      flex-grow: 0;
-      max-width: 79.1667%;
-    }
-    .bottomContainer .bottomTable {
-      flex-basis: 100%;
-      max-width: 100%;
-    }
+  .bottomContainer .bottomTable {
+    flex-basis: 100%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 100%;
   }
-  
+}
+
+@media only screen and(min-width: 1536) {
+  .topGrid1 {
+    flex-basis: 33.3333%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 33.3333%;
+  }
+  .topGrid2 {
+    flex-basis: 18.75% !important;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 18.75% !important;
+  }
+  .bottomContainerLeft {
+    flex-basis: 79.1667%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 79.1667%;
+  }
+  .bottomContainer .bottomTable {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
