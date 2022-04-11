@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Paper, Typography, Button, CircularProgress, InputAdornment, TextField, MenuItem, Select, Grid, Container, Box, Input, TablePagination } from '@mui/material';
+import { Paper, Typography, Button, CircularProgress, InputAdornment, TextField, MenuItem, Select, Grid, Container, Box, Input, TablePagination, Tabs, Tab } from '@mui/material';
 import BigNumber from 'bignumber.js';
 import { Search } from '@mui/icons-material';
 import { useRouter } from "next/router";
@@ -8,6 +8,7 @@ import style from './convert.module.css';
 import style1 from './ssVotes.module.css';
 import { formatCurrency } from '../../utils';
 import PoolsRow from '../poolsRow/poolsRow';
+import Mymodel from "./Mymodel"
 
 import GaugesTable from './ssVotesTable.js'
 
@@ -29,6 +30,29 @@ export default function ssPools() {
   const [token, setToken] = useState(null)
   const [vestNFTs, setVestNFTs] = useState([])
   const [search, setSearch] = useState('');
+
+  const [modelTabs, setModeltabs] = useState(0);
+
+  const [open, setOpen] = useState(false);
+
+  const openModel = () => {
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const handleChangeModeltab = (event, newValue) => {
+    setModeltabs(newValue);
+  };
+
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
 
 
   const ssUpdated = () => {
@@ -175,7 +199,29 @@ export default function ssPools() {
     )
   }
 
+
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
   return (
+    <>
     <Container id="main" className={style.mainContainer}>
       <Box id="mainContainer" className={style.mainContainerInner}>
         <Box className={style.containerTop}>
@@ -270,7 +316,7 @@ export default function ssPools() {
                   return false
 
                 })}
-                setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked}
+                setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked} openModal={openModel}
               />
 
               <TablePagination
@@ -288,5 +334,74 @@ export default function ssPools() {
         </Box>
       </Box>
     </Container>
+    {
+        open &&
+        <Mymodel text="Manage SOLIDsex" open={open} handleClose={handleClose}>
+
+          <Box className={style.bottomContainerLeftBottom}>
+            <Box className={style.bottomContainerpannelTop}>
+              <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
+
+                <Tabs value={modelTabs} onChange={handleChangeModeltab} className={style.tabs}>
+                  <Tab label="Stake" {...a11yProps(0, "model")} className={style.tab} />
+                  <Tab label="Withdraw" {...a11yProps(1, "model")} className={style.tab} />
+                </Tabs>
+
+              </Box>
+            </Box>
+
+            <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={modelTabs} index={0}>
+              <Box className={style.tabPannel1}>
+                <Box className={style.tabPannelrow3}>
+                  <Box className={style.tabPannelrow3Left}>
+                    <Box className={style.tabPannelrow3LeftInner}>
+                      <Box className={style.tabinputFields}>
+                        <Input placeholder='Enter Amount' className={style.AmountInput} />
+                        <Button className={style.buttontop}>Max</Button>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box className={`${style.tabPannelrow3Right} ${style.modelButtons}`}>
+                  <Button className={style.approveBtn} style={{ marginRight: '10px' }}>
+                    Approve
+                  </Button>
+                  <Button className={style.approveBtn}>
+                    Convert tokens
+                  </Button>
+                </Box>
+              </Box>
+            </TabPanel>
+            <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={modelTabs} index={1}>
+              <Box className={`${style.tabPannel1} ${style.tabPannel1Modell}`}>
+                <Box className={style.tabPannelrow3}>
+                  <Box className={style.tabPannelrow3Left}>
+                    <Box className={style.tabPannelrow3LeftInner}>
+                      <Box className={style.marginTop}>
+                        <Box className={style.tabPannelrow3LeftInner}>
+                          <Box className={style.tabinputFields}>
+                            <Input placeholder='Enter Amount' className={style.AmountInput} />
+                            <Button className={style.buttontop}>Max</Button>
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box className={`${style.tabPannelrow3Right} ${style.modelButtons}`}>
+                  <Button className={style.approveBtn}>
+                    Withdraw
+                  </Button>
+                </Box>
+              </Box>
+            </TabPanel>
+          </Box>
+
+          <Typography id="modal-modal-description" style={{ textAlign: 'center', borderTop: '1px solid rgb(2, 119, 250)', paddingTop: '10px' }} sx={{ mt: 2 }}>
+            Please Approve the contract
+          </Typography>
+        </Mymodel>
+      }
+    </>
   );
 }

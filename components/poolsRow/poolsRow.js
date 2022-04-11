@@ -134,7 +134,7 @@ const headCells = [
   }
 ];
 
-export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, veToken, token, poolReward, poolStaked }) {
+export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, veToken, token, poolReward, poolStaked, openModal }) {
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('totalVotes');
   const [sliderValues, setSliderValues] = useState(defaultVotes)
@@ -328,7 +328,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                       </Box>
                     </Grid>
                     <Grid xs={6} lg={1.5} className={style.tableBox3}>
-                      <Button className={style.manageButton}>Manage</Button>
+                      <Button className={style.manageButton} onClick={openModal}>Manage</Button>
                     </Grid>
                     <Grid xs={6} lg={1.5} className={style.tableBox3}>
                       <Button>Claim Earnings</Button>
