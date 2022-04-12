@@ -134,11 +134,13 @@ const useStyles = makeStyles((theme) => ({
   textSpaced: {
     lineHeight: '1.5',
     fontWeight: '200',
-    fontSize: '12px'
+    fontSize: '12px',
+    color: "#fff"
   },
   headerText: {
     fontWeight: '200',
-    fontSize: '12px'
+    fontSize: '12px',
+    color: '#fff'
   },
   cell: {},
   cellSuccess: {
@@ -249,7 +251,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    background: '#20272b !important',
   },
   actionButtonText: {
     fontSize: '15px',
