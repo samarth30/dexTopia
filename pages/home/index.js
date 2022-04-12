@@ -28,7 +28,7 @@ export default function Home() {
                   <p class={homeStyle.section1text}>
                     A yield optimizer
                     <br />
-                    for gaslyy&nbsp;
+                    for dextopia&nbsp;
                     <span style={{ fontWeight: 'normal' }}>built<br style={{ display: 'block' }} /> on Fantom</span>
                   </p>
                 </Box>
@@ -46,9 +46,9 @@ export default function Home() {
 
           <Box className={homeStyle.section2}>
             <Grid container style={{ marginTop: '50px' }} >
-              <AmountBox text1="Gaslyy TVL" text2="$535.95m" text3="63% dominance" />
-              <AmountBox text1="Total SOLID locked on Gaslyy" text2="13.79m" text3="31.7% of total locked" />
-              <AmountBox text1="Total SEX locked" text2="5.08m" text3="74% of total supply locked" />
+              <AmountBox text1="dextopia TVL" text2="$535.95m" text3="63% dominance" />
+              <AmountBox text1="Total vetopia locked on dextopia" text2="13.79m" text3="31.7% of total locked" />
+              <AmountBox text1="Total topia locked" text2="5.08m" text3="74% of total supply locked" />
             </Grid>
           </Box>
 
@@ -56,7 +56,7 @@ export default function Home() {
           <Box className={`${homeStyle.section2} ${homeStyle.section3}`}>
             <Box className={homeStyle.section3Inner}>
               <Box className={homeStyle.section3Left}>
-                <p className={homeStyle.para1}>SEX PARTNERS</p>
+                <p className={homeStyle.para1}>topia PARTNERS</p>
                 <p className={`${homeStyle.para2} ${homeStyle.doWhite}`}>
                   Enjoy more voting
                   <br style={{ display: 'block' }} />
@@ -133,11 +133,11 @@ export default function Home() {
 
           <Box className={homeStyle.section5}>
             <Box className={homeStyle.section5Inner}>
-              <p className={homeStyle.para1}>SEX HOLDERS</p>
+              <p className={homeStyle.para1}>topia HOLDERS</p>
               <p className={homeStyle.para2}>
-                Control voting power, decide on SOLID emissions,
+                Control voting power, decide on vetopia emissions,
                 <br style={{ display: 'block' }} />
-                earn protocol fees and gaslyy expansion.
+                earn protocol fees and dextopia expansion.
               </p>
             </Box>
           </Box>

@@ -32,11 +32,11 @@ export default function Footer() {
           <Grid item xs={5} md={2.4} lg={4} className={style.footer4}>
             <Box className={style.footer4Inner}>
               <Typography className={style.footer4Innerp1}>
-                &nbsp; Gaslyy Voting Power &nbsp;
+                &nbsp; dextopia Voting Power &nbsp;
               </Typography>
               <Typography className={style.footer4Innerp2}>
                 <Link className={style.footer4Innerp2Link}>
-                  13,789,805.5 SOLID
+                  13,789,805.5 vetopia
                 </Link>
               </Typography>
 
@@ -45,7 +45,7 @@ export default function Footer() {
 
           <Grid item xs={3} md={1.25} lg={2.5} className={style.footer5}>
             <Box className={style.footer5Inner}>
-              <Typography className={style.footer5Innerp1}>SEX Price &nbsp; </Typography>
+              <Typography className={style.footer5Innerp1}>topia Price &nbsp; </Typography>
               <Typography className={style.footer5Innerp2}>
                 <Link className={style.footer5Innerp2Link}>
                   $4.53
@@ -57,7 +57,7 @@ export default function Footer() {
 
           <Grid item xs={3} md={1.25} lg={2.5} className={style.footer6}>
             <Box className={style.footer6Inner}>
-              <Typography className={style.footer6Innerp1}>SEX Price &nbsp; </Typography>
+              <Typography className={style.footer6Innerp1}>topia Price &nbsp; </Typography>
               <Typography className={style.footer6Innerp2}>
                   $4.53
               </Typography>

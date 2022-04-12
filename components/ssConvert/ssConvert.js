@@ -366,7 +366,7 @@ topiaEarning: "0"
             <Paper elevation={1} className={style.bottomContainerLeftInner}>
               <Box className={style.bottomContainerLeftInnerTop}>
                 <Typography variant='h3' className={style.h3text}>
-                  Convert & stake gaslyy NFTs/Tokens into GASsex
+                  Convert & stake dextopia NFTs/Tokens into GAStopia
                 </Typography>
               </Box>
 
@@ -388,7 +388,7 @@ topiaEarning: "0"
                     </Box>
                     <Box className={style.tabPannelrow2}>
                       <Typography variant='p' className={style.balancep}>
-                        Balance: 0 SOLID
+                        Balance: 0 vetopia
                       </Typography>
                     </Box>
                     <Box className={style.tabPannelrow3}>
@@ -414,7 +414,7 @@ topiaEarning: "0"
                     </Box>
                     <Box className={style.tabPannelrow4}>
                       <Typography variant='p' className={style.balancep}>
-                        Converting 0 SOLID Tokens to 0 GASsex
+                        Converting 0 vetopia Tokens to 0 GAStopia
                       </Typography>
                     </Box>
                   </Box>
@@ -428,7 +428,7 @@ topiaEarning: "0"
                         </Box>
                         <Box className={style.tabPannelrow2}>
                           <Typography variant='p' className={style.balancep}>
-                            Balance: 0 SOLID
+                            Balance: 0 vetopia
                           </Typography>
                         </Box>
                         <Box className={style.tabPannelrow3}>
@@ -460,7 +460,7 @@ topiaEarning: "0"
                         </Box>
                         <Box className={style.tabPannelrow4}>
                           <Typography variant='p' className={style.balancep}>
-                            Converting 0 SOLID Tokens From the selected SOLID NFT to 0 SOLIDDsex
+                            Converting 0 vetopia Tokens From the selected vetopia NFT to 0 SOLIDDsex
                           </Typography>
                         </Box>
                       </Box>
@@ -487,7 +487,7 @@ topiaEarning: "0"
 
               </Grid>
               <Grid lg={1.7} item>
-                <Typography variant="h6">Your Staked GASsex</Typography>
+                <Typography variant="h6">Your Staked GAStopia</Typography>
 
               </Grid>
               <Grid lg={1.7} item>
@@ -499,7 +499,7 @@ topiaEarning: "0"
                 <Container className={style.tableBoxes}>
                   <Grid item xs={12} lg={2}>
                     <Typography variant="p">
-                      Staked GASsex
+                      Staked GAStopia
                     </Typography>
                   </Grid>
                   <Grid item xs={12} lg={1.75}>
@@ -512,8 +512,8 @@ topiaEarning: "0"
                     <Typography variant="p">0</Typography>
                   </Grid>
                   <Grid item xs={6} lg={1.5}>
-                    <Typography variant="p">0 SEX </Typography>
-                    <Typography variant="p">0 SOLID</Typography>
+                    <Typography variant="p">0 topia </Typography>
+                    <Typography variant="p">0 vetopia</Typography>
                   </Grid>
                   <Grid item xs={6} lg={1.5}>
                     <Button className={style.approveBtn} onClick={openModel}>Manage</Button>
@@ -532,7 +532,7 @@ topiaEarning: "0"
   </Container>
         {
           open &&
-          <Mymodel text="Manage SOLIDsex" open={open} handleClose={handleClose}>
+          <Mymodel text="Manage SOLIDtopia" open={open} handleClose={handleClose}>
   
             <Box className={style.bottomContainerLeftBottom}>
               <Box className={style.bottomContainerpannelTop}>

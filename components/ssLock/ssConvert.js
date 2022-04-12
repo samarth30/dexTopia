@@ -350,7 +350,7 @@ topiaEarning: "0"
                     <Box>
                         <Grid style={{marginTop:'50px'}} container spacing={2}>
                             <Grid item xs={7}>
-                                <CustomBox tableSize="400" text="Your SEX locks - 0% of vlSEX" />
+                                <CustomBox tableSize="400" text="Your topia locks - 0% of vlSEX" />
                             </Grid>
                             <Grid item xs={5}>
                             <CustomBox text="Current Week Claimable Earnings " />

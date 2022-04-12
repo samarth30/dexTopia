@@ -336,7 +336,7 @@ export default function ssPools() {
     </Container>
     {
         open &&
-        <Mymodel text="Manage SOLIDsex" open={open} handleClose={handleClose}>
+        <Mymodel text="Manage vetopia" open={open} handleClose={handleClose}>
 
           <Box className={style.bottomContainerLeftBottom}>
             <Box className={style.bottomContainerpannelTop}>
