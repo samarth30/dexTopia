@@ -214,6 +214,7 @@ export default function ssWhitelist() {
               </InputAdornment>
             ),
           }}
+          sx={{ input: { color: 'white' } }}
         />
         </Grid>
         <Grid item lg={5} md={5} sm={12} xs={12}>
