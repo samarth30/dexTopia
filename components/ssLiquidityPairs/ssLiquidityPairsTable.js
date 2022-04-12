@@ -195,7 +195,7 @@ function EnhancedTableHead(props) {
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel active={orderBy === headCell.id} direction={orderBy === headCell.id ? order : 'asc'} onClick={createSortHandler(headCell.id)}>
-              <Typography variant='h5' className={ classes.headerText }>{headCell.label}</Typography>
+              <Typography variant='h5' className={ classes.headerText } >{headCell.label}</Typography>
               {orderBy === headCell.id ? <span className={classes.visuallyHidden}>{order === 'desc' ? 'sorted descending' : 'sorted ascending'}</span> : null}
             </TableSortLabel>
           </TableCell>
@@ -254,11 +254,13 @@ const useStyles = makeStyles((theme) => ({
   textSpaced: {
     lineHeight: '1.5',
     fontWeight: '200',
-    fontSize: '12px'
+    fontSize: '12px',
+    color: '#fff'
   },
   headerText: {
     fontWeight: '200',
-    fontSize: '12px'
+    fontSize: '12px',
+    color: '#fff'
   },
   cell: {},
   cellSuccess: {
@@ -363,6 +365,7 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     display: 'flex',
     width: '100%',
+    color: '#fff !important'
   },
   buttonOverride: {
     width: '100%',
@@ -545,7 +548,6 @@ const EnhancedTableToolbar = (props) => {
           startIcon={<AddCircleOutline />}
           size='large'
           className={ classes.buttonOverride }
-          color='primary'
           onClick={ onCreate }
         >
           <Typography className={ classes.actionButtonText }>Add Liquidity</Typography>
@@ -566,6 +568,7 @@ const EnhancedTableToolbar = (props) => {
               </InputAdornment>
             ),
           }}
+          sx={{ input: { color: 'white' } }}
         />
       </Grid>
       <Grid item lg={1} md={true} sm={2} xs={2}>
