@@ -473,15 +473,15 @@ const Header = () => {
         <TransactionQueue setQueueLength={setQueueLength} />
       </Container>
       {chainInvalid ? (
-        <div className={classes.chainInvalidError}>
-          <div className={classes.ErrorContent}>
-            <WrongNetworkIcon className={classes.networkIcon} />
-            <Typography className={classes.ErrorTxt}>
+        <div className={style.chainInvalidError}>
+          <div className={style.ErrorContent}>
+            <WrongNetworkIcon className={style.networkIcon} />
+            <Typography className={style.ErrorTxt}>
               The chain you're connected to isn't supported. Please check that
               your wallet is connected to MATIC Testnet.
             </Typography>
             <Button
-              className={classes.switchNetworkBtn}
+              className={style.switchNetworkBtn}
               variant="contained"
               onClick={() => switchChain()}
             >
