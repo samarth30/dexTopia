@@ -113,6 +113,7 @@
   padding: 24px;
   height: 600px;
   overflow-y: scroll;
+  background-color: #1f67c5;
 }
 
 .manageLocalContainer {
