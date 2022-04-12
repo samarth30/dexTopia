@@ -35,7 +35,7 @@ import style from './header.module.css';
 // import starLogo from '../../public/images/star.svg';
 
 
-const pages = ['HOME', 'SWAP', 'POOLS', 'CONVERT SOLID', 'LOCK SEX', 'VOTE', 'LIQUIDITY', 'VEST'];
+const pages = ['HOME', 'SWAP', 'LIQUIDITY', 'VEST', 'VOTE', 'WHITELIST', 'POOLS', 'CONVERT SOLID', 'LOCK SEX'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const returnPage = (page) => {
@@ -46,6 +46,18 @@ const returnPage = (page) => {
     case 'SWAP':
       return 'swap'
       break;
+    case 'LIQUIDITY':
+      return 'liquidity'
+      break;
+    case 'VEST':
+      return 'vest'
+      break;
+    case 'VOTE':
+      return 'vote'
+      break;
+    case 'WHITELIST':
+      return 'whitelist'
+      break;
     case 'POOLS':
       return 'pools'
       break;
@@ -54,15 +66,6 @@ const returnPage = (page) => {
       break;
     case 'LOCK SEX':
       return 'lock'
-      break;
-    case 'VOTE':
-      return 'vote'
-      break;
-    case 'LIQUIDITY':
-      return 'liquidity'
-      break;
-    case 'VEST':
-      return 'vest'
       break;
     default:
       break;
@@ -339,7 +342,7 @@ const Header = () => {
                     router.push(`/${pg}`)
                   }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
-                style={{color: "#fff !important"}}
+                style={{color: "white !important"}}
               >
                 {page}
               </Button>
@@ -398,13 +401,13 @@ const Header = () => {
                     primary="Dashboard"
                   />
                 </StyledMenuItem>
-                <StyledMenuItem onClick={onAddressClicked}>
+                <StyledMenuItem onClick={onAddressClicked} style={{background: "#fff"}}>
                   <ListItemIcon className={style.userMenuIcon}>
                     <AccountBalanceWalletOutlined fontSize="small" />
                   </ListItemIcon>
                   <ListItemText
                     className={style.userMenuText}
-                    primary="Switch Wallet Provider"
+                    secondary="Switch Wallet Provider"
                   />
                 </StyledMenuItem>
               </StyledMenu>
@@ -464,7 +467,32 @@ const Header = () => {
             </Menu>
           </Box>
         </Toolbar>
+        {unlockOpen && (
+          <Unlock modalOpen={unlockOpen} closeModal={closeUnlock} />
+        )}
+        <TransactionQueue setQueueLength={setQueueLength} />
       </Container>
+      {chainInvalid ? (
+        <div className={classes.chainInvalidError}>
+          <div className={classes.ErrorContent}>
+            <WrongNetworkIcon className={classes.networkIcon} />
+            <Typography className={classes.ErrorTxt}>
+              The chain you're connected to isn't supported. Please check that
+              your wallet is connected to MATIC Testnet.
+            </Typography>
+            <Button
+              className={classes.switchNetworkBtn}
+              variant="contained"
+              onClick={() => switchChain()}
+            >
+              Switch to{" "}
+              {process.env.NEXT_PUBLIC_CHAINID == "4002"
+                ? "Matic Testnet"
+                : "Matic Mainnet"}
+            </Button>
+          </div>
+        </div>
+      ) : null}
     </AppBar>
   );
 };

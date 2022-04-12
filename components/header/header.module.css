@@ -182,6 +182,7 @@
 
 .userMenuText {
   transform: scale(0.85);
+  color: #000 !important;
 }
 
 .userMenuIcon {
