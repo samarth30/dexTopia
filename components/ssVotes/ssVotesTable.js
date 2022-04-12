@@ -6,6 +6,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Table
 import BigNumber from 'bignumber.js';
 
 import { formatCurrency } from '../../utils';
+import { ImportantDevices } from '@mui/icons-material';
 
 const PrettoSlider = withStyles({
   root: {
@@ -219,7 +220,8 @@ const useStyles = makeStyles((theme) => ({
   textSpaced: {
     lineHeight: '1.5',
     fontWeight: '200',
-    fontSize: '12px'
+    fontSize: '12px',
+    color: '#fff !important',
   },
   textSpacedFloat: {
     lineHeight: '1.5',
@@ -301,14 +303,16 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '12px'
   },
   tableContainer: {
-    overflowX: 'hidden'
+    overflowX: 'hidden',
+    background: '#20272b',
   },
   overrideTableHead: {
     borderBottom: '1px solid rgba(104,108,122,0.2) !important',
   },
   headerText: {
     fontWeight: '200',
-    fontSize: '12px'
+    fontSize: '12px',
+    color: '#fff'
   },
   tooltipContainer: {
     minWidth: '240px',
