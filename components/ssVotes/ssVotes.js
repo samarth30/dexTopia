@@ -121,7 +121,7 @@ export default function ssVotes() {
     return (
       <div className={ classes.textField}>
         <div className={ classes.mediumInputContainer}>
-          <Grid container>
+          <Grid container style={{background: "white !important"}}>
             <Grid item lg='auto' md='auto' sm={12} xs={12}>
               <Typography variant="body2" className={ classes.smallText }>Please select your veNFT:</Typography>
             </Grid>
@@ -129,6 +129,7 @@ export default function ssVotes() {
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <div className={ classes.mediumInputAmount }>
                 <Select
+                  style={{background: "white !important"}}
                   fullWidth
                   value={ value }
                   onChange={handleChange}

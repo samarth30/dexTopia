@@ -274,6 +274,7 @@
   opacity: 0.6;
   width: 80px;
   font-size: 12px !important;
+  color: white !important;
 }
 
 .vestPeriodToggle {
@@ -324,10 +325,12 @@
   font-weight: bold !important;
   font-size: 14px !important;
   padding: 6px 0px;
+  color: white !important;
 }
 
 .vestInfo > .text {
   font-size: 14px !important;
+  color: white !important;
 }
 
 
@@ -467,6 +470,7 @@
   font-size: 18px !important;
   letter-spacing: normal !important;
   font-weight: bold !important;
+  color: white !important;
 }
 
 .vestInfoContainer {
@@ -482,22 +486,26 @@
   grid-template-columns: 1fr 1fr;
   padding-bottom: 12px;
   margin-bottom: 12px;
+  color: #fff !important;
 }
 
 .vestInfoContainer > .mainSection > .amount {
   font-size: 20px !important;
   line-height: 2;
+  color: white !important;
 }
 
 .vestInfoContainer > .mainSection > .values {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: white !important;
 }
 
 .vestInfoContainer > .mainSection > .values > .val {
   font-size: 10px !important;
-  padding: 3px 0px
+  padding: 3px 0px;
+  color: white !important;
 }
 
 .vestInfoContainer > .seccondSection {

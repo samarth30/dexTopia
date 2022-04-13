@@ -280,7 +280,7 @@ const Header = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, color: "#fff !important" }}
             onClick={() => router.push("/home")}
           >
             {/* <img src={logo} alt="logo header" /> */}
@@ -341,7 +341,7 @@ const Header = () => {
                     const pg = returnPage(page);
                     router.push(`/${pg}`)
                   }}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white !important', display: 'block' }}
                 style={{color: "white !important"}}
               >
                 {page}
