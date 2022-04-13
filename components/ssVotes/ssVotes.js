@@ -184,7 +184,7 @@ export default function ssVotes() {
               className={classes.searchContainer}
               variant="outlined"
               fullWidth
-              placeholder="MATIC, MIM, 0x..."
+              placeholder="AVAX, MIM, 0x..."
               value={search}
               onChange={onSearchChanged}
               inputProps={{

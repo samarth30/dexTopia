@@ -1,57 +1,57 @@
 import abis from "../abis";
 
-export const GOV_TOKEN_ADDRESS = '0xea4AFdD0aeCE596468beC02922ca6f25F8148De8'
-export const GOV_TOKEN_NAME = 'DYSTOPIA'
-export const GOV_TOKEN_SYMBOL = 'DYST'
+export const GOV_TOKEN_ADDRESS = '0x90D6a3B44e32803eB7Cad92bb65eBed33383C363'
+export const GOV_TOKEN_NAME = 'Gasly'
+export const GOV_TOKEN_SYMBOL = 'GAS'
 export const GOV_TOKEN_DECIMALS = 18
-export const GOV_TOKEN_LOGO = 'https://dystopia-swap-seven.vercel.app/logo.svg'
+export const GOV_TOKEN_LOGO = ''
 export const GOV_TOKEN_ABI = abis.tokenABI
 
-export const VE_TOKEN_ADDRESS = '0xA4d64a69179A2De4623De9e2aaf6918198a87842'
+export const VE_TOKEN_ADDRESS = '0x73F378f1cA99A35b176778aa72fE7844eF92e42F'
 export const VE_TOKEN_NAME = 'veNFT'
 export const VE_TOKEN_SYMBOL = 'veNFT'
 export const VE_TOKEN_DECIMALS = 18
-export const VE_TOKEN_LOGO = 'https://dystopia-swap-seven.vercel.app/logo.svg'
+export const VE_TOKEN_LOGO = ''
 export const VE_TOKEN_ABI = abis.veTokenABI
 
-export const WFTM_ADDRESS = '0x07B9c47452C41e8E00f98aC4c075F5c443281d2A'
-export const WFTM_NAME = 'Wrapped MATIC'
-export const WFTM_SYMBOL = 'WMATIC'
+export const WFTM_ADDRESS = '0x81E6fe8E375e141Ba7B31FE8C2983267604c11Ec'
+export const WFTM_NAME = 'Wrapped AVAX'
+export const WFTM_SYMBOL = 'WAVAX'
 export const WFTM_DECIMALS = 18
-export const WFTM_LOGO = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0/logo.png'
+export const WFTM_LOGO = 'https://traderjoexyz.com/static/media/avalanche_token_round.3e178e42.png'
 export const WFTM_ABI = abis.wftmABI
 
-export const FTM_ADDRESS = 'MATIC'
-export const FTM_NAME = 'MATIC'
-export const FTM_SYMBOL = 'MATIC'
+export const FTM_ADDRESS = 'AVAX'
+export const FTM_NAME = 'AVAX'
+export const FTM_SYMBOL = 'AVAX'
 export const FTM_DECIMALS = 18
-export const FTM_LOGO = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0/logo.png'
+export const FTM_LOGO = 'https://traderjoexyz.com/static/media/avalanche_token_round.3e178e42.png'
 
-export const FACTORY_ADDRESS = '0x710EccF77bFBd5FAf69D5D0ae36c2457859b1823'
+export const FACTORY_ADDRESS = '0xE650F4d8708cb1460E3EefA26FA9BA4f6Ef8f7B1'
 export const FACTORY_ABI = abis.factoryABI
 
-export const LP_DEPOSITER = '0xaeeC0fe46212D5c4B5fa08B22863a5b7b1Ac9c78'
+export const LP_DEPOSITER = '0x7C7E3CE362C92C9Fa18E1Bc374D21294eC9D914a'
 export const LP_DEPOSITER_ABI = abis.lpDepositor
 
-export const DEXTOPIA_VE_DEPOSITER = '0xE22eBB4E9fb0613Eb95A33FC811D44d64c11FFe3'
+export const DEXTOPIA_VE_DEPOSITER = '0xD855b58aD4863230A365338b8c11a0e4a61f11a6'
 export const DEXTOPIA_VE_DEPOSITER_ABI = abis.dexTopiaVeDepositor
 
-export const DEXTOPIA_TOKEN = '0x4BC8FFBabaa7706fCA20cEEb6c2C1050d4f338aD'
+export const DEXTOPIA_TOKEN = '0xDD414685D6F13682cFF8D472E09247D3C0D16098'
 export const DEXTOPIA_TOKEN_ABI = abis.erc20ABI
 
-export const DEXTOPIA_TOKENLOCKER = "0xEeF2F3a39525F509474e63996cFB04EA3589E140";
+export const DEXTOPIA_TOKENLOCKER = "0x080eB8c1F4C349f47688262f7d1b69C87c7267C0";
 export const DEXTOPIA_TOKENLOCKER_ABI = abis.dexTopiaTockenLocker;
 
-export const DEXTOPIA_STAKINGREWARDS = "0xA1E477D8Aec51C19f70c7DD426d579191758A969";
+export const DEXTOPIA_STAKINGREWARDS = "0xc0C57e6F4037C3aB09182c57F8b1f1e2cD2072D1";
 export const DEXTOPIA_STAKINGREWARDS_ABI = abis.dexTopiaStakingRewards;
 
-export const ROUTER_ADDRESS = '0x582Bc23902AF09186815549D44F3BA89214788BD'
+export const ROUTER_ADDRESS = '0x878B1F802Bc2f3cF7B7686AA5983b293E7E90cf7'
 export const ROUTER_ABI = abis.routerABI
 
-export const VE_DIST_ADDRESS = '0x1C9E86FF0dfB437c0b1080CAFbDBeEa1589438DF'
+export const VE_DIST_ADDRESS = '0x91d2a6C41008880B988D47A0e44DC64490AD97E3'
 export const VE_DIST_ABI = abis.veDistABI
 
-export const VOTER_ADDRESS = '0x1Df565C43eDBe77eb4e854059fD369a478B68fdC'
+export const VOTER_ADDRESS = '0x5Ac1967A8f1CB566D53938F084d6Df91F9A02579'
 export const VOTER_ABI = abis.voterABI
 
 export const ERC20_ABI = abis.erc20ABI
@@ -60,4 +60,4 @@ export const GAUGE_ABI = abis.gaugeABI
 export const BRIBE_ABI = abis.bribeABI
 export const TOKEN_ABI = abis.tokenABI
 
-export const MULTICALL_ADDRESS = '0xa6a0c0409fdddE2E66FBee64b09Bfca9f95C18EF'
+export const MULTICALL_ADDRESS = '0xe7c03fA4357b1a447C5CC00044BFf1321A91e3f5'

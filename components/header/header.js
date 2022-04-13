@@ -35,7 +35,7 @@ import style from './header.module.css';
 // import starLogo from '../../public/images/star.svg';
 
 
-const pages = ['HOME', 'SWAP', 'LIQUIDITY', 'VEST', 'VOTE', 'WHITELIST', 'POOLS', 'CONVERT SOLID', 'LOCK TOPIA'];
+const pages = ['HOME', 'SWAP', 'LIQUIDITY', 'VEST', 'VOTE', 'WHITELIST', 'POOLS', 'CONVERT', 'LOCK TOPIA'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const returnPage = (page) => {
@@ -61,7 +61,7 @@ const returnPage = (page) => {
     case 'POOLS':
       return 'pools'
       break;
-    case 'CONVERT SOLID':
+    case 'CONVERT':
       return 'convert'
       break;
     case 'LOCK TOPIA':
@@ -478,7 +478,7 @@ const Header = () => {
             <WrongNetworkIcon className={style.networkIcon} />
             <Typography className={style.ErrorTxt}>
               The chain you're connected to isn't supported. Please check that
-              your wallet is connected to MATIC Testnet.
+              your wallet is connected to AVAX Testnet.
             </Typography>
             <Button
               className={style.switchNetworkBtn}
@@ -486,9 +486,9 @@ const Header = () => {
               onClick={() => switchChain()}
             >
               Switch to{" "}
-              {process.env.NEXT_PUBLIC_CHAINID == "4002"
-                ? "Matic Testnet"
-                : "Matic Mainnet"}
+              {process.env.NEXT_PUBLIC_CHAINID == "43113"
+                ? "AXAX TESTNET"
+                : "AVAX Mainnet"}
             </Button>
           </div>
         </div>

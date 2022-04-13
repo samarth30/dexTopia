@@ -307,16 +307,16 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                       </Typography>
                       {/* <img src={symbolcircle} className={style.svgIcon} alt="symbol" srcSet="" /> */}
                     </Grid>
-                    <Grid xs={12} lg={1.5} className={style.tableBox2}>
+                    {/* <Grid xs={12} lg={1.5} className={style.tableBox2}>
                       <Typography variant="p" className={style.tableBox2text}>
                       { formatCurrency(row?.gauge?.weightPercent) } %
                       </Typography>
-                    </Grid>
-                    <Grid xs={12} lg={1.5} className={style.tableBox2}>
+                    </Grid> */}
+                    {/* <Grid xs={12} lg={1.5} className={style.tableBox2}>
                       <Typography variant="p" className={style.tableBox2text}>
                       { formatCurrency(row?.gauge?.weight) }
                       </Typography>
-                    </Grid>
+                    </Grid> */}
                     <Grid xs={12} lg={2} className={style.tableBox2}>
                       <Box style={{ marginLeft: '50px' }}>
                         <Typography variant="p" className={style.tableBox2text}>

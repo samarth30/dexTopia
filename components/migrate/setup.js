@@ -475,7 +475,7 @@ export default function Setup() {
                 autoFocus
                 variant="outlined"
                 fullWidth
-                placeholder="MATIC, DAI, 0x..."
+                placeholder="AVAX, DAI, 0x..."
                 value={search}
                 onChange={onSearchChanged}
                 InputProps={{
