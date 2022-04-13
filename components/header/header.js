@@ -350,14 +350,6 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }} className={style.navbarRight}>
-            <Box className={style.navBarRightTextMain}>
-              <Box className={style.navBarRightTextInner}>
-                <Box className={style.navBarRightLogo}>
-                  {/* <img src={starLogo} alt="starLogo" /> */}
-                  star logo
-                </Box>
-              </Box>
-            </Box>
             <Box>
               {/* <Button variant="contained" className={style.buttonNavbar}>Connect wallet</Button> */}
               {account && account.address ? (
