@@ -999,7 +999,7 @@ export default function ssLiquidityManage() {
     return (
       <div className={ classes.textField}>
         <div className={ classes.mediumInputContainer}>
-          <div className={ classes.mediumInputAmount }>
+          <div className={ classes.mediumInputAmount } style={{backgroundColor: "#161B2C !important"}}>
             <Select
               fullWidth
               value={ token }
