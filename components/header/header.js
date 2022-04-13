@@ -479,7 +479,7 @@ const Header = () => {
             >
               Switch to{" "}
               {process.env.NEXT_PUBLIC_CHAINID == "43113"
-                ? "AXAX TESTNET"
+                ? "AVAX TESTNET"
                 : "AVAX Mainnet"}
             </Button>
           </div>
