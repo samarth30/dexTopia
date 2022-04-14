@@ -56,6 +56,13 @@ topiaEarning: "0"
   const [modelTabs, setModeltabs] = useState(0);
 
   const [open, setOpen] = useState(false);
+  const [selectDropdown, setSelectDropdown] = useState("")
+
+  useEffect(() => {
+    const nfts = stores.stableSwapStore.getStore('vestNFTs');
+    setVestNFTs(nfts)
+  }, [])
+  
 
   const openModel = () => {
     setOpen(true);
@@ -441,18 +448,29 @@ topiaEarning: "0"
                                     labelId="demo-multiple-chip-label"
                                     id="demo-multiple-chip"
                                     className={style.tabinputFieldsSelection}
-                                    value={null}
-                                    onChange={null}
+                                    value={selectDropdown}
+                                    onChange={(e) => {setSelectDropdown(e.target.value)}}
+                                    style={{color: "#fff !important"}}
                                   >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    {vestNFTs && vestNFTs.map((vest) => {
+                                      return (
+                                        <MenuItem key={vest.id} value={vest}>
+                                          <div className={ style.menuOption }>
+                                            <Typography>Token #{vest.id}</Typography>
+                                            <div>
+                                              <Typography align='right' className={ style.smallerText }>{ formatCurrency(vest.lockValue) }</Typography>
+                                              <Typography color='textSecondary' className={ style.smallerText }>{veToken?.symbol}</Typography>
+                                            </div>
+                                          </div>
+                                        </MenuItem>
+                                      )
+                                    })}
                                   </Select>
                                 </FormControl>
                               </Box>
                             </Box>
                           </Box>
-                          <Box className={style.tabPannelrow3Right}>
+                          <Box className={style.tabPannelrow3Right} style={{height: "60px"}}>
                             <Button className={style.approveBtn}>
                               Convert tokens
                             </Button>

@@ -14,6 +14,14 @@
   margin-bottom: 24px;
 }
 
+.tabinputFieldsSelection {
+  color: #fff !important;
+}
+
+.smallerText {
+  color: #fff !important;
+}
+
 .containerTop {
   flex-direction: row;
   -moz-box-align: center;
