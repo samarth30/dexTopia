@@ -467,9 +467,9 @@ class Store {
     this.setStore({StakingRewardStakedBalances:{stakedBalance ,
       dysTopiaEarning,
       topiaEarning }});
-    console.log({stakedBalance ,
-      dysTopiaEarning,
-      topiaEarning },"pippppp")
+    // console.log({stakedBalance ,
+    //   dysTopiaEarning,
+    //   topiaEarning },"chandler")
    return {stakedBalance ,
     dysTopiaEarning,
     topiaEarning };

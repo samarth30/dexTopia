@@ -116,9 +116,13 @@ topiaEarning: "0"
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT,
       content: {},
     });
-    const stakingRewardsStakedBalancedata = stores.stableSwapStore.getStore("stakingRewardStakedBalance");
-    console.log(stakingRewardsStakedBalancedata)
-    setstakingRewardStaked(stakingRewardsStakedBalancedata)
+    const stakingRewardsStakedBalancedata = stores.stableSwapStore.getStore("StakingRewardStakedBalances");
+    console.log(stakingRewardsStakedBalancedata,"chandler")
+    // console.log(stakingRewardsStakedBalancedata?.stakedBalance , "chandler")
+    setstakingRewardStaked({   dysTopiaEarning: stakingRewardsStakedBalancedata?.dysTopiaEarning,
+    stakedBalance: stakingRewardsStakedBalancedata?.stakedBalance,
+    topiaEarning: stakingRewardsStakedBalancedata?.topiaEarning})
+    
     const tockenLockerDatas = stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA,
       content: {},
@@ -147,7 +151,7 @@ topiaEarning: "0"
     forceUpdate();
   };
 
-  const [depositInput, setDepositInput] = useState("false");
+  const [depositInput, setDepositInput] = useState("0");
 
   const onInputField = async (e) => {
     setDepositInput(e.target.value);
@@ -161,11 +165,17 @@ topiaEarning: "0"
     });
   };
 
+
+  const [depositInputveTopia, setDepositInputVeTopia] = useState("0");
+
+  const onInputDepositStakeVtopia = async (e) => {
+    setDepositInputVeTopia(e.target.value);
+  };
   const onDepositVeTopia = async ()=>{
     
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT,
-      content: { amount: "1" },
+      content: { amount: depositInputveTopia},
     });
   }
 
@@ -174,7 +184,7 @@ topiaEarning: "0"
     
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_WITHDRAW,
-      content: { amount: "1" },
+      content: { amount: depositInputveTopia },
     });
   }
   
@@ -411,10 +421,10 @@ topiaEarning: "0"
 
                       </Box>
                       <Box className={style.tabPannelrow3Right}>
-                        <Button className={style.approveBtn} style={{ marginRight: '10px' }} onClick={() => onDeposit()}>
+                        {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }} onClick={() => onDeposit()}>
                           Approve
-                        </Button>
-                        <Button className={style.approveBtn}>
+                        </Button> */}
+                        <Button className={style.approveBtn} onClick={() => onDeposit()}>
                           Convert tokens
                         </Button>
                       </Box>
@@ -527,11 +537,18 @@ topiaEarning: "0"
                     <Typography variant="p">26.1%</Typography>
                   </Grid>
                   <Grid item xs={12} lg={1.75}>
-                    <Typography variant="p">0</Typography>
+           
+                    <Typography variant="p">{stakingRewardStaked !== "undefined" &&  formatCurrency(
+                          BigNumber(stakingRewardStaked?.stakedBalance).div(10 ** 18)
+                        )}</Typography>
                   </Grid>
                   <Grid item xs={6} lg={1.5}>
-                    <Typography variant="p">0 topia </Typography>
-                    <Typography variant="p">0 vetopia</Typography>
+                    <Typography variant="p">{stakingRewardStaked !== "undefined" &&  formatCurrency(
+                          BigNumber(stakingRewardStaked?.dysTopiaEarning).div(10 ** 18)
+                        )} dystopia </Typography>
+                    <Typography variant="p">{stakingRewardStaked !== "undefined" &&  formatCurrency(
+                          BigNumber(stakingRewardStaked?.topiaEarning).div(10 ** 18)
+                        )} vetopia</Typography>
                   </Grid>
                   <Grid item xs={6} lg={1.5}>
                     <Button className={style.approveBtn} onClick={openModel}>Manage</Button>
@@ -558,7 +575,7 @@ topiaEarning: "0"
   
                   <Tabs value={modelTabs} onChange={handleChangeModeltab} className={style.tabs}>
                     <Tab label="Stake" {...a11yProps(0, "model")} className={style.tab} />
-                    <Tab label="Withdraw" {...a11yProps(1, "model")} className={style.tab} />
+                    <Tab label="Withdraw" {...a11yProps(1, "model")} className={style.tab}  />
                   </Tabs>
   
                 </Box>
@@ -570,17 +587,17 @@ topiaEarning: "0"
                     <Box className={style.tabPannelrow3Left}>
                       <Box className={style.tabPannelrow3LeftInner}>
                         <Box className={style.tabinputFields}>
-                          <Input placeholder='Enter Amount' className={style.AmountInput} />
+                          <Input placeholder='Enter Amount' className={style.AmountInput} value={depositInputveTopia} onChange={onInputDepositStakeVtopia}/>
                           <Button className={style.buttontop}>Max</Button>
                         </Box>
                       </Box>
                     </Box>
                   </Box>
                   <Box className={`${style.modelButtons}`} style={{display: "flex", flexFlow: "row wrap", marginLeft: "0px !important", marginTop: "20px"}}>
-                    <Button className={style.approveBtn} style={{ marginRight: '10px' }}>
+                    {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }}>
                       Approve
-                    </Button>
-                    <Button className={style.approveBtn} style={{background: "rgb(2, 119, 250)", color: "#fff"}}>
+                    </Button> */}
+                    <Button className={style.approveBtn} style={{background: "rgb(2, 119, 250)", color: "#fff"}} onClick={()=>{onDepositVeTopia()}} >
                       Convert tokens
                     </Button>
                   </Box>
@@ -594,7 +611,7 @@ topiaEarning: "0"
                         <Box className={style.marginTop}>
                           <Box className={style.tabPannelrow3LeftInner}>
                             <Box className={style.tabinputFields}>
-                              <Input placeholder='Enter Amount' className={style.AmountInput} />
+                              <Input placeholder='Enter Amount' className={style.AmountInput} value={depositInputveTopia} onChange={onInputDepositStakeVtopia}/>
                               <Button className={style.buttontop}>Max</Button>
                             </Box>
                           </Box>
@@ -603,7 +620,7 @@ topiaEarning: "0"
                     </Box>
                   </Box>
                   <Box className={`${style.modelButtons}`} style={{display: "flex", flexFlow: "row wrap", marginLeft: "0px !important", marginTop: "20px"}}>
-                    <Button className={style.approveBtn} style={{background: "rgb(2, 119, 250)", color: "#fff"}}>
+                    <Button className={style.approveBtn} style={{background: "rgb(2, 119, 250)", color: "#fff"}}  onClick={()=>{onWithdrawVeTopia()}} >
                       Withdraw
                     </Button>
                   </Box>
