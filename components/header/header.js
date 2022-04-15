@@ -361,6 +361,7 @@ const Header = () => {
                 aria-controls="simple-menu"
                 aria-haspopup="true"
                 onClick={handleClick}
+                style={{fontWeight: "bold", color: "white !important"}}
               >
                 {account && account.address && (
                   <div

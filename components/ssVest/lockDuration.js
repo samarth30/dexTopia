@@ -124,9 +124,7 @@ export default function ffLockDuration({ nft, updateLockDuration }) {
               disabled={ lockLoading }
               inputProps={{
                 min: min,
-                max: moment().add(1460, 'days').format('YYYY-MM-DD')
-              }}
-              inputProps={{
+                max: moment().add(1460, 'days').format('YYYY-MM-DD'),
                 className: classes.largeInput,
                 shrink: true,
               }}
