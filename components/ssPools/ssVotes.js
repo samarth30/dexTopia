@@ -60,6 +60,7 @@ export default function ssPools() {
     const as = stores.stableSwapStore.getStore('pairs');
 
     const filteredAssets = as
+    console.log(filteredAssets,"hellllll")
     setGauges(filteredAssets)
 
     const poolRewards = stores.dispatcher.dispatch({ type: ACTIONS.POOLREWARDS, content: { filteredAssets } })
@@ -316,7 +317,7 @@ export default function ssPools() {
                   return false
 
                 })}
-                setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked} openModal={openModel}
+                setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked}
               />
 
               <TablePagination
@@ -334,74 +335,7 @@ export default function ssPools() {
         </Box>
       </Box>
     </Container>
-    {
-        open &&
-        <Mymodel text="Manage vetopia" open={open} handleClose={handleClose}>
-
-          <Box className={style.bottomContainerLeftBottom}>
-            <Box className={style.bottomContainerpannelTop}>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
-
-                <Tabs value={modelTabs} onChange={handleChangeModeltab} className={style.tabs}>
-                  <Tab label="Stake" {...a11yProps(0, "model")} className={style.tab} />
-                  <Tab label="Withdraw" {...a11yProps(1, "model")} className={style.tab} />
-                </Tabs>
-
-              </Box>
-            </Box>
-
-            <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={modelTabs} index={0}>
-              <Box className={style.tabPannel1}>
-                <Box className={style.tabPannelrow3}>
-                  <Box className={style.tabPannelrow3Left}>
-                    <Box className={style.tabPannelrow3LeftInner}>
-                      <Box className={style.tabinputFields}>
-                        <Input placeholder='Enter Amount' className={style.AmountInput} />
-                        <Button className={style.buttontop}>Max</Button>
-                      </Box>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box className={`${style.tabPannelrow3Right} ${style.modelButtons}`}>
-                  <Button className={style.approveBtn} style={{ marginRight: '10px' }}>
-                    Approve
-                  </Button>
-                  <Button className={style.approveBtn}>
-                    Convert tokens
-                  </Button>
-                </Box>
-              </Box>
-            </TabPanel>
-            <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={modelTabs} index={1}>
-              <Box className={`${style.tabPannel1} ${style.tabPannel1Modell}`}>
-                <Box className={style.tabPannelrow3}>
-                  <Box className={style.tabPannelrow3Left}>
-                    <Box className={style.tabPannelrow3LeftInner}>
-                      <Box className={style.marginTop}>
-                        <Box className={style.tabPannelrow3LeftInner}>
-                          <Box className={style.tabinputFields}>
-                            <Input placeholder='Enter Amount' className={style.AmountInput} />
-                            <Button className={style.buttontop}>Max</Button>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box className={`${style.tabPannelrow3Right} ${style.modelButtons}`}>
-                  <Button className={style.approveBtn}>
-                    Withdraw
-                  </Button>
-                </Box>
-              </Box>
-            </TabPanel>
-          </Box>
-
-          <Typography id="modal-modal-description" style={{ textAlign: 'center', borderTop: '1px solid rgb(2, 119, 250)', paddingTop: '10px' }} sx={{ mt: 2 }}>
-            Please Approve the contract
-          </Typography>
-        </Mymodel>
-      }
+    
     </>
   );
 }

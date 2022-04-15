@@ -478,7 +478,7 @@ topiaEarning: "0"
                         </Box>
                         <Box className={style.tabPannelrow4}>
                           <Typography variant='p' className={style.balancep}>
-                            Converting 0 vetopia Tokens From the selected vetopia NFT to 0 SOLIDDsex
+                            Converting 0 vetopia Tokens From the selected vetopia NFT to 0 Gasly
                           </Typography>
                         </Box>
                       </Box>
