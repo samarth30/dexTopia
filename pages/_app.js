@@ -102,12 +102,13 @@ export default function MyApp({ Component, pageProps }) {
           <CssBaseline/>
           {validateConfigured() && (
             <>
+            <div className="jss7">
             <Layout>
-            <div className="jss7"></div>
             <div className="jss8">
               <Component {...pageProps} changeTheme={changeTheme}/>
             </div>
             </Layout>
+            </div>
             </>
           )}
           {!validateConfigured() && <Configure {...pageProps} />}

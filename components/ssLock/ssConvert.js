@@ -93,7 +93,7 @@ topiaEarning: "0"
       type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA,
       content: {},
     });
-    const tockenLockerData = stores.stableSwapStore.getStore("tockenLockerData");
+    const tockenLockerData = stores.stableSwapStore.getStore("TockenLockerDatas");
     console.log(tockenLockerData)
     settockenLockerDataRedux(tockenLockerData)
     
