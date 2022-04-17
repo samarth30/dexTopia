@@ -99,7 +99,7 @@ export default function CustomBox({text,amount, col, tableSize, rows, isPeginati
             </Box>
 
             <Box className={boxStyle.buttonDiv}>
-                <Button variant="contained" disableElevation>
+                <Button variant="contained" disableElevation style={{background: "#842fb9 none repeat scroll 0% 0%", border: "1px solid #842fb9"}}>
                     Disable elevation
                 </Button>
             </Box>
