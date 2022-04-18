@@ -4,6 +4,7 @@ import style from './convert.module.css';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 import homeStyle from './home.module.css';
 import AmountBox from "../../components/amountBox/amountBox";
@@ -14,7 +15,7 @@ import AmountBox from "../../components/amountBox/amountBox";
 // import monkerdrinkLogo from '../../public/images/monkerdrink.svg';
 // import rightArrowLogo from '../../public/images/rightArrow.svg';
 
-import { Link } from '@mui/material';
+import { Card, CardContent, Link } from '@mui/material';
 
 export default function Home() {
   let arr = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -53,7 +54,7 @@ export default function Home() {
           </Box>
 
           {/* company */}
-          <Box className={`${homeStyle.section2} ${homeStyle.section3}`}>
+          {/* <Box className={`${homeStyle.section2} ${homeStyle.section3}`}>
             <Box className={homeStyle.section3Inner}>
               <Box className={homeStyle.section3Left}>
                 <p className={homeStyle.para1}>topia PARTNERS</p>
@@ -77,7 +78,6 @@ export default function Home() {
                         <Grid key={i} item xs={5} md={5} className={homeStyle.boxCompany}>
                           <Link className={`${homeStyle.boxLink}`}>
                             <Box className={homeStyle.boxLinkImage}>
-                              {/* <img src={boxImageLogo} alt="boxImageLogo" srcset="" /> */}
                             </Box>
                           </Link>
                         </Grid>
@@ -87,6 +87,70 @@ export default function Home() {
                   </Grid>
                 </Box>
               </Box>
+            </Box>
+          </Box> */}
+
+          <Box>
+            <Typography variant='h1' color="common.white" className={homeStyle.partnerHeading} align='center'>
+               Topia Partners
+            </Typography>
+            <Box display='flex' flexWrap="wrap" justifyContent='center' style={{marginTop: "3rem"}}>
+            <Card sx={{ width: 200 }} className={homeStyle.partnerCard}>
+              <CardContent>
+                <Typography variant='h5' color='common.white' align='center'>
+                  Sm chain
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card sx={{ width: 200 }} className={homeStyle.partnerCard}>
+              <CardContent>
+                <Typography variant='h5' color='common.white' align='center'>
+                  Tezos
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card sx={{ width: 200 }} className={homeStyle.partnerCard}>
+              <CardContent>
+                <Typography variant='h5' color='common.white' align='center'>
+                  TDefi
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card sx={{ width: 200 }} className={homeStyle.partnerCard}>
+              <CardContent>
+                <Typography variant='h5' color='common.white' align='center'>
+                  Polygon
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card sx={{ width: 200 }} className={homeStyle.partnerCard}>
+              <CardContent>
+                <Typography variant='h5' color='common.white' align='center'>
+                  Grinas
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card sx={{ width: 200 }} className={homeStyle.partnerCard}>
+              <CardContent>
+                <Typography variant='h5' color='common.white' align='center'>
+                  SL2
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card sx={{ width: 200 }} className={homeStyle.partnerCard}>
+              <CardContent>
+                <Typography variant='h5' color='common.white' align='center'>
+                  Deca4
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card sx={{ width: 200 }} className={homeStyle.partnerCard}>
+              <CardContent>
+                <Typography variant='h5' color='common.white' align='center'>
+                  Bullish
+                </Typography>
+              </CardContent>
+            </Card>
             </Box>
           </Box>
 
