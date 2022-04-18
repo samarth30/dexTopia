@@ -192,6 +192,20 @@
   transition: all 0.5s ease-in-out !important;
 }
 
+.featureHeading {
+  font-family: "Titillium Web", sans-serif !important;
+}
+
+.featureCard {
+  margin: 2rem 2rem;
+  background: #000 !important;
+  box-shadow:  9px 9px 7px #e300ff, -9px -9px 7px #39d0d8 !important;
+  border-bottom: #e300ff solid 2px !important;
+  border-right: #e300ff solid 2px !important;
+  border-left: #39d0d8 solid 2px !important;
+  border-top: #39d0d8 solid 2px !important;
+}
+
 .section4 {
   margin-top: 160px;
   margin-bottom: 160px;

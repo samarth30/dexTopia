@@ -154,6 +154,34 @@ export default function Home() {
             </Box>
           </Box>
 
+          <Box className={homeStyle.featureBox} style={{marginTop: "3rem"}}>
+            <Typography variant='h1' color="common.white" className={homeStyle.featureHeading} align='center'>
+               Topia Features
+            </Typography>
+          <Box display='flex' justifyContent='center' style={{marginTop: "3rem"}} >
+            <Card variant='outlined' className={homeStyle.featureCard}>
+              <CardContent>
+                <Typography variant='h5' color='common.white' align='center'>
+                    LIQUIDITY PROVIDERS
+                </Typography>
+                <Typography variant='h6' color='common.white' align='center'>
+                    Get a bigger boost and earn <br /> higher yield on your liquidity.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card variant='outlined' className={homeStyle.featureCard}>
+              <CardContent>
+                <Typography variant='h5' color='common.white' align='center'>
+                    LIQUIDITY PROVIDERS
+                </Typography>
+                <Typography variant='h6' color='common.white' align='center'>
+                    Get a bigger boost and earn <br /> higher yield on your liquidity.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Box>
+          </Box>
+
           <Box className={homeStyle.section4}>
             <Box className={homeStyle.innerSection4}>
               <Box className={homeStyle.innerSection4Partetions}>
