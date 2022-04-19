@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import homeStyle from './home.module.css';
-import AmountBox from "../../components/amountBox/amountBox";
+import AmountBox from "./amountBox/amountBox";
 
 import { useRouter } from 'next/router'
 // import guthubLogo from '../../public/images/github.svg';
@@ -47,12 +47,10 @@ export default function Home() {
             </Box>
           </Box>
 
-          <Box className={homeStyle.section2}>
-            <Grid container style={{ marginTop: '50px' }} >
-              <AmountBox text1="dextopia TVL" text2="$535.95m" text3="63% dominance" />
-              <AmountBox text1="Total vetopia locked on dextopia" text2="13.79m" text3="31.7% of total locked" />
-              <AmountBox text1="Total topia locked" text2="5.08m" text3="74% of total supply locked" />
-            </Grid>
+          <Box className={homeStyle.section2} display='flex' flexWrap='wrap' container >
+            <AmountBox text1="dextopia TVL" text2="$535.95m" text3="63% dominance" />
+            <AmountBox text1="Total vetopia locked on dextopia" text2="13.79m" text3="31.7% of total locked" />
+            <AmountBox text1="Total topia locked" text2="5.08m" text3="74% of total supply locked" />
           </Box>
 
           {/* company */}
@@ -160,7 +158,7 @@ export default function Home() {
             <Typography variant='h1' color="common.white" className={homeStyle.featureHeading} align='center'>
                Topia Features
             </Typography>
-          <Box display='flex' justifyContent='center' style={{marginTop: "3rem"}} >
+          <Box display='flex' flexWrap='wrap' justifyContent='center' style={{marginTop: "3rem"}} >
             <Card variant='outlined' className={homeStyle.featureCard}>
               <CardContent>
                 <Typography className={homeStyle.featureCardHeading} variant='h5' align='center'>

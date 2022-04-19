@@ -173,6 +173,11 @@
   width: inherit;
 }
 
+.amountBox {
+  width: 400px !important;
+  margin: 2rem 0.5rem !important;
+}
+
 .partnerBox {
   margin-top: 15rem !important;
 }
