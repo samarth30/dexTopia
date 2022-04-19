@@ -26,11 +26,12 @@
   color: rgb(255, 255, 255);
   transition: all 0.2s ease 0s;
   backface-visibility: hidden;
-  background: linear-gradient(
+  /* background: linear-gradient(
     91.59deg,
     rgb(2, 119, 250) -2.14%,
     rgb(255, 78, 147) 101.38%
-  );
+  ); */
+  background: #842fb9;
   text-transform: none;
   width: 320px;
   font-size: 22px;
@@ -172,6 +173,10 @@
   width: inherit;
 }
 
+.partnerBox {
+  margin-top: 15rem !important;
+}
+
 .partnerHeading {
   font-family: "Titillium Web", sans-serif !important;
 }
@@ -192,11 +197,16 @@
   transition: all 0.5s ease-in-out !important;
 }
 
+.featureBox {
+  margin-top: 15rem !important;
+}
+
 .featureHeading {
   font-family: "Titillium Web", sans-serif !important;
 }
 
 .featureCard {
+  padding: 1rem 1.2rem;
   margin: 2rem 2rem;
   background: #000 !important;
   box-shadow:  9px 9px 7px #e300ff, -9px -9px 7px #39d0d8 !important;
@@ -204,6 +214,12 @@
   border-right: #e300ff solid 2px !important;
   border-left: #39d0d8 solid 2px !important;
   border-top: #39d0d8 solid 2px !important;
+}
+
+.featureCardHeading {
+  color: grey !important;
+  margin-bottom: 0.5rem !important;
+  font-family: "Titillium Web", sans-serif !important;
 }
 
 .section4 {

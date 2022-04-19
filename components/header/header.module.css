@@ -121,11 +121,12 @@
   color: rgb(255, 255, 255);
   transition: all 0.2s ease 0s;
   backface-visibility: hidden;
-  background: linear-gradient(
+  /* background: linear-gradient(
     91.59deg,
     rgb(2, 119, 250) -2.14%,
     rgb(255, 78, 147) 101.38%
-  );
+  ); */
+  background: #842fb9 !important;
   text-transform: none;
 }
 

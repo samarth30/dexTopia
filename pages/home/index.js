@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 
 import homeStyle from './home.module.css';
 import AmountBox from "../../components/amountBox/amountBox";
+
+import { useRouter } from 'next/router'
 // import guthubLogo from '../../public/images/github.svg';
 
 // import boxImageLogo from '../../public/images/boxImage.svg';
@@ -18,6 +20,7 @@ import AmountBox from "../../components/amountBox/amountBox";
 import { Card, CardContent, Link } from '@mui/material';
 
 export default function Home() {
+  const router = useRouter()
   let arr = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
       <Container id="main" className={style.mainContainer}>
@@ -34,13 +37,12 @@ export default function Home() {
                   </p>
                 </Box>
                 <Box className={homeStyle.right}>
-                  {/* <img src={monkerdrinkLogo} alt="monkerrewardLogo" /> */}
 
                 </Box>
 
               </Box>
               <Box className={homeStyle.section1Col2}>
-                <button className={homeStyle.btn}>Stake liquidity</button>
+                <button className={homeStyle.btn} onClick={() => {router.push("/pools")}}>Stake liquidity</button>
               </Box>
             </Box>
           </Box>
@@ -90,7 +92,7 @@ export default function Home() {
             </Box>
           </Box> */}
 
-          <Box>
+          <Box className={homeStyle.partnerBox}>
             <Typography variant='h1' color="common.white" className={homeStyle.partnerHeading} align='center'>
                Topia Partners
             </Typography>
@@ -161,7 +163,7 @@ export default function Home() {
           <Box display='flex' justifyContent='center' style={{marginTop: "3rem"}} >
             <Card variant='outlined' className={homeStyle.featureCard}>
               <CardContent>
-                <Typography variant='h5' color='common.white' align='center'>
+                <Typography className={homeStyle.featureCardHeading} variant='h5' align='center'>
                     LIQUIDITY PROVIDERS
                 </Typography>
                 <Typography variant='h6' color='common.white' align='center'>
@@ -171,7 +173,17 @@ export default function Home() {
             </Card>
             <Card variant='outlined' className={homeStyle.featureCard}>
               <CardContent>
-                <Typography variant='h5' color='common.white' align='center'>
+                <Typography className={homeStyle.featureCardHeading} variant='h5' align='center'>
+                    LIQUIDITY PROVIDERS
+                </Typography>
+                <Typography variant='h6' color='common.white' align='center'>
+                    Get a bigger boost and earn <br /> higher yield on your liquidity.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card variant='outlined' className={homeStyle.featureCard}>
+              <CardContent>
+                <Typography className={homeStyle.featureCardHeading} variant='h5' align='center'>
                     LIQUIDITY PROVIDERS
                 </Typography>
                 <Typography variant='h6' color='common.white' align='center'>
@@ -182,7 +194,7 @@ export default function Home() {
           </Box>
           </Box>
 
-          <Box className={homeStyle.section4}>
+          {/* <Box className={homeStyle.section4}>
             <Box className={homeStyle.innerSection4}>
               <Box className={homeStyle.innerSection4Partetions}>
                 <Box className={homeStyle.innerSection4Left}>
@@ -194,7 +206,6 @@ export default function Home() {
                   </p>
                 </Box>
                 <Box className={homeStyle.innerSection4Right}>
-                  {/* <img src={monkerrewardLogo} alt="monkerrewardLogo" /> */}
                 </Box>
 
               </Box>
@@ -206,7 +217,6 @@ export default function Home() {
               <Box className={homeStyle.innerSection4Partetions}>
                 <Box className={homeStyle.innerSection4Right}>
                   <Box className={homeStyle.innerSection4Right}>
-                    {/* <img src={monkerrewardLogo} alt="monkerrewardLogo" /> */}
                   </Box>
 
                 </Box>
@@ -221,7 +231,7 @@ export default function Home() {
                 </Box>
               </Box>
             </Box>
-          </Box>
+          </Box> */}
 
           <Box className={homeStyle.section5}>
             <Box className={homeStyle.section5Inner}>
