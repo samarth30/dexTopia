@@ -11,60 +11,39 @@ import Link from '@mui/material/Link';
 
 export default function Footer() {
   return (
-    <footer className={style.footerMain}>
-      <Box className={style.footerInner}>
-        <Container className={style.footerDataContainer}>
-
-          <Grid item lg={1.75} className={style.footer2}>
-            <Box className={style.footer2Inner}>
-              {/* <img src={greenCircle} alt="greenCircle" srcSet="" /> */}
-              <Typography className={style.footer2Innerp}>
-                <Link className={style.footer2InnerLink}>
-                  &nbsp; 33131406
-                </Link>
-              </Typography>
-            </Box>
-
-          </Grid>
-
-          <Grid item md={3} lg={1}></Grid>
-
-          <Grid item xs={5} md={2.4} lg={4} className={style.footer4}>
-            <Box className={style.footer4Inner}>
-              <Typography className={style.footer4Innerp1}>
-                &nbsp; dextopia Voting Power &nbsp;
-              </Typography>
-              <Typography className={style.footer4Innerp2}>
-                <Link className={style.footer4Innerp2Link}>
-                  13,789,805.5 vetopia
-                </Link>
-              </Typography>
-
-            </Box>
-          </Grid>
-
-          <Grid item xs={3} md={1.25} lg={2.5} className={style.footer5}>
-            <Box className={style.footer5Inner}>
-              <Typography className={style.footer5Innerp1}>topia Price &nbsp; </Typography>
-              <Typography className={style.footer5Innerp2}>
-                <Link className={style.footer5Innerp2Link}>
-                  $4.53
-                </Link>
-              </Typography>
-
-            </Box>
-          </Grid>
-
-          <Grid item xs={3} md={1.25} lg={2.5} className={style.footer6}>
-            <Box className={style.footer6Inner}>
-              <Typography className={style.footer6Innerp1}>topia Price &nbsp; </Typography>
-              <Typography className={style.footer6Innerp2}>
-                  $4.53
-              </Typography>
-            </Box>
-          </Grid>
-        </Container>
-      </Box>
+    <footer className={style.footerContainer}>
+        <div className={style.footerBoxDiv}>
+          <div className={style.footerBox}>
+              <div className={style.column1}>
+                  <p className={style.footerLinksHeading}>Links</p>
+                  <p className={style.footerLinksBody}>Partners</p>
+                  <p className={style.footerLinksBody}>Roadmap</p>
+                  <p className={style.footerLinksBody}>Team</p>
+              </div>
+              <div className={style.column2}>
+                  <p className={style.footerLinksHeading}>Links</p>
+                  <p className={style.footerLinksBody}>Partners</p>
+                  <p className={style.footerLinksBody}>Roadmap</p>
+                  <p className={style.footerLinksBody}>Team</p>
+              </div>
+              <div className={style.column3}>
+                  <p className={style.footerLinksHeading}>Title</p>
+                  <p className={style.footerLinksBody}>Terms and Conditions</p>
+                  <p className={style.footerLinksBody}>Privacy Policy</p>
+              </div>
+              <div className={style.column4}>
+                  <div className={style.footerImgDiv}>
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnOIfM-pc0T3Sm3TugKXKLSj01GGcmO2cygwNMzO3pY-olZ9CXZcg2sigJ2rahEy5Rx7M&usqp=CAU" alt="footer logo" />
+                  </div>
+              </div>
+          </div>
+          <hr />
+          <div className={style.belowHrBox}>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus temporibus quia dolores ab blanditiis alias, ducimus et facere mollitia incidunt ea ratione architecto quo, esse laudantium ipsa fuga voluptates omnis!
+            </p>
+          </div>
+        </div>
     </footer>
   )
 }

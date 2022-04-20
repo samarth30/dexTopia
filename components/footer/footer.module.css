@@ -1,260 +1,88 @@
-.footerMain {
+.footerContainer {
     width: 100%;
-    bottom: 0;
     z-index: 5;
-    position: fixed;
-    background: #20272a;
-  }
+    background: linear-gradient(90deg, rgba(20,16,64,1) 0%, rgba(44,32,98,1) 35%, rgba(60,46,121,1) 65%, rgba(103,51,186,1) 100%);
+    padding-bottom: 3rem;
+}
+
+.footerBoxDiv {
+  width: 50%;
+  margin: 0 auto;
+}
   
-  .footerInner {
-    color: #ffffff;
+.footerBox {
     display: flex;
-    padding: 8px;
-    align-items: center;
     justify-content: center;
+    font-size: 1.2rem;
+}
+
+.footerLinksHeading {
+  color: #fff;
+  font-weight: 800;
+}
+
+.footerLinksBody {
+  color: #808080;
+}
+
+.column1, .column2, .column3, .column4 {
+    margin: 0 2rem;
+    padding: 1rem 0;
+    font-family: "Titillium Web", sans-serif !important;
+}
+
+.footerImgDiv img {
+    width: 50%
+}
+
+.belowHrBox {
+  padding: 0 3rem;
+}
+
+.belowHrBox p {
+  color: #808080;
+}
+
+@media screen and (max-width: 1650px) {
+  .footerBoxDiv {
+    width: 70%;
   }
-  
-  .footerDataContainer {
-    box-sizing: border-box;
-    display: flex !important;
-    flex-flow: row wrap !important;
-    max-width: 1500opx !important;
+}
+
+@media screen and (max-width: 1200px) {
+  .footerBoxDiv {
+    width: 90%;
   }
-  
-  .footer1 {
-    box-sizing: border-box;
-    margin: 0px;
-    flex-direction: row;
+  .belowHrBox {
+    padding: 0 5rem;
   }
-  
-  .footer2 {
-    box-sizing: border-box;
-    margin: 0px;
-    flex-direction: row;
+}
+
+@media screen and (max-width: 750px) {
+  .footerBoxDiv {
+    width: 100%;
   }
-  
-  .footer2Inner {
-    display: flex;
-    -moz-box-align: center;
-    align-items: center;
-    flex-direction: row;
+  .footerBox {
+    font-size: 1rem;
   }
-  
-  .footer2Innerp {
-    margin: 0px;
-    font-size: 18px;
-    font-family: "Titillium Web", sans-serif;
-    line-height: 1.5;
-    font-weight: 600;
+  .belowHrBox {
+    padding: 0 3rem;
   }
-  
-  .footer2InnerLink {
-    margin: 0px;
-    text-decoration: none;
-    transition: all 0.2s ease 0s;
-    color: rgb(255, 255, 255);
+  .column1, .column2, .column3, .column4 {
+    margin: 0 1rem;
+    padding: 1rem 0;
   }
-  
-  .footer4 {
-    box-sizing: border-box;
-    margin: 0px;
-    flex-direction: row;
-    flex-basis: 41.6667%;
-    -moz-box-flex: 0;
-    flex-grow: 0;
-    max-width: 41.6667%;
+}
+
+@media screen and (max-width: 450px) {
+  .footerBox {
+    font-size: 0.8rem;
   }
-  
-  .footer4Inner {
-    display: flex;
-    -moz-box-align: center;
-    align-items: center;
+  .column1, .column2, .column3, .column4 {
+    margin: 0 0.5rem;
+    padding: 1rem 0;
   }
-  
-  .footer4Innerp1 {
-    margin: 0px;
-    font-weight: normal;
-    font-size: 18px;
-    font-family: "Titillium Web", sans-serif;
-    line-height: 1.5;
-    opacity: 0.8;
+  .footerImgDiv img {
+    width: 40%
   }
-  
-  .footer4Innerp2 {
-    margin: 0px;
-    font-size: 18px;
-    font-family: "Titillium Web", sans-serif;
-    line-height: 1.5;
-    font-weight: 600;
-  }
-  
-  .footer4Innerp2Link {
-    margin: 0px;
-    text-decoration: none;
-    transition: all 0.2s ease 0s;
-    color: rgb(255, 255, 255);
-  }
-  
-  .footer5 {
-    box-sizing: border-box;
-    margin: 0px;
-    flex-direction: row;
-    flex-basis: 25%;
-    -moz-box-flex: 0;
-    flex-grow: 0;
-    max-width: 25%;
-  }
-  
-  .footer5Inner {
-    display: flex;
-    flex-direction: row !important;
-    -moz-box-align: center;
-    align-items: center;
-  }
-  
-  .footer5Innerp1 {
-    margin: 0px;
-    font-weight: normal;
-    font-size: 18px;
-    font-family: "Titillium Web", sans-serif;
-    line-height: 1.5;
-    opacity: 0.8;
-  }
-  
-  .footer5Innerp2 {
-    margin: 0px;
-    font-size: 18px;
-    font-family: "Titillium Web", sans-serif;
-    line-height: 1.5;
-    font-weight: 600;
-  }
-  
-  .footer5Innerp2Link {
-    margin: 0px;
-    text-decoration: none;
-    transition: all 0.2s ease 0s;
-    color: rgb(255, 255, 255);
-  }
-  
-  .footer6 {
-    box-sizing: border-box;
-    margin: 0px;
-    flex-direction: row;
-    flex-basis: 33.3333%;
-    -moz-box-flex: 0;
-    flex-grow: 0;
-    max-width: 33.3333%;
-  }
-  
-  .footer6Inner {
-      display: flex;
-      -webkit-box-align: center;
-      align-items: center;
-  }
-  
-  /* // media query */
-  
-  @media only screen and(min-width: 1536px) {
-    .footer4 {
-      flex-basis: 33.3333%;
-      max-width: 33.3333%;
-    }
-    .footer5 {
-      flex-basis: 20.8333%;
-      -moz-box-flex: 0;
-      flex-grow: 0;
-      max-width: 20.8333%;
-    }
-    .footer6 {
-      flex-basis: 16.6667%;
-      -moz-box-flex: 0;
-      flex-grow: 0;
-  
-      max-width: 16.6667%;
-    }
-  }
-  @media only screen and(min-width: 1200px) {
-    .footer4 {
-      flex-basis: 33.3333%;
-      max-width: 33.3333%;
-    }
-    .footer5 {
-      flex-basis: 20.8333%;
-      max-width: 20.8333%;
-    }
-    .footer6 {
-      flex-basis: 16.6667%;
-      max-width: 16.6667%;
-    }
-  }
-  @media only screen and (min-width: 900px) {
-    .footer4 {
-      flex-basis: 20%;
-      -webkit-box-flex: 0;
-      flex-grow: 0;
-      max-width: 20%;
-    }
-    .footerDataContainer > .MuiGrid-item {
-      padding-left: 24px;
-    }
-    .footer5 {
-      flex-basis: 10.4167%;
-      max-width: 10.4167%;
-    }
-  
-    .footer6 {
-      flex-basis: 10.4167%;
-      max-width: 10.4167%;
-    }
-  }
-  
-  @media only screen and (min-width: 600px) {
-    .footer4 {
-      flex-basis: 41.6667%;
-      max-width: 41.6667%;
-    }
-    .footerDataContainer > .MuiGrid-item {
-      padding-left: 16px;
-    }
-    .footerDataContainer {
-      -moz-box-align: unset;
-      align-items: unset;
-    }
-    .footerInner {
-      align-items: unset;
-      -moz-box-align: unset;
-    }
-  
-    .footer5 {
-      flex-basis: 25%;
-      max-width: 25%;
-    }
-    .footer5Inner {
-      flex-direction: row;
-    }
-  
-    .footer6 {
-      flex-basis: 33.3333%;
-      max-width: 24.3333%;
-    }
-  }
-  @media only screen and (min-width: 0px) {
-    .footerDataContainer {
-      -moz-box-align: center;
-      align-items: center;
-    }
-    .footerDataContainer > .MuiGrid-item {
-      padding-left: 8px;
-    }
-    .footer5Inner {
-      flex-direction: column;
-    }
-  }
-  
-  @media only screen and (min-width: 900px) {
-    .footerDataContainer {
-      width: calc(100% + 24px);
-      margin-left: -24px;
-    }
-  }
-  
+}
