@@ -57,6 +57,7 @@ topiaEarning: "0"
 
   const [open, setOpen] = useState(false);
   const [selectDropdown, setSelectDropdown] = useState("")
+  const [depositInput, setDepositInput] = useState("0");
 
   useEffect(() => {
     const nfts = stores.stableSwapStore.getStore('vestNFTs');
@@ -149,12 +150,6 @@ topiaEarning: "0"
     }
 
     forceUpdate();
-  };
-
-  const [depositInput, setDepositInput] = useState("0");
-
-  const onInputField = async (e) => {
-    setDepositInput(e.target.value);
   };
 
   const onDeposit = async () => {
@@ -412,8 +407,7 @@ topiaEarning: "0"
                       <Box className={style.tabPannelrow3Left}>
                         <Box className={style.tabPannelrow3LeftInner}>
                           <Box className={style.tabinputFields}>
-
-                            <Input placeholder='Enter Amount' className={style.AmountInput} value={depositInput} onChange={onInputField} />
+                            <Input autoFocus="autoFocus" placeholder='Enter Amount' className={style.AmountInput} onChange={(e) => {setDepositInput(e.target.value)}} value={depositInput} />
                             <Button className={style.buttontop}>Max</Button>
                           </Box>
 
