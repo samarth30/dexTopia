@@ -59,7 +59,9 @@ export default function ssPools() {
     setVeToken(stores.stableSwapStore.getStore('veToken'))
     const as = stores.stableSwapStore.getStore('pairs');
 
-    const filteredAssets = as
+    const filteredAssets = as.filter((asset) => {
+      return asset.gauge && asset.gauge.address
+    })
     console.log(filteredAssets,"hellllll")
     setGauges(filteredAssets)
 
