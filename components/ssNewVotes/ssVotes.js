@@ -38,6 +38,86 @@ const Item = styled(Paper)(({ theme }) => ({
     color: '#fff',
 }));
 
+function descendingComparator(a, b, orderBy) {
+    if (!a || !b) {
+      return 0;
+    }
+  
+    switch (orderBy) {
+      case 'balance':
+  
+        if (BigNumber(b?.gauge?.balance).lt(a?.gauge?.balance)) {
+          return -1;
+        }
+        if (BigNumber(b?.gauge?.balance).gt(a?.gauge?.balance)) {
+          return 1;
+        }
+        return 0;
+  
+      case 'liquidity':
+  
+        let reserveA = BigNumber(a?.reserve0).plus(a?.reserve1).toNumber()
+        let reserveB = BigNumber(b?.reserve0).plus(b?.reserve1).toNumber()
+  
+        if (BigNumber(reserveB).lt(reserveA)) {
+          return -1;
+        }
+        if (BigNumber(reserveB).gt(reserveA)) {
+          return 1;
+        }
+        return 0;
+  
+      case 'totalVotes':
+  
+        if (BigNumber(b?.gauge?.weightPercent).lt(a?.gauge?.weightPercent)) {
+          return -1;
+        }
+        if (BigNumber(b?.gauge?.weightPercent).gt(a?.gauge?.weightPercent)) {
+          return 1;
+        }
+        return 0;
+  
+      case 'apy':
+  
+        if (BigNumber(b?.gauge?.bribes.length).lt(a?.gauge?.bribes.length)) {
+          return -1;
+        }
+        if (BigNumber(b?.gauge?.bribes.length).gt(a?.gauge?.bribes.length)) {
+          return 1;
+        }
+        return 0;
+  
+      case 'myVotes':
+      case 'mvp':
+  
+        if (BigNumber(b?.gauge?.bribes.length).lt(a?.gauge?.bribes.length)) {
+          return -1;
+        }
+        if (BigNumber(b?.gauge?.bribes.length).gt(a?.gauge?.bribes.length)) {
+          return 1;
+        }
+        return 0;
+  
+      default:
+        return 0
+    }
+  
+  }
+  
+  function getComparator(order, orderBy) {
+    return order === 'desc' ? (a, b) => descendingComparator(a, b, orderBy) : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+  
+  function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
+  }
+
 export default function Vote() {
     const router = useRouter()
 
@@ -51,6 +131,13 @@ export default function Vote() {
     const [ token, setToken ] = useState(null)
     const [ vestNFTs, setVestNFTs ] = useState([])
     const [search, setSearch] = useState('');
+
+
+    const [order, setOrder] = useState('desc');
+    const [orderBy, setOrderBy] = useState('totalVotes');
+    const [sliderValues, setSliderValues] = useState(votes)
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [page, setPage] = useState(0);
 
     const ssUpdated = () => {
         setVeToken(stores.stableSwapStore.getStore('veToken'))
@@ -183,6 +270,51 @@ export default function Vote() {
           </div>
         )
       }
+    
+      useEffect(() => {
+        setSliderValues(votes)
+      }, [votes]);
+    
+      const onSliderChange = (event, value, asset) => {
+        let newSliderValues = [...sliderValues]
+    
+        newSliderValues = newSliderValues.map((val) => {
+          if(asset?.address === val.address) {
+            val.value = value
+          }
+          return val
+        })
+    
+        setParentSliderValues(newSliderValues)
+      }
+    
+      const handleRequestSort = (event, property) => {
+        const isAsc = orderBy === property && order === 'asc';
+        setOrder(isAsc ? 'desc' : 'asc');
+        setOrderBy(property);
+      };
+    
+      const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+      };
+    
+      const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+      };
+    
+      if (!gauges) {
+        return (
+          <div className={classes.root}>
+            <Skeleton variant="rect" width={'100%'} height={40} className={classes.skelly1} />
+            <Skeleton variant="rect" width={'100%'} height={70} className={classes.skelly} />
+            <Skeleton variant="rect" width={'100%'} height={70} className={classes.skelly} />
+            <Skeleton variant="rect" width={'100%'} height={70} className={classes.skelly} />
+            <Skeleton variant="rect" width={'100%'} height={70} className={classes.skelly} />
+            <Skeleton variant="rect" width={'100%'} height={70} className={classes.skelly} />
+          </div>
+        );
+      }
 
     return (
             <Container id="main" className={style.mainContainer}>
@@ -213,7 +345,12 @@ export default function Vote() {
                                         </Box>
                                         <Box className={voteStyle.right}>
                                             <Box className={voteStyle.inputBoxContainer}>
-                                                <Input placeholder="Search pools" className={voteStyle.inputBox}></Input>
+                                                <Input 
+                                                    value={search}  
+                                                    placeholder="Search pools" 
+                                                    className={voteStyle.inputBox}>
+                                                    onChange={onSearchChanged}
+                                                </Input>
                                                 {/* <img src={search} alt="search" className={voteStyle.searchIcon} srcSet="" /> */}
                                             </Box>
 
@@ -417,6 +554,29 @@ export default function Vote() {
                         </Grid>
                     </Box>
                 </Box>
+                <Paper elevation={10} className={ voteStyle.actionButtons }>
+                    <Grid container spacing={2}>
+                    <Grid item lg={6}>
+                        <div className={ voteStyle.infoSection }>
+                        <Typography>Voting Power Used: </Typography>
+                        <Typography className={ `${BigNumber(totalVotes).gt(100) ? voteStyle.errorText : voteStyle.helpText}` }>{ totalVotes } %</Typography>
+                        </div>
+                    </Grid>
+                    <Grid item lg={6}>
+                        <Button
+                        className={ voteStyle.buttonOverrideFixed }
+                        variant='contained'
+                        size='large'
+                        color='primary'
+                        disabled={ voteLoading || BigNumber(totalVotes).eq(0) || BigNumber(totalVotes).gt(100) }
+                        onClick={ onVote }
+                        >
+                        <Typography className={ voteStyle.actionButtonText }>{ voteLoading ? `Casting Votes` : `Cast Votes` }</Typography>
+                        { voteLoading && <CircularProgress size={10} className={ voteStyle.loadingCircle } /> }
+                        </Button>
+                    </Grid>
+                    </Grid>
+                </Paper>
             </Container>
 
     )
