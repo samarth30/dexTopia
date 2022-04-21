@@ -7,7 +7,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import style from './convert.module.css';
 import style1 from './ssVotes.module.css';
 import { formatCurrency } from '../../utils';
-import PoolsRow from '../poolsRow/poolsRow';
+import PoolsRow from './poolsRow';
 import Mymodel from "./Mymodel"
 
 import GaugesTable from './ssVotesTable.js'
@@ -54,7 +54,8 @@ export default function ssPools() {
     };
   }
 
-
+const [ssUpdateDone,setssUpdateDone] = useState(false);
+let ssupdateDone = false;
   const ssUpdated = () => {
     setVeToken(stores.stableSwapStore.getStore('veToken'))
     const as = stores.stableSwapStore.getStore('pairs');
@@ -62,8 +63,14 @@ export default function ssPools() {
     const filteredAssets = as.filter((asset) => {
       return asset.gauge && asset.gauge.address
     })
-    console.log(filteredAssets,"hellllll")
-    setGauges(filteredAssets)
+    if(filteredAssets.length > 0 && !ssupdateDone){
+      console.log('hell')
+      console.log(filteredAssets,"hellllll")
+      ssupdateDone = true;
+      setssUpdateDone(true);
+      setGauges(filteredAssets)
+    }
+ 
 
     const poolRewards = stores.dispatcher.dispatch({ type: ACTIONS.POOLREWARDS, content: { filteredAssets } })
 
@@ -301,6 +308,10 @@ export default function ssPools() {
                   </Container>
                 </Box>
               </Grid>
+{console.log(ssUpdateDone,"hell")}
+<div>
+{
+  gauges.length > 0 && ssUpdateDone && 
 
               <PoolsRow
                 gauges={gauges.filter((pair) => {
@@ -321,7 +332,8 @@ export default function ssPools() {
                 })}
                 setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked}
               />
-
+              }
+              </div>
               <TablePagination
                 component="div"
                 className={style1.pagination}
