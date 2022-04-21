@@ -327,6 +327,54 @@
     font-weight: 700;
 }
 
+/* previous ui  */
+.actionButtons {
+  padding: 10px 0;
+  min-width: 560px !important;
+  background: #11172a !important;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translatex(-50%);
+  border-radius: 12 !important;
+  border: 1px solid rgba(126, 153, 176, 0.2);
+  z-index: 20 !important;
+}
+
+.helpText {
+  margin-left: 6px !important;
+  font-size: 20px !important;
+  color: #52af77 !important;
+}
+
+.errorText {
+  margin-left: 6px !important;
+  font-size: 20px !important;
+  color: #da0052 !important;
+}
+
+.buttonOverrideFixed {
+  background: rgb(23, 52, 72) !important;
+  color: rgb(6, 211, 215) !important;
+  font-weight: 700 !important;
+  min-width: 200px !important;
+  max-height: 48px;
+}
+
+.buttonOverrideFixed:hover {
+  background: rgb(19, 44, 60) !important;
+}
+
+.actionButtonText {
+  font-size: 15px !important;
+  text-transform: capitalize !important;
+  font-weight: 700 !important;
+}
+
+
+.loadingCircle {
+  margin-left: 6px !important;
+}
 
 
 @media only screen and(min-width: 0px) {
