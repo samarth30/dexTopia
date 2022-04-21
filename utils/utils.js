@@ -8,10 +8,10 @@ import BigNumber from "bignumber.js";
 //   return window.navigator.language;
 // }
 
-export function formatCurrency(amount, decimals = 13) {
+export function formatCurrency(amount, decimals = 4) {
   if (!isNaN(amount)) {
 
-    if(BigNumber(amount).gt(0) && BigNumber(amount).lt(0.0000000000000001)) {
+    if(BigNumber(amount).gt(0) && BigNumber(amount).lt(0.001)) {
       return '< 0.01'
     }
 

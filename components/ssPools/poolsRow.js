@@ -463,6 +463,7 @@ export default function PoolsRow({
               <Box className={style.tabPannelrow3LeftInner}>
                 <Box className={style.tabinputFields}>
                   <Input
+                  autoFocus="autoFocus"
                     placeholder="Enter Amount"
                     className={style.AmountInput}
                     onChange={onInputField}
@@ -496,6 +497,7 @@ export default function PoolsRow({
                   <Box className={style.tabPannelrow3LeftInner}>
                     <Box className={style.tabinputFields}>
                       <Input
+                      autoFocus="autoFocus"
                         placeholder="Enter Amount"
                         className={style.AmountInput}
                         onChange={onInputField}

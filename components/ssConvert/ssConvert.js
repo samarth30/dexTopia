@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Mymodel from './Mymodel'
+import Mymodel from "./Mymodel";
 import {
   Paper,
   Typography,
@@ -16,7 +16,7 @@ import {
   Tabs,
   Input,
   InputLabel,
-  FormControl
+  FormControl,
 } from "@mui/material";
 import BigNumber from "bignumber.js";
 import { Search } from "@mui/icons-material";
@@ -41,9 +41,11 @@ export default function ssConvert() {
   const [poolStaked, setPoolStaked] = useState([]);
   const [stakingRewardStaked, setstakingRewardStaked] = useState({
     dysTopiaEarning: "0",
-stakedBalance: "0",
-topiaEarning: "0"
+    stakedBalance: "0",
+    topiaEarning: "0",
   });
+
+  const [veTopiaBalance, setveTopiaBalance] = useState("0");
   const [voteLoading, setVoteLoading] = useState(false);
   const [votes, setVotes] = useState([]);
   const [veToken, setVeToken] = useState(null);
@@ -56,24 +58,22 @@ topiaEarning: "0"
   const [modelTabs, setModeltabs] = useState(0);
 
   const [open, setOpen] = useState(false);
-  const [selectDropdown, setSelectDropdown] = useState("")
+  const [selectDropdown, setSelectDropdown] = useState("");
   const [depositInput, setDepositInput] = useState("0");
 
   useEffect(() => {
-    const nfts = stores.stableSwapStore.getStore('vestNFTs');
-    setVestNFTs(nfts)
-  }, [])
-  
+    const nfts = stores.stableSwapStore.getStore("vestNFTs");
+    setVestNFTs(nfts);
+  }, []);
 
   const openModel = () => {
     setOpen(true);
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
-  }
+  };
 
-  
   const handleChanges = (event, newValue) => {
     setValue(newValue);
   };
@@ -85,7 +85,7 @@ topiaEarning: "0"
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
     };
   }
 
@@ -117,17 +117,25 @@ topiaEarning: "0"
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT,
       content: {},
     });
-    const stakingRewardsStakedBalancedata = stores.stableSwapStore.getStore("StakingRewardStakedBalances");
-    console.log(stakingRewardsStakedBalancedata,"chandler")
-    // console.log(stakingRewardsStakedBalancedata?.stakedBalance , "chandler")
-    setstakingRewardStaked({   dysTopiaEarning: stakingRewardsStakedBalancedata?.dysTopiaEarning,
-    stakedBalance: stakingRewardsStakedBalancedata?.stakedBalance,
-    topiaEarning: stakingRewardsStakedBalancedata?.topiaEarning})
-    
-    const tockenLockerDatas = stores.dispatcher.dispatch({
-      type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA,
+
+    const vedepositordata = stores.dispatcher.dispatch({
+      type: ACTIONS.VE_DEPOSITOR_DATA,
       content: {},
     });
+
+    const stakingRewardsStakedBalancedata = stores.stableSwapStore.getStore(
+      "StakingRewardStakedBalances"
+    );
+
+    setstakingRewardStaked({
+      dysTopiaEarning: stakingRewardsStakedBalancedata?.dysTopiaEarning,
+      stakedBalance: stakingRewardsStakedBalancedata?.stakedBalance,
+      topiaEarning: stakingRewardsStakedBalancedata?.topiaEarning,
+    });
+
+    const vedepositordatas = stores.stableSwapStore.getStore("veDepositorData");
+    // console.log(vedepositordatas, "vedepo");
+    setveTopiaBalance(vedepositordatas?.balanceOfVeTopia);
 
     const nfts = stores.stableSwapStore.getStore("vestNFTs");
     setVestNFTs(nfts);
@@ -160,36 +168,31 @@ topiaEarning: "0"
     });
   };
 
-
   const [depositInputveTopia, setDepositInputVeTopia] = useState("0");
 
   const onInputDepositStakeVtopia = async (e) => {
     setDepositInputVeTopia(e.target.value);
   };
-  const onDepositVeTopia = async ()=>{
-    
+  const onDepositVeTopia = async () => {
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT,
-      content: { amount: depositInputveTopia},
+      content: { amount: depositInputveTopia },
     });
-  }
+  };
 
-
-  const onWithdrawVeTopia = async ()=>{
-    
+  const onWithdrawVeTopia = async () => {
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_WITHDRAW,
       content: { amount: depositInputveTopia },
     });
-  }
-  
-  const onClaimVeTopia = async ()=>{
-    
+  };
+
+  const onClaimVeTopia = async () => {
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_GETREWARD,
-      content: {  },
+      content: {},
     });
-  }
+  };
 
   useEffect(() => {
     const vestVotesReturned = (vals) => {
@@ -332,7 +335,7 @@ topiaEarning: "0"
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
+
     return (
       <div
         role="tabpanel"
@@ -352,94 +355,144 @@ topiaEarning: "0"
 
   return (
     <>
-    <Container id="main" className={style.mainContainer}>
-    <Box id="mainContainer" className={style.mainContainerInner}>
-      <Box className={style.containerTop}>
-        <Container className={style.topContainer}>
-          <Grid item className={style.topGrid1} lg={4}>
-            <Typography variant="h1" className={style.mainText}>Convert</Typography>
-          </Grid>
-          <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-            <Paper elevation={1} className={style.topGrid2Inner}>
-              <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
-              <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
-            </Paper>
-          </Grid>
-          <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-            <Paper elevation={1} className={style.topGrid2Inner}>
-              <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
-              <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
-            </Paper>
-          </Grid>
-        </Container>
-
-        <Container className={style.bottomContainer}>
-          <Grid item xs={12} lg={9.5} className={style.bottomContainerLeft}>
-            <Paper elevation={1} className={style.bottomContainerLeftInner}>
-              <Box className={style.bottomContainerLeftInnerTop}>
-                <Typography variant='h3' className={style.h3text}>
-                  Convert & stake dextopia NFTs/Tokens into GAStopia
+      <Container id="main" className={style.mainContainer}>
+        <Box id="mainContainer" className={style.mainContainerInner}>
+          <Box className={style.containerTop}>
+            <Container className={style.topContainer}>
+              <Grid item className={style.topGrid1} lg={4}>
+                <Typography variant="h1" className={style.mainText}>
+                  Convert
                 </Typography>
-              </Box>
+              </Grid>
+              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+                <Paper elevation={1} className={style.topGrid2Inner}>
+                  <Typography className={style.topGrid2Innertext1}>
+                    Total Deposits
+                  </Typography>
+                  <Typography className={style.topGrid2InnerPrice}>
+                    $0.00
+                  </Typography>
+                </Paper>
+              </Grid>
+              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+                <Paper elevation={1} className={style.topGrid2Inner}>
+                  <Typography className={style.topGrid2Innertext1}>
+                    Total Deposits
+                  </Typography>
+                  <Typography className={style.topGrid2InnerPrice}>
+                    $0.00
+                  </Typography>
+                </Paper>
+              </Grid>
+            </Container>
 
-              <Box className={style.bottomContainerLeftBottom}>
-                <Box className={style.bottomContainerpannelTop}>
-                  <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
-                    <Tabs value={value} onChange={handleChanges} className={style.tabs}>
-                        <Tab label="Solid Token" {...a11yProps(0, "page")} className={style.tab} />
-                        <Tab label="Solid NFT" {...a11yProps(1, "page")} className={style.tab} />
-                    </Tabs>
+            <Container className={style.bottomContainer}>
+              <Grid item xs={12} lg={9.5} className={style.bottomContainerLeft}>
+                <Paper elevation={1} className={style.bottomContainerLeftInner}>
+                  <Box className={style.bottomContainerLeftInnerTop}>
+                    <Typography variant="h3" className={style.h3text}>
+                      Convert & stake dextopia NFTs/Tokens into GAStopia
+                    </Typography>
                   </Box>
-                </Box>
-                <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={value} index={0}>
-                  <Box className={style.tabPannel1}>
-                    <Box className={style.tabPannelrow1}>
-                      <Typography variant="h6" className={style.h6Text}>
-                        This process is irreversible
-                      </Typography>
-                    </Box>
-                    <Box className={style.tabPannelrow2}>
-                      <Typography variant='p' className={style.balancep}>
-                        Balance: 0 vetopia
-                      </Typography>
-                    </Box>
-                    <Box className={style.tabPannelrow3}>
-                      <Box className={style.tabPannelrow3Left}>
-                        <Box className={style.tabPannelrow3LeftInner}>
-                          <Box className={style.tabinputFields}>
-                            <Input autoFocus="autoFocus" placeholder='Enter Amount' className={style.AmountInput} onChange={(e) => {setDepositInput(e.target.value)}} value={depositInput} />
-                            <Button className={style.buttontop}>Max</Button>
-                          </Box>
 
-                        </Box>
-
-                      </Box>
-                      <Box className={style.tabPannelrow3Right}>
-                        {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }} onClick={() => onDeposit()}>
-                          Approve
-                        </Button> */}
-                        <Button className={style.approveBtn} onClick={() => onDeposit()}>
-                          Convert tokens
-                        </Button>
+                  <Box className={style.bottomContainerLeftBottom}>
+                    <Box className={style.bottomContainerpannelTop}>
+                      <Box
+                        sx={{ borderBottom: 1, borderColor: "divider" }}
+                        className={style.tabBox}
+                      >
+                        <Tabs
+                          value={value}
+                          onChange={handleChanges}
+                          className={style.tabs}
+                        >
+                          <Tab
+                            label="Solid Token"
+                            {...a11yProps(0, "page")}
+                            className={style.tab}
+                          />
+                          <Tab
+                            label="Solid NFT"
+                            {...a11yProps(1, "page")}
+                            className={style.tab}
+                          />
+                        </Tabs>
                       </Box>
                     </Box>
-                    <Box className={style.tabPannelrow4}>
-                      <Typography variant='p' className={style.balancep}>
-                        Converting 0 vetopia Tokens to 0 GAStopia
-                      </Typography>
-                    </Box>
-                  </Box>
-                </TabPanel>
-                <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={value} index={1}>
-                <Box className={style.tabPannel1}>
+                    <TabPanel
+                      style={{ backgroundColor: "rgb(32 39 43)" }}
+                      value={value}
+                      index={0}
+                    >
+                      <Box className={style.tabPannel1}>
                         <Box className={style.tabPannelrow1}>
                           <Typography variant="h6" className={style.h6Text}>
                             This process is irreversible
                           </Typography>
                         </Box>
                         <Box className={style.tabPannelrow2}>
-                          <Typography variant='p' className={style.balancep}>
-                            Balance: 0 vetopia
+                          <Typography variant="p" className={style.balancep}>
+                            Balance: {formatCurrency(
+                              BigNumber(veTopiaBalance).div(
+                                10 ** 18
+                              )
+                            )}  vetopia
+                          </Typography>
+                        </Box>
+                        <Box className={style.tabPannelrow3}>
+                          <Box className={style.tabPannelrow3Left}>
+                            <Box className={style.tabPannelrow3LeftInner}>
+                              <Box className={style.tabinputFields}>
+                                <Input
+                                  autoFocus="autoFocus"
+                                  placeholder="Enter Amount"
+                                  className={style.AmountInput}
+                                  onChange={(e) => {
+                                    setDepositInput(e.target.value);
+                                  }}
+                                  value={depositInput}
+                                />
+                                <Button className={style.buttontop}>Max</Button>
+                              </Box>
+                            </Box>
+                          </Box>
+                          <Box className={style.tabPannelrow3Right}>
+                            {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }} onClick={() => onDeposit()}>
+                          Approve
+                        </Button> */}
+                            <Button
+                              className={style.approveBtn}
+                              onClick={() => onDeposit()}
+                            >
+                              Convert tokens
+                            </Button>
+                          </Box>
+                        </Box>
+                        <Box className={style.tabPannelrow4}>
+                          <Typography variant="p" className={style.balancep}>
+                            Converting 0 vetopia Tokens to 0 GAStopia
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </TabPanel>
+                    <TabPanel
+                      style={{ backgroundColor: "rgb(32 39 43)" }}
+                      value={value}
+                      index={1}
+                    >
+                      <Box className={style.tabPannel1}>
+                        <Box className={style.tabPannelrow1}>
+                          <Typography variant="h6" className={style.h6Text}>
+                            This process is irreversible
+                          </Typography>
+                        </Box>
+                        <Box className={style.tabPannelrow2}>
+                          <Typography variant="p" className={style.balancep}>
+                          Balance: {formatCurrency(
+                              BigNumber(veTopiaBalance).div(
+                                10 ** 18
+                              )
+                            )}  vetopia
                           </Typography>
                         </Box>
                         <Box className={style.tabPannelrow3}>
@@ -447,186 +500,304 @@ topiaEarning: "0"
                             <Box className={style.tabPannelrow3LeftInner}>
                               <Box className={style.marginTop}>
                                 <FormControl sx={{ m: 1, minWidth: 300 }}>
-                                  <InputLabel style={{color: '#fff'}} id="demo-multiple-chip-label">Select Token ID</InputLabel>
+                                  <InputLabel
+                                    style={{ color: "#fff" }}
+                                    id="demo-multiple-chip-label"
+                                  >
+                                    Select Token ID
+                                  </InputLabel>
                                   <Select
                                     labelId="demo-multiple-chip-label"
                                     id="demo-multiple-chip"
                                     className={style.tabinputFieldsSelection}
                                     value={selectDropdown}
-                                    onChange={(e) => {setSelectDropdown(e.target.value)}}
-                                    style={{color: "#fff !important"}}
+                                    onChange={(e) => {
+                                      setSelectDropdown(e.target.value);
+                                    }}
+                                    style={{ color: "#fff !important" }}
                                   >
-                                    {vestNFTs && vestNFTs.map((vest) => {
-                                      return (
-                                        <MenuItem key={vest.id} value={vest}>
-                                          <div className={ style.menuOption }>
-                                            <Typography>Token #{vest.id}</Typography>
-                                            <div>
-                                              <Typography align='right' className={ style.smallerText }>{ formatCurrency(vest.lockValue) }</Typography>
-                                              <Typography color='textSecondary' className={ style.smallerText }>{veToken?.symbol}</Typography>
+                                    {vestNFTs &&
+                                      vestNFTs.map((vest) => {
+                                        return (
+                                          <MenuItem key={vest.id} value={vest}>
+                                            <div className={style.menuOption}>
+                                              <Typography>
+                                                Token #{vest.id}
+                                              </Typography>
+                                              <div>
+                                                <Typography
+                                                  align="right"
+                                                  className={style.smallerText}
+                                                >
+                                                  {formatCurrency(
+                                                    vest.lockValue
+                                                  )}
+                                                </Typography>
+                                                <Typography
+                                                  color="textSecondary"
+                                                  className={style.smallerText}
+                                                >
+                                                  {veToken?.symbol}
+                                                </Typography>
+                                              </div>
                                             </div>
-                                          </div>
-                                        </MenuItem>
-                                      )
-                                    })}
+                                          </MenuItem>
+                                        );
+                                      })}
                                   </Select>
                                 </FormControl>
                               </Box>
                             </Box>
                           </Box>
-                          <Box className={style.tabPannelrow3Right} style={{height: "60px"}}>
+                          <Box
+                            className={style.tabPannelrow3Right}
+                            style={{ height: "60px" }}
+                          >
                             <Button className={style.approveBtn}>
                               Convert tokens
                             </Button>
                           </Box>
                         </Box>
                         <Box className={style.tabPannelrow4}>
-                          <Typography variant='p' className={style.balancep}>
-                            Converting 0 vetopia Tokens From the selected vetopia NFT to 0 Gasly
+                          <Typography variant="p" className={style.balancep}>
+                            Converting 0 vetopia Tokens From the selected
+                            vetopia NFT to 0 Gasly
                           </Typography>
                         </Box>
                       </Box>
-                </TabPanel>
-              </Box>
-            </Paper>
-          </Grid>
+                    </TabPanel>
+                  </Box>
+                </Paper>
+              </Grid>
 
-          {/* <Grid item xs={2.5}>
+              {/* <Grid item xs={2.5}>
           <Paper elevation={1} className={style.topGrid2Inner}>
               <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
               <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
             </Paper>
           </Grid> */}
 
-          <Grid item xs={12} className={style.bottomTable}>
-            <Container className={style.bottomTableInner}>
-              <Grid lg={2.1} item className={style.tableheaderGText}></Grid>
-              <Grid lg={1.85} item>
-                <Typography variant="h6" className={style.tableheaderGText}>TVL</Typography>
-              </Grid>
-              <Grid lg={1.5} item>
-                <Typography variant="h6">APR</Typography>
-
-              </Grid>
-              <Grid lg={1.7} item>
-                <Typography variant="h6">Your Staked GAStopia</Typography>
-
-              </Grid>
-              <Grid lg={1.7} item>
-                <Typography variant="h6">Your Earning</Typography>
-              </Grid>
-            </Container>
-            <Paper elevation={1} className={style.tableRow}>
-              <Box className={style.tableRowInner}>
-                <Container className={style.tableBoxes}>
-                  <Grid item xs={12} lg={2}>
-                    <Typography variant="p">
-                      Staked GAStopia
+              <Grid item xs={12} className={style.bottomTable}>
+                <Container className={style.bottomTableInner}>
+                  <Grid lg={2.1} item className={style.tableheaderGText}></Grid>
+                  <Grid lg={1.85} item>
+                    <Typography variant="h6" className={style.tableheaderGText}>
+                      TVL
                     </Typography>
                   </Grid>
-                  <Grid item xs={12} lg={1.75}>
-                    <Typography variant="p">6,656,064.4</Typography>
+                  <Grid lg={1.5} item>
+                    <Typography variant="h6">APR</Typography>
                   </Grid>
-                  <Grid item xs={12} lg={1.75}>
-                    <Typography variant="p">26.1%</Typography>
+                  <Grid lg={1.7} item>
+                    <Typography variant="h6">Your Staked GAStopia</Typography>
                   </Grid>
-                  <Grid item xs={12} lg={1.75}>
-           
-                    <Typography variant="p">{stakingRewardStaked !== "undefined" &&  formatCurrency(
-                          BigNumber(stakingRewardStaked?.stakedBalance).div(10 ** 18)
-                        )}</Typography>
+                  <Grid lg={1.7} item>
+                    <Typography variant="h6">Your Earning</Typography>
                   </Grid>
-                  <Grid item xs={6} lg={1.5}>
-                    <Typography variant="p">{stakingRewardStaked !== "undefined" &&  formatCurrency(
-                          BigNumber(stakingRewardStaked?.dysTopiaEarning).div(10 ** 18)
-                        )} dystopia </Typography>
-                    <Typography variant="p">{stakingRewardStaked !== "undefined" &&  formatCurrency(
-                          BigNumber(stakingRewardStaked?.topiaEarning).div(10 ** 18)
-                        )} vetopia</Typography>
-                  </Grid>
-                  <Grid item xs={6} lg={1.5}>
-                    <Button className={style.approveBtn} onClick={openModel}>Manage</Button>
-                  </Grid>
-                  <Grid item xs={6} lg={1.5}>
-                    <Button className={style.approveBtn} onClick={()=>onClaimVeTopia()}>Claim Earnings</Button>
-                  </Grid>
-
                 </Container>
+                <Paper elevation={1} className={style.tableRow}>
+                  <Box className={style.tableRowInner}>
+                    <Container className={style.tableBoxes}>
+                      <Grid item xs={12} lg={2}>
+                        <Typography variant="p">Staked GAStopia</Typography>
+                      </Grid>
+                      <Grid item xs={12} lg={1.75}>
+                        <Typography variant="p">6,656,064.4</Typography>
+                      </Grid>
+                      <Grid item xs={12} lg={1.75}>
+                        <Typography variant="p">26.1%</Typography>
+                      </Grid>
+                      <Grid item xs={12} lg={1.75}>
+                        <Typography variant="p">
+                          {stakingRewardStaked !== "undefined" &&
+                            formatCurrency(
+                              BigNumber(stakingRewardStaked?.stakedBalance).div(
+                                10 ** 18
+                              )
+                            )}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6} lg={1.5}>
+                        <Typography variant="p">
+                          {stakingRewardStaked !== "undefined" &&
+                            formatCurrency(
+                              BigNumber(
+                                stakingRewardStaked?.dysTopiaEarning
+                              ).div(10 ** 18)
+                            )}{" "}
+                          dystopia{" "}
+                        </Typography>
+                        <Typography variant="p">
+                          {stakingRewardStaked !== "undefined" &&
+                            formatCurrency(
+                              BigNumber(stakingRewardStaked?.topiaEarning).div(
+                                10 ** 18
+                              )
+                            )}{" "}
+                          vetopia
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6} lg={1.5}>
+                        <Button
+                          className={style.approveBtn}
+                          onClick={openModel}
+                        >
+                          Manage
+                        </Button>
+                      </Grid>
+                      <Grid item xs={6} lg={1.5}>
+                        <Button
+                          className={style.approveBtn}
+                          onClick={() => onClaimVeTopia()}
+                        >
+                          Claim Earnings
+                        </Button>
+                      </Grid>
+                    </Container>
+                  </Box>
+                </Paper>
+              </Grid>
+            </Container>
+          </Box>
+        </Box>
+      </Container>
+      {open && (
+        <Mymodel text="Manage SOLIDtopia" open={open} handleClose={handleClose}>
+          <Box className={style.bottomContainerLeftBottom}>
+            <Box className={style.bottomContainerpannelTop}>
+              <Box
+                sx={{ borderBottom: 1, borderColor: "divider" }}
+                className={style.tabBox}
+              >
+                <Tabs
+                  value={modelTabs}
+                  onChange={handleChangeModeltab}
+                  className={style.tabs}
+                >
+                  <Tab
+                    label="Stake"
+                    {...a11yProps(0, "model")}
+                    className={style.tab}
+                  />
+                  <Tab
+                    label="Withdraw"
+                    {...a11yProps(1, "model")}
+                    className={style.tab}
+                  />
+                </Tabs>
               </Box>
-            </Paper>
-          </Grid>
-        </Container>
-      </Box>
-    </Box>
-  </Container>
-        {
-          open &&
-          <Mymodel text="Manage SOLIDtopia" open={open} handleClose={handleClose}>
-  
-            <Box className={style.bottomContainerLeftBottom}>
-              <Box className={style.bottomContainerpannelTop}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
-  
-                  <Tabs value={modelTabs} onChange={handleChangeModeltab} className={style.tabs}>
-                    <Tab label="Stake" {...a11yProps(0, "model")} className={style.tab} />
-                    <Tab label="Withdraw" {...a11yProps(1, "model")} className={style.tab}  />
-                  </Tabs>
-  
-                </Box>
-              </Box>
-  
-              <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={modelTabs} index={0}>
-                <Box className={style.tabPannel1}>
-                  <Box className={style.tabPannelrow3}>
-                    <Box className={style.tabPannelrow3Left}>
-                      <Box className={style.tabPannelrow3LeftInner}>
-                        <Box className={style.tabinputFields}>
-                          <Input placeholder='Enter Amount' className={style.AmountInput} value={depositInputveTopia} onChange={onInputDepositStakeVtopia}/>
-                          <Button className={style.buttontop}>Max</Button>
-                        </Box>
+            </Box>
+
+            <TabPanel
+              style={{ backgroundColor: "rgb(32 39 43)" }}
+              value={modelTabs}
+              index={0}
+            >
+              <Box className={style.tabPannel1}>
+                <Box className={style.tabPannelrow3}>
+                  <Box className={style.tabPannelrow3Left}>
+                    <Box className={style.tabPannelrow3LeftInner}>
+                      <Box className={style.tabinputFields}>
+                        <Input
+                          placeholder="Enter Amount"
+                          className={style.AmountInput}
+                          value={depositInputveTopia}
+                          onChange={onInputDepositStakeVtopia}
+                        />
+                        <Button className={style.buttontop} onClick={()=>{setDepositInputVeTopia(formatCurrency(
+                              BigNumber(veTopiaBalance).div(
+                                10 ** 18
+                              )
+                            ))}}>Max</Button>
                       </Box>
                     </Box>
                   </Box>
-                  <Box className={`${style.modelButtons}`} style={{display: "flex", flexFlow: "row wrap", marginLeft: "0px !important", marginTop: "20px"}}>
-                    {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }}>
+                </Box>
+                <Box
+                  className={`${style.modelButtons}`}
+                  style={{
+                    display: "flex",
+                    flexFlow: "row wrap",
+                    marginLeft: "0px !important",
+                    marginTop: "20px",
+                  }}
+                >
+                  {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }}>
                       Approve
                     </Button> */}
-                    <Button className={style.approveBtn} style={{background: "rgb(2, 119, 250)", color: "#fff"}} onClick={()=>{onDepositVeTopia()}} >
-                      Convert tokens
-                    </Button>
-                  </Box>
+                  <Button
+                    className={style.approveBtn}
+                    style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
+                    onClick={() => {
+                      onDepositVeTopia();
+                    }}
+                  >
+                    Convert tokens
+                  </Button>
                 </Box>
-              </TabPanel>
-              <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={modelTabs} index={1}>
-                <Box className={`${style.tabPannel1} ${style.tabPannel1Modell}`}>
-                  <Box className={style.tabPannelrow3}>
-                    <Box className={style.tabPannelrow3Left}>
-                      <Box className={style.tabPannelrow3LeftInner}>
-                        <Box className={style.marginTop}>
-                          <Box className={style.tabPannelrow3LeftInner}>
-                            <Box className={style.tabinputFields}>
-                              <Input placeholder='Enter Amount' className={style.AmountInput} value={depositInputveTopia} onChange={onInputDepositStakeVtopia}/>
-                              <Button className={style.buttontop}>Max</Button>
-                            </Box>
+              </Box>
+            </TabPanel>
+            <TabPanel
+              style={{ backgroundColor: "rgb(32 39 43)" }}
+              value={modelTabs}
+              index={1}
+            >
+              <Box className={`${style.tabPannel1} ${style.tabPannel1Modell}`}>
+                <Box className={style.tabPannelrow3}>
+                  <Box className={style.tabPannelrow3Left}>
+                    <Box className={style.tabPannelrow3LeftInner}>
+                      <Box className={style.marginTop}>
+                        <Box className={style.tabPannelrow3LeftInner}>
+                          <Box className={style.tabinputFields}>
+                            <Input
+                              placeholder="Enter Amount"
+                              className={style.AmountInput}
+                              value={depositInputveTopia}
+                              onChange={onInputDepositStakeVtopia}
+                            />
+                            <Button className={style.buttontop}>Max</Button>
                           </Box>
                         </Box>
                       </Box>
                     </Box>
                   </Box>
-                  <Box className={`${style.modelButtons}`} style={{display: "flex", flexFlow: "row wrap", marginLeft: "0px !important", marginTop: "20px"}}>
-                    <Button className={style.approveBtn} style={{background: "rgb(2, 119, 250)", color: "#fff"}}  onClick={()=>{onWithdrawVeTopia()}} >
-                      Withdraw
-                    </Button>
-                  </Box>
                 </Box>
-              </TabPanel>
-            </Box>
-  
-            <Typography id="modal-modal-description" style={{ textAlign: 'center', borderTop: '1px solid rgb(2, 119, 250)', paddingTop: '10px' }} sx={{ mt: 2 }}>
-              Please Approve the contract
-            </Typography>
-          </Mymodel>
-        }
-        </>
+                <Box
+                  className={`${style.modelButtons}`}
+                  style={{
+                    display: "flex",
+                    flexFlow: "row wrap",
+                    marginLeft: "0px !important",
+                    marginTop: "20px",
+                  }}
+                >
+                  <Button
+                    className={style.approveBtn}
+                    style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
+                    onClick={() => {
+                      onWithdrawVeTopia();
+                    }}
+                  >
+                    Withdraw
+                  </Button>
+                </Box>
+              </Box>
+            </TabPanel>
+          </Box>
+
+          <Typography
+            id="modal-modal-description"
+            style={{
+              textAlign: "center",
+              borderTop: "1px solid rgb(2, 119, 250)",
+              paddingTop: "10px",
+            }}
+            sx={{ mt: 2 }}
+          >
+            Please Approve the contract
+          </Typography>
+        </Mymodel>
+      )}
+    </>
   );
 }
