@@ -1,0 +1,408 @@
+.bottomContainer .btn {
+    display: inline-flex;
+    -moz-box-align: center;
+    align-items: center;
+    -moz-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    outline: currentcolor none 0px;
+    margin: 0px;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    font-family: "Titillium Web",sans-serif;
+    line-height: 1.75;
+    padding: 6px 16px;
+    border-radius: 4px;
+    min-width: 90px;
+    font-size: 14px;
+    color: black !important;
+    width: 250px;
+    font-weight: bold;
+    background: rgb(2,119,250) none repeat scroll 0% 0%;
+    transition: all 0.2s ease 0s;
+    backface-visibility: hidden;
+    text-transform: none;
+}
+
+.bottomContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.bottomContainer > .MuiGrid-item {
+  padding-top: 24px;
+}
+
+.bottomContainer .topContainerInner {
+  box-sizing: border-box !important;
+  margin: 0px;
+  flex-direction: row !important;
+  flex-basis: 100%;
+  -moz-box-flex: 0;
+  flex-grow: 0;
+  width: 100%;
+  max-width: 100% !important;
+}
+
+.topContainerBox {
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  color: rgb(255, 255, 255) !important;
+  background: rgb(32, 39, 43) none repeat scroll 0% 0% !important;
+  padding: 24px 32px;
+  box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px;
+  border: 1px solid rgb(2, 119, 250);
+}
+
+.topContainerBox .header1 {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  -moz-box-align: center;
+  align-items: center;
+  -moz-box-pack: justify;
+  justify-content: space-between;
+}
+
+.topContainerBox .header1 .left span {
+  margin: 0px;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 22px;
+  font-weight: 700 !important;
+  line-height: 37px;
+  color: #fff;
+}
+
+.topContainerBox .header1 .inputBoxContainer {
+  position: relative;
+  display: flex;
+}
+
+.topContainerBox .header1 .right .inputBox {
+  font-weight: normal;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.4375em;
+  color: rgba(0, 0, 0, 0.87);
+  box-sizing: border-box;
+  cursor: text;
+  display: inline-flex;
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 7px;
+  color: #fff;
+  padding-right: 80px;
+  border: 1px solid rgb(2, 119, 250);
+  position: relative;
+}
+
+.right .searchIcon {
+  position: absolute;
+  right: 10px;
+  top: 7px;
+}
+
+.right .row2 {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: row;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+.topContainerBox .header1 .right input::placeholder {
+  padding-left: 10px;
+  color: #fff;
+}
+
+.header2 {
+  margin-bottom: 38px;
+  display: flex;
+  flex-direction: row;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+.header2 .textRow2 {
+  margin: 0px;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
+.header4 {
+  display: flex;
+  flex-direction: column;
+}
+
+.header4 .header4Inner {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.header4Inner .hederBox {
+  box-sizing: border-box;
+  margin: 4px 0px;
+  flex-direction: row;
+  flex-basis: 100%;
+  -moz-box-flex: 0;
+  flex-grow: 0;
+  max-width: 100%;
+}
+.headertext {
+  margin: 0px;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
+.hederBox .hederBoxInner {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  padding: 22px;
+  padding-right: 0;
+  padding-left: 0;
+  border: 1px solid rgb(2, 119, 250);
+  border-radius: 4px;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+.hyfernSymbol {
+  margin: 0px;
+  font-weight: normal;
+  font-size: 18px;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.5;
+}
+
+.pagination {
+  color: #fff !important;
+  flex: end;
+}
+
+.multiBoxes > div {
+  display: flex;
+  -moz-box-align: center;
+  align-items: center;
+  -moz-box-pack: center;
+  justify-content: center;
+}
+
+.multiBoxes .boxes {
+  display: flex;
+  flex-direction: row;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+.multiBoxes .boxes .left {
+  display: flex;
+  flex-flow: column wrap;
+  position: relative;
+}
+
+.multiBoxes .boxes .left .inputBox {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  min-width: 0px;
+  padding: 0px;
+  margin: 0px;
+  border: 0px none;
+  vertical-align: top;
+  background: rgb(20, 24, 25) none repeat scroll 0% 0%;
+}
+
+.multiBoxes .boxes .left .inputBox input {
+  color: #fff !important;
+}
+
+.inpputButtonMax {
+  position: absolute !important;
+  right: 5px;
+  top: 10px;
+}
+.multiBoxes .boxes .right .like {
+  display: inline-flex;
+  border-radius: 4px;
+  margin-left: 2.4px;
+  height: 50px;
+  background-color: rgb(75 199 137) !important;
+}
+
+.multiBoxes .boxes .dislike {
+  height: 50px;
+  margin-right: 5px;
+}
+
+.svgIcons {
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentcolor;
+  flex-shrink: 0;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+  color: rgb(255, 255, 255);
+}
+
+.header5{
+    width: 100%;
+}
+
+
+.bottomContainer .bottomVoteInnnerContainer{
+    width: 100% !important;
+    transition: box-shadow 300ms cubic-bezier(0.4,0,0.2,1) 0ms;
+    border-radius: 4px;
+    color: rgb(255,255,255);
+    background: rgb(32,39,43) none repeat scroll 0% 0%;
+    padding: 24px 32px;
+    box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px;
+    border: 1px solid rgb(2,119,250);
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: left;
+    min-height: 80px;
+    margin-bottom: 24px;
+    max-width: 100% !important;
+}
+
+.bottomVoteList{
+    width: 100% !important;
+    margin-top: 10px;
+}
+
+.bottomVoteListColumn{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.bottomVoteListColumn .bottomVoteListData {
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100% !important;
+}
+
+.bottomVoteListColumn .bottomVoteListData .bottomVoteListBox{
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: row wrap;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid rgb(2,119,250);
+    -moz-box-align: center;
+    align-items: center;
+}
+
+.textData{
+    color: #fff !important;
+}
+.bottomVoteListBox .textData{
+    margin: 0px;
+    color: #fff !important;
+    font-family: "Titillium Web",sans-serif;
+    line-height: 1.5;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+
+@media only screen and(min-width: 0px) {
+  .bottomContainer {
+    width: calc(100% + 8px);
+    margin-left: -8px;
+  }
+  .bottomContainer > .MuiGrid-item {
+    padding-left: 8px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .bottomContainer {
+    width: calc(100% + 24px);
+    margin-left: -24px;
+  }
+  .bottomContainer > .MuiGrid-item {
+    padding-left: 24px;
+  }
+  .bottomContainer .topContainerInner {
+    flex-basis: 100%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+  .multiBoxes {
+    flex-basis: 24.1667%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 24.1667%;
+  }
+}
+
+@media only screen and(min-width: 600px) {
+  .bottomContainer {
+    width: calc(100% + 16px);
+    margin-left: -16px;
+  }
+  .bottomContainer > .MuiGrid-item {
+    padding-left: 16px;
+  }
+  .bottomContainer .topContainerInner {
+    flex-basis: 100%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+}
+
+@media only screen and(min-width: 1200px) {
+  .bottomContainer .topContainerInner {
+    flex-basis: 100%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+  .multiBoxes {
+    flex-basis: 24.1667%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 24.1667%;
+  }
+}
+
+@media only screen and(min-width: 1536px) {
+  .bottomContainer .topContainerInner {
+    flex-basis: 100%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+
+  .multiBoxes {
+    flex-basis: 24.1667%;
+    -moz-box-flex: 0;
+    flex-grow: 0;
+  }
+}

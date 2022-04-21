@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Button, Paper, SvgIcon } from "@mui/material";
-import Gauges from '../../components/ssVotes';
+// import Gauges from '../../components/ssVotes';
+import Gauges from '../../components/ssNewVotes/ssVotes';
 import Unlock from '../../components/unlock';
 import classes from './vote.module.css';
 
