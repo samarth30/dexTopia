@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react';
 import style from './convert.module.css';
 
 import TablePagination from '@mui/material/TablePagination';
@@ -8,15 +8,28 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-
+import { Search } from '@mui/icons-material';
+import { useRouter } from "next/router";
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
+import BigNumber from 'bignumber.js';
 import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import InputAdornment from '@mui/material/InputAdornment';
+import MenuItem from "@mui/material/MenuItem";
+import Select from '@mui/material/Select';
+
 // import search from '../asset/images/search.svg';
 import TextField from '@mui/material/TextField';
 import voteStyle from './ssVotes.module.css';
 import ButtonGroup from '@mui/material/ButtonGroup';
 // import likeimage from '../asset/images/like.svg';
 // import dislikeimage from '../asset/images/dislike.svg';
+import { formatCurrency } from '../../utils';
+import GaugesTable from './ssVotesTable.js'
+
+import stores from '../../stores'
+import { ACTIONS } from '../../stores/constants';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
@@ -26,6 +39,150 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Vote() {
+    const router = useRouter()
+
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
+  
+    const [ gauges, setGauges ] = useState([])
+    const [ voteLoading, setVoteLoading ] = useState(false)
+    const [ votes, setVotes ] = useState([])
+    const [ veToken, setVeToken ] = useState(null)
+    const [ token, setToken ] = useState(null)
+    const [ vestNFTs, setVestNFTs ] = useState([])
+    const [search, setSearch] = useState('');
+
+    const ssUpdated = () => {
+        setVeToken(stores.stableSwapStore.getStore('veToken'))
+        const as = stores.stableSwapStore.getStore('pairs');
+    
+        const filteredAssets = as.filter((asset) => {
+          return asset.gauge && asset.gauge.address
+        })
+        setGauges(filteredAssets)
+    
+    
+        const nfts = stores.stableSwapStore.getStore('vestNFTs');
+        setVestNFTs(nfts)
+    
+        if(nfts && nfts.length > 0) {
+          setToken(nfts[0]);
+        }
+    
+        if(nfts && nfts.length > 0 && filteredAssets && filteredAssets.length > 0) {
+           stores.dispatcher.dispatch({ type: ACTIONS.GET_VEST_VOTES, content: { tokenID: nfts[0].id } })
+          // stores.dispatcher.dispatch({ type: ACTIONS.GET_VEST_BALANCES, content: { tokenID: nfts[0].id } })
+        }
+    
+        forceUpdate()
+      }
+
+    useEffect(() => {
+        const vestVotesReturned = (vals) => {
+          setVotes(vals.map((asset) => {
+            return {
+              address: asset?.address,
+              value: BigNumber((asset && asset.votePercent) ? asset.votePercent : 0).toNumber(0)
+            }
+          }))
+          forceUpdate()
+        }
+    
+        const vestBalancesReturned = (vals) => {
+          setGauges(vals)
+          forceUpdate()
+        }
+    
+        const stableSwapUpdated = () => {
+          ssUpdated()
+        }
+    
+        const voteReturned = () => {
+          setVoteLoading(false)
+        }
+    
+        ssUpdated()
+    
+        // stores.dispatcher.dispatch({ type: ACTIONS.GET_VEST_NFTS, content: {} })
+    
+        stores.emitter.on(ACTIONS.UPDATED, stableSwapUpdated);
+        stores.emitter.on(ACTIONS.VOTE_RETURNED, voteReturned);
+        stores.emitter.on(ACTIONS.ERROR, voteReturned);
+        stores.emitter.on(ACTIONS.VEST_VOTES_RETURNED, vestVotesReturned)
+        // stores.emitter.on(ACTIONS.VEST_NFTS_RETURNED, vestNFTsReturned)
+        stores.emitter.on(ACTIONS.VEST_BALANCES_RETURNED, vestBalancesReturned)
+    
+        return () => {
+          stores.emitter.removeListener(ACTIONS.UPDATED, stableSwapUpdated);
+          stores.emitter.removeListener(ACTIONS.VOTE_RETURNED, voteReturned);
+          stores.emitter.removeListener(ACTIONS.ERROR, voteReturned);
+          stores.emitter.removeListener(ACTIONS.VEST_VOTES_RETURNED, vestVotesReturned)
+          // stores.emitter.removeListener(ACTIONS.VEST_NFTS_RETURNED, vestNFTsReturned)
+          stores.emitter.removeListener(ACTIONS.VEST_BALANCES_RETURNED, vestBalancesReturned)
+        };
+      }, []);
+    
+      const onVote = () => {
+        setVoteLoading(true)
+        stores.dispatcher.dispatch({ type: ACTIONS.VOTE, content: { votes, tokenID: token.id }})
+      }
+    
+      let totalVotes = votes.reduce((acc, curr) => { return BigNumber(acc).plus(BigNumber(curr.value).lt(0) ? (curr.value*-1) : curr.value).toNumber() }, 0 )
+    
+      const handleChange = (event) => {
+        setToken(event.target.value);
+        stores.dispatcher.dispatch({ type: ACTIONS.GET_VEST_VOTES, content: { tokenID: event.target.value.id } })
+      }
+    
+      const onSearchChanged = (event) => {
+        setSearch(event.target.value);
+      };
+    
+      const onBribe = () => {
+        router.push('/bribe/create')
+      }
+    
+      const renderMediumInput = (value, options) => {
+        return (
+          <div className={ classes.textField}>
+            <div className={ classes.mediumInputContainer}>
+              <Grid container style={{background: "white !important"}}>
+                <Grid item lg='auto' md='auto' sm={12} xs={12}>
+                  <Typography variant="body2" className={ classes.smallText }>Please select your veNFT:</Typography>
+                </Grid>
+    
+                <Grid item lg={6} md={6} sm={12} xs={12}>
+                  <div className={ classes.mediumInputAmount }>
+                    <Select
+                      style={{background: "white !important"}}
+                      fullWidth
+                      value={ value }
+                      onChange={handleChange}
+                      inputProps={{
+                        className: classes.mediumInput,
+                      }}
+                    >
+                      { options && options.map((option) => {
+                        return (
+                          <MenuItem key={option.id} value={option}>
+                            <div className={ classes.menuOption }>
+                              <Typography>Token #{option.id}</Typography>
+                              <div>
+                                <Typography align='right' className={ classes.smallerText }>{ formatCurrency(option.lockValue) }</Typography>
+                                <Typography color='textSecondary' className={ classes.smallerText }>{veToken?.symbol}</Typography>
+                              </div>
+                            </div>
+                          </MenuItem>
+                        )
+                      })}
+                    </Select>
+                  </div>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+        )
+      }
 
     return (
             <Container id="main" className={style.mainContainer}>
