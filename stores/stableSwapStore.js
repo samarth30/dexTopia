@@ -504,14 +504,14 @@ class Store {
 
 
         try {
-          const dexTopiaStakingRewardContract = new web3.eth.Contract(
-            CONTRACTS.DEXTOPIA_STAKINGREWARDS_ABI,
-            CONTRACTS.DEXTOPIA_STAKINGREWARDS
+          const dexTopiaTockenLockerContract = new web3.eth.Contract(
+            CONTRACTS.DEXTOPIA_TOKENLOCKER_ABI,
+            CONTRACTS.DEXTOPIA_TOKENLOCKER
           );
            
          
-               lockedBalance = await  dexTopiaStakingRewardContract.methods.userBalance(account.address).call();
-               activeUserLocks  = await dexTopiaStakingRewardContract.methods.getActiveUserLocks(account.address).call();
+               lockedBalance = await  dexTopiaTockenLockerContract.methods.userBalance(account.address).call();
+               activeUserLocks  = await dexTopiaTockenLockerContract.methods.getActiveUserLocks(account.address).call();
            
 
               // await multicall.aggregate([
