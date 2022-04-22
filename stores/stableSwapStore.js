@@ -9,7 +9,7 @@ import stores from "./";
 import BigNumber from "bignumber.js";
 import { createClient } from "urql";
 import { assertValidExecutionArguments } from "graphql/execution/execute";
-import axios from 'axios'
+import axios, { Axios } from 'axios'
 
 const queryone = `
 query {
@@ -113,7 +113,8 @@ class Store {
       poolRewards:[],
       poolStakedBalance:[],
       stakingRewardStakedBalance : [],
-      tockenLockerData : []
+      tockenLockerData : [],
+      veDepositorData:[]
     };
 
     dispatcher.register(
@@ -255,7 +256,8 @@ class Store {
           case ACTIONS.VE_DEPOSITOR_DEPOSIT: 
             this.veDepositorDeposit(payload);
             break;
-          
+          case ACTIONS.VE_DEPOSITOR_DATA: 
+            this.veDepositorData(payload);
           // dextopia StakingReward
           case ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT:
             this.dexTopiastakingRewardDeposit(payload);
@@ -528,6 +530,46 @@ class Store {
     this.setStore({TockenLockerDatas: {lockedBalance , activeUserLocks}});
     console.log({lockedBalance , activeUserLocks},"pippppp")
    return {lockedBalance , activeUserLocks};
+      
+  }
+
+  veDepositorData = async(address) =>{
+    const veDepositorDatas = this.store.veDepositorData;
+    const multicall = await stores.accountStore.getMulticall();
+    const web3 = await stores.accountStore.getWeb3Provider();
+    if (!web3) {
+      console.warn("web3 not found");
+      return null;
+    }
+    const account = stores.accountStore.getStore("account");
+    if (!account) {
+      console.warn("account not found");
+      return null;
+    }
+
+    
+  
+     let balanceOfVeTopia = 0;
+
+
+        try {
+          const dexTopiaVeDepositor = new web3.eth.Contract(
+            CONTRACTS.DEXTOPIA_VE_DEPOSITER_ABI,
+            CONTRACTS.DEXTOPIA_VE_DEPOSITER
+          );
+           
+         
+          balanceOfVeTopia = await  dexTopiaVeDepositor.methods.balanceOf(account.address).call();
+              //  activeUserLocks  = await dexTopiaTockenLockerContract.methods.getActiveUserLocks(account.address).call();
+           
+        }
+        catch(e){
+          console.log(e ,"allsetbro");
+        }
+   
+    this.setStore({veDepositorData: {balanceOfVeTopia }});
+    console.log({balanceOfVeTopia },"pippppp")
+   return {balanceOfVeTopia };
       
   }
   getNFTByID = async (id) => {
