@@ -1,12 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import style from './poolsRow.module.css';
-import { Typography, Slider, Tooltip, Box, Container, Grid, Paper, Input, Button } from '@mui/material';
+import { Typography, Slider, Tooltip, Box, Container, Grid, Paper, Input, Button, Tabs, Tab, Select, MenuItem } from '@mui/material';
 import BigNumber from 'bignumber.js';
 import stores from '../../stores'
 import { ACTIONS } from '../../stores/constants';
 import { formatCurrency } from '../../utils';
 import { makeStyles, withStyles } from '@mui/styles';
 import Skeleton from '@mui/lab/Skeleton';
+import Mymodel from "./Mymodel"
 
 function descendingComparator(a, b, orderBy) {
     if (!a || !b) {
@@ -136,6 +137,15 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
   const [page, setPage] = useState(0);
   const [ depositLoading, setDepositLoading ] = useState(false)
   const [depositInput,setDepositInput] = useState(false);
+  const [open, setOpen] = useState(false)
+
+  const openModel = (poolAddress) => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     setSliderValues(defaultVotes)
@@ -291,7 +301,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                             </Box>
                         </Grid>
                         <Grid xs={6} lg={1.5} className={style.tableBox3}>
-                            <Button className={style.manageButton}>Manage</Button>
+                            <Button className={style.manageButton} onClick={openModel}>Manage</Button>
                         </Grid>
                         <Grid xs={6} lg={1.5} className={style.tableBox3}>
                             <Button>Claim Earnings</Button>
@@ -299,6 +309,98 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                     </Container>
                 </Paper>
             </Grid>
+            {open && (
+        <Mymodel text="Manage SOLIDtopia" open={open} handleClose={handleClose}>
+          <Box className={style.bottomContainerLeftBottom}>
+            <Box className={style.bottomContainerpannelTop}>
+              <Box
+                sx={{ borderBottom: 1, borderColor: "divider" }}
+                className={style.tabBox}
+              >
+                {/* <Tabs
+                  value={modelTabs}
+                  onChange={handleChangeModeltab}
+                  className={style.tabs}
+                >
+                  <Tab
+                    label="Stake"
+                    {...a11yProps(0, "model")}
+                    className={style.tab}
+                  />
+                  <Tab
+                    label="Withdraw"
+                    {...a11yProps(1, "model")}
+                    className={style.tab}
+                  />
+                </Tabs> */}
+                <Box className={style.tabPannel1}>
+                <Box className={style.tabPannelrow3}>
+                  <Box className={style.tabPannelrow3Left}>
+                    <Box className={style.tabPannelrow3LeftInner}>
+                      <Box className={style.tabinputFields}>
+                        <Input
+                          placeholder="Enter Amount"
+                          className={style.AmountInput}
+                          style={{ color: "#fff" }}
+                        />
+                        <Button className={style.buttontop}>Max</Button>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="Age"
+                  value="50"
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+                <Box
+                  className={`${style.modelButtons}`}
+                  style={{
+                    display: "flex",
+                    flexFlow: "row wrap",
+                    marginLeft: "0px !important",
+                    marginTop: "20px",
+                  }}
+                >
+                  {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }}>
+                      Approve
+                    </Button> */}
+                  <Button
+                    className={style.approveBtn}
+                    style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
+                  >
+                    Convert tokens
+                  </Button>
+                  <Button
+                    className={style.approveBtn}
+                    style={{ background: "rgb(2, 119, 250)", color: "#fff", marginLeft: "0.5rem" }}
+                  >
+                    Lock tokens
+                  </Button>
+                </Box>
+              </Box>
+              </Box>
+            </Box>
+          </Box>
+
+          <Typography
+            id="modal-modal-description"
+            style={{
+              textAlign: "center",
+              borderTop: "1px solid rgb(2, 119, 250)",
+              paddingTop: "10px",
+            }}
+            sx={{ mt: 2 }}
+          >
+            Please Approve the contract
+          </Typography>
+        </Mymodel>
+      )}
         </Fragment>
     )
 }
