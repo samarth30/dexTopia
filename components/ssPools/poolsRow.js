@@ -172,9 +172,14 @@ export default function PoolsRow({
 
   const [open, setOpen] = useState(false);
   const [PoolAddressSelected,setPoolAddressSelected] = useState("");
+  const [maxLpBalance , setMaxLpBalance] = useState("0");
+  const [maxLpStaked , setMaxLpStaked] = useState("0");
 
-  const openModel = (poolAddress) => {
+  const openModel = (poolAddress , row , poolstakedparticular) => {
+    setDepositInput(0)
     setPoolAddressSelected(poolAddress)
+    setMaxLpBalance(row?.balance);
+    setMaxLpStaked(poolstakedparticular)
     setOpen(true);
   };
 
@@ -410,7 +415,7 @@ export default function PoolsRow({
                     </Box>
                   </Grid>
                   <Grid xs={6} lg={1.5} className={style.tableBox3}>
-                    <Button className={style.manageButton} onClick={()=>{openModel(row?.address)}}>
+                    <Button className={style.manageButton} onClick={()=>{openModel(row?.address , row , poolStaked[index])}}>
                       Manage
                     </Button>
                   </Grid>
@@ -469,7 +474,7 @@ export default function PoolsRow({
                     onChange={onInputField}
                     value={depositInput}
                   />
-                  <Button className={style.buttontop}>Max</Button>
+                  <Button className={style.buttontop} onClick={()=>{setDepositInput(maxLpBalance)}}>Max</Button>
                 </Box>
               </Box>
             </Box>
@@ -503,7 +508,9 @@ export default function PoolsRow({
                         onChange={onInputField}
                     value={depositInput}
                       />
-                      <Button className={style.buttontop}>Max</Button>
+                      <Button className={style.buttontop} onClick={()=>{setDepositInput(formatCurrency(
+                          BigNumber(maxLpStaked).div(10 ** 18)
+                        )  )}}>Max</Button>
                     </Box>
                   </Box>
                 </Box>
