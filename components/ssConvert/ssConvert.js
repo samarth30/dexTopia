@@ -160,7 +160,7 @@ export default function ssConvert() {
     forceUpdate();
   };
 
-  const onDeposit = async () => {
+  const onDeposit = async (depositInput) => {
     // setDepositLoading(true)
     await stores.dispatcher.dispatch({
       type: ACTIONS.VE_DEPOSITOR_DEPOSIT,
@@ -171,9 +171,10 @@ export default function ssConvert() {
   const [depositInputveTopia, setDepositInputVeTopia] = useState("0");
 
   const onInputDepositStakeVtopia = async (e) => {
+    console.log("siflskjfklsdlja", e.target.value);
     setDepositInputVeTopia(e.target.value);
   };
-  const onDepositVeTopia = async () => {
+  const onDepositVeTopia = async (depositInputveTopia) => {
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT,
       content: { amount: depositInputveTopia },
@@ -195,7 +196,7 @@ export default function ssConvert() {
   };
 
   useEffect(() => {
-    const vestVotesReturned = (vals) => {
+    const vestVotesReturned = async (vals) => {
       setVotes(
         vals.map((asset) => {
           return {
@@ -214,8 +215,8 @@ export default function ssConvert() {
       forceUpdate();
     };
 
-    const stableSwapUpdated = () => {
-      ssUpdated();
+    const stableSwapUpdated = async () => {
+      await ssUpdated();
     };
 
     const voteReturned = () => {
@@ -462,7 +463,7 @@ export default function ssConvert() {
                         </Button> */}
                             <Button
                               className={style.approveBtn}
-                              onClick={() => onDeposit()}
+                              onClick={() => onDeposit(depositInput)}
                             >
                               Convert tokens
                             </Button>
@@ -702,7 +703,7 @@ export default function ssConvert() {
                           placeholder="Enter Amount"
                           className={style.AmountInput}
                           value={depositInputveTopia}
-                          onChange={onInputDepositStakeVtopia}
+                          onChange={() => onInputDepositStakeVtopia()}
                         />
                         <Button className={style.buttontop} onClick={()=>{setDepositInputVeTopia(formatCurrency(
                               BigNumber(veTopiaBalance).div(
@@ -728,9 +729,7 @@ export default function ssConvert() {
                   <Button
                     className={style.approveBtn}
                     style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
-                    onClick={() => {
-                      onDepositVeTopia();
-                    }}
+                    onClick={() => {onDepositVeTopia(depositInputveTopia)}}
                   >
                     Convert tokens
                   </Button>
@@ -753,7 +752,7 @@ export default function ssConvert() {
                               placeholder="Enter Amount"
                               className={style.AmountInput}
                               value={depositInputveTopia}
-                              onChange={onInputDepositStakeVtopia}
+                              onChange={() => onInputDepositStakeVtopia()}
                             />
                             <Button className={style.buttontop}>Max</Button>
                           </Box>
@@ -775,7 +774,7 @@ export default function ssConvert() {
                     className={style.approveBtn}
                     style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
                     onClick={() => {
-                      onWithdrawVeTopia();
+                      onWithdrawVeTopia()
                     }}
                   >
                     Withdraw
