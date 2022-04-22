@@ -316,6 +316,8 @@ export default function Vote() {
         );
       }
 
+      console.log("votes page", gauges)
+
     return (
             <Container id="main" className={style.mainContainer}>
                 <Box id="mainContainer" className={style.mainContainerInner}>
@@ -385,30 +387,32 @@ export default function Vote() {
                                     <Box className={voteStyle.header4}>
                                         <Container className={voteStyle.header4Inner}>
                                             <Grid xs={12} item className={voteStyle.hederBox}>
-                                                <Grid xs={12} container className={voteStyle.hederBoxInner}>
+                                              {gauges.map((gauge, index) => {
+                                                return (
+                                                  <Grid key={index} xs={12} container className={voteStyle.hederBoxInner}>
                                                     <Grid item xs={3}>
                                                         <Typography variant="p" className={voteStyle.headertext}>
-                                                            USDC/OXD (Volatile)
+                                                            {gauge.symbol}
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item xs={2}>
                                                         <Typography variant="p" className={voteStyle.hyfernSymbol}>
-                                                            ---
+                                                            {gauge && gauge.balance && gauge.balance.substring(0, 4)}
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item xs={0.7}>
                                                         <Typography variant="p" className={voteStyle.hyfernSymbol}>
-                                                            ---
+                                                            {gauge && gauge.totalSupply && gauge.totalSupply.substring(0, 4)}
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item xs={2.3}>
                                                         <Typography variant="p" className={voteStyle.hyfernSymbol}>
-                                                            ---
+                                                            {gauge && gauge.claimable0 && gauge.claimable0.substring(0, 4)}
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item xs={1}>
                                                         <Typography variant="p" className={voteStyle.hyfernSymbol}>
-                                                            ---
+                                                            {gauge && gauge.claimable1 && gauge.claimable1.substring(0, 4)}
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item xs={3} className={voteStyle.multiBoxes}>
@@ -430,56 +434,9 @@ export default function Vote() {
                                                         </Box>
                                                     </Grid>
                                                 </Grid>
+                                                )
+                                              })}
                                             </Grid>
-
-                                            <Grid xs={12} item className={voteStyle.hederBox}>
-                                                <Grid xs={12} container className={voteStyle.hederBoxInner}>
-                                                    <Grid item xs={3}>
-                                                        <Typography variant="p" className={voteStyle.headertext}>
-                                                            USDC/OXD (Volatile)
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item xs={2}>
-                                                        <Typography variant="p" className={voteStyle.hyfernSymbol}>
-                                                            ---
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item xs={0.7}>
-                                                        <Typography variant="p" className={voteStyle.hyfernSymbol}>
-                                                            ---
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item xs={2.3}>
-                                                        <Typography variant="p" className={voteStyle.hyfernSymbol}>
-                                                            ---
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item xs={1}>
-                                                        <Typography variant="p" className={voteStyle.hyfernSymbol}>
-                                                            ---
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item xs={3} className={voteStyle.multiBoxes}>
-                                                        <Box className={voteStyle.boxes}>
-                                                            <Box className={voteStyle.left}>
-                                                                <TextField placeholder="Enter vote" className={voteStyle.inputBox} variant="outlined" />
-                                                                <Button className={voteStyle.inpputButtonMax}>Max</Button>
-                                                            </Box>
-                                                            <Box className={voteStyle.right}>
-                                                                <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                                                                    <Button className={voteStyle.like}>
-                                                                        {/* <img src={likeimage} className={voteStyle.svgIcons} alt="likeimage" /> */}
-                                                                    </Button>
-                                                                    <Button className={voteStyle.dislike}>
-                                                                        {/* <img src={dislikeimage} className={voteStyle.svgIcons} alt="likeimage" /> */}
-                                                                    </Button>
-                                                                </ButtonGroup>
-                                                            </Box>
-                                                        </Box>
-                                                    </Grid>
-                                                </Grid>
-                                            </Grid>
-
 
                                             <Box style={{ width: '100%' }}>
                                                 <TablePagination
@@ -558,7 +515,7 @@ export default function Vote() {
                     <Grid container spacing={2}>
                     <Grid item lg={6}>
                         <div className={ voteStyle.infoSection }>
-                        <Typography>Voting Power Used: </Typography>
+                        <Typography color="common.white">Voting Power Used: </Typography>
                         <Typography className={ `${BigNumber(totalVotes).gt(100) ? voteStyle.errorText : voteStyle.helpText}` }>{ totalVotes } %</Typography>
                         </div>
                     </Grid>
