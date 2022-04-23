@@ -33,7 +33,7 @@ export default function Footer() {
               </div>
               <div className={style.column4}>
                   <div className={style.footerImgDiv}>
-                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnOIfM-pc0T3Sm3TugKXKLSj01GGcmO2cygwNMzO3pY-olZ9CXZcg2sigJ2rahEy5Rx7M&usqp=CAU" alt="footer logo" />
+                      <img src="./images/logodex.png" alt="footer logo" />
                   </div>
               </div>
           </div>
