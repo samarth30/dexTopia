@@ -391,6 +391,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                   label="Age"
                   value={weekInputField}
                   onChange={onChangeWeekInputField}
+                  style={{color: "white !important"}}
                 >
                   <MenuItem value={11}>11 weeks</MenuItem>
                   <MenuItem value={12}>12 weeks</MenuItem>
