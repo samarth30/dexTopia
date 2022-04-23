@@ -6890,7 +6890,7 @@ class Store {
 
   // dextopia staking reward deposit token
   dexTopiastakingRewardDeposit = async (payload) => {
-    try {
+   // try {
       const context = this;
 
       const account = stores.accountStore.getStore("account");
@@ -6904,6 +6904,7 @@ class Store {
         console.warn("web3 not found");
         return null;
       }
+    
       // console.log(payload.content,"heeh")
       const { amount } = payload.content;
 
@@ -6932,92 +6933,92 @@ class Store {
       });
 
 
-      let allowance0 = 0;
+    //   let allowance0 = 0;
       
-      allowance0 = await this._getUniversalAllowance(web3,CONTRACTS.DEXTOPIA_VE_DEPOSITER, account,CONTRACTS.DEXTOPIA_STAKINGREWARDS);
+    //   allowance0 = await this._getUniversalAllowance(web3,CONTRACTS.DEXTOPIA_VE_DEPOSITER, account,CONTRACTS.DEXTOPIA_STAKINGREWARDS);
       
-        if (BigNumber(allowance0).lt(amount)) {
-          this.emitter.emit(ACTIONS.TX_STATUS, {
-            uuid: allowance0TXID,
-            description: `Allow the dextopia staking reward to spend your token`,
-          });
-        } else {
-          this.emitter.emit(ACTIONS.TX_STATUS, {
-            uuid: allowance0TXID,
-            description: `Allowance on dextopia staking reward sufficient`,
-            status: "DONE",
-          });
-        }
+    //     if (BigNumber(allowance0).lt(amount)) {
+    //       this.emitter.emit(ACTIONS.TX_STATUS, {
+    //         uuid: allowance0TXID,
+    //         description: `Allow the dextopia staking reward to spend your token`,
+    //       });
+    //     } else {
+    //       this.emitter.emit(ACTIONS.TX_STATUS, {
+    //         uuid: allowance0TXID,
+    //         description: `Allowance on dextopia staking reward sufficient`,
+    //         status: "DONE",
+    //       });
+    //     }
       
 
-      const gasPrice = await stores.accountStore.getGasPrice();
+    //   const gasPrice = await stores.accountStore.getGasPrice();
 
-      const allowanceCallsPromises = [];
-      if (BigNumber(allowance0).lt(amount)) {
-      const tokenContract = new web3.eth.Contract(
-        CONTRACTS.ERC20_ABI,
-        CONTRACTS.DEXTOPIA_VE_DEPOSITER
-      );
-      const tokenPromise = new Promise((resolve, reject) => {
-        this._callContractWait(
-          web3,
-          tokenContract,
-          "approve",
-          [CONTRACTS.DEXTOPIA_STAKINGREWARDS, MAX_UINT256],
-          account,
-          gasPrice,
-          null,
-          null,
-          allowance0TXID,
-          (err) => {
-            if (err) {
-              reject(err);
-              return;
-            }
+    //   const allowanceCallsPromises = [];
+    //   if (BigNumber(allowance0).lt(amount)) {
+    //   const tokenContract = new web3.eth.Contract(
+    //     CONTRACTS.ERC20_ABI,
+    //     CONTRACTS.DEXTOPIA_VE_DEPOSITER
+    //   );
+    //   const tokenPromise = new Promise((resolve, reject) => {
+    //     this._callContractWait(
+    //       web3,
+    //       tokenContract,
+    //       "approve",
+    //       [CONTRACTS.DEXTOPIA_STAKINGREWARDS, MAX_UINT256],
+    //       account,
+    //       gasPrice,
+    //       null,
+    //       null,
+    //       allowance0TXID,
+    //       (err) => {
+    //         if (err) {
+    //           reject(err);
+    //           return;
+    //         }
 
-            resolve();
-          }
-        );
-      });
+    //         resolve();
+    //       }
+    //     );
+    //   });
 
-      allowanceCallsPromises.push(tokenPromise);
-    }
-    const done = await Promise.all(allowanceCallsPromises);
+    //   allowanceCallsPromises.push(tokenPromise);
+    // }
+    // const done = await Promise.all(allowanceCallsPromises);
 
-      // SUBMIT DEPOSIT TRANSACTION
-      const sendAmount = BigNumber(amount)
-        .times(10 ** 18)
-        .toFixed(0);
+    //   // SUBMIT DEPOSIT TRANSACTION
+    //   const sendAmount = BigNumber(amount)
+    //     .times(10 ** 18)
+    //     .toFixed(0);
 
-        const dexTopiaStakingRewardContract = new web3.eth.Contract(
-          CONTRACTS.DEXTOPIA_STAKINGREWARDS_ABI,
-          CONTRACTS.DEXTOPIA_STAKINGREWARDS
-        );
+    //     const dexTopiaStakingRewardContract = new web3.eth.Contract(
+    //       CONTRACTS.DEXTOPIA_STAKINGREWARDS_ABI,
+    //       CONTRACTS.DEXTOPIA_STAKINGREWARDS
+    //     );
 
-      this._callContractWait(
-        web3,
-        dexTopiaStakingRewardContract,
-        "stake",
-        [sendAmount],
-        account,
-        gasPrice,
-        null,
-        null,
-        depositTXID,
-        async (err) => {
-          if (err) {
-            return this.emitter.emit(ACTIONS.ERROR, err);
-          }
+    //   this._callContractWait(
+    //     web3,
+    //     dexTopiaStakingRewardContract,
+    //     "stake",
+    //     [sendAmount],
+    //     account,
+    //     gasPrice,
+    //     null,
+    //     null,
+    //     depositTXID,
+    //     async (err) => {
+    //       if (err) {
+    //         return this.emitter.emit(ACTIONS.ERROR, err);
+    //       }
 
-          this._getPairInfo(web3, account);
+    //       this._getPairInfo(web3, account);
 
-          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
-        }
-      );
-    } catch (ex) {
-      console.error(ex);
-      this.emitter.emit(ACTIONS.ERROR, ex);
-    }
+    //       this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+    //     }
+    //   );
+    // } catch (ex) {
+    //   console.error(ex);
+    //   this.emitter.emit(ACTIONS.ERROR, ex);
+    // }
   };
 
 

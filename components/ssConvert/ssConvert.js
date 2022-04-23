@@ -114,15 +114,15 @@ export default function ssConvert() {
       type: ACTIONS.POOLSTAKED,
       content: { filteredAssets },
     });
-    const stakingRewardsStakedBalance = stores.dispatcher.dispatch({
-      type: ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT,
-      content: {},
-    });
+    // const stakingRewardsStakedBalance = stores.dispatcher.dispatch({
+    //   type: ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT,
+    //   content: {},
+    // });
 
-    const vedepositordata = stores.dispatcher.dispatch({
-      type: ACTIONS.VE_DEPOSITOR_DATA,
-      content: {},
-    });
+    // const vedepositordata = stores.dispatcher.dispatch({
+    //   type: ACTIONS.VE_DEPOSITOR_DATA,
+    //   content: {},
+    // });
 
     const stakingRewardsStakedBalancedata = stores.stableSwapStore.getStore(
       "StakingRewardStakedBalances"
@@ -162,7 +162,7 @@ export default function ssConvert() {
     forceUpdate();
   };
 
-  const onDeposit = async () => {
+  const onDeposit = async (depositInput) => {
     // setDepositLoading(true)
     await stores.dispatcher.dispatch({
       type: ACTIONS.VE_DEPOSITOR_DEPOSIT,
@@ -173,7 +173,8 @@ export default function ssConvert() {
   const [depositInputveTopia, setDepositInputVeTopia] = useState("0");
 
   const onInputDepositStakeVtopia = async (e) => {
-    setDepositInputVeTopia(e.target.value);
+    console.log("siflskjfklsdlja", e);
+   setDepositInputVeTopia(e.target.value);
   };
 
   const onInputDepositDyst = async (e)=>{
@@ -202,7 +203,7 @@ export default function ssConvert() {
   };
 
   useEffect(() => {
-    const vestVotesReturned = (vals) => {
+    const vestVotesReturned = async (vals) => {
       setVotes(
         vals.map((asset) => {
           return {
@@ -221,8 +222,8 @@ export default function ssConvert() {
       forceUpdate();
     };
 
-    const stableSwapUpdated = () => {
-      ssUpdated();
+    const stableSwapUpdated = async () => {
+      await ssUpdated();
     };
 
     const voteReturned = () => {
@@ -471,7 +472,7 @@ export default function ssConvert() {
                         </Button> */}
                             <Button
                               className={style.approveBtn}
-                              onClick={() => onDeposit()}
+                              onClick={() => onDeposit(depositInput)}
                             >
                               Convert tokens
                             </Button>
@@ -650,7 +651,7 @@ export default function ssConvert() {
                       <Grid item xs={6} lg={1.5}>
                         <Button
                           className={style.approveBtn}
-                          onClick={openModel}
+                          onClick={()=> openModel()}
                         >
                           Manage
                         </Button>
@@ -724,9 +725,10 @@ export default function ssConvert() {
                         <Input
                           autoFocus="autoFocus"
                           placeholder="Enter Amount"
+                          autoFocus="autoFocus"
                           className={style.AmountInput}
                           value={depositInputveTopia}
-                          onChange={onInputDepositStakeVtopia}
+                          onChange={(e) => onInputDepositStakeVtopia(e)}
                         />
                         <Button className={style.buttontop} onClick={()=>{setDepositInputVeTopia(formatCurrency(
                               BigNumber(veTopiaBalance).div(
@@ -752,9 +754,7 @@ export default function ssConvert() {
                   <Button
                     className={style.approveBtn}
                     style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
-                    onClick={() => {
-                      onDepositVeTopia();
-                    }}
+                     onClick={() => onDepositVeTopia(depositInputveTopia)}
                   >
                     Convert tokens
                   </Button>
@@ -776,9 +776,10 @@ export default function ssConvert() {
                             <Input
                               autoFocus="autoFocus"
                               placeholder="Enter Amount"
+                              autoFocus="autoFocus"
                               className={style.AmountInput}
                               value={depositInputveTopia}
-                              onChange={onInputDepositStakeVtopia}
+                              onChange={(e) => onInputDepositStakeVtopia(e)}
                             />
                              <Button className={style.buttontop} onClick={()=>{setDepositInputVeTopia(formatCurrency(
                               BigNumber(stakingRewardStaked?.stakedBalance).div(
@@ -804,7 +805,7 @@ export default function ssConvert() {
                     className={style.approveBtn}
                     style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
                     onClick={() => {
-                      onWithdrawVeTopia();
+                      onWithdrawVeTopia()
                     }}
                   >
                     Withdraw
