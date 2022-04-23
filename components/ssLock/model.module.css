@@ -1,0 +1,10 @@
+.modelHeader{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.modalclloseImage{
+    cursor: pointer;
+}

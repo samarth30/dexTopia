@@ -527,7 +527,7 @@ class Store {
           console.log(e ,"allsetbro");
         }
    
-    this.setStore({TockenLockerDatas: {lockedBalance , activeUserLocks}});
+    this.setStore({TockenLockerData: {lockedBalance , activeUserLocks}});
     console.log({lockedBalance , activeUserLocks},"pippppp")
    return {lockedBalance , activeUserLocks};
       
