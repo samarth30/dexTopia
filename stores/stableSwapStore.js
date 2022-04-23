@@ -527,7 +527,7 @@ class Store {
           console.log(e ,"allsetbro");
         }
    
-    this.setStore({TockenLockerDatas: {lockedBalance , activeUserLocks}});
+    this.setStore({TockenLockerData: {lockedBalance , activeUserLocks}});
     console.log({lockedBalance , activeUserLocks},"pippppp")
    return {lockedBalance , activeUserLocks};
       
@@ -550,6 +550,7 @@ class Store {
     
   
      let balanceOfVeTopia = 0;
+     let balanceOfDystToken= 0;
 
 
         try {
@@ -557,6 +558,15 @@ class Store {
             CONTRACTS.DEXTOPIA_VE_DEPOSITER_ABI,
             CONTRACTS.DEXTOPIA_VE_DEPOSITER
           );
+
+          const veTokenContract = new web3.eth.Contract(
+            CONTRACTS.GOV_TOKEN_ABI,
+            CONTRACTS.GOV_TOKEN_ADDRESS
+          );
+    
+           balanceOfDystToken = await Promise.all([
+            veTokenContract.methods.balanceOf(account.address).call(),
+          ]);
            
          
           balanceOfVeTopia = await  dexTopiaVeDepositor.methods.balanceOf(account.address).call();
@@ -567,9 +577,9 @@ class Store {
           console.log(e ,"allsetbro");
         }
    
-    this.setStore({veDepositorData: {balanceOfVeTopia }});
-    console.log({balanceOfVeTopia },"pippppp")
-   return {balanceOfVeTopia };
+    this.setStore({veDepositorData: {balanceOfVeTopia ,balanceOfDystToken }});
+    console.log({balanceOfVeTopia , balanceOfDystToken },"pippppp")
+   return {balanceOfVeTopia , balanceOfDystToken };
       
   }
   getNFTByID = async (id) => {

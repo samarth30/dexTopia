@@ -22,7 +22,7 @@ import { formatCurrency } from "../../utils/utils";
 import PoolsRow from "./poolsRow"
 import CustomBox from "../customBox/customBox"
 import { styled } from '@mui/material/styles';
-
+import Mymodel from "./Mymodel";
 import GaugesTable from "./ssVotesTable.js";
 
 import stores from "../../stores";
@@ -94,7 +94,7 @@ topiaEarning: "0"
       content: {},
     });
     const tockenLockerData = stores.stableSwapStore.getStore("TockenLockerDatas");
-    console.log(tockenLockerData)
+    console.log(tockenLockerData,"lock")
     settockenLockerDataRedux(tockenLockerData)
     
     const nfts = stores.stableSwapStore.getStore("vestNFTs");

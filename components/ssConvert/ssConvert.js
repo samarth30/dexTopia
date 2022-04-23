@@ -46,6 +46,7 @@ export default function ssConvert() {
   });
 
   const [veTopiaBalance, setveTopiaBalance] = useState("0");
+  const [dystopiaBalance,setDystopiaBalance] = useState("0");
   const [voteLoading, setVoteLoading] = useState(false);
   const [votes, setVotes] = useState([]);
   const [veToken, setVeToken] = useState(null);
@@ -58,7 +59,7 @@ export default function ssConvert() {
   const [modelTabs, setModeltabs] = useState(0);
 
   const [open, setOpen] = useState(false);
-  const [selectDropdown, setSelectDropdown] = useState("");
+  const [selectDropdown, setSelectDropdown] = useState("0");
   const [depositInput, setDepositInput] = useState("0");
 
   useEffect(() => {
@@ -136,6 +137,7 @@ export default function ssConvert() {
     const vedepositordatas = stores.stableSwapStore.getStore("veDepositorData");
     // console.log(vedepositordatas, "vedepo");
     setveTopiaBalance(vedepositordatas?.balanceOfVeTopia);
+    setDystopiaBalance(vedepositordatas?.balanceOfDystToken);
 
     const nfts = stores.stableSwapStore.getStore("vestNFTs");
     setVestNFTs(nfts);
@@ -174,7 +176,12 @@ export default function ssConvert() {
     console.log("siflskjfklsdlja", e);
    setDepositInputVeTopia(e.target.value);
   };
-  const onDepositVeTopia = async (depositInputveTopia) => {
+
+  const onInputDepositDyst = async (e)=>{
+    setDepositInput(e.target.value);
+  }
+
+  const onDepositVeTopia = async () => {
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT,
       content: { amount: depositInputveTopia },
@@ -434,10 +441,10 @@ export default function ssConvert() {
                         <Box className={style.tabPannelrow2}>
                           <Typography variant="p" className={style.balancep}>
                             Balance: {formatCurrency(
-                              BigNumber(veTopiaBalance).div(
+                              BigNumber(dystopiaBalance).div(
                                 10 ** 18
                               )
-                            )}  vetopia
+                            )}  dystopia
                           </Typography>
                         </Box>
                         <Box className={style.tabPannelrow3}>
@@ -448,12 +455,14 @@ export default function ssConvert() {
                                   autoFocus="autoFocus"
                                   placeholder="Enter Amount"
                                   className={style.AmountInput}
-                                  onChange={(e) => {
-                                    setDepositInput(e.target.value);
-                                  }}
+                                  onChange={onInputDepositDyst}
                                   value={depositInput}
                                 />
-                                <Button className={style.buttontop}>Max</Button>
+                                <Button className={style.buttontop} onClick={()=>{setDepositInput(formatCurrency(
+                              BigNumber(dystopiaBalance).div(
+                                10 ** 18
+                              )
+                            )) }}>Max</Button>
                               </Box>
                             </Box>
                           </Box>
@@ -471,7 +480,7 @@ export default function ssConvert() {
                         </Box>
                         <Box className={style.tabPannelrow4}>
                           <Typography variant="p" className={style.balancep}>
-                            Converting 0 vetopia Tokens to 0 GAStopia
+                            Converting {depositInput} dystopia Tokens to {depositInput} Topia
                           </Typography>
                         </Box>
                       </Box>
@@ -490,10 +499,10 @@ export default function ssConvert() {
                         <Box className={style.tabPannelrow2}>
                           <Typography variant="p" className={style.balancep}>
                           Balance: {formatCurrency(
-                              BigNumber(veTopiaBalance).div(
+                              BigNumber(dystopiaBalance).div(
                                 10 ** 18
                               )
-                            )}  vetopia
+                            )}  dystopia in all nfts ?
                           </Typography>
                         </Box>
                         <Box className={style.tabPannelrow3}>
@@ -628,6 +637,7 @@ export default function ssConvert() {
                             )}{" "}
                           dystopia{" "}
                         </Typography>
+                        <br></br>
                         <Typography variant="p">
                           {stakingRewardStaked !== "undefined" &&
                             formatCurrency(
@@ -688,18 +698,32 @@ export default function ssConvert() {
                 </Tabs>
               </Box>
             </Box>
-
+            your vetopia balance : {formatCurrency(
+                              BigNumber(veTopiaBalance).div(
+                                10 ** 18
+                              )
+                            )}
+                            <br></br>
+                            your vetopai staked balance : {formatCurrency(
+                              BigNumber(stakingRewardStaked?.stakedBalance).div(
+                                10 ** 18
+                              )
+                            )}
             <TabPanel
               style={{ backgroundColor: "rgb(32 39 43)" }}
               value={modelTabs}
               index={0}
             >
               <Box className={style.tabPannel1}>
+                
                 <Box className={style.tabPannelrow3}>
                   <Box className={style.tabPannelrow3Left}>
                     <Box className={style.tabPannelrow3LeftInner}>
+                    
                       <Box className={style.tabinputFields}>
+                        
                         <Input
+                          autoFocus="autoFocus"
                           placeholder="Enter Amount"
                           autoFocus="autoFocus"
                           className={style.AmountInput}
@@ -750,13 +774,18 @@ export default function ssConvert() {
                         <Box className={style.tabPannelrow3LeftInner}>
                           <Box className={style.tabinputFields}>
                             <Input
+                              autoFocus="autoFocus"
                               placeholder="Enter Amount"
                               autoFocus="autoFocus"
                               className={style.AmountInput}
                               value={depositInputveTopia}
                               onChange={(e) => onInputDepositStakeVtopia(e)}
                             />
-                            <Button className={style.buttontop}>Max</Button>
+                             <Button className={style.buttontop} onClick={()=>{setDepositInputVeTopia(formatCurrency(
+                              BigNumber(stakingRewardStaked?.stakedBalance).div(
+                                10 ** 18
+                              )
+                            ))}}>Max</Button>
                           </Box>
                         </Box>
                       </Box>
@@ -795,7 +824,7 @@ export default function ssConvert() {
             }}
             sx={{ mt: 2 }}
           >
-            Please Approve the contract
+            {/* Please Approve the contract */}
           </Typography>
         </Mymodel>
       )}
