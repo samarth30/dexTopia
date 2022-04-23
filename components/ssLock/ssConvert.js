@@ -49,7 +49,7 @@ export default function ssLock() {
 stakedBalance: "0",
 topiaEarning: "0"
   });
-  const [tockenLockerDataRedux,settockenLockerDataRedux] = useState({lockedBalance:"0" , activeUserLocks:"0"})
+  const [tockenLockerDataRedux,settockenLockerDataRedux] = useState({lockedBalance:"0" , activeUserLocks:[] , balanceOfTopiaToken : "0"})
   const [voteLoading, setVoteLoading] = useState(false);
   const [votes, setVotes] = useState([]);
   const [veToken, setVeToken] = useState(null);
@@ -57,7 +57,7 @@ topiaEarning: "0"
   const [vestNFTs, setVestNFTs] = useState([]);
   const [search, setSearch] = useState("");
   const [tab, setTab] = useState("token");
-
+console.log("tockenLockerDataRedux",tockenLockerDataRedux)
   const ssUpdated = () => {
     setVeToken(stores.stableSwapStore.getStore("veToken"));
     const as = stores.stableSwapStore.getStore("pairs");
@@ -93,7 +93,7 @@ topiaEarning: "0"
       type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA,
       content: {},
     });
-    const tockenLockerData = stores.stableSwapStore.getStore("TockenLockerDatas");
+    const tockenLockerData = stores.stableSwapStore.getStore("tockenLockerData");
     console.log(tockenLockerData,"lock")
     settockenLockerDataRedux(tockenLockerData)
     
@@ -137,10 +137,6 @@ topiaEarning: "0"
       content: { amount: depositInput ,  weeks:depositInputWeeks },
     });
   };
-
- 
-
-
 
 
   useEffect(() => {
@@ -343,7 +339,7 @@ topiaEarning: "0"
                         </Box>
                     </Grid>
                     
-                    <PoolsRow />
+                    <PoolsRow tockenLockerDataRedux={tockenLockerDataRedux} />
 
                     {/* Bottom boxes */}
 

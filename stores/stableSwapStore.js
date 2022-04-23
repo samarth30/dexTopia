@@ -503,6 +503,7 @@ class Store {
     
   
      let lockedBalance = 0;
+     let balanceOfTopiaToken = 0;
      let activeUserLocks=[];
 
 
@@ -511,11 +512,16 @@ class Store {
             CONTRACTS.DEXTOPIA_TOKENLOCKER_ABI,
             CONTRACTS.DEXTOPIA_TOKENLOCKER
           );
+
+          const topiaTokenContract = new web3.eth.Contract(
+            CONTRACTS.DEXTOPIA_TOKEN_ABI,
+            CONTRACTS.DEXTOPIA_TOKEN
+          );
            
          
                lockedBalance = await  dexTopiaTockenLockerContract.methods.userBalance(account.address).call();
                activeUserLocks  = await dexTopiaTockenLockerContract.methods.getActiveUserLocks(account.address).call();
-           
+               balanceOfTopiaToken = await topiaTokenContract.methods.balanceOf(account.address).call();
 
               // await multicall.aggregate([
               //   dexTopiaStakingRewardContract.methods.balanceOf(account.address),
@@ -528,9 +534,9 @@ class Store {
           console.log(e ,"allsetbro");
         }
    
-    this.setStore({TockenLockerData: {lockedBalance , activeUserLocks}});
-    console.log({lockedBalance , activeUserLocks},"pippppp")
-   return {lockedBalance , activeUserLocks};
+    this.setStore({tockenLockerData: {lockedBalance , activeUserLocks , balanceOfTopiaToken}});
+    console.log({lockedBalance , activeUserLocks , balanceOfTopiaToken},"pippppp")
+   return {lockedBalance , activeUserLocks , balanceOfTopiaToken};
       
   }
 

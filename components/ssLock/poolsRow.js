@@ -129,7 +129,7 @@ function descendingComparator(a, b, orderBy) {
     }
   ];
 
-export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, veToken, token,poolReward , poolStaked }) {
+export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, veToken, token,poolReward , poolStaked , tockenLockerDataRedux }) {
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('totalVotes');
   const [sliderValues, setSliderValues] = useState(defaultVotes)
@@ -146,6 +146,26 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
   const handleClose = () => {
     setOpen(false);
   };
+
+
+  const[weekInputField,setWeekInputField] = useState(11);
+
+  const onChangeWeekInputField = (e)=>{
+    setWeekInputField(e.target.value);
+  }
+
+  const[lockInput,SetLockInput] = useState(0);
+
+  const onChangeLockInput = (e)=>{
+    SetLockInput(e.target.value);
+  }
+
+  const LockTokensFunc = async ()=>{
+    await stores.dispatcher.dispatch({
+      type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DEPOSIT,
+      content: {amount :lockInput  , weeks : weekInputField },
+    });
+  }
 
   useEffect(() => {
     setSliderValues(defaultVotes)
@@ -287,7 +307,11 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                         </Grid>
                         <Grid xs={12} lg={1.5} className={style.tableBox2}>
                             <Typography variant="p" className={style.tableBox2text}>
-                                $0.00
+                                {formatCurrency(
+                              BigNumber(tockenLockerDataRedux?.lockedBalance).div(
+                                10 ** 18
+                              )
+                            )}
                             </Typography>
                         </Grid>
                         <Grid xs={12} lg={2} className={style.tableBox2}>
@@ -295,9 +319,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                                 <Typography variant="p" className={style.tableBox2text}>
                                     0 topia 
                                 </Typography>
-                                <Typography variant="p" className={style.tableBox2text}>
-                                    0 Solid
-                                </Typography>
+                           
                             </Box>
                         </Grid>
                         <Grid xs={6} lg={1.5} className={style.tableBox3}>
@@ -339,11 +361,17 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                     <Box className={style.tabPannelrow3LeftInner}>
                       <Box className={style.tabinputFields}>
                         <Input
+                        value={lockInput}
+                        onChange={onChangeLockInput}
                           placeholder="Enter Amount"
                           className={style.AmountInput}
                           style={{ color: "#fff" }}
                         />
-                        <Button className={style.buttontop}>Max</Button>
+                        <Button className={style.buttontop} onClick={()=>{SetLockInput(formatCurrency(
+                              BigNumber(tockenLockerDataRedux?.balanceOfTopiaToken).div(
+                                10 ** 18
+                              )
+                            )) }} >Max</Button>
                       </Box>
                     </Box>
                   </Box>
@@ -352,11 +380,15 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   label="Age"
-                  value="50"
+                  value={weekInputField}
+                  onChange={onChangeWeekInputField}
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={11}>11 weeks</MenuItem>
+                  <MenuItem value={12}>12 weeks</MenuItem>
+                  <MenuItem value={13}>13 weeks</MenuItem>
+                  <MenuItem value={14}>14 weeks</MenuItem>
+                  <MenuItem value={15}>15 weeks</MenuItem>
+                  <MenuItem value={16}>16 weeks</MenuItem>
                 </Select>
                 <Box
                   className={`${style.modelButtons}`}
@@ -370,15 +402,16 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                   {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }}>
                       Approve
                     </Button> */}
-                  <Button
+                  {/* <Button
                     className={style.approveBtn}
                     style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
                   >
                     Convert tokens
-                  </Button>
+                  </Button> */}
                   <Button
                     className={style.approveBtn}
                     style={{ background: "rgb(2, 119, 250)", color: "#fff", marginLeft: "0.5rem" }}
+                    onClick={()=>{LockTokensFunc()}}
                   >
                     Lock tokens
                   </Button>
@@ -388,7 +421,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
             </Box>
           </Box>
 
-          <Typography
+          {/* <Typography
             id="modal-modal-description"
             style={{
               textAlign: "center",
@@ -398,7 +431,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
             sx={{ mt: 2 }}
           >
             Please Approve the contract
-          </Typography>
+          </Typography> */}
         </Mymodel>
       )}
         </Fragment>
