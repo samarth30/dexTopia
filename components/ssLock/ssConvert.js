@@ -49,7 +49,7 @@ export default function ssLock() {
 stakedBalance: "0",
 topiaEarning: "0"
   });
-  const [tockenLockerDataRedux,settockenLockerDataRedux] = useState({lockedBalance:"0" , activeUserLocks:[] , balanceOfTopiaToken : "0"})
+  const [tockenLockerDataRedux,settockenLockerDataRedux] = useState({lockedBalance:"0" , activeUserLocks:[] , balanceOfTopiaToken : "0" , userWeight: "0" , startTimeTockenLocker :0,getweek : 0})
   const [voteLoading, setVoteLoading] = useState(false);
   const [votes, setVotes] = useState([]);
   const [veToken, setVeToken] = useState(null);
@@ -346,7 +346,7 @@ console.log("tockenLockerDataRedux",tockenLockerDataRedux)
                     <Box>
                         <Grid style={{marginTop:'50px'}} container spacing={2}>
                             <Grid item xs={7}>
-                                <CustomBox tableSize="400" text="Your topia locks - 0% of vTopia" />
+                                <CustomBox tableSize="400" text="Your topia locks - 0% of vTopia" rows = {tockenLockerDataRedux} />
                             </Grid>
                             <Grid item xs={5}>
                             <CustomBox text="Current Week Claimable Earnings " />
