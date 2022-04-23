@@ -18,9 +18,9 @@ export default function ffWarning({ close }) {
             Use of the Dystopia.exchange website, services, dapp, or application is subject to the following terms and conditions and I hereby confirm that by proceeding and interacting with the protocol I am aware of these and accept them in full:
             </span>
             <br /><br />
-            Dystopia.exchange is a smart contract protocol in alpha stage of launch, and even though multiple security audits have been completed on the smart contracts, I understand the risks associated with using the Solidly protocol and associated functions.
+            Dystopia.exchange is a smart contract protocol in alpha stage of launch, and even though multiple security audits have been completed on the smart contracts, I understand the risks associated with using the Dystopia protocol and associated functions.
             <br /><br />
-            Any interactions that I have with the associated Dystopia protocol apps, smart contracts or any related functions MAY place my funds at risk, and I hereby release the Solidly protocol and its contributors, team members, and service providers from any and all liability associated with my use of the above-mentioned functions.
+            Any interactions that I have with the associated Dystopia protocol apps, smart contracts or any related functions MAY place my funds at risk, and I hereby release the Dystopia protocol and its contributors, team members, and service providers from any and all liability associated with my use of the above-mentioned functions.
             <br /><br />
             I am lawfully permitted to access this site and use the Dystopia.exchange application functions, and I am not in contravention of any laws governing my jurisdiction of residence or citizenship.
           </Typography>

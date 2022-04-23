@@ -264,7 +264,7 @@ let ssupdateDone = false;
               <Box className={style1.right}>
                 <Box className={style1.rightInput}>
                   <Input placeholder="Search Pools" className={style1.inputBox}></Input>
-                  <img src={search} className={style1.searchIcon} alt="search" />
+                  <img src="/images/search.svg" className={style1.searchIcon} alt="search" />
                 </Box>
                 <Button className={style1.btn}>Claim All Earnings</Button>
               </Box>
