@@ -341,7 +341,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                 </Paper>
             </Grid>
             {open && (
-        <Mymodel text="Manage SOLIDtopia" open={open} handleClose={handleClose}>
+        <Mymodel text="Manage Tocken Locker" open={open} handleClose={handleClose}>
           <Box className={style.bottomContainerLeftBottom}>
             <Box className={style.bottomContainerpannelTop}>
               <Box

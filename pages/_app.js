@@ -91,7 +91,7 @@ export default function MyApp({ Component, pageProps }) {
     <ThemeProvider theme={theme}>
       <React.Fragment>
         <Head>
-          <title>Dystopia</title>
+          <title>Dextopia</title>
           <meta
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"
