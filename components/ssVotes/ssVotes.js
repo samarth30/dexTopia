@@ -164,12 +164,12 @@ export default function ssVotes() {
       <div className={ classes.topBarContainer }>
 
         <Grid container spacing={1}>
-          <Grid item lg='auto' lg='auto' sm={12} xs={12}>
+          <Grid item lg='auto'  sm={12} xs={12}>
             
               <Button
                 variant="contained"
-                color="secondary"
-                className={classes.button}
+                // color="secondary"
+                // className={classes.button}
                 startIcon={<AddCircleOutlineIcon />}
                 size='large'
                 className={ classes.buttonOverride }
@@ -185,7 +185,7 @@ export default function ssVotes() {
               className={classes.searchContainer}
               variant="outlined"
               fullWidth
-              placeholder="AVAX, MIM, 0x..."
+              placeholder="MATIC, MIM, 0x..."
               value={search}
               onChange={onSearchChanged}
               inputProps={{
@@ -197,7 +197,7 @@ export default function ssVotes() {
               }}
             />
           </Grid>
-          <Grid item lg='auto' lg='auto' sm={12} xs={12}>
+          <Grid item lg='auto' sm={12} xs={12}>
             <div className={ classes.tokenIDContainer }>
               { renderMediumInput(token, vestNFTs) }
             </div>
