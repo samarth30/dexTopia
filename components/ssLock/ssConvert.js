@@ -20,7 +20,7 @@ import style from "./ssVotes.module.css";
 import style1 from "./pool.module.css"
 import { formatCurrency } from "../../utils/utils";
 import PoolsRow from "./poolsRow"
-import CustomBox from "./customBox/customBox"
+import CustomBox from "./customBox"
 import { styled } from '@mui/material/styles';
 import Mymodel from "./Mymodel";
 import GaugesTable from "./ssVotesTable.js";
