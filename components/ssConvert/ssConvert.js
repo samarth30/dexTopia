@@ -399,7 +399,7 @@ export default function ssConvert() {
                 <Paper elevation={1} className={style.bottomContainerLeftInner}>
                   <Box className={style.bottomContainerLeftInnerTop}>
                     <Typography variant="h3" className={style.h3text}>
-                      Convert & stake dextopia NFTs/Tokens into GAStopia
+                      Convert & stake dextopia NFTs/Tokens into Dextopia
                     </Typography>
                   </Box>
 
@@ -570,8 +570,8 @@ export default function ssConvert() {
                         </Box>
                         <Box className={style.tabPannelrow4}>
                           <Typography variant="p" className={style.balancep}>
-                            Converting 0 vetopia Tokens From the selected
-                            vetopia NFT to 0 Gasly
+                            Converting Dystopia Tokens From the selected
+                            Dystopia NFT to 0 VeTopia Token
                           </Typography>
                         </Box>
                       </Box>
@@ -599,7 +599,7 @@ export default function ssConvert() {
                     <Typography variant="h6">APR</Typography>
                   </Grid>
                   <Grid lg={1.7} item>
-                    <Typography variant="h6">Your Staked GAStopia</Typography>
+                    <Typography variant="h6">Your Staked Dextopia</Typography>
                   </Grid>
                   <Grid lg={1.7} item>
                     <Typography variant="h6">Your Earning</Typography>
@@ -609,7 +609,7 @@ export default function ssConvert() {
                   <Box className={style.tableRowInner}>
                     <Container className={style.tableBoxes}>
                       <Grid item xs={12} lg={2}>
-                        <Typography variant="p">Staked GAStopia</Typography>
+                        <Typography variant="p">Staked Dextopia</Typography>
                       </Grid>
                       <Grid item xs={12} lg={1.75}>
                         <Typography variant="p">6,656,064.4</Typography>
@@ -645,7 +645,7 @@ export default function ssConvert() {
                                 10 ** 18
                               )
                             )}{" "}
-                          vetopia
+                          topia
                         </Typography>
                       </Grid>
                       <Grid item xs={6} lg={1.5}>
@@ -673,7 +673,7 @@ export default function ssConvert() {
         </Box>
       </Container>
       {open && (
-        <Mymodel text="Manage SOLIDtopia" open={open} handleClose={handleClose}>
+        <Mymodel text="Manage veTopia Staker" open={open} handleClose={handleClose}>
           <Box className={style.bottomContainerLeftBottom}>
             <Box className={style.bottomContainerpannelTop}>
               <Box
@@ -725,7 +725,7 @@ export default function ssConvert() {
                         <Input
                           autoFocus="autoFocus"
                           placeholder="Enter Amount"
-                          autoFocus="autoFocus"
+                          // autoFocus="autoFocus"
                           className={style.AmountInput}
                           value={depositInputveTopia}
                           onChange={(e) => onInputDepositStakeVtopia(e)}
@@ -776,7 +776,7 @@ export default function ssConvert() {
                             <Input
                               autoFocus="autoFocus"
                               placeholder="Enter Amount"
-                              autoFocus="autoFocus"
+                              // autoFocus="autoFocus"
                               className={style.AmountInput}
                               value={depositInputveTopia}
                               onChange={(e) => onInputDepositStakeVtopia(e)}

@@ -90,7 +90,7 @@ export default function Home() {
             </Box>
           </Box> */}
 
-          <Box className={homeStyle.partnerBox}>
+          {/* <Box className={homeStyle.partnerBox}>
             <Typography variant='h1' color="common.white" className={homeStyle.partnerHeading} align='center'>
                Topia Partners
             </Typography>
@@ -152,7 +152,7 @@ export default function Home() {
               </CardContent>
             </Card>
             </Box>
-          </Box>
+          </Box> */}
 
           <Box className={homeStyle.featureBox} style={{marginTop: "3rem"}}>
             <Typography variant='h1' color="common.white" className={homeStyle.featureHeading} align='center'>
@@ -242,7 +242,7 @@ export default function Home() {
             </Box>
           </Box>
 
-          <Box className={homeStyle.section6}>
+          {/* <Box className={homeStyle.section6}>
             <Box className={homeStyle.section6Inner}>
               <Box className={homeStyle.section6InnerBoxes}>
                 <Box className={homeStyle.section6left}>
@@ -251,16 +251,16 @@ export default function Home() {
                     <Box className={homeStyle.boxInner}>
                       <h3 className={homeStyle.boxtext}>Coming Soon</h3>
                     </Box>
-                    {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+            
                   </Box>
                 </Box>
                 <Box className={homeStyle.section6Right}>
                   <p className={homeStyle.titleSocial}>GITHUB</p>
                   <Box style={{ marginLeft: '100px' }} className={homeStyle.boxSocial}>
                     <Box className={homeStyle.boxInner}>
-                      {/* <img src={guthubLogo} alt="guthubLogo" /> */}
+                      <img src={guthubLogo} alt="guthubLogo" />
                     </Box>
-                    {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+                    <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" />
                   </Box>
 
                   <Box className={homeStyle.section6RightBottom}>
@@ -269,32 +269,32 @@ export default function Home() {
                     <Box className={homeStyle.section6RightBottomLeft}>
                       <Box className={homeStyle.boxSocial}>
                         <Box className={homeStyle.boxInner}>
-                          {/* <img src={guthubLogo} alt="guthubLogo" /> */}
+                          <img src={guthubLogo} alt="guthubLogo" />
                         </Box>
-                        {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+                        <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" />
                       </Box>
 
                       <Box style={{ marginRight: '14px' }} className={homeStyle.boxSocial}>
                         <Box className={homeStyle.boxInner}>
-                          {/* <img src={guthubLogo} alt="guthubLogo" /> */}
+                          <img src={guthubLogo} alt="guthubLogo" />
                         </Box>
-                        {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+                        <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" />
                       </Box>
                     </Box>
 
                     <Box className={homeStyle.section6RightBottomRight}>
                       <Box className={homeStyle.boxSocial}>
                         <Box className={homeStyle.boxInner}>
-                          {/* <img src={guthubLogo} alt="guthubLogo" /> */}
+                          <img src={guthubLogo} alt="guthubLogo" />
                         </Box>
-                        {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+                        <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" />
                       </Box>
 
                       <Box style={{ marginRight: '14px' }} className={homeStyle.boxSocial}>
                         <Box className={homeStyle.boxInner}>
-                          {/* <img src={guthubLogo} alt="guthubLogo" /> */}
+                          <img src={guthubLogo} alt="guthubLogo" />
                         </Box>
-                        {/* <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" /> */}
+                        <img src={rightArrowLogo} alt="rightArrowLogo" srcset="" />
                       </Box>
                     </Box>
 
@@ -304,7 +304,7 @@ export default function Home() {
                 </Box>
               </Box>
             </Box>
-          </Box>
+          </Box> */}
 
 
         </Box>

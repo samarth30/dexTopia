@@ -1,8 +1,8 @@
 import abis from "../abis";
 
 export const GOV_TOKEN_ADDRESS = '0x90D6a3B44e32803eB7Cad92bb65eBed33383C363'
-export const GOV_TOKEN_NAME = 'Gasly'
-export const GOV_TOKEN_SYMBOL = 'GAS'
+export const GOV_TOKEN_NAME = 'Topia'
+export const GOV_TOKEN_SYMBOL = 'Topia'
 export const GOV_TOKEN_DECIMALS = 18
 export const GOV_TOKEN_LOGO = ''
 export const GOV_TOKEN_ABI = abis.tokenABI

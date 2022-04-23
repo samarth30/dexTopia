@@ -34,8 +34,8 @@ import style from './header.module.css';
 // import logo from '../../public/images/logo.svg';
 // import starLogo from '../../public/images/star.svg';
 
-
-const pages = ['HOME', 'SWAP', 'LIQUIDITY', 'VEST', 'VOTE', 'WHITELIST', 'POOLS', 'CONVERT', 'LOCK TOPIA'];
+// 'HOME', 'SWAP', 'LIQUIDITY', 'VEST',
+const pages = [ 'HOME', 'POOLS', 'CONVERT', 'LOCK TOPIA','VOTE', 'WHITELIST'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const returnPage = (page) => {
