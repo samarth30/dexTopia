@@ -276,6 +276,9 @@ class Store {
           case ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DEPOSIT:
             this.dexTopiaTockenLockerDeposit(payload);
             break;
+          case ACTIONS.DEXTOPIA_TOCKEN_LOCKER_EXTEND:
+            this.dexTopiaTockenLockerExtend(payload);
+            break;
           case ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA:
             this.getDexTopiaTockenLockerData(payload);
             break;
@@ -505,7 +508,10 @@ class Store {
      let lockedBalance = 0;
      let balanceOfTopiaToken = 0;
      let activeUserLocks=[];
-
+     let userWeight = 0;
+     let startTimeTockenLocker = 0;
+     let getweek = 0;
+     let data;
 
         try {
           const dexTopiaTockenLockerContract = new web3.eth.Contract(
@@ -522,7 +528,11 @@ class Store {
                lockedBalance = await  dexTopiaTockenLockerContract.methods.userBalance(account.address).call();
                activeUserLocks  = await dexTopiaTockenLockerContract.methods.getActiveUserLocks(account.address).call();
                balanceOfTopiaToken = await topiaTokenContract.methods.balanceOf(account.address).call();
-
+               userWeight = await dexTopiaTockenLockerContract.methods.userWeight(account.address).call();
+               startTimeTockenLocker = await dexTopiaTockenLockerContract.methods.startTime().call();
+               getweek = await dexTopiaTockenLockerContract.methods.getWeek().call();
+                data =  await dexTopiaTockenLockerContract.methods.exitStream(account.address).call();
+              
               // await multicall.aggregate([
               //   dexTopiaStakingRewardContract.methods.balanceOf(account.address),
               //   dexTopiaStakingRewardContract.methods.earned(account.address,CONTRACTS.DEXTOPIA_TOKEN),
@@ -534,9 +544,10 @@ class Store {
           console.log(e ,"allsetbro");
         }
    
-    this.setStore({tockenLockerData: {lockedBalance , activeUserLocks , balanceOfTopiaToken}});
-    console.log({lockedBalance , activeUserLocks , balanceOfTopiaToken},"pippppp")
-   return {lockedBalance , activeUserLocks , balanceOfTopiaToken};
+    this.setStore({tockenLockerData: {lockedBalance , activeUserLocks , balanceOfTopiaToken , userWeight ,startTimeTockenLocker , getweek}});
+    console.log({lockedBalance , activeUserLocks , balanceOfTopiaToken , userWeight ,startTimeTockenLocker , getweek},"pippppp")
+    console.log(data,"topdex")
+   return {lockedBalance , activeUserLocks , balanceOfTopiaToken , userWeight , startTimeTockenLocker , getweek};
       
   }
 
@@ -7306,6 +7317,137 @@ class Store {
       );
     } catch (ex) {
       console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
+  };
+
+  // dextopia Tocken Locker deposit token
+  dexTopiaTockenLockerExtend = async (payload) => {
+    try {
+      const context = this;
+
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+      // console.log(payload.content,"heeh")
+      const { amount , weeks , newWeeks } = payload.content;
+
+      // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
+      let allowance0TXID = this.getTXUUID();
+      let depositTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `Deposit Topia token to tocken Locker`,
+        type: "Liquidity",
+        verb: "Liquidity Deposit",
+        transactions: [
+          {
+            uuid: allowance0TXID,
+            description: `Checking your Topia token allowance`,
+            status: "WAITING",
+          },
+          {
+            uuid: depositTXID,
+            description: `Deposit Topia token to the dextopia tocken Locker`,
+            status: "WAITING",
+          }
+        ],
+      });
+
+
+      let allowance0 = 0;
+
+        allowance0 = await this._getUniversalAllowance(web3,CONTRACTS.DEXTOPIA_TOKEN, account, CONTRACTS.DEXTOPIA_TOKENLOCKER);
+        if (BigNumber(allowance0).lt(amount)) {
+          this.emitter.emit(ACTIONS.TX_STATUS, {
+            uuid: allowance0TXID,
+            description: `Allow the dextopia tocken locker to spend your token`,
+          });
+        } else {
+          this.emitter.emit(ACTIONS.TX_STATUS, {
+            uuid: allowance0TXID,
+            description: `Allowance on dextopia tocken locker sufficient`,
+            status: "DONE",
+          });
+        }
+      
+
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+      const allowanceCallsPromises = [];
+      if (BigNumber(allowance0).lt(amount)) {
+      const tokenContract = new web3.eth.Contract(
+        CONTRACTS.ERC20_ABI,
+        CONTRACTS.DEXTOPIA_TOKEN
+      );
+      const tokenPromise = new Promise((resolve, reject) => {
+        this._callContractWait(
+          web3,
+          tokenContract,
+          "approve",
+          [CONTRACTS.DEXTOPIA_TOKENLOCKER, MAX_UINT256],
+          account,
+          gasPrice,
+          null,
+          null,
+          allowance0TXID,
+          (err) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+
+            resolve();
+          }
+        );
+      });
+
+      allowanceCallsPromises.push(tokenPromise);
+    }
+    const done = await Promise.all(allowanceCallsPromises);
+
+      // SUBMIT DEPOSIT TRANSACTION
+      const sendAmount = BigNumber(amount)
+        .times(10 ** 18)
+        .toFixed(0);
+
+        const dexTopiaTockenLockerContract = new web3.eth.Contract(
+          CONTRACTS.DEXTOPIA_TOKENLOCKER_ABI,
+          CONTRACTS.DEXTOPIA_TOKENLOCKER
+        );
+
+      this._callContractWait(
+        web3,
+        dexTopiaTockenLockerContract,
+        "extendLock",
+        [sendAmount , weeks , newWeeks],
+        account,
+        gasPrice,
+        null,
+        null,
+        depositTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.log(ex,"ex");
       this.emitter.emit(ACTIONS.ERROR, ex);
     }
   };
