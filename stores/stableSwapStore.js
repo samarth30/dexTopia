@@ -257,7 +257,8 @@ class Store {
             this.veDepositorDeposit(payload);
             break;
           case ACTIONS.VE_DEPOSITOR_DATA: 
-            this.veDepositorData(payload);
+            this.veDepositorDataFunction(payload);
+            break;
           // dextopia StakingReward
           case ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT:
             this.dexTopiastakingRewardDeposit(payload);
@@ -533,7 +534,7 @@ class Store {
       
   }
 
-  veDepositorData = async(address) =>{
+  veDepositorDataFunction = async(address) =>{
     const veDepositorDatas = this.store.veDepositorData;
     const multicall = await stores.accountStore.getMulticall();
     const web3 = await stores.accountStore.getWeb3Provider();
@@ -547,7 +548,13 @@ class Store {
       return null;
     }
 
-    
+    let poolReward = [];
+
+    if (veDepositorDatas) {
+      poolReward = veDepositorDatas;
+    } else {
+      poolReward = this.getStore("veDepositorData");
+    }
   
      let balanceOfVeTopia = 0;
      let balanceOfDystToken= 0;
@@ -564,9 +571,7 @@ class Store {
             CONTRACTS.GOV_TOKEN_ADDRESS
           );
     
-           balanceOfDystToken = await Promise.all([
-            veTokenContract.methods.balanceOf(account.address).call(),
-          ]);
+           balanceOfDystToken = await veTokenContract.methods.balanceOf(account.address).call()
            
          
           balanceOfVeTopia = await  dexTopiaVeDepositor.methods.balanceOf(account.address).call();

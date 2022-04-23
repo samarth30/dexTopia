@@ -114,15 +114,15 @@ export default function ssConvert() {
       type: ACTIONS.POOLSTAKED,
       content: { filteredAssets },
     });
-    // const stakingRewardsStakedBalance = stores.dispatcher.dispatch({
-    //   type: ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT,
-    //   content: {},
-    // });
+    const stakingRewardsStakedBalance = stores.dispatcher.dispatch({
+      type: ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT,
+      content: {},
+    });
 
-    // const vedepositordata = stores.dispatcher.dispatch({
-    //   type: ACTIONS.VE_DEPOSITOR_DATA,
-    //   content: {},
-    // });
+    const vedepositordata = stores.dispatcher.dispatch({
+      type: ACTIONS.VE_DEPOSITOR_DATA,
+      content: {},
+    });
 
     const stakingRewardsStakedBalancedata = stores.stableSwapStore.getStore(
       "StakingRewardStakedBalances"
