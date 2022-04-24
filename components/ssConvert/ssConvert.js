@@ -83,6 +83,10 @@ export default function ssConvert() {
     setModeltabs(newValue);
   };
 
+  const convertVeDystToVeTopia = ()=>{
+
+  }
+
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
@@ -497,13 +501,13 @@ export default function ssConvert() {
                           </Typography>
                         </Box>
                         <Box className={style.tabPannelrow2}>
-                          <Typography variant="p" className={style.balancep}>
+                          {/* <Typography variant="p" className={style.balancep}>
                           Balance: {formatCurrency(
                               BigNumber(dystopiaBalance).div(
                                 10 ** 18
                               )
                             )}  dystopia in all nfts ?
-                          </Typography>
+                          </Typography> */}
                         </Box>
                         <Box className={style.tabPannelrow3}>
                           <Box className={style.tabPannelrow3Left}>

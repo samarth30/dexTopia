@@ -231,10 +231,11 @@ export default function PoolsRow({
     });
   };
 
-  const onclaimSingleEarning = async ()=>{
+  const onclaimSingleEarning = async (address)=>{
+    // window.alert(address)
     await stores.dispatcher.dispatch({
       type: ACTIONS.LP_DEPOSITOR_GET_REWARD,
-      content: { poolAddress: PoolAddressSelected },
+      content: { poolAddresses: address },
     });
   }
 
@@ -418,7 +419,7 @@ export default function PoolsRow({
                     </Button>
                   </Grid>
                   <Grid xs={6} lg={1.5} className={style.tableBox3}>
-                    <Button onClick={()=>{onclaimSingleEarning()}}>Claim Earnings</Button>
+                    <Button onClick={()=>{onclaimSingleEarning(row?.address)}}>Claim Earnings</Button>
                   </Grid>
                 </Container>
               </Paper>
