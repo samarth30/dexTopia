@@ -213,13 +213,18 @@
   opacity: 1 !important;
   color: rgb(255, 255, 255) !important;
 }
+
+.convertModal__p {
+  padding: 24px !important
+}
+
 .tabPannel1 {
   margin-bottom: 16px;
   display: flex;
   color: #fff !important;
   flex-direction: column;
   padding-right: 32px;
-  padding-left: 15px;
+  padding-left: 0px !important;
   padding-bottom: 24px;
 }
 

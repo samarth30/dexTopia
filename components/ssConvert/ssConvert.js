@@ -698,6 +698,7 @@ export default function ssConvert() {
                 </Tabs>
               </Box>
             </Box>
+            <Typography className="convertModal__p" pt={3} sx={{paddingLeft: "24px"}}>
             your vetopia balance : {formatCurrency(
                               BigNumber(veTopiaBalance).div(
                                 10 ** 18
@@ -709,6 +710,7 @@ export default function ssConvert() {
                                 10 ** 18
                               )
                             )}
+            </Typography>
             <TabPanel
               style={{ backgroundColor: "rgb(32 39 43)" }}
               value={modelTabs}
