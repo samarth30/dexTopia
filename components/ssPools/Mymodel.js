@@ -3,7 +3,6 @@ import React, { Fragment } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-// import closeIcon from '../asset/images/close.svg';
 import Typography from '@mui/material/Typography';
 import modelStyle from './model.module.css';
 
@@ -37,7 +36,7 @@ export default function Mymodel({ open, text, handleClose, children }) {
                             <Typography id="modal-modal-title" variant="h6" component="h2">
                                 {text}
                             </Typography>
-                            {/* <img onClick={handleClose} className={modelStyle.modalclloseImage} src={closeIcon} alt="closeIcon" /> */}
+                            <img  src="/images/close.svg" onClick={handleClose} className={modelStyle.modalclloseImage} alt="closeIcon" />
                         </Box>
                         {children}
                     </Box>

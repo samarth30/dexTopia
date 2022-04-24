@@ -353,7 +353,7 @@ export default function Vote() {
                                                     className={voteStyle.inputBox}>
                                                     onChange={onSearchChanged}
                                                 </Input>
-                                                {/* <img src={search} alt="search" className={voteStyle.searchIcon} srcSet="" /> */}
+                                                <img src="/images/search.svg" alt="search" className={voteStyle.searchIcon} srcSet="" />
                                             </Box>
 
                                         </Box>
@@ -424,10 +424,10 @@ export default function Vote() {
                                                             <Box className={voteStyle.right}>
                                                                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                                                                     <Button className={voteStyle.like}>
-                                                                        {/* <img src={likeimage} className={voteStyle.svgIcons} alt="likeimage" /> */}
+                                                                        <img src="/images/like.svg" className={voteStyle.svgIcons} alt="likeimage" />
                                                                     </Button>
                                                                     <Button className={voteStyle.dislike}>
-                                                                        {/* <img src={dislikeimage} className={voteStyle.svgIcons} alt="likeimage" /> */}
+                                                                        <img src="/images/dislike.svg" className={voteStyle.svgIcons} alt="likeimage" />
                                                                     </Button>
                                                                 </ButtonGroup>
                                                             </Box>

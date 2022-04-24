@@ -13,8 +13,6 @@ import stores from '../../stores'
 import { ACTIONS } from '../../stores/constants';
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
-// import imgPng from '../../public/images/download.png';
-// import symbolcircle from '../../public/images/symbolcircle.svg';
 
 function descendingComparator(a, b, orderBy) {
   if (!a || !b) {
