@@ -34,8 +34,8 @@ import style from './header.module.css';
 // import logo from '../../public/images/logo.svg';
 // import starLogo from '../../public/images/star.svg';
 
-
-const pages = ['HOME', 'SWAP', 'LIQUIDITY', 'VEST', 'VOTE', 'WHITELIST', 'POOLS', 'CONVERT', 'LOCK TOPIA'];
+// 'HOME', 'SWAP', 'LIQUIDITY', 'VEST',
+const pages = [ 'HOME', 'POOLS', 'CONVERT', 'LOCK TOPIA','VOTE', 'WHITELIST'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const returnPage = (page) => {
@@ -283,8 +283,8 @@ const Header = () => {
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, color: "#fff !important" }}
             onClick={() => router.push("/home")}
           >
-            {/* <img src={logo} alt="logo header" /> */}
-            DexTopia
+            <img src="./images/logodex.png" alt="logo header" style={{ width:"100px" , height:"100px"}} />
+            {/* DexTopia */}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -471,7 +471,7 @@ const Header = () => {
             <WrongNetworkIcon className={style.networkIcon} />
             <Typography className={style.ErrorTxt}>
               The chain you're connected to isn't supported. Please check that
-              your wallet is connected to AVAX Testnet.
+              your wallet is connected to MATIC Testnet.
             </Typography>
             <Button
               className={style.switchNetworkBtn}
@@ -479,9 +479,9 @@ const Header = () => {
               onClick={() => switchChain()}
             >
               Switch to{" "}
-              {process.env.NEXT_PUBLIC_CHAINID == "43113"
-                ? "AVAX TESTNET"
-                : "AVAX Mainnet"}
+              {process.env.NEXT_PUBLIC_CHAINID == "80001"
+                ? "MATIC TESTNET"
+                : "MATIC Mainnet"}
             </Button>
           </div>
         </div>

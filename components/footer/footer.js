@@ -15,34 +15,34 @@ export default function Footer() {
         <div className={style.footerBoxDiv}>
           <div className={style.footerBox}>
               <div className={style.column1}>
-                  <p className={style.footerLinksHeading}>Links</p>
+                  {/* <p className={style.footerLinksHeading}>Links</p> */}
                   <p className={style.footerLinksBody}>Partners</p>
                   <p className={style.footerLinksBody}>Roadmap</p>
                   <p className={style.footerLinksBody}>Team</p>
               </div>
               <div className={style.column2}>
-                  <p className={style.footerLinksHeading}>Links</p>
+                  {/* <p className={style.footerLinksHeading}>Links</p> */}
                   <p className={style.footerLinksBody}>Partners</p>
                   <p className={style.footerLinksBody}>Roadmap</p>
                   <p className={style.footerLinksBody}>Team</p>
               </div>
               <div className={style.column3}>
-                  <p className={style.footerLinksHeading}>Title</p>
+                  {/* <p className={style.footerLinksHeading}>Title</p> */}
                   <p className={style.footerLinksBody}>Terms and Conditions</p>
                   <p className={style.footerLinksBody}>Privacy Policy</p>
               </div>
               <div className={style.column4}>
                   <div className={style.footerImgDiv}>
-                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnOIfM-pc0T3Sm3TugKXKLSj01GGcmO2cygwNMzO3pY-olZ9CXZcg2sigJ2rahEy5Rx7M&usqp=CAU" alt="footer logo" />
+                      <img src="./images/logodex.png" alt="footer logo" />
                   </div>
               </div>
           </div>
           <hr />
-          <div className={style.belowHrBox}>
+          {/* <div className={style.belowHrBox}>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus temporibus quia dolores ab blanditiis alias, ducimus et facere mollitia incidunt ea ratione architecto quo, esse laudantium ipsa fuga voluptates omnis!
             </p>
-          </div>
+          </div> */}
         </div>
     </footer>
   )

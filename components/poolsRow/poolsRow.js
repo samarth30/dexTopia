@@ -405,7 +405,7 @@ export default function PoolsRow({
                               10 ** 18
                             )
                           )}{" "}
-                        Gasly
+                        Dystopia
                       </Typography>
                       <Typography variant="p" className={style.tableBox2text}>
                         {poolReward[index] &&
@@ -414,7 +414,7 @@ export default function PoolsRow({
                               10 ** 18
                             )
                           )}{" "}
-                        Gasly
+                        Topia
                       </Typography>
                     </Box>
                   </Grid>
@@ -435,7 +435,7 @@ export default function PoolsRow({
     </Fragment>
 
 {open && (
-  <Mymodel text="Manage vetopia" open={open} handleClose={handleClose}>
+  <Mymodel text="Manage Lp Tocken staker" open={open} handleClose={handleClose}>
     <Box className={style.bottomContainerLeftBottom}>
       <Box className={style.bottomContainerpannelTop}>
         <Box

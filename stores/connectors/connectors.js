@@ -6,14 +6,14 @@ import { NetworkConnector } from "@web3-react/network-connector";
 const POLLING_INTERVAL = 12000;
 const RPC_URLS = {
   137: "https://polygon-mainnet.g.alchemy.com/v2/z31K9anv5tvGi7AxPhtSSD2FCBJvK0Wj",
-  43113: "https://api.avax-test.network/ext/bc/C/rpc"
+  80001: "https://api.avax-test.network/ext/bc/C/rpc"
 };
 
 let obj = {}
 if(process.env.NEXT_PUBLIC_CHAINID == 137) {
   obj = { 137: RPC_URLS[137] }
 } else {
-  obj = { 43113: RPC_URLS[43113] }
+  obj = { 80001: RPC_URLS[80001] }
 }
 
 export const network = new NetworkConnector({ urls: obj });
@@ -25,7 +25,7 @@ export const injected = new InjectedConnector({
 export const walletconnect = new WalletConnectConnector({
   rpc: {
     137: RPC_URLS[137],
-    43113: RPC_URLS[43113]
+    80001: RPC_URLS[80001]
   },
   chainId: parseInt(process.env.NEXT_PUBLIC_CHAINID),
   bridge: "https://bridge.walletconnect.org",
@@ -35,6 +35,6 @@ export const walletconnect = new WalletConnectConnector({
 
 export const walletlink = new WalletLinkConnector({
   url: RPC_URLS[process.env.NEXT_PUBLIC_CHAINID],
-  appName: "Gaslyy",
+  appName: "Dextopia",
   chainId: parseInt(process.env.NEXT_PUBLIC_CHAINID),
 });
