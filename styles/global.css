@@ -61,7 +61,7 @@ code {
 .jss7 {
   z-index: 1;
   min-height: 100vh;
-  background: url("../public/images/dextopia-back.png");
+  background: url("../public/images/dextopia-back.svg");
   object-fit: cover;
   background-size: cover;
 }
