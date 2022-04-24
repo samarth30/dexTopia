@@ -452,8 +452,41 @@
   }
 }
 
-@media only screen and(min-width: 1200px) {
-}
+@media only screen and (max-width: 900px) {
+  .section3 .section3Inner {
+    flex-direction: column;
+  }
 
-@media only screen and(min-width: 1536px) {
+  .section3Inner .section3Right {
+    margin-top: 79px;
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+
+  .section4 .innerSection4 .innerSection4Partetions{
+    flex-direction: column;
+  }
+  .section4 .innerSection4 .innerSection4Partetions .innerSection4Right{
+    margin-top: 5px;
+  }
+  .reverreverse{
+    flex-direction: column-reverse !important;
+  }
+  .section6InnerBoxes{
+    flex-direction: column;
+  }
+
+  .section3 .section3Right .section3RightInner .boxes{
+    margin-left: 0;
+  }
+  .monkerrewardLogo{
+    width: 95% !important;
+  }
+  .section6RightBottomLeft,.section6RightBottomRight{
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .section1Inner .section1Col1 .left .section1text {
+    font-size: 53px;
+  }
 }

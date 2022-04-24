@@ -239,10 +239,6 @@
   display: flex;
 }
 
-.tabPannelrow3Left {
-  width: 300px;
-}
-
 .tabPannelrow3 button {
   min-width: 120px;
   height: 100%;
@@ -350,6 +346,7 @@
 .tabPannelrow3LeftInner .tabinputFieldsSelection {
   color: #fff !important;
   border: 1px solid rgb(2, 119, 250) !important;
+  width: 100% !important;
 }
 
 .tabPannelrow3LeftInner .buttontop {
@@ -655,5 +652,17 @@
   .bottomContainer .bottomTable {
     flex-basis: 100%;
     max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .tableRow .tableRowInner .tableBoxes{
+    flex-direction: column !important;
+    gap: 1rem;
+  }
+
+  .tabPannelrow3{
+    flex-direction: column !important;
+    gap: 1rem;
   }
 }

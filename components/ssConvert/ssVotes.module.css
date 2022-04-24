@@ -248,10 +248,6 @@
   display: flex;
 }
 
-.tabPannelrow3Left {
-  width: 300px;
-}
-
 .tabPannelrow3 button {
   min-width: 120px;
   height: 100%;
@@ -342,6 +338,7 @@
   border: 0px none;
   vertical-align: top;
   background: rgb(20, 24, 25) none repeat scroll 0% 0%;
+  width: 100% !important;
 }
 
 .tabPannelrow3LeftInner .buttontop {
@@ -645,5 +642,18 @@
   .bottomContainer .bottomTable {
     flex-basis: 100%;
     max-width: 100%;
+  }
+}
+
+
+@media only screen and (max-width: 900px) {
+  .tableRow .tableRowInner .tableBoxes{
+    flex-direction: column !important;
+    gap: 1rem;
+  }
+
+  .tabPannelrow3{
+    flex-direction: column !important;
+    gap: 1rem;
   }
 }

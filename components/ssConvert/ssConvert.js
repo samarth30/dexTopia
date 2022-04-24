@@ -509,7 +509,7 @@ export default function ssConvert() {
                           <Box className={style.tabPannelrow3Left}>
                             <Box className={style.tabPannelrow3LeftInner}>
                               <Box className={style.marginTop}>
-                                <FormControl sx={{ m: 1, minWidth: 300 }}>
+                                <FormControl sx={{ m: 1, minWidth: 200 }}>
                                   <InputLabel
                                     style={{ color: "#fff" }}
                                     id="demo-multiple-chip-label"

@@ -173,7 +173,7 @@
   
   .pagination {
     overflow: auto;
-    color: rgb(255,255,255);
+    color: rgb(255,255,255) !important;
     font-size: 20px;
     font-weight: 600;
     margin-top: 16px;
@@ -256,4 +256,22 @@
       max-width: 100%;
     }
   }
+
+  @media only screen and (max-width: 900px) {
+    .bottomContainer .bottomTopBar {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 1rem !important;
+    }
+  
+    .bottomContainer .bottomTopBar .left{
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .tableHeaderInner{
+      padding: 0 !important;
+    }
+    
+  }
+  
   

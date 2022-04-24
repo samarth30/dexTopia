@@ -13,26 +13,15 @@ import {
   Box,
 } from "@mui/material";
 import BigNumber from "bignumber.js";
-import { Search } from "@mui/icons-material";
 import { useRouter } from "next/router";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import style from "./ssVotes.module.css";
 import style1 from "./pool.module.css"
 import { formatCurrency } from "../../utils/utils";
 import PoolsRow from "./poolsRow"
 import CustomBox from "./customBox"
-import { styled } from '@mui/material/styles';
-import Mymodel from "./Mymodel";
-import GaugesTable from "./ssVotesTable.js";
 
 import stores from "../../stores";
 import { ACTIONS } from "../../stores/constants/constants";
-
-const Item = styled(Paper)(({ theme }) => ({
-  marginTop:'20px',
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 
 export default function ssLock() {
@@ -345,14 +334,14 @@ console.log("tockenLockerDataRedux",tockenLockerDataRedux)
 
                     <Box>
                         <Grid style={{marginTop:'50px'}} container spacing={2}>
-                            <Grid item xs={7}>
+                            <Grid item md={6} xs={12}>
                                 <CustomBox tableSize="400" text="Your topia locks - 0% of vTopia" rows = {tockenLockerDataRedux} />
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item md={6} xs={12}>
                             <CustomBox text="Current Week Claimable Earnings " />
                             </Grid>
-                            <Grid item xs={7}></Grid>
-                            <Grid item xs={5}>
+                            <Grid item md={7} xs={0}></Grid>
+                            <Grid item md={5} xs={12}>
                             <CustomBox tableSize="400" text="Next Weeks Total Earnings" />
                             </Grid>
                         </Grid>

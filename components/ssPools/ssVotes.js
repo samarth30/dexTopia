@@ -255,7 +255,7 @@ let ssupdateDone = false;
           <Box className={style1.bottomContainer}>
             <Box className={style1.bottomTopBar}>
               <Box className={style1.left}>
-                <Typography variant="h3">Filter</Typography>
+                <Typography sx={{ color: 'white' }} variant="h3">Filter</Typography>
                 <Button className={style1.btn}>ALL</Button>
                 <Button className={style1.btn}>STABLE</Button>
                 <Button className={style1.btn}>Volatile</Button>

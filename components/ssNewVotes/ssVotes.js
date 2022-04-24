@@ -390,32 +390,32 @@ export default function Vote() {
                                               {gauges.map((gauge, index) => {
                                                 return (
                                                   <Grid key={index} xs={12} container className={voteStyle.hederBoxInner}>
-                                                    <Grid item xs={3}>
+                                                    <Grid item md={3} xs={6}>
                                                         <Typography variant="p" className={voteStyle.headertext}>
                                                             {gauge.symbol}
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={2}>
+                                                    <Grid item md={2} xs={6}>
                                                         <Typography variant="p" className={voteStyle.hyfernSymbol}>
                                                             {gauge && gauge.balance && gauge.balance.substring(0, 4)}
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={0.7}>
+                                                    <Grid item md={0.7} xs={6}>
                                                         <Typography variant="p" className={voteStyle.hyfernSymbol}>
                                                             {gauge && gauge.totalSupply && gauge.totalSupply.substring(0, 4)}
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={2.3}>
+                                                    <Grid item md={2.3} xs={6}>
                                                         <Typography variant="p" className={voteStyle.hyfernSymbol}>
                                                             {gauge && gauge.claimable0 && gauge.claimable0.substring(0, 4)}
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={1}>
+                                                    <Grid item md={1} xs={6}>
                                                         <Typography variant="p" className={voteStyle.hyfernSymbol}>
                                                             {gauge && gauge.claimable1 && gauge.claimable1.substring(0, 4)}
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={3} className={voteStyle.multiBoxes}>
+                                                    <Grid item xs={12} md={3} lg={3} className={voteStyle.multiBoxes}>
                                                         <Box className={voteStyle.boxes}>
                                                             <Box className={voteStyle.left}>
                                                                 <TextField placeholder="Enter vote" className={voteStyle.inputBox} variant="outlined" />
