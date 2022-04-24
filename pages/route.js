@@ -9,6 +9,7 @@ import Whitelist from "./whitelist";
 import Bribe from "./bribe/create";
 import Lock from "./lock"
 import Convert from "./convert";
+import Home from "./home"
 
 import { useRouter } from "next/router";
 
@@ -43,7 +44,7 @@ function Route({ changeTheme, ...props }) {
   } else if (activePath.includes("/bribe")) {
     return <Bribe props={props} changeTheme={changeTheme} />;
   } else if (activePath.includes("/")) {
-    return <Swap props={props} changeTheme={changeTheme} />;
+    return <Home props={props} changeTheme={changeTheme} />;
   } else {
     return <Swap props={props} changeTheme={changeTheme} />;
   }
