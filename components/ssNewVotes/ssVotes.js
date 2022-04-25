@@ -8,23 +8,19 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import { Search } from '@mui/icons-material';
 import { useRouter } from "next/router";
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import BigNumber from 'bignumber.js';
 import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
-import InputAdornment from '@mui/material/InputAdornment';
 import MenuItem from "@mui/material/MenuItem";
 import Select from '@mui/material/Select';
+import Slider from '@mui/material/Slider';
+import { makeStyles, withStyles } from '@mui/styles';
 
-// import search from '../asset/images/search.svg';
 import TextField from '@mui/material/TextField';
 import voteStyle from './ssVotes.module.css';
 import ButtonGroup from '@mui/material/ButtonGroup';
-// import likeimage from '../asset/images/like.svg';
-// import dislikeimage from '../asset/images/dislike.svg';
 import { formatCurrency } from '../../utils';
 import GaugesTable from './ssVotesTable.js'
 
@@ -37,6 +33,34 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     color: '#fff',
 }));
+
+const PrettoSlider = withStyles({
+  root: {
+    color: '#06D3D7',
+    height: 8,
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: '#06D3D7',
+    border: '2px solid currentColor',
+    marginTop: -8,
+    marginLeft: -12,
+    '&:focus, &:hover, &$active': {
+      boxShadow: 'inherit',
+    },
+  },
+  active: {},
+  valueLabel: {
+    left: 'calc(-50% + 4px)',
+  },
+  track: {
+    height: 8,
+  },
+  rail: {
+    height: 8,
+  }
+})(Slider);
 
 function descendingComparator(a, b, orderBy) {
     if (!a || !b) {
@@ -388,6 +412,15 @@ export default function Vote() {
                                         <Container className={voteStyle.header4Inner}>
                                             <Grid xs={12} item className={voteStyle.hederBox}>
                                               {gauges.map((gauge, index) => {
+                                                  if (!gauge) {
+                                                    return null;
+                                                  }
+                                                  let sliderValue = sliderValues.find((el) => el.address === gauge?.address)?.value
+                                                  if(sliderValue) {
+                                                    sliderValue = BigNumber(sliderValue).toNumber(0)
+                                                  } else {
+                                                    sliderValue = 0
+                                                  }
                                                 return (
                                                   <Grid key={index} xs={12} container className={voteStyle.hederBoxInner}>
                                                     <Grid item md={3} xs={6}>
@@ -417,19 +450,27 @@ export default function Vote() {
                                                     </Grid>
                                                     <Grid item xs={12} md={3} lg={3} className={voteStyle.multiBoxes}>
                                                         <Box className={voteStyle.boxes}>
-                                                            <Box className={voteStyle.left}>
+                                                            {/* <Box className={voteStyle.left}>
                                                                 <TextField placeholder="Enter vote" className={voteStyle.inputBox} variant="outlined" />
                                                                 <Button className={voteStyle.inpputButtonMax}>Max</Button>
-                                                            </Box>
+                                                            </Box> */}
                                                             <Box className={voteStyle.right}>
-                                                                <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                                                                {/* <ButtonGroup variant="contained" aria-label="outlined primary button group">
                                                                     <Button className={voteStyle.like}>
                                                                         <img src="/images/like.svg" className={voteStyle.svgIcons} alt="likeimage" />
                                                                     </Button>
                                                                     <Button className={voteStyle.dislike}>
                                                                         <img src="/images/dislike.svg" className={voteStyle.svgIcons} alt="likeimage" />
                                                                     </Button>
-                                                                </ButtonGroup>
+                                                                </ButtonGroup> */}
+                                                                <PrettoSlider
+                                                                  valueLabelDisplay="auto"
+                                                                  value={ sliderValue }
+                                                                  onChange={ (event, value) => { onSliderChange(event, value, gauge) } }
+                                                                  min={-100}
+                                                                  max={100}
+                                                                  marks
+                                                                />
                                                             </Box>
                                                         </Box>
                                                     </Grid>
