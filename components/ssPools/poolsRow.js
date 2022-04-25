@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import BigNumber from "bignumber.js";
-import { formatCurrency } from "../../utils";
+import { formatCurrency, formatCurrencyDifferent } from "../../utils";
 import Mymodel from "./Mymodel";
 import {   TablePagination, Tabs, Tab } from '@mui/material';
 import stores from '../../stores'
@@ -525,7 +525,7 @@ export default function PoolsRow({
                         onChange={onInputField}
                     value={depositInput}
                       />
-                      <Button className={style.buttontop} onClick={()=>{setDepositInput(formatCurrency(
+                      <Button className={style.buttontop} onClick={()=>{setDepositInput(formatCurrencyDifferent(
                           BigNumber(maxLpStaked).div(10 ** 18)
                         )  )}}>Max</Button>
                     </Box>
