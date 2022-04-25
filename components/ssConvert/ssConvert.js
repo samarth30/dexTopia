@@ -616,7 +616,7 @@ console.log( selectDropdown.id,"idii")
                   <Box className={style.tableRowInner}>
                     <Container className={style.tableBoxes}>
                       <Grid item xs={12} lg={2}>
-                        <Typography variant="p">Staked Dextopia</Typography>
+                        <Typography variant="p"  style={{maxWidth: '200px'}} >Staked Dextopia</Typography>
                       </Grid>
                       <Grid item xs={12} lg={1.75}>
                         <Typography variant="p">6,656,064.4</Typography>

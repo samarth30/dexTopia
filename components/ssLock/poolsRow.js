@@ -324,7 +324,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                             </Typography>
                         </Grid>
                         <Grid xs={12} lg={2} className={style.tableBox2}>
-                            <Box style={{ marginLeft: '50px' }}>
+                            <Box>
                                 <Typography variant="p" className={style.tableBox2text}>
                                     0 topia 
                                 </Typography>
