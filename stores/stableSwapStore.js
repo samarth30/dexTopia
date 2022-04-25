@@ -7096,6 +7096,7 @@ class Store {
       const gasPrice = await stores.accountStore.getGasPrice();
 
       const allowanceCallsPromises = [];
+      console.log(allowance0,amount,"alow")
       if (BigNumber(allowance0).lt(amount)) {
       const tokenContract = new web3.eth.Contract(
         CONTRACTS.ERC20_ABI,

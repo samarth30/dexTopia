@@ -160,10 +160,18 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
     SetLockInput(e.target.value);
   }
 
+  function reverseFormatNumber(val,locale){
+    var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, '');
+    var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, '');
+    var reversedVal = val.replace(new RegExp('\\' + group, 'g'), '');
+    reversedVal = reversedVal.replace(new RegExp('\\' + decimal, 'g'), '.');
+    return Number.isNaN(reversedVal)?0:reversedVal;
+}
+
   const LockTokensFunc = async ()=>{
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DEPOSIT,
-      content: {amount :lockInput  , weeks : weekInputField },
+      content: {amount :reverseFormatNumber(lockInput)  , weeks : weekInputField },
     });
   }
 
@@ -380,7 +388,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                               BigNumber(tockenLockerDataRedux?.balanceOfTopiaToken).div(
                                 10 ** 18
                               )
-                            )) }} >Max</Button>
+                            ,15)) }} >Max</Button>
                       </Box>
                     </Box>
                   </Box>

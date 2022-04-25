@@ -86,11 +86,19 @@ export default function CustomBox({
     SetLockInput(e.target.value);
   }
 
+  function reverseFormatNumber(val,locale){
+    var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, '');
+    var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, '');
+    var reversedVal = val.replace(new RegExp('\\' + group, 'g'), '');
+    reversedVal = reversedVal.replace(new RegExp('\\' + decimal, 'g'), '.');
+    return Number.isNaN(reversedVal)?0:reversedVal;
+}
+
   const extendLockFunction = async () => {
     // setDepositLoading(true)
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_EXTEND,
-      content: { amount: lockInput ,  weeks: fetchedweeks , newWeeks  :weekInputField },
+      content: { amount: reverseFormatNumber(lockInput) ,  weeks: fetchedweeks , newWeeks  :weekInputField },
     });
   };
 

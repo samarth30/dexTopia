@@ -215,11 +215,19 @@ export default function PoolsRow({
     };
   }
 
+  function reverseFormatNumber(val,locale){
+    var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, '');
+    var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, '');
+    var reversedVal = val.replace(new RegExp('\\' + group, 'g'), '');
+    reversedVal = reversedVal.replace(new RegExp('\\' + decimal, 'g'), '.');
+    return Number.isNaN(reversedVal)?0:reversedVal;
+}
+
   const onDeposit = async () => {
     setDepositLoading(true);
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEPOSITPOOL,
-      content: { poolAddress: PoolAddressSelected, amount: depositInput },
+      content: { poolAddress: PoolAddressSelected, amount: reverseFormatNumber(depositInput) },
     });
   };
 
@@ -227,7 +235,7 @@ export default function PoolsRow({
     setDepositLoading(true);
     await stores.dispatcher.dispatch({
       type: ACTIONS.WITHDRAW_LPDEPOSITOR,
-      content: { poolAddress: PoolAddressSelected, amount: depositInput },
+      content: { poolAddress: PoolAddressSelected, amount: reverseFormatNumber(depositInput) },
     });
   };
 
@@ -509,7 +517,7 @@ export default function PoolsRow({
                       />
                       <Button className={style.buttontop} onClick={()=>{setDepositInput(formatCurrency(
                           BigNumber(maxLpStaked).div(10 ** 18)
-                        )  )}}>Max</Button>
+                        ,15)  )}}>Max</Button>
                     </Box>
                   </Box>
                 </Box>
