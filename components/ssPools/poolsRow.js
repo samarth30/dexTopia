@@ -527,7 +527,7 @@ export default function PoolsRow({
                       />
                       <Button className={style.buttontop} onClick={()=>{setDepositInput(formatCurrencyDifferent(
                           BigNumber(maxLpStaked).div(10 ** 18)
-                        )  )}}>Max</Button>
+                        ,15)  )}}>Max</Button>
                     </Box>
                   </Box>
                 </Box>
