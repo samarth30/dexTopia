@@ -487,7 +487,7 @@
 @media only screen and (min-width: 900px) {
   .topContainer {
     width: calc(100% + 24px);
-    margin-left: -24px;
+    margin-left: 0px;
   }
   .topContainer > .MuiGrid-item {
     padding-left: 24px;
