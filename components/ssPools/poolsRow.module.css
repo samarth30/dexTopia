@@ -49,7 +49,7 @@
   flex-direction: row;
   -moz-box-align: center;
   align-items: center;
-  padding: 10px 32px;
+  padding: 10px 20px;
 }
 
 .tableRowInner {
@@ -82,6 +82,7 @@
   flex-direction: row;
   -moz-box-align: center;
   align-items: center;
+  width: 190px;
 }
 
 .tableBoxInnerTop .left {
@@ -135,6 +136,7 @@
     flex-direction: row;
     -moz-box-align: center;
     align-items: center;
+    max-width: 205px;
 }
 
 .svgIcon {
