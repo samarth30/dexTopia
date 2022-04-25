@@ -83,10 +83,13 @@ export default function ssConvert() {
     setModeltabs(newValue);
   };
 
-  const convertVeDystToVeTopia = ()=>{
-
+  const convertVeDystToVeTopia = async ()=>{
+    await stores.dispatcher.dispatch({
+      type: ACTIONS.VE_TRANSFER_TO_DEPOSITOR,
+      content: { id: selectDropdown.id },
+    });
   }
-
+console.log( selectDropdown.id,"idii")
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
@@ -567,7 +570,7 @@ export default function ssConvert() {
                             className={style.tabPannelrow3Right}
                             style={{ height: "60px" }}
                           >
-                            <Button className={style.approveBtn}>
+                            <Button className={style.approveBtn} onClick={()=>{convertVeDystToVeTopia()}}>
                               Convert tokens
                             </Button>
                           </Box>
@@ -623,7 +626,8 @@ export default function ssConvert() {
                       </Grid>
                       <Grid item xs={12} lg={1.75}>
                         <Typography variant="p">
-                          {stakingRewardStaked !== "undefined" &&
+
+                          {stakingRewardStaked &&
                             formatCurrency(
                               BigNumber(stakingRewardStaked?.stakedBalance).div(
                                 10 ** 18
@@ -633,7 +637,7 @@ export default function ssConvert() {
                       </Grid>
                       <Grid item xs={6} lg={1.5}>
                         <Typography variant="p">
-                          {stakingRewardStaked !== "undefined" &&
+                          {stakingRewardStaked  &&
                             formatCurrency(
                               BigNumber(
                                 stakingRewardStaked?.dysTopiaEarning

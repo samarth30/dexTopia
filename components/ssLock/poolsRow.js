@@ -282,9 +282,9 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                                             Imagge
                                         </Box>
                                     </Box>
-                                    <Typography variant="p" className={style.right}>
+                                    {/* <Typography variant="p" className={style.right}>
                                         USDC/MIM
-                                    </Typography>
+                                    </Typography> */}
                                 </Box>
                                 <Box className={style.tableBoxInnerBottom}>
                                     <Typography variant='p'>
