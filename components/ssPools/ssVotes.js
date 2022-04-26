@@ -273,7 +273,8 @@ let ssupdateDone = false;
             <Grid item className={style.topGrid2} xs={6} lg={2.25}>
               <Paper elevation={1} className={style.topGrid2Inner}>
                 <Typography className={style.topGrid2Innertext1}>Your Total Deposits</Typography>
-                <Typography className={style.topGrid2InnerPrice}>${YourDepositTotal && YourDepositTotal.toLocaleString()}</Typography>
+                {console.log(YourDepositTotal,"parsefloat")}
+                <Typography className={style.topGrid2InnerPrice}>${YourDepositTotal && parseFloat(YourDepositTotal) > 0 && YourDepositTotal < 100000000000000000? YourDepositTotal.toLocaleString() : 0}</Typography>
               </Paper>
             </Grid>
           </Box>

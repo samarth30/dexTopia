@@ -407,10 +407,10 @@ export default function PoolsRow({
                   </Grid>
                   <Grid xs={12} lg={1.5} className={style.tableBox2}>
                     <Typography variant="p" className={style.tableBox2text}  >
-                      ${poolStaked[index] && TvlData[index] &&
+                      ${poolStaked[index] && TvlData[index] && poolStaked[index][0] > 0  ?
                     
                     Number(BigNumber(TvlData[index].lpBalanceInAPool).div((BigNumber(poolStaked[index][0]).div(10 ** 18))))*TvlData[index]?.tvl
-                        }
+                       : 0 }
                     </Typography>
                    
                   </Grid>
