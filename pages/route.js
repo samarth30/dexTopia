@@ -12,6 +12,7 @@ import Convert from "./convert";
 import Home from "./home"
 
 import { useRouter } from "next/router";
+import Partner from "./partner";
 
 function Route({ changeTheme, ...props }) {
   const router = useRouter();
@@ -26,6 +27,9 @@ function Route({ changeTheme, ...props }) {
     }
   } else if (activePath.includes("/vest")) {
     return <Vest props={props} changeTheme={changeTheme} />;
+  }
+  else if (activePath.includes("/partner")) {
+    return <Partner props={props} changeTheme={changeTheme} />;
   }
   else if (activePath.includes("/pools")) {
     return <Vote props={props} changeTheme={changeTheme} />;

@@ -35,7 +35,7 @@ import style from './header.module.css';
 // import starLogo from '../../public/images/star.svg';
 
 // 'HOME', 'SWAP', 'LIQUIDITY', 'VEST',
-const pages = [ 'HOME', 'POOLS', 'CONVERT', 'LOCK TOPIA','VOTE', 'WHITELIST'];
+const pages = [ 'HOME', 'POOLS', 'CONVERT', 'LOCK TOPIA','VOTE', 'WHITELIST', 'PARTNER'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const returnPage = (page) => {
@@ -66,6 +66,9 @@ const returnPage = (page) => {
       break;
     case 'LOCK TOPIA':
       return 'lock'
+      break;
+    case 'PARTNER':
+      return 'partner'
       break;
     default:
       break;
