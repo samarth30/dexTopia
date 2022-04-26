@@ -58,7 +58,7 @@ console.log("tockenLockerDataRedux",tockenLockerDataRedux)
       type: ACTIONS.POOLREWARDS,
       content: { filteredAssets },
     });
-
+ 
     const ass = stores.stableSwapStore.getStore("poolRewards");
     console.log(ass, "pipppp");
     setPoolReward(ass);
@@ -335,7 +335,7 @@ console.log("tockenLockerDataRedux",tockenLockerDataRedux)
                     <Box>
                         <Grid style={{marginTop:'50px'}} container spacing={2}>
                             <Grid item md={6} xs={12}>
-                                <CustomBox tableSize="400" text="Your topia locks - 0% of vTopia" rows = {tockenLockerDataRedux} />
+                                <CustomBox tableSize="400" text="Your Topia locks - 0% of vTopia" rows = {tockenLockerDataRedux} />
                             </Grid>
                             <Grid item md={6} xs={12}>
                             <CustomBox text="Current Week Claimable Earnings " />

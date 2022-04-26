@@ -1,6 +1,6 @@
 import { calendarPickerSkeletonClasses } from '@mui/lab';
 import React, { useState, useEffect } from 'react';
-import classes from './lock.module.css';
+import classes from '../../pages/vote/vote.module.css';
 import CCLock from '../../components/ssLock';
 import { Typography, Button, Paper, SvgIcon } from "@mui/material";
 import Unlock from '../../components/unlock';
@@ -12,7 +12,7 @@ function Lock({ changeTheme }) {
     const accountStore = stores.accountStore.getStore('account');
     const [account, setAccount] = useState(accountStore);
     const [unlockOpen, setUnlockOpen] = useState(false);
-  
+   
     useEffect(() => {
       const accountConfigure = () => {
         const accountStore = stores.accountStore.getStore('account');
@@ -41,14 +41,16 @@ function Lock({ changeTheme }) {
     const [tab, setTab] = useState("token")
 
   return (
-    <div className={classes.container}>
-       {account && account.address ?
+    <div className={classes.ffContainer}>
+        {account && account.address ?
         <div className={classes.connected}>
           <CCLock />
-        </div> :  <Paper className={classes.notConnectedContent}>
+        </div>
+        :
+        <Paper className={classes.notConnectedContent}>
           <div className={classes.sphere}></div>
           <div className={classes.contentFloat}>
-          <Typography className={classes.mainHeadingNC} variant='h1'>Vote</Typography>
+          <Typography className={classes.mainHeadingNC} variant='h1'>Lock Topia</Typography>
           <Typography className={classes.mainDescNC} color='common.white' variant='body2'>
             Use your veSolid to vote for your selected liquidity pair’s rewards distribution or create a bribe to encourage others to do the same.
           </Typography>
@@ -61,9 +63,9 @@ function Lock({ changeTheme }) {
               <Typography>Connect Wallet to Continue</Typography>
           </Button>
           </div>
-        </Paper>}
-        {unlockOpen && <Unlock modalOpen={unlockOpen} closeModal={closeUnlock} />}
-       
+        </Paper>
+       }
+       {unlockOpen && <Unlock modalOpen={unlockOpen} closeModal={closeUnlock} />}
     </div>
   );
 }

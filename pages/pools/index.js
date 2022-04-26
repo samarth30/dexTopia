@@ -49,9 +49,9 @@ function Vote({ changeTheme }) {
         <Paper className={classes.notConnectedContent}>
           <div className={classes.sphere}></div>
           <div className={classes.contentFloat}>
-          <Typography className={classes.mainHeadingNC} variant='h1'>Vote</Typography>
-          <Typography className={classes.mainDescNC} color='common.white' variant='body2'>
-            Use your veSolid to vote for your selected liquidity pair’s rewards distribution or create a bribe to encourage others to do the same.
+          <Typography className={classes.mainHeadingNC} variant='h1'>Pools</Typography>
+          <Typography className={classes.mainDescNC} variant='body2'>
+                use your LP token to participate in pools
           </Typography>
           <Button
             disableElevation

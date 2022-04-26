@@ -160,10 +160,18 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
     SetLockInput(e.target.value);
   }
 
+  function reverseFormatNumber(val,locale){
+    var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, '');
+    var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, '');
+    var reversedVal = val.replace(new RegExp('\\' + group, 'g'), '');
+    reversedVal = reversedVal.replace(new RegExp('\\' + decimal, 'g'), '.');
+    return Number.isNaN(reversedVal)?0:reversedVal;
+}
+
   const LockTokensFunc = async ()=>{
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DEPOSIT,
-      content: {amount :lockInput  , weeks : weekInputField },
+      content: {amount :reverseFormatNumber(lockInput)  , weeks : weekInputField },
     });
   }
 
@@ -282,9 +290,9 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                                             Imagge
                                         </Box>
                                     </Box>
-                                    <Typography variant="p" className={style.right}>
+                                    {/* <Typography variant="p" className={style.right}>
                                         USDC/MIM
-                                    </Typography>
+                                    </Typography> */}
                                 </Box>
                                 <Box className={style.tableBoxInnerBottom}>
                                     <Typography variant='p'>
@@ -311,7 +319,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                               BigNumber(tockenLockerDataRedux?.lockedBalance).div(
                                 10 ** 18
                               )
-                            )} topia
+                            )} Topia
                             </Typography>
 
                             <br></br>
@@ -320,13 +328,13 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                               BigNumber(tockenLockerDataRedux?.userWeight).div(
                                 10 ** 18
                               )
-                            )} vltopia
+                            )} vlTopia
                             </Typography>
                         </Grid>
                         <Grid xs={12} lg={2} className={style.tableBox2}>
-                            <Box style={{ marginLeft: '50px' }}>
+                            <Box>
                                 <Typography variant="p" className={style.tableBox2text}>
-                                    0 topia 
+                                    0 Topia 
                                 </Typography>
                            
                             </Box>
@@ -380,7 +388,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                               BigNumber(tockenLockerDataRedux?.balanceOfTopiaToken).div(
                                 10 ** 18
                               )
-                            )) }} >Max</Button>
+                            ,15)) }} >Max</Button>
                       </Box>
                     </Box>
                   </Box>

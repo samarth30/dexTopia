@@ -259,6 +259,9 @@ class Store {
           case ACTIONS.VE_DEPOSITOR_DATA: 
             this.veDepositorDataFunction(payload);
             break;
+          case ACTIONS.VE_TRANSFER_TO_DEPOSITOR: 
+            this.veDystTransfertoVeDepositor(payload);
+            break;
           // dextopia StakingReward
           case ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT:
             this.dexTopiastakingRewardDeposit(payload);
@@ -6655,6 +6658,77 @@ class Store {
     }
   };
 
+  // ve depositor deposit token
+  veDystTransfertoVeDepositor = async (payload) => {
+    try {
+      const context = this;
+
+     
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+      // console.log(payload.content,"heeh")
+     
+      const { id } = payload.content;
+
+      let depositTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+    
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `Transfer VeDyst to veDepositor`,
+        type: "Liquidity",
+        verb: "Liquidity Deposit",
+        transactions: [
+          {
+            uuid: depositTXID,
+            description: `Transfer VeDyst to veDepositor`,
+            status: "WAITING",
+          }
+        ],
+      });
+
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+      const veDystContract = new web3.eth.Contract(
+          CONTRACTS.VE_TOKEN_ABI,
+          CONTRACTS.VE_TOKEN_ADDRESS
+        );
+
+      this._callContractWait(
+        web3,
+        veDystContract,
+        "safeTransferFrom",
+        [account.address,CONTRACTS.DEXTOPIA_VE_DEPOSITER,id],
+        account,
+        gasPrice,
+        null,
+        null,
+        depositTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
+  };
+
 
 
   withdrawLpDepositor = async (payload) => {
@@ -7022,6 +7096,7 @@ class Store {
       const gasPrice = await stores.accountStore.getGasPrice();
 
       const allowanceCallsPromises = [];
+      console.log(allowance0,amount,"alow")
       if (BigNumber(allowance0).lt(amount)) {
       const tokenContract = new web3.eth.Contract(
         CONTRACTS.ERC20_ABI,

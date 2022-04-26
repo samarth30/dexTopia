@@ -83,10 +83,13 @@ export default function ssConvert() {
     setModeltabs(newValue);
   };
 
-  const convertVeDystToVeTopia = ()=>{
-
+  const convertVeDystToVeTopia = async ()=>{
+    await stores.dispatcher.dispatch({
+      type: ACTIONS.VE_TRANSFER_TO_DEPOSITOR,
+      content: { id: selectDropdown.id },
+    });
   }
-
+// console.log( selectDropdown,"idii")
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
@@ -185,17 +188,27 @@ export default function ssConvert() {
     setDepositInput(e.target.value);
   }
 
+  function reverseFormatNumber(val,locale){
+    var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, '');
+    var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, '');
+    var reversedVal = val.replace(new RegExp('\\' + group, 'g'), '');
+    reversedVal = reversedVal.replace(new RegExp('\\' + decimal, 'g'), '.');
+    return Number.isNaN(reversedVal)?0:reversedVal;
+}
+
   const onDepositVeTopia = async () => {
+
+    console.log(reverseFormatNumber(depositInputveTopia),"alow")
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT,
-      content: { amount: depositInputveTopia },
+      content: { amount: reverseFormatNumber(depositInputveTopia) },
     });
   };
 
   const onWithdrawVeTopia = async () => {
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_WITHDRAW,
-      content: { amount: depositInputveTopia },
+      content: { amount: reverseFormatNumber(depositInputveTopia) },
     });
   };
 
@@ -466,7 +479,7 @@ export default function ssConvert() {
                               BigNumber(dystopiaBalance).div(
                                 10 ** 18
                               )
-                            )) }}>Max</Button>
+                            ,15)) }}>Max</Button>
                               </Box>
                             </Box>
                           </Box>
@@ -567,15 +580,15 @@ export default function ssConvert() {
                             className={style.tabPannelrow3Right}
                             style={{ height: "60px" }}
                           >
-                            <Button className={style.approveBtn}>
+                            <Button className={style.approveBtn} onClick={()=>{convertVeDystToVeTopia()}}>
                               Convert tokens
                             </Button>
                           </Box>
                         </Box>
                         <Box className={style.tabPannelrow4}>
                           <Typography variant="p" className={style.balancep}>
-                            Converting Dystopia Tokens From the selected
-                            Dystopia NFT to 0 VeTopia Token
+                            Converting veDyst From the selected
+                            Dystopia NFT to {selectDropdown ? parseFloat(selectDropdown?.lockAmount).toFixed(2) : 0} veTopia
                           </Typography>
                         </Box>
                       </Box>
@@ -613,7 +626,7 @@ export default function ssConvert() {
                   <Box className={style.tableRowInner}>
                     <Container className={style.tableBoxes}>
                       <Grid item xs={12} lg={2}>
-                        <Typography variant="p">Staked Dextopia</Typography>
+                        <Typography variant="p"  style={{maxWidth: '200px'}} >Staked Dextopia</Typography>
                       </Grid>
                       <Grid item xs={12} lg={1.75}>
                         <Typography variant="p">6,656,064.4</Typography>
@@ -623,7 +636,8 @@ export default function ssConvert() {
                       </Grid>
                       <Grid item xs={12} lg={1.75}>
                         <Typography variant="p">
-                          {stakingRewardStaked !== "undefined" &&
+
+                          {stakingRewardStaked &&
                             formatCurrency(
                               BigNumber(stakingRewardStaked?.stakedBalance).div(
                                 10 ** 18
@@ -633,7 +647,7 @@ export default function ssConvert() {
                       </Grid>
                       <Grid item xs={6} lg={1.5}>
                         <Typography variant="p">
-                          {stakingRewardStaked !== "undefined" &&
+                          {stakingRewardStaked  &&
                             formatCurrency(
                               BigNumber(
                                 stakingRewardStaked?.dysTopiaEarning
@@ -649,7 +663,7 @@ export default function ssConvert() {
                                 10 ** 18
                               )
                             )}{" "}
-                          topia
+                          Topia
                         </Typography>
                       </Grid>
                       <Grid item xs={6} lg={1.5}>
@@ -740,7 +754,7 @@ export default function ssConvert() {
                               BigNumber(veTopiaBalance).div(
                                 10 ** 18
                               )
-                            ))}}>Max</Button>
+                            ,15))}}>Max</Button>
                       </Box>
                     </Box>
                   </Box>
@@ -791,7 +805,7 @@ export default function ssConvert() {
                               BigNumber(stakingRewardStaked?.stakedBalance).div(
                                 10 ** 18
                               )
-                            ))}}>Max</Button>
+                            ,15))}}>Max</Button>
                           </Box>
                         </Box>
                       </Box>

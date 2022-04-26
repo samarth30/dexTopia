@@ -29,11 +29,11 @@ export default function Home() {
             <Box className={homeStyle.section1Inner}>
               <Box className={homeStyle.section1Col1}>
                 <Box className={homeStyle.left}>
-                  <p class={homeStyle.section1text}>
+                  <p class={homeStyle.section1text} >
                     A yield optimizer
                     <br />
-                    for dextopia&nbsp;
-                    <span style={{ fontWeight: 'normal' }}>built<br style={{ display: 'block' }} /> on Fantom</span>
+                    for Dystopia&nbsp;
+                    <span style={{ fontWeight: 'normal' }}>built<br style={{ display: 'block' }} /> on Polygon</span>
                   </p>
                 </Box>
                 <Box className={homeStyle.right}>
@@ -50,7 +50,7 @@ export default function Home() {
           <Box className={homeStyle.section2} display='flex' flexWrap='wrap' container >
             <AmountBox text1="dextopia TVL" text2="$535.95m" text3="63% dominance" />
             <AmountBox text1="Total vetopia locked on dextopia" text2="13.79m" text3="31.7% of total locked" />
-            <AmountBox text1="Total topia locked" text2="5.08m" text3="74% of total supply locked" />
+            <AmountBox text1="Total Topia locked" text2="5.08m" text3="74% of total supply locked" />
           </Box>
 
           {/* company */}
@@ -233,7 +233,7 @@ export default function Home() {
 
           <Box className={homeStyle.section5}>
             <Box className={homeStyle.section5Inner}>
-              <p className={homeStyle.para1}>topia HOLDERS</p>
+              <p className={homeStyle.para1}>Topia HOLDERS</p>
               <p className={homeStyle.para2}>
                 Control voting power, decide on vetopia emissions,
                 <br style={{ display: 'block' }} />

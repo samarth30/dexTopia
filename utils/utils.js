@@ -26,6 +26,24 @@ export function formatCurrency(amount, decimals = 4) {
   }
 }
 
+export function formatCurrencyDifferent(amount, decimals = 4) {
+  if (!isNaN(amount)) {
+
+    // if(BigNumber(amount).gt(0) && BigNumber(amount).lt(0.001)) {
+    //   return '< 0.01'
+    // }
+
+    const formatter = new Intl.NumberFormat(undefined, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+
+    return formatter.format(amount);
+  } else {
+    return 0;
+  }
+}
+
 export function formatAddress(address, length = "short") {
   if (address && length === "short") {
     address =
