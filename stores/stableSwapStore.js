@@ -610,8 +610,8 @@ class Store {
        
          const totalVolumeInUsd = Number(totalVolumeInUsdInReserve0) + Number(totalVolumeInUsdInReserve1);
          tvl = BigNumber(totalVolumeInUsd).multipliedBy(BigNumber(LpBalanceRatioo));
-         console.log({price1 :pair.token0Price ,price2: pair.token1Price, balance1 :pair.reserve0 , balance2: pair.reserve1,LpBalanceRatioo : Number(LpBalanceRatioo),totalVolumeInUsdInReserve0:Number(totalVolumeInUsdInReserve0),totalVolumeInUsdInReserve1:Number(totalVolumeInUsdInReserve1),totalVolumeInUsd:Number(totalVolumeInUsd), tvl : Number(tvl)},"tvl")
-         return {price1 :pair.token0Price ,price2: pair.token1Price, balance1 :pair.reserve0 , balance2: pair.reserve1,LpBalanceRatioo : Number(LpBalanceRatioo),totalVolumeInUsdInReserve0:Number(totalVolumeInUsdInReserve0),totalVolumeInUsdInReserve1:Number(totalVolumeInUsdInReserve1),totalVolumeInUsd:Number(totalVolumeInUsd), tvl : Number(tvl)}
+         console.log({lpBalanceInAPool,price1 :pair.token0Price ,price2: pair.token1Price, balance1 :pair.reserve0 , balance2: pair.reserve1,LpBalanceRatioo : Number(LpBalanceRatioo),totalVolumeInUsdInReserve0:Number(totalVolumeInUsdInReserve0),totalVolumeInUsdInReserve1:Number(totalVolumeInUsdInReserve1),totalVolumeInUsd:Number(totalVolumeInUsd), tvl : Number(tvl)},"tvl")
+         return {lpBalanceInAPool ,price1 :pair.token0Price ,price2: pair.token1Price, balance1 :pair.reserve0 , balance2: pair.reserve1,LpBalanceRatioo : Number(LpBalanceRatioo),totalVolumeInUsdInReserve0:Number(totalVolumeInUsdInReserve0),totalVolumeInUsdInReserve1:Number(totalVolumeInUsdInReserve1),totalVolumeInUsd:Number(totalVolumeInUsd), tvl : Number(tvl)}
 
         }catch(e){
           console.log(e ,"allsetbro");

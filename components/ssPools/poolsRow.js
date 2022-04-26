@@ -392,7 +392,7 @@ export default function PoolsRow({
 
                   <Grid xs={12} lg={1.5} className={style.tableBox2} style={{marginLeft: '10px'}} >
                     <Typography variant="p" className={style.tableBox2text}>
-                      {TvlData[index] && TvlData[index]?.tvl}
+                      {TvlData[index] && (TvlData[index]?.tvl).toLocaleString()}$
                     </Typography>
                    
                   </Grid>
@@ -407,10 +407,10 @@ export default function PoolsRow({
                   </Grid>
                   <Grid xs={12} lg={1.5} className={style.tableBox2}>
                     <Typography variant="p" className={style.tableBox2text}  >
-                      ${poolStaked[index] &&
-                        formatCurrency(
-                          BigNumber(poolStaked[index][0]).div(10 ** 18)
-                        )}
+                      ${poolStaked[index] && TvlData[index] &&
+                    
+                    Number(BigNumber(TvlData[index].lpBalanceInAPool).div((BigNumber(poolStaked[index][0]).div(10 ** 18))))*TvlData[index]?.tvl
+                        }
                     </Typography>
                    
                   </Grid>

@@ -31,6 +31,8 @@ export default function ssPools() {
   const [vestNFTs, setVestNFTs] = useState([])
   const [search, setSearch] = useState('');
   const [TvlData , setTvlData] = useState();
+  const [TotalValueLocked,setTotalValueLocked] = useState(0)
+  const [YourDepositTotal,setYourDepositTotal] = useState(0);
 
   const [modelTabs, setModeltabs] = useState(0);
 
@@ -83,11 +85,27 @@ let ssupdateDone = false;
     setPoolReward(ass)
 
     const asss = stores.stableSwapStore.getStore("poolStakedBalance");
-    console.log(asss, "pipp")
+    console.log(asss, "pipp"  )
     setPoolStaked(asss);
 
     const tvldata = stores.stableSwapStore.getStore("tvls");
 
+    let tvlsum = tvldata.map((object)=>{
+      return object.tvl;
+    })
+    tvlsum = tvlsum.reduce((a, b) => a + b, 0)
+
+    let yourDepositsTotal = asss.map((object,i)=>{
+      console.log(object,"object")
+      if(object){
+        return object && Number(BigNumber(tvldata[i].lpBalanceInAPool).div((BigNumber(object).div(10 ** 18))))*tvldata[i]?.tvl
+      }
+      
+    })
+    yourDepositsTotal = yourDepositsTotal.reduce((a, b) => a + b, 0)
+
+    setYourDepositTotal(yourDepositsTotal)
+    setTotalValueLocked(tvlsum)
     setTvlData(tvldata)
     const poolStakedBalances = stores.dispatcher.dispatch({ type: ACTIONS.POOLSTAKED, content: { filteredAssets } })
     const stakingRewardsStakedBalance = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT, content: {} })
@@ -248,14 +266,14 @@ let ssupdateDone = false;
             </Grid>
             <Grid item className={style.topGrid2} xs={6} lg={2.25}>
               <Paper elevation={1} className={style.topGrid2Inner}>
-                <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
-                <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+                <Typography className={style.topGrid2Innertext1}>Total Value Locked</Typography>
+                <Typography className={style.topGrid2InnerPrice}>${TotalValueLocked.toLocaleString() }</Typography>
               </Paper>
             </Grid>
             <Grid item className={style.topGrid2} xs={6} lg={2.25}>
               <Paper elevation={1} className={style.topGrid2Inner}>
-                <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
-                <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+                <Typography className={style.topGrid2Innertext1}>Your Total Deposits</Typography>
+                <Typography className={style.topGrid2InnerPrice}>${YourDepositTotal && YourDepositTotal.toLocaleString()}</Typography>
               </Paper>
             </Grid>
           </Box>
@@ -315,7 +333,7 @@ let ssupdateDone = false;
                   </Container>
                 </Box>
               </Grid>
-{console.log(ssUpdateDone,"hell")}
+
 <div>
 {
   gauges.length > 0 && ssUpdateDone && 
