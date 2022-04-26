@@ -162,6 +162,7 @@ export default function Vote() {
     const [sliderValues, setSliderValues] = useState(votes)
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [page, setPage] = useState(0);
+    const [parentSliderValues, setParentSliderValues] = useState(100)
 
     const ssUpdated = () => {
         setVeToken(stores.stableSwapStore.getStore('veToken'))
