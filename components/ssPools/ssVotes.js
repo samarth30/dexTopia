@@ -30,6 +30,7 @@ export default function ssPools() {
   const [token, setToken] = useState(null)
   const [vestNFTs, setVestNFTs] = useState([])
   const [search, setSearch] = useState('');
+  const [TvlData , setTvlData] = useState();
 
   const [modelTabs, setModeltabs] = useState(0);
 
@@ -70,9 +71,12 @@ let ssupdateDone = false;
       setssUpdateDone(true);
       setGauges(filteredAssets)
     }
- 
-
+    let realfilteredassets = filteredAssets.map((object)=>{
+      return object.address
+    })
+    
     const poolRewards = stores.dispatcher.dispatch({ type: ACTIONS.POOLREWARDS, content: { filteredAssets } })
+    const tvldataas = stores.dispatcher.dispatch({ type: ACTIONS.TVL_DATA_POOLS, content: { realfilteredassets } })
 
     const ass = stores.stableSwapStore.getStore('poolRewards')
     console.log(ass, "pipppp")
@@ -82,6 +86,9 @@ let ssupdateDone = false;
     console.log(asss, "pipp")
     setPoolStaked(asss);
 
+    const tvldata = stores.stableSwapStore.getStore("tvls");
+
+    setTvlData(tvldata)
     const poolStakedBalances = stores.dispatcher.dispatch({ type: ACTIONS.POOLSTAKED, content: { filteredAssets } })
     const stakingRewardsStakedBalance = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_STAKING_REWARD_STAKEDAMOUNT, content: {} })
 
@@ -331,6 +338,7 @@ let ssupdateDone = false;
 
                 })}
                 setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked}
+                TvlData={TvlData}
               />
               }
               </div>

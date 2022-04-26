@@ -138,6 +138,7 @@ export default function PoolsRow({
   token,
   poolReward,
   poolStaked,
+  TvlData
 }) {
   const [order, setOrder] = useState("desc");
   const [orderBy, setOrderBy] = useState("totalVotes");
@@ -391,10 +392,7 @@ export default function PoolsRow({
 
                   <Grid xs={12} lg={1.5} className={style.tableBox2} style={{marginLeft: '10px'}} >
                     <Typography variant="p" className={style.tableBox2text}>
-                      {poolStaked[index] &&
-                        formatCurrency(
-                          BigNumber(poolStaked[index][0]).div(10 ** 18)
-                        )}
+                      {TvlData[index] && TvlData[index]?.tvl}
                     </Typography>
                    
                   </Grid>
