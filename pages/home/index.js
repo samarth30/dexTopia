@@ -33,7 +33,7 @@ export default function Home() {
                     A yield optimizer
                     <br />
                     for dextopia&nbsp;
-                    <span style={{ fontWeight: 'normal' }}>built<br style={{ display: 'block' }} /> on Fantom</span>
+                    <span style={{ fontWeight: 'normal', color: "#842fb9" }}>built<br style={{ display: 'block' }} /> on Matic</span>
                   </p>
                 </Box>
                 <Box className={homeStyle.right}>
