@@ -319,7 +319,7 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                               BigNumber(tockenLockerDataRedux?.lockedBalance).div(
                                 10 ** 18
                               )
-                            )} topia
+                            )} Topia
                             </Typography>
 
                             <br></br>
@@ -328,13 +328,13 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
                               BigNumber(tockenLockerDataRedux?.userWeight).div(
                                 10 ** 18
                               )
-                            )} vltopia
+                            )} vlTopia
                             </Typography>
                         </Grid>
                         <Grid xs={12} lg={2} className={style.tableBox2}>
                             <Box>
                                 <Typography variant="p" className={style.tableBox2text}>
-                                    0 topia 
+                                    0 Topia 
                                 </Typography>
                            
                             </Box>

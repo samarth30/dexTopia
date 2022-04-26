@@ -663,7 +663,7 @@ export default function ssConvert() {
                                 10 ** 18
                               )
                             )}{" "}
-                          topia
+                          Topia
                         </Typography>
                       </Grid>
                       <Grid item xs={6} lg={1.5}>
