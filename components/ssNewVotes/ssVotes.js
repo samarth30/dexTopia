@@ -162,7 +162,11 @@ export default function Vote() {
     const [sliderValues, setSliderValues] = useState(votes)
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [page, setPage] = useState(0);
-    const [parentSliderValues, setParentSliderValues] = useState(100)
+
+    useEffect(() => {
+      setSliderValues(votes)
+    }, [votes])
+    
 
     const ssUpdated = () => {
         setVeToken(stores.stableSwapStore.getStore('veToken'))
@@ -310,7 +314,7 @@ export default function Vote() {
           return val
         })
     
-        setParentSliderValues(newSliderValues)
+        setVotes(newSliderValues)
       }
     
       const handleRequestSort = (event, property) => {
@@ -341,7 +345,7 @@ export default function Vote() {
         );
       }
 
-      console.log("votes page", gauges)
+      console.log("votes page", votes)
 
     return (
             <Container id="main" className={style.mainContainer}>
@@ -422,6 +426,7 @@ export default function Vote() {
                                                   } else {
                                                     sliderValue = 0
                                                   }
+                                                  {console.log(sliderValue)}
                                                 return (
                                                   <Grid key={index} xs={12} container className={voteStyle.hederBoxInner}>
                                                     <Grid item md={3} xs={6}>
@@ -464,6 +469,7 @@ export default function Vote() {
                                                                         <img src="/images/dislike.svg" className={voteStyle.svgIcons} alt="likeimage" />
                                                                     </Button>
                                                                 </ButtonGroup> */}
+                                                                {console.log("preeto", sliderValue)}
                                                                 <PrettoSlider
                                                                   valueLabelDisplay="auto"
                                                                   value={ sliderValue }

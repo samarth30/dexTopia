@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import CustomBox from './customBox/customBox';
+import Alert from '@mui/material/Alert';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,18 +77,30 @@ export default function Partner() {
               <Grid item className={style.topGrid1} lg={4}>
                 <Typography variant="h1" className={style.mainText}>Partner</Typography>
               </Grid>
+              <Grid item className={style.topGrid2}>
+                <Paper elevation={1} className={style.topGrid2Inner}>
+                <Typography className={style.topGrid2Innertext1}>Partners</Typography>
+                  <Typography className={style.topGrid2InnerPrice}>8/15</Typography>
+                </Paper>
+              </Grid>
               <Grid item className={style.topGrid2} xs={6} lg={2.25}>
                 <Paper elevation={1} className={style.topGrid2Inner}>
-                  <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+                  <Typography className={style.topGrid2Innertext1}>Early Partner Deadline</Typography>
                   <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
                 </Paper>
               </Grid>
               <Grid item className={style.topGrid2} xs={6} lg={2.25}>
                 <Paper elevation={1} className={style.topGrid2Inner}>
-                  <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+                  <Typography className={style.topGrid2Innertext1}>Final Partner Deadline</Typography>
                   <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
                 </Paper>
               </Grid>
+            </Container>
+            
+            <Container className={style.topContainer}>
+              <Box style={{border: "2px solid #1c6de0", background: "#194172", color: "white", padding: "1rem 1rem", width: "100%", textAlign: "center"}}>
+                <Typography color="common.white" style={{fontSize: "1.5rem"}}>First 15 Protocols to convert their NFT. Become a Partner!. Find out More</Typography>
+              </Box>
             </Container>
 
             <Container className={style.bottomContainer}>
@@ -153,12 +166,38 @@ export default function Partner() {
                         </Box>
                       </Box>
                     </TabPanel>
-                    <Box style={{display: "flex"}}>
-                    <CustomBox />
-                    <CustomBox />
-                    </Box>
                   </Box>
                 </Paper>
+                <Box style={{ display: "flex", flexWrap: "wrap", margin: "1rem 0", background: "transparent", justifyContent: "space-between" }}>
+                      <Box style={{ width: "45%", margin: '0 0.5rem', padding: "1.5rem", color: "white", background: "#1f272b", border: "4px solid #194172" }}>
+                        <Typography variant='h4'>
+                          Negative Vote Protection
+                        </Typography>
+                        <Typography variant='h6'>
+                          Only Available to early partners
+                        </Typography>
+                      </Box>
+                      <Box style={{ width: "45%", margin: '0 0.5rem', padding: "1.5rem", color: "white", background: "#1f272b", border: "4px solid #194172" }}>
+                        <Typography variant='h4'>
+                          Partners whitelist token
+                        </Typography>
+                        <Typography variant='h6'>
+                          Only Available to early partners
+                        </Typography>
+                      </Box>
+                </Box>
+                <Box style={{background: "#1f272b", padding: "1.5rem", margin: "1rem 0", width: "30%", border: "4px solid #194172"}}>
+                    <Typography variant='h4' color='common.white'>
+                      Partner Claim
+                    </Typography>
+                    <Typography variant='h6' color='common.white'>
+                      Claimable Sex
+                    </Typography>
+                    <Typography variant='h3' color='common.white'>
+                      0
+                    </Typography>
+                    <Button variant="contained">claim</Button>
+                </Box>
               </Grid>
             </Container>
 
