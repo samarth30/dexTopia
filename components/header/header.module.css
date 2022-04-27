@@ -15,10 +15,13 @@
   border: unset;
   padding: 8px 8px 2px;
   background: transparent !important;
+
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
 }
 
 .headerScroll {
-  background-color: #000 !important;
+  background-color: #202631 !important;
 }
 
 .headerContainer {

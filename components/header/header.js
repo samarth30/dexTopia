@@ -342,8 +342,8 @@ const Header = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            {/* <img src={logo} alt="logo header" /> */}
-            LogoHeader
+            <img src="./images/logodex.png" alt="logo header" style={{ width:"85px" , height:"85px"}} />
+            {/* LogoHeader */}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (

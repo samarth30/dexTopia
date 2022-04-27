@@ -38,9 +38,9 @@ export default function Home() {
                     <span style={{ fontWeight: 'normal' }}>built<br style={{ display: 'block' }} /> on Polygon</span>
                   </p>
                 </Box>
-                <Box className={homeStyle.right}>
+                {/* <Box className={homeStyle.right}>
 
-                </Box>
+                </Box> */}
 
               </Box>
               <Box className={homeStyle.section1Col2}>

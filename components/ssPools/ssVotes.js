@@ -252,9 +252,9 @@ export default function ssPools() {
     } else if (filter === "stable") {
       newGauges = gaugeItems?.filter(item => item.isStable === true)
     } else if (filter === "volatile") {
-      // newGauges = gauges.filter(item => )
+      newGauges = gaugeItems?.filter(item => item.isStable === false)
     } else if (filter === "mine") {
-
+      // TODO: on which based?
     }
     setGaugeItems(newGauges || [])
 
