@@ -112,6 +112,9 @@ let ssupdateDone = false;
 
     const tockenLockerDatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA, content: {} })
 
+    const topiapartnersdatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_DATA, content: {} }) 
+    const topiaParntersdata =  stores.stableSwapStore.getStore('topiaPartnersData');
+    console.log(topiaParntersdata,"partnerdata")
     const nfts = stores.stableSwapStore.getStore('vestNFTs');
     setVestNFTs(nfts)
 
@@ -274,7 +277,7 @@ let ssupdateDone = false;
               <Paper elevation={1} className={style.topGrid2Inner}>
                 <Typography className={style.topGrid2Innertext1}>Your Total Deposits</Typography>
                 {console.log(YourDepositTotal,"parsefloat")}
-                <Typography className={style.topGrid2InnerPrice}>${YourDepositTotal && parseFloat(YourDepositTotal) > 0 && YourDepositTotal < 100000000000000000? YourDepositTotal.toLocaleString() : 0}</Typography>
+                <Typography className={style.topGrid2InnerPrice}>${YourDepositTotal && parseFloat(YourDepositTotal) > 0 && YourDepositTotal < 100000000000000000 ? YourDepositTotal.toLocaleString() : 0}</Typography>
               </Paper>
             </Grid>
           </Box>
