@@ -6,16 +6,16 @@ import { useRouter } from "next/router";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import style from './convert.module.css';
 import style1 from './ssVotes.module.css';
-import { formatCurrency } from '../../utils';
+import { formatCurrency } from '../../utils/utils';
 import PoolsRow from './poolsRow';
 import Mymodel from "./Mymodel"
 
 import GaugesTable from './ssVotesTable.js'
 
 import stores from '../../stores'
-import { ACTIONS } from '../../stores/constants';
+import { ACTIONS } from '../../stores/constants/constants';
 
-export default function ssPools() {
+export default function ssPartners() {
   const router = useRouter()
 
   const [, updateState] = useState();
@@ -112,7 +112,9 @@ let ssupdateDone = false;
 
     const tockenLockerDatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA, content: {} })
 
-    
+    const topiapartnersdatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_DATA, content: {} }) 
+    const topiaParntersdata =  stores.stableSwapStore.getStore('topiaPartnersData');
+    console.log(topiaParntersdata,"partnerdata")
     const nfts = stores.stableSwapStore.getStore('vestNFTs');
     setVestNFTs(nfts)
 
@@ -259,124 +261,140 @@ let ssupdateDone = false;
   return (
     <>
     <Container id="main" className={style.mainContainer}>
-      <Box id="mainContainer" className={style.mainContainerInner}>
-        <Box className={style.containerTop}>
-          <Box className={style.topContainer}>
-            <Grid item className={style.topGrid1} lg={4}>
-              <Typography variant="h1" className={style.mainText}>Pools</Typography>
-            </Grid>
-            <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-              <Paper elevation={1} className={style.topGrid2Inner}>
-                <Typography className={style.topGrid2Innertext1}>Total Value Locked</Typography>
-                <Typography className={style.topGrid2InnerPrice}>${TotalValueLocked.toLocaleString() }</Typography>
-              </Paper>
-            </Grid>
-            <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-              <Paper elevation={1} className={style.topGrid2Inner}>
-                <Typography className={style.topGrid2Innertext1}>Your Total Deposits</Typography>
-                {console.log(YourDepositTotal,"parsefloat")}
-                <Typography className={style.topGrid2InnerPrice}>${YourDepositTotal && parseFloat(YourDepositTotal) > 0 && YourDepositTotal < 100000000000000000 ? YourDepositTotal.toLocaleString() : 0}</Typography>
-              </Paper>
-            </Grid>
-          </Box>
-          <Box className={style1.bottomContainer}>
-            <Box className={style1.bottomTopBar}>
-              <Box className={style1.left}>
-                <Typography sx={{ color: 'white' }} variant="h3">Filter</Typography>
-                <Button className={style1.btn}>ALL</Button>
-                <Button className={style1.btn}>STABLE</Button>
-                <Button className={style1.btn}>Volatile</Button>
-                <Button className={style1.btn}>My Deposits</Button>
+        <Box id="mainContainer" className={style.mainContainerInner}>
+          <Box className={style.containerTop}>
+            <Container className={style.topContainer}>
+              <Grid item className={style.topGrid1} lg={4}>
+                <Typography variant="h1" className={style.mainText}>Partner</Typography>
+              </Grid>
+              <Grid item className={style.topGrid2}>
+                <Paper elevation={1} className={style.topGrid2Inner}>
+                <Typography className={style.topGrid2Innertext1}>Partners</Typography>
+                  <Typography className={style.topGrid2InnerPrice}>8/15</Typography>
+                </Paper>
+              </Grid>
+              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+                <Paper elevation={1} className={style.topGrid2Inner}>
+                  <Typography className={style.topGrid2Innertext1}>Early Partner Deadline</Typography>
+                  <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+                </Paper>
+              </Grid>
+              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+                <Paper elevation={1} className={style.topGrid2Inner}>
+                  <Typography className={style.topGrid2Innertext1}>Final Partner Deadline</Typography>
+                  <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+                </Paper>
+              </Grid>
+            </Container>
+            
+            <Container className={style.topContainer}>
+              <Box style={{border: "2px solid #1c6de0", background: "#194172", color: "white", padding: "1rem 1rem", width: "100%", textAlign: "center"}}>
+                <Typography color="common.white" style={{fontSize: "1.5rem"}}>First 15 Protocols to convert their NFT. Become a Partner!. Find out More</Typography>
               </Box>
-              <Box className={style1.right}>
-                <Box className={style1.rightInput}>
-                  <Input placeholder="Search Pools" className={style1.inputBox}></Input>
-                  <img src="/images/search.svg" className={style1.searchIcon} alt="search" />
+            </Container>
+
+            <Container className={style.bottomContainer}>
+              <Grid item xs={12} lg={9.5} className={style.bottomContainerLeft}>
+                <Paper elevation={1} className={style.bottomContainerLeftInner}>
+                  <Box className={style.bottomContainerLeftInnerTop}>
+                    <Typography variant='h3' className={style.h3text}>
+                      Convert & stake Solidly NFTs/Tokens into SOLIDsex
+                    </Typography>
+                  </Box>
+
+                  <Box className={style.bottomContainerLeftBottom}>
+                    <Box className={style.bottomContainerpannelTop}>
+                      <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
+                        <Tabs value={value} onChange={handleChange} className={style.tabs}>
+                          <Tab label="Solid Token" {...a11yProps(0, "page")} className={style.tab} />
+                        </Tabs>
+                      </Box>
+                    </Box>
+                    <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={value} index={0}>
+                      <Box className={style.tabPannel1}>
+                        <Box className={style.tabPannelrow1}>
+                          <Typography variant="h6" className={style.h6Text}>
+                            This process is irreversible
+                          </Typography>
+                        </Box>
+                        <Box className={style.tabPannelrow2}>
+                          <Typography variant='p' className={style.balancep}>
+                            Balance: 0 SOLID
+                          </Typography>
+                        </Box>
+                        <Box className={style.tabPannelrow3}>
+                          <Box className={style.tabPannelrow3Left}>
+                            <Box className={style.tabPannelrow3LeftInner}>
+                              <Box className={style.marginTop}>
+                                <FormControl sx={{ m: 1, minWidth: 200 }}>
+                                  <InputLabel style={{ color: '#fff' }} id="demo-multiple-chip-label">Select Token ID</InputLabel>
+                                  <Select
+                                    labelId="demo-multiple-chip-label"
+                                    id="demo-multiple-chip"
+                                    className={style.tabinputFieldsSelection}
+                                    value={null}
+                                    onChange={null}
+                                  >
+                                    <MenuItem value={10}>Ten</MenuItem>
+                                    <MenuItem value={20}>Twenty</MenuItem>
+                                    <MenuItem value={30}>Thirty</MenuItem>
+                                  </Select>
+                                </FormControl>
+                              </Box>
+                            </Box>
+                          </Box>
+                        </Box>
+                        <Box className={style.tabPannelrow3Right}>
+                          <Button className={style.approveBtn}>
+                            Convert tokens
+                          </Button>
+                        </Box>
+                        <Box className={style.tabPannelrow4}>
+                          <Typography variant='p' className={style.balancep}>
+                            Converting 0 SOLID Tokens From the selected SOLID NFT to 0 SOLIDDsex
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </TabPanel>
+                  </Box>
+                </Paper>
+                <Box style={{ display: "flex", flexWrap: "wrap", margin: "1rem 0", background: "transparent", justifyContent: "space-between" }}>
+                      <Box style={{ width: "45%", margin: '0 0.5rem', padding: "1.5rem", color: "white", background: "#1f272b", border: "4px solid #194172" }}>
+                        <Typography>
+                          Negative Vote Protection
+                        </Typography>
+                        <Typography>
+                          Only Available to early partners
+                        </Typography>
+                      </Box>
+                      <Box style={{ width: "45%", margin: '0 0.5rem', padding: "1.5rem", color: "white", background: "#1f272b", border: "4px solid #194172" }}>
+                        <Typography>
+                          Partners whitelist token
+                        </Typography>
+                        <Typography>
+                          Only Available to early partners
+                        </Typography>
+                      </Box>
                 </Box>
-                <Button className={style1.btn}>Claim All Earnings</Button>
-              </Box>
-            </Box>
-            {/* // main */}
-
-            <Container item xs={12} className={style1.tableMainBox}>
-              <Grid xs={12} item className={style1.tableHeader}>
-                <Box className={style1.tableHeaderInner}>
-                  <Container className={style1.tableHeaderInnerBoxes}>
-                    <Grid item xs={2.5} className={style1.box1}></Grid>
-                    <Grid item xs={1.5} className={style1.box2}>
-                      <Button>
-                        <Typography variant="h6" className={style1.h3text}>
-                          TVL
-                        </Typography>
-                      </Button>
-
-                    </Grid>
-                    <Grid item xs={1.5} className={style1.box2}>
-                      <Button>
-                        <Typography variant="h6" className={style1.h3text}>
-                          APR
-                        </Typography>
-                      </Button>
-                    </Grid>
-                    <Grid item xs={1.5} className={style1.box2}>
-                      <Button>
-                        <Typography variant="h6" className={style1.h3text}>
-                          Your Deposits
-                        </Typography>
-                      </Button>
-                    </Grid>
-                    <Grid item xs={2} className={style1.box2}>
-                      <Button>
-                        <Typography variant="h6" className={style1.h3text}>
-                          Your Earnings
-                        </Typography>
-                      </Button>
-                    </Grid>
-                  </Container>
+                <Box style={{background: "#1f272b", padding: "1.5rem", margin: "1rem 0", width: "30%", border: "4px solid #194172"}}>
+                    <Typography variant='h4' color='common.white'>
+                      Partner Claim
+                    </Typography>
+                    <Typography variant='h6' color='common.white'>
+                      Claimable Sex
+                    </Typography>
+                    <Typography variant='h3' color='common.white'>
+                      0
+                    </Typography>
+                    <Button variant="contained">claim</Button>
                 </Box>
               </Grid>
-
-<div>
-{
-  gauges.length > 0 && ssUpdateDone && 
-
-              <PoolsRow
-                gauges={gauges.filter((pair) => {
-                  if (!search || search === '') {
-                    return true
-                  }
-
-                  const searchLower = search.toLowerCase()
-
-                  if (pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
-                    pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
-                    pair.token1.symbol.toLowerCase().includes(searchLower) || pair.token1.address.toLowerCase().includes(searchLower) || pair.token1.name.toLowerCase().includes(searchLower)) {
-                    return true
-                  }
-
-                  return false
-
-                })}
-                setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked}
-                TvlData={TvlData}
-              />
-              }
-              </div>
-              <TablePagination
-                component="div"
-                className={style1.pagination}
-                count={10}
-                page={10}
-                onPageChange={null}
-                rowsPerPage={10}
-                onRowsPerPageChange={null}
-              />
-
             </Container>
+
           </Box>
-        </Box>
-      </Box>
-    </Container>
+        </Box >
+      </Container >
+
     
     </>
   );
