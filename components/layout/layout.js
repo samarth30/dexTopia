@@ -44,7 +44,6 @@ export default function Layout({
         )}
         <SnackbarController />
         {children}
-        <Footer />
         </>
     </>
   );
