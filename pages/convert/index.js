@@ -52,7 +52,7 @@ function Convert({ changeTheme }) {
           <div className={classes.contentFloat}>
             <Typography className={classes.mainHeadingNC} variant='h1'>Convert</Typography>
             <Typography className={classes.mainDescNC} color='common.white' variant='body2'>
-              Use your veSolid to vote for your selected liquidity pair’s rewards distribution or create a bribe to encourage others to do the same.
+              Use your veDyst to vote for your selected liquidity pair’s rewards distribution or create a bribe to encourage others to do the same.
             </Typography>
             <Button
               disableElevation

@@ -298,7 +298,7 @@ let ssupdateDone = false;
                 <Paper elevation={1} className={style.bottomContainerLeftInner}>
                   <Box className={style.bottomContainerLeftInnerTop}>
                     <Typography variant='h3' className={style.h3text}>
-                      Convert & stake Solidly NFTs/Tokens into SOLIDsex
+                      Convert & stake Dystopia NFTs/Tokens into VeTopia
                     </Typography>
                   </Box>
 
