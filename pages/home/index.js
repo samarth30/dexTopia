@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import homeStyle from './home.module.css';
 import AmountBox from "./amountBox/amountBox";
 
+import Footer from '../../components/footer/footer';
 import { useRouter } from 'next/router'
 // import guthubLogo from '../../public/images/github.svg';
 
@@ -23,6 +24,7 @@ export default function Home() {
   const router = useRouter()
   let arr = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
+      <>
       <Container id="main" className={style.mainContainer}>
         <Box className={homeStyle.mainContainerInner}>
           <Box className={homeStyle.section1}>
@@ -309,5 +311,7 @@ export default function Home() {
 
         </Box>
       </Container>
+      <Footer />
+      </>
   )
 }
