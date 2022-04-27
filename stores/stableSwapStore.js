@@ -300,6 +300,9 @@ class Store {
           case ACTIONS.DEXTOPIA_TOPIA_PARTNER_EARLY_PARTNER_CLAIM:
             this.dexTopiaEarlyPartnerClaim(payload);
             break;
+          case ACTIONS.DEXTOPIA_TOPIA_PARTNER_EARLY_PARTNER_SENDVENFT:
+            this.veDystTransfertoTopiaPartners(payload);
+            break;  
           
 
           // special Data
@@ -6880,6 +6883,78 @@ class Store {
       this.emitter.emit(ACTIONS.ERROR, ex);
     }
   };
+
+  // sex partner deposit ve dyst
+    // ve depositor deposit token
+    veDystTransfertoTopiaPartners = async (payload) => {
+      try {
+        const context = this;
+  
+       
+        const account = stores.accountStore.getStore("account");
+        if (!account) {
+          console.warn("account not found");
+          return null;
+        }
+  
+        const web3 = await stores.accountStore.getWeb3Provider();
+        if (!web3) {
+          console.warn("web3 not found");
+          return null;
+        }
+        // console.log(payload.content,"heeh")
+       
+        const { id } = payload.content;
+  
+        let depositTXID = this.getTXUUID();
+  
+        //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+      
+        this.emitter.emit(ACTIONS.TX_ADDED, {
+          title: `Transfer VeDyst to Topia Partners`,
+          type: "Liquidity",
+          verb: "Liquidity Deposit",
+          transactions: [
+            {
+              uuid: depositTXID,
+              description: `Transfer VeDyst to Topia Partners`,
+              status: "WAITING",
+            }
+          ],
+        });
+  
+        const gasPrice = await stores.accountStore.getGasPrice();
+  
+        const dexTopiaPartners = new web3.eth.Contract(
+          CONTRACTS.DEXTOPIA_TOPIAPARTNER_ABI,
+          CONTRACTS.DEXTOPIA_TOPIAPARTNER
+        );
+  
+        this._callContractWait(
+          web3,
+          dexTopiaPartners,
+          "safeTransferFrom",
+          [account.address,CONTRACTS.DEXTOPIA_TOPIAPARTNER,id],
+          account,
+          gasPrice,
+          null,
+          null,
+          depositTXID,
+          async (err) => {
+            if (err) {
+              return this.emitter.emit(ACTIONS.ERROR, err);
+            }
+  
+            this._getPairInfo(web3, account);
+  
+            this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+          }
+        );
+      } catch (ex) {
+        console.error(ex);
+        this.emitter.emit(ACTIONS.ERROR, ex);
+      }
+    };
 
 
 
