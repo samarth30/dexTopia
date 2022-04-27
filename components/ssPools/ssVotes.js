@@ -281,8 +281,8 @@ let ssupdateDone = false;
           </Box>
           <Box className={style1.bottomContainer}>
             <Box className={style1.bottomTopBar}>
-              <Box className={style1.left}>
                 <Typography sx={{ color: 'white' }} variant="h3">Filter</Typography>
+              <Box className={style1.left}>
                 <Button className={style1.btn}>ALL</Button>
                 <Button className={style1.btn}>STABLE</Button>
                 <Button className={style1.btn}>Volatile</Button>
@@ -293,7 +293,7 @@ let ssupdateDone = false;
                   <Input placeholder="Search Pools" value={search} onChange={onSearchChanged} className={style1.inputBox}></Input>
                   <img src="/images/search.svg" className={style1.searchIcon} alt="search" />
                 </Box>
-                <Button className={style1.btn}>Claim All Earnings</Button>
+                <Button className={style1.btn} >Claim All Earnings</Button>
               </Box>
             </Box>
             {/* // main */}

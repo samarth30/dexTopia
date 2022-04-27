@@ -24,7 +24,7 @@
   line-height: 1.75;
   padding: 5px 15px;
   border-radius: 4px;
-  min-width: 90px;
+  width: 120px;
   font-size: 14px;
   font-weight: bold;
   transition: all 0.2s ease 0s;
@@ -33,6 +33,11 @@
   border: 1px solid rgb(32, 39, 43);
   background: rgb(2, 119, 250) none repeat scroll 0% 0%;
   color: rgb(255, 255, 255);
+}
+
+.right .btn {
+  min-width: 90px;
+  width: unset;
 }
 
 .bottomContainer {
@@ -274,7 +279,10 @@
   }
 
   .bottomContainer .bottomTopBar .left{
-    flex-direction: column;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 !important;
     gap: .5rem;
   }
   .tableHeaderInner{
