@@ -33,16 +33,68 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     color: '#fff',
 }));
-
-const PrettoSlider = withStyles({
+// const PrettoSlider = styled(Slider)(({theme, appTheme}) => {
+//   return ({
+//     color: appTheme === 'dark' ? '#3880ff' : '#3880ff',
+//     height: 2,
+//     padding: '15px 0',
+//     '& .MuiSlider-thumb': {
+//       height: 10,
+//       width: 10,
+//       backgroundColor: appTheme === 'dark' ? '#4CADE6' : '#5688A5',
+//       boxShadow: 'none',
+//       '&:focus, &:hover, &.Mui-active': {
+//         boxShadow: 'none',
+//         '@media (hover: none)': {
+//           boxShadow: 'none',
+//         },
+//       },
+//     },
+//     '& .MuiSlider-valueLabel': {
+//       fontSize: 10,
+//       fontWeight: 400,
+//       top: -6,
+//       border: '1px solid #0B5E8E',
+//       background: '#B9DFF5',
+//       padding: 5,
+//       borderRadius: 0,
+//       '&:before': {
+//         borderBottom: '1px solid #0B5E8E',
+//         borderRight: '1px solid #0B5E8E',
+//       },
+//       '& *': {
+//         color: '#325569',
+//       },
+//     },
+//     '& .MuiSlider-track': {
+//       border: 'none',
+//       backgroundColor: '#9BC9E4',
+//     },
+//     '& .MuiSlider-rail': {
+//       opacity: 1,
+//       backgroundColor: '#9BC9E4',
+//     },
+//     '& .MuiSlider-mark': {
+//       opacity: 1,
+//       backgroundColor: '#CFE5F2',
+//       height: 2,
+//       width: 2,
+//       '&.MuiSlider-markActive': {
+//         backgroundColor: '#CFE5F2',
+//         opacity: 1,
+//       },
+//     },
+//   });
+// });
+ const PrettoSlider = withStyles({
   root: {
-    color: '#06D3D7',
+    color: '#7155FF',
     height: 8,
   },
   thumb: {
     height: 24,
     width: 24,
-    backgroundColor: '#06D3D7',
+    backgroundColor: '#7155FF',
     border: '2px solid currentColor',
     marginTop: -8,
     marginLeft: -12,
@@ -162,6 +214,11 @@ export default function Vote() {
     const [sliderValues, setSliderValues] = useState(votes)
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [page, setPage] = useState(0);
+
+    useEffect(() => {
+      setSliderValues(votes)
+    }, [votes])
+    
 
     const ssUpdated = () => {
         setVeToken(stores.stableSwapStore.getStore('veToken'))
@@ -309,7 +366,7 @@ export default function Vote() {
           return val
         })
     
-        setParentSliderValues(newSliderValues)
+        setVotes(newSliderValues)
       }
     
       const handleRequestSort = (event, property) => {
@@ -340,7 +397,7 @@ export default function Vote() {
         );
       }
 
-      console.log("votes page", gauges)
+      console.log("votes page", votes)
 
     return (
             <Container id="main" className={style.mainContainer}>
@@ -421,6 +478,7 @@ export default function Vote() {
                                                   } else {
                                                     sliderValue = 0
                                                   }
+                                                  {console.log(sliderValue)}
                                                 return (
                                                   <Grid key={index} xs={12} container className={voteStyle.hederBoxInner}>
                                                     <Grid item md={3} xs={6}>
@@ -454,7 +512,7 @@ export default function Vote() {
                                                                 <TextField placeholder="Enter vote" className={voteStyle.inputBox} variant="outlined" />
                                                                 <Button className={voteStyle.inpputButtonMax}>Max</Button>
                                                             </Box> */}
-                                                            <Box className={voteStyle.right}>
+                                                            
                                                                 {/* <ButtonGroup variant="contained" aria-label="outlined primary button group">
                                                                     <Button className={voteStyle.like}>
                                                                         <img src="/images/like.svg" className={voteStyle.svgIcons} alt="likeimage" />
@@ -463,6 +521,7 @@ export default function Vote() {
                                                                         <img src="/images/dislike.svg" className={voteStyle.svgIcons} alt="likeimage" />
                                                                     </Button>
                                                                 </ButtonGroup> */}
+                                                                {console.log("preeto", sliderValue)}
                                                                 <PrettoSlider
                                                                   valueLabelDisplay="auto"
                                                                   value={ sliderValue }
@@ -470,8 +529,9 @@ export default function Vote() {
                                                                   min={-100}
                                                                   max={100}
                                                                   marks
+                                                                  step={1}
                                                                 />
-                                                            </Box>
+                                                            
                                                         </Box>
                                                     </Grid>
                                                 </Grid>

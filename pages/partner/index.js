@@ -1,14 +1,14 @@
+import { calendarPickerSkeletonClasses } from '@mui/lab';
 import React, { useState, useEffect } from 'react';
+import classes from '../../pages/vote/vote.module.css';
+import CCPartner from '../../components/ssPartners/ssPartners';
 import { Typography, Button, Paper, SvgIcon } from "@mui/material";
-// import Gauges from '../../components/ssVotes';
-import Gauges from '../../components/ssNewVotes/ssVotes';
 import Unlock from '../../components/unlock';
-import classes from './vote.module.css';
 
 import stores from '../../stores';
 import { ACTIONS } from '../../stores/constants';
+function Partner({ changeTheme }) {
 
-function Vote({ changeTheme }) {
   const accountStore = stores.accountStore.getStore('account');
   const [account, setAccount] = useState(accountStore);
   const [unlockOpen, setUnlockOpen] = useState(false);
@@ -38,36 +38,37 @@ function Vote({ changeTheme }) {
   const closeUnlock = () => {
     setUnlockOpen(false);
   };
+  const [tab, setTab] = useState("token")
 
   return (
     <div className={classes.ffContainer}>
-
       {account && account.address ?
         <div className={classes.connected}>
-          <Gauges />
+          <CCPartner />
         </div>
         :
         <Paper className={classes.notConnectedContent}>
           <div className={classes.sphere}></div>
           <div className={classes.contentFloat}>
-          <Typography className={classes.mainHeadingNC} variant='h1'>Vote</Typography>
-          <Typography className={classes.mainDescNC} color='common.white' variant='body2'>
-            Use your veDyst to vote for your selected liquidity pair’s rewards distribution or create a bribe to encourage others to do the same.
-          </Typography>
-          <Button
-            disableElevation
-            className={classes.buttonConnect}
-            variant="contained"
-            onClick={onAddressClicked}>
+            <Typography className={classes.mainHeadingNC} variant='h1'>Convert</Typography>
+            <Typography className={classes.mainDescNC} color='common.white' variant='body2'>
+              Use your veDyst to vote for your selected liquidity pair’s rewards distribution or create a bribe to encourage others to do the same.
+            </Typography>
+            <Button
+              disableElevation
+              className={classes.buttonConnect}
+              variant="contained"
+              onClick={onAddressClicked}>
               {account && account.address && <div className={`${classes.accountIcon} ${classes.metamask}`}></div>}
               <Typography>Connect Wallet to Continue</Typography>
-          </Button>
+            </Button>
           </div>
         </Paper>
-       }
-       {unlockOpen && <Unlock modalOpen={unlockOpen} closeModal={closeUnlock} />}
+      }
+      {unlockOpen && <Unlock modalOpen={unlockOpen} closeModal={closeUnlock} />}
     </div>
   );
 }
 
-export default Vote;
+export default Partner;
+

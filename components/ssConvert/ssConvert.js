@@ -89,7 +89,7 @@ export default function ssConvert() {
       content: { id: selectDropdown.id },
     });
   }
-console.log( selectDropdown.id,"idii")
+// console.log( selectDropdown,"idii")
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
@@ -188,17 +188,27 @@ console.log( selectDropdown.id,"idii")
     setDepositInput(e.target.value);
   }
 
+  function reverseFormatNumber(val,locale){
+    var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, '');
+    var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, '');
+    var reversedVal = val.replace(new RegExp('\\' + group, 'g'), '');
+    reversedVal = reversedVal.replace(new RegExp('\\' + decimal, 'g'), '.');
+    return Number.isNaN(reversedVal)?0:reversedVal;
+}
+
   const onDepositVeTopia = async () => {
+
+    console.log(reverseFormatNumber(depositInputveTopia),"alow")
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT,
-      content: { amount: depositInputveTopia },
+      content: { amount: reverseFormatNumber(depositInputveTopia) },
     });
   };
 
   const onWithdrawVeTopia = async () => {
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_WITHDRAW,
-      content: { amount: depositInputveTopia },
+      content: { amount: reverseFormatNumber(depositInputveTopia) },
     });
   };
 
@@ -469,7 +479,7 @@ console.log( selectDropdown.id,"idii")
                               BigNumber(dystopiaBalance).div(
                                 10 ** 18
                               )
-                            )) }}>Max</Button>
+                            ,15)) }}>Max</Button>
                               </Box>
                             </Box>
                           </Box>
@@ -577,8 +587,8 @@ console.log( selectDropdown.id,"idii")
                         </Box>
                         <Box className={style.tabPannelrow4}>
                           <Typography variant="p" className={style.balancep}>
-                            Converting Dystopia Tokens From the selected
-                            Dystopia NFT to 0 VeTopia Token
+                            Converting veDyst From the selected
+                            Dystopia NFT to {selectDropdown ? parseFloat(selectDropdown?.lockAmount).toFixed(2) : 0} veTopia
                           </Typography>
                         </Box>
                       </Box>
@@ -653,7 +663,7 @@ console.log( selectDropdown.id,"idii")
                                 10 ** 18
                               )
                             )}{" "}
-                          topia
+                          Topia
                         </Typography>
                       </Grid>
                       <Grid item xs={6} lg={1.5}>
@@ -744,7 +754,7 @@ console.log( selectDropdown.id,"idii")
                               BigNumber(veTopiaBalance).div(
                                 10 ** 18
                               )
-                            ))}}>Max</Button>
+                            ,15))}}>Max</Button>
                       </Box>
                     </Box>
                   </Box>
@@ -795,7 +805,7 @@ console.log( selectDropdown.id,"idii")
                               BigNumber(stakingRewardStaked?.stakedBalance).div(
                                 10 ** 18
                               )
-                            ))}}>Max</Button>
+                            ,15))}}>Max</Button>
                           </Box>
                         </Box>
                       </Box>

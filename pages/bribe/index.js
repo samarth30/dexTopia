@@ -63,7 +63,7 @@ function Bribes({ changeTheme }) {
           <BalanceIcon className={ classes.overviewIcon } />
            <Typography className={classes.mainHeadingNC} variant='h1'>Bribes</Typography>
            <Typography className={classes.mainDescNC} color='common.white' variant='body2'>
-             Use your veSolid to vote for your selected pool’s rewards distribution or create a bribe to encourage others to do the same.
+             Use your veDyst to vote for your selected pool’s rewards distribution or create a bribe to encourage others to do the same.
            </Typography>
            <Button
              disableElevation
@@ -82,3 +82,10 @@ function Bribes({ changeTheme }) {
 }
 
 export default Bribes;
+// const totalRewardPricePerYear = new BigNumber(rewardTokenPrice)
+//     .times(tokenPerBlock)
+//     .times(BLOCKS_PER_YEAR);
+//   const totalStakingTokenInPool = tvl;
+
+//   const apy = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100);
+//   return apy.isNaN() || !apy.isFinite() ? null : apy.toNumber();

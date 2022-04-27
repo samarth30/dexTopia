@@ -42,6 +42,8 @@ query {
    }
    reserve0
    reserve1
+   token0Price
+   token1Price
    totalSupply
    claimable0
    claimable1
@@ -114,7 +116,9 @@ class Store {
       poolStakedBalance:[],
       stakingRewardStakedBalance : [],
       tockenLockerData : [],
-      veDepositorData:[]
+      topiaPartnersData :[],
+      veDepositorData:[],
+      tvls:[]
     };
 
     dispatcher.register(
@@ -286,6 +290,28 @@ class Store {
             this.getDexTopiaTockenLockerData(payload);
             break;
 
+          // dextopia Sex Partners
+          case ACTIONS.DEXTOPIA_TOPIA_PARTNER_DATA:
+            this.getDexTopiaPartnerData(payload);
+            break;
+          case ACTIONS.DEXTOPIA_TOPIA_PARTNER_CLAIM:
+            this.dexTopiaPartnerClaim(payload);
+            break;
+          case ACTIONS.DEXTOPIA_TOPIA_PARTNER_EARLY_PARTNER_CLAIM:
+            this.dexTopiaEarlyPartnerClaim(payload);
+            break;
+          case ACTIONS.DEXTOPIA_TOPIA_PARTNER_EARLY_PARTNER_SENDVENFT:
+            this.veDystTransfertoTopiaPartners(payload);
+            break;  
+          
+
+          // special Data
+          case ACTIONS.TVL_DATA_POOLS:
+            this.getPoolsTvlData(payload);
+            break;
+          
+          
+          
           default: {
           }
         }
@@ -551,6 +577,135 @@ class Store {
     console.log({lockedBalance , activeUserLocks , balanceOfTopiaToken , userWeight ,startTimeTockenLocker , getweek},"pippppp")
     console.log(data,"topdex")
    return {lockedBalance , activeUserLocks , balanceOfTopiaToken , userWeight , startTimeTockenLocker , getweek};
+      
+  }
+
+  getDexTopiaPartnerData = async(address) =>{
+    const topiaPartnersDatas = this.store.topiaPartnersData;
+    const multicall = await stores.accountStore.getMulticall();
+    const web3 = await stores.accountStore.getWeb3Provider();
+    if (!web3) {
+      console.warn("web3 not found");
+      return null;
+    }
+    const account = stores.accountStore.getStore("account");
+    if (!account) {
+      console.warn("account not found");
+      return null;
+    }
+
+    let poolReward = [];
+
+    if (topiaPartnersDatas) {
+      poolReward = topiaPartnersDatas;
+    } else {
+      poolReward = this.getStore("topiaPartnersData");
+    }
+    
+  
+    //  Mintpact
+    //  Claimable 
+    //  earlypartnerdeadline
+    //  Finalpartnerdeadline
+    //  Totalminted
+    //  partnercount
+    //  userdata(msg.sender)
+    // isearlypartner(msg.sender)
+    let totalMintPct = 0, claimable=0, earlyPartnerDeadline=0, finalPartnerDeadline=0, totalMinted=0,partnerCount=0,isEarlyPartner=false , userData;
+     
+
+        try {
+          const dexTopiaPartners = new web3.eth.Contract(
+            CONTRACTS.DEXTOPIA_TOPIAPARTNER_ABI,
+            CONTRACTS.DEXTOPIA_TOPIAPARTNER
+          );
+
+           [totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner] =
+              await multicall.aggregate([
+                dexTopiaPartners.methods.totalMintPct(),
+                dexTopiaPartners.methods.claimable(account.address),
+                dexTopiaPartners.methods.earlyPartnerDeadline(),
+                dexTopiaPartners.methods.finalPartnerDeadline(),
+                dexTopiaPartners.methods.totalMinted(),
+                dexTopiaPartners.methods.partnerCount(),
+                dexTopiaPartners.methods.userData(account.address),
+                dexTopiaPartners.methods.isEarlyPartner(),
+              ]);
+           
+        }
+        catch(e){
+          console.log(e ,"allsetbro");
+        }
+   
+    this.setStore({topiaPartnersData: {totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner}});
+    console.log({totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner},"pippppp")
+
+   return {totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner};
+      
+  }
+
+  getPoolsTvlData = async(address) =>{
+    const PoolsData = this.store.pairs;
+    const multicall = await stores.accountStore.getMulticall();
+    const web3 = await stores.accountStore.getWeb3Provider();
+    if (!web3) {
+      console.warn("web3 not found");
+      return null;
+    }
+    const account = stores.accountStore.getStore("account");
+    if (!account) {
+      console.warn("account not found");
+      return null;
+    }
+
+    let poolsdata = []
+    
+    if(poolsdata){
+      poolsdata = PoolsData
+    }else{
+     poolsdata = this.getStore("pairs");
+    }
+    let realwordlpools = poolsdata.map((object)=>{
+      return object.address
+    })
+  
+    const lpDepositorContract = new web3.eth.Contract(
+      CONTRACTS.LP_DEPOSITER_ABI,
+      CONTRACTS.LP_DEPOSITER
+    );
+
+    const ps = await Promise.all(
+      address.content.realfilteredassets.map(async (object) => {
+        const a = Array.from(realwordlpools).indexOf(object.toString());
+        console.log(a,"index")
+        if(a !== -1){
+        try {
+         const pair = poolsdata[parseInt(a)]; 
+         let tvl = 0;
+         
+         let lpBalanceInAPool = await lpDepositorContract.methods.totalBalances(pair.address).call();
+         lpBalanceInAPool = web3.utils.fromWei(lpBalanceInAPool,'ether');
+
+         const LpBalanceRatioo = BigNumber(lpBalanceInAPool).div(BigNumber(pair.totalSupply));
+         const totalVolumeInUsdInReserve0 =  BigNumber(pair.reserve0).multipliedBy(BigNumber(pair.token0Price))
+         const totalVolumeInUsdInReserve1 =  BigNumber(pair.reserve1).multipliedBy(BigNumber(pair.token1Price))
+       
+         const totalVolumeInUsd = Number(totalVolumeInUsdInReserve0) + Number(totalVolumeInUsdInReserve1);
+         tvl = BigNumber(totalVolumeInUsd).multipliedBy(BigNumber(LpBalanceRatioo));
+         console.log({lpBalanceInAPool,price1 :pair.token0Price ,price2: pair.token1Price, balance1 :pair.reserve0 , balance2: pair.reserve1,LpBalanceRatioo : Number(LpBalanceRatioo),totalVolumeInUsdInReserve0:Number(totalVolumeInUsdInReserve0),totalVolumeInUsdInReserve1:Number(totalVolumeInUsdInReserve1),totalVolumeInUsd:Number(totalVolumeInUsd), tvl : Number(tvl)},"tvl")
+         return {lpBalanceInAPool ,price1 :pair.token0Price ,price2: pair.token1Price, balance1 :pair.reserve0 , balance2: pair.reserve1,LpBalanceRatioo : Number(LpBalanceRatioo),totalVolumeInUsdInReserve0:Number(totalVolumeInUsdInReserve0),totalVolumeInUsdInReserve1:Number(totalVolumeInUsdInReserve1),totalVolumeInUsd:Number(totalVolumeInUsd), tvl : Number(tvl)}
+
+        }catch(e){
+          console.log(e ,"allsetbro");
+        }
+      }else {
+        return null;
+      }
+      }));
+   
+    this.setStore({tvls: ps});
+    
+   return {ps};
       
   }
 
@@ -6729,6 +6884,78 @@ class Store {
     }
   };
 
+  // sex partner deposit ve dyst
+    // ve depositor deposit token
+    veDystTransfertoTopiaPartners = async (payload) => {
+      try {
+        const context = this;
+  
+       
+        const account = stores.accountStore.getStore("account");
+        if (!account) {
+          console.warn("account not found");
+          return null;
+        }
+  
+        const web3 = await stores.accountStore.getWeb3Provider();
+        if (!web3) {
+          console.warn("web3 not found");
+          return null;
+        }
+        // console.log(payload.content,"heeh")
+       
+        const { id } = payload.content;
+  
+        let depositTXID = this.getTXUUID();
+  
+        //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+      
+        this.emitter.emit(ACTIONS.TX_ADDED, {
+          title: `Transfer VeDyst to Topia Partners`,
+          type: "Liquidity",
+          verb: "Liquidity Deposit",
+          transactions: [
+            {
+              uuid: depositTXID,
+              description: `Transfer VeDyst to Topia Partners`,
+              status: "WAITING",
+            }
+          ],
+        });
+  
+        const gasPrice = await stores.accountStore.getGasPrice();
+  
+        const dexTopiaPartners = new web3.eth.Contract(
+          CONTRACTS.DEXTOPIA_TOPIAPARTNER_ABI,
+          CONTRACTS.DEXTOPIA_TOPIAPARTNER
+        );
+  
+        this._callContractWait(
+          web3,
+          dexTopiaPartners,
+          "safeTransferFrom",
+          [account.address,CONTRACTS.DEXTOPIA_TOPIAPARTNER,id],
+          account,
+          gasPrice,
+          null,
+          null,
+          depositTXID,
+          async (err) => {
+            if (err) {
+              return this.emitter.emit(ACTIONS.ERROR, err);
+            }
+  
+            this._getPairInfo(web3, account);
+  
+            this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+          }
+        );
+      } catch (ex) {
+        console.error(ex);
+        this.emitter.emit(ACTIONS.ERROR, ex);
+      }
+    };
+
 
 
   withdrawLpDepositor = async (payload) => {
@@ -7096,6 +7323,7 @@ class Store {
       const gasPrice = await stores.accountStore.getGasPrice();
 
       const allowanceCallsPromises = [];
+      console.log(allowance0,amount,"alow")
       if (BigNumber(allowance0).lt(amount)) {
       const tokenContract = new web3.eth.Contract(
         CONTRACTS.ERC20_ABI,
@@ -7309,6 +7537,145 @@ class Store {
     }
   };
 
+  // topiapartner claim
+  dexTopiaPartnerClaim= async (payload) => {
+    try {
+      const context = this;
+
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+      // console.log(payload.content,"heeh")
+      const {  } = payload.content;
+
+      // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
+      let withdrawTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `Claiming Token from Topia Partner`,
+        type: "Liquidity",
+        verb: "Liquidity withdraw",
+        transactions: [
+          {
+            uuid: withdrawTXID,
+            description: `Claiming Token from Topia Partner`,
+            status: "WAITING",
+          }
+        ],
+      });
+
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+      const dexTopiaPartners = new web3.eth.Contract(
+        CONTRACTS.DEXTOPIA_TOPIAPARTNER_ABI,
+        CONTRACTS.DEXTOPIA_TOPIAPARTNER
+      );
+
+      this._callContractWait(
+        web3,
+        dexTopiaPartners,
+        "claim",
+        [],
+        account,
+        gasPrice,
+        null,
+        null,
+        withdrawTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
+  };
+
+  // topia partner claim
+  dexTopiaEarlyPartnerClaim= async (payload) => {
+    try {
+      const context = this;
+
+      const account = stores.accountStore.getStore("account");
+      if (!account) {
+        console.warn("account not found");
+        return null;
+      }
+
+      const web3 = await stores.accountStore.getWeb3Provider();
+      if (!web3) {
+        console.warn("web3 not found");
+        return null;
+      }
+      // console.log(payload.content,"heeh")
+      const {  } = payload.content;
+
+      // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
+      let withdrawTXID = this.getTXUUID();
+
+      //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
+
+      this.emitter.emit(ACTIONS.TX_ADDED, {
+        title: `early Partner Claiming from Topia Partner`,
+        type: "Liquidity",
+        verb: "Liquidity withdraw",
+        transactions: [
+          {
+            uuid: withdrawTXID,
+            description: `early Partner Claiming from Topia Partner`,
+            status: "WAITING",
+          }
+        ],
+      });
+
+      const gasPrice = await stores.accountStore.getGasPrice();
+
+      const dexTopiaPartners = new web3.eth.Contract(
+        CONTRACTS.DEXTOPIA_TOPIAPARTNER_ABI,
+        CONTRACTS.DEXTOPIA_TOPIAPARTNER
+      );
+
+      this._callContractWait(
+        web3,
+        dexTopiaPartners,
+        "earlyPartnerClaim",
+        [],
+        account,
+        gasPrice,
+        null,
+        null,
+        withdrawTXID,
+        async (err) => {
+          if (err) {
+            return this.emitter.emit(ACTIONS.ERROR, err);
+          }
+
+          this._getPairInfo(web3, account);
+
+          this.emitter.emit(ACTIONS.LIQUIDITY_DEPOSIT);
+        }
+      );
+    } catch (ex) {
+      console.error(ex);
+      this.emitter.emit(ACTIONS.ERROR, ex);
+    }
+  };
 
   // dextopia Tocken Locker deposit token
   dexTopiaTockenLockerDeposit = async (payload) => {
