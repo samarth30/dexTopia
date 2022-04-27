@@ -138,6 +138,7 @@ export default function PoolsRow({
   token,
   poolReward,
   poolStaked,
+  TvlData
 }) {
   const [order, setOrder] = useState("desc");
   const [orderBy, setOrderBy] = useState("totalVotes");
@@ -215,11 +216,19 @@ export default function PoolsRow({
     };
   }
 
+  function reverseFormatNumber(val,locale){
+    var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, '');
+    var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, '');
+    var reversedVal = val.replace(new RegExp('\\' + group, 'g'), '');
+    reversedVal = reversedVal.replace(new RegExp('\\' + decimal, 'g'), '.');
+    return Number.isNaN(reversedVal)?0:reversedVal;
+}
+
   const onDeposit = async () => {
     setDepositLoading(true);
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEPOSITPOOL,
-      content: { poolAddress: PoolAddressSelected, amount: depositInput },
+      content: { poolAddress: PoolAddressSelected, amount: reverseFormatNumber(depositInput) },
     });
   };
 
@@ -227,7 +236,7 @@ export default function PoolsRow({
     setDepositLoading(true);
     await stores.dispatcher.dispatch({
       type: ACTIONS.WITHDRAW_LPDEPOSITOR,
-      content: { poolAddress: PoolAddressSelected, amount: depositInput },
+      content: { poolAddress: PoolAddressSelected, amount: reverseFormatNumber(depositInput) },
     });
   };
 
@@ -388,10 +397,7 @@ export default function PoolsRow({
                   <Grid xs={12} lg={1.5} className={style.tableBox2} style={{marginLeft: '10px'}} >
                     <span className={style.tableInlineText} >TVL :</span>
                     <Typography variant="p" className={style.tableBox2text}>
-                      {poolStaked[index] &&
-                        formatCurrency(
-                          BigNumber(poolStaked[index][0]).div(10 ** 18)
-                        )}
+                    {TvlData[index] && (TvlData[index]?.tvl).toLocaleString()}$
                     </Typography>
                    
                   </Grid>
@@ -408,10 +414,7 @@ export default function PoolsRow({
                   <Grid xs={12} lg={1.5} className={style.tableBox2}>
                   <span className={style.tableInlineText} >Your Deposit :</span>
                     <Typography variant="p" className={style.tableBox2text}  >
-                      ${poolStaked[index] &&
-                        formatCurrency(
-                          BigNumber(poolStaked[index][0]).div(10 ** 18)
-                        )}
+                    ${poolStaked[index] && TvlData[index] && poolStaked[index][0] > 0  ? Number(BigNumber(TvlData[index].lpBalanceInAPool).div((BigNumber(poolStaked[index][0]).div(10 ** 18))))*TvlData[index]?.tvl : 0 }
                     </Typography>
                    
                   </Grid>
