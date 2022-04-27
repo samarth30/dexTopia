@@ -14,6 +14,7 @@ import { lpDepositor } from './lpDepositor'
 import {dexTopiaVeDepositor} from './dexTopiaVeDepositor';
 import {dexTopiaTockenLocker} from "./dexTopiaTockenLocker";
 import {dexTopiaStakingRewards} from "./dexTopiaStakingRewards";
+import {dexTopiaPartners} from "./dexTopiaPartners";
 export default {
   erc20ABI,
   veTokenABI,
@@ -30,5 +31,6 @@ export default {
   lpDepositor,
   dexTopiaVeDepositor,
   dexTopiaTockenLocker,
-  dexTopiaStakingRewards
+  dexTopiaStakingRewards,
+  dexTopiaPartners
 }
