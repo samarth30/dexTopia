@@ -70,3 +70,9 @@ code {
   object-fit: cover;
   background-size: cover;
 }
+
+@media (min-width: 1200px) { 
+.css-1oqqzyl-MuiContainer-root {
+    max-width: 1235px !important; 
+}
+}
