@@ -42,6 +42,8 @@ query {
    }
    reserve0
    reserve1
+   token0Price
+   token1Price
    totalSupply
    claimable0
    claimable1
@@ -114,7 +116,8 @@ class Store {
       poolStakedBalance:[],
       stakingRewardStakedBalance : [],
       tockenLockerData : [],
-      veDepositorData:[]
+      veDepositorData:[],
+      tvls:[]
     };
 
     dispatcher.register(
@@ -286,6 +289,11 @@ class Store {
             this.getDexTopiaTockenLockerData(payload);
             break;
 
+          // special Data
+          case ACTIONS.TVL_DATA_POOLS:
+            this.getPoolsTvlData(payload);
+            break;
+          
           default: {
           }
         }
@@ -551,6 +559,71 @@ class Store {
     console.log({lockedBalance , activeUserLocks , balanceOfTopiaToken , userWeight ,startTimeTockenLocker , getweek},"pippppp")
     console.log(data,"topdex")
    return {lockedBalance , activeUserLocks , balanceOfTopiaToken , userWeight , startTimeTockenLocker , getweek};
+      
+  }
+
+  getPoolsTvlData = async(address) =>{
+    const PoolsData = this.store.pairs;
+    const multicall = await stores.accountStore.getMulticall();
+    const web3 = await stores.accountStore.getWeb3Provider();
+    if (!web3) {
+      console.warn("web3 not found");
+      return null;
+    }
+    const account = stores.accountStore.getStore("account");
+    if (!account) {
+      console.warn("account not found");
+      return null;
+    }
+
+    let poolsdata = []
+    
+    if(poolsdata){
+      poolsdata = PoolsData
+    }else{
+     poolsdata = this.getStore("pairs");
+    }
+    let realwordlpools = poolsdata.map((object)=>{
+      return object.address
+    })
+  
+    const lpDepositorContract = new web3.eth.Contract(
+      CONTRACTS.LP_DEPOSITER_ABI,
+      CONTRACTS.LP_DEPOSITER
+    );
+
+    const ps = await Promise.all(
+      address.content.realfilteredassets.map(async (object) => {
+        const a = Array.from(realwordlpools).indexOf(object.toString());
+        console.log(a,"index")
+        if(a !== -1){
+        try {
+         const pair = poolsdata[parseInt(a)]; 
+         let tvl = 0;
+         
+         let lpBalanceInAPool = await lpDepositorContract.methods.totalBalances(pair.address).call();
+         lpBalanceInAPool = web3.utils.fromWei(lpBalanceInAPool,'ether');
+
+         const LpBalanceRatioo = BigNumber(lpBalanceInAPool).div(BigNumber(pair.totalSupply));
+         const totalVolumeInUsdInReserve0 =  BigNumber(pair.reserve0).multipliedBy(BigNumber(pair.token0Price))
+         const totalVolumeInUsdInReserve1 =  BigNumber(pair.reserve1).multipliedBy(BigNumber(pair.token1Price))
+       
+         const totalVolumeInUsd = Number(totalVolumeInUsdInReserve0) + Number(totalVolumeInUsdInReserve1);
+         tvl = BigNumber(totalVolumeInUsd).multipliedBy(BigNumber(LpBalanceRatioo));
+         console.log({lpBalanceInAPool,price1 :pair.token0Price ,price2: pair.token1Price, balance1 :pair.reserve0 , balance2: pair.reserve1,LpBalanceRatioo : Number(LpBalanceRatioo),totalVolumeInUsdInReserve0:Number(totalVolumeInUsdInReserve0),totalVolumeInUsdInReserve1:Number(totalVolumeInUsdInReserve1),totalVolumeInUsd:Number(totalVolumeInUsd), tvl : Number(tvl)},"tvl")
+         return {lpBalanceInAPool ,price1 :pair.token0Price ,price2: pair.token1Price, balance1 :pair.reserve0 , balance2: pair.reserve1,LpBalanceRatioo : Number(LpBalanceRatioo),totalVolumeInUsdInReserve0:Number(totalVolumeInUsdInReserve0),totalVolumeInUsdInReserve1:Number(totalVolumeInUsdInReserve1),totalVolumeInUsd:Number(totalVolumeInUsd), tvl : Number(tvl)}
+
+        }catch(e){
+          console.log(e ,"allsetbro");
+        }
+      }else {
+        return null;
+      }
+      }));
+   
+    this.setStore({tvls: ps});
+    
+   return {ps};
       
   }
 
