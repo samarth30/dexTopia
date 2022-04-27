@@ -42,10 +42,6 @@ body {
   /* background: url("../public/images/dextopia-back.png") no-repeat center center/cover; */
 }
 
-.MuiPaper-root {
-  background-color: transparent !important;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

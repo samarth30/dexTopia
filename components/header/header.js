@@ -9,18 +9,15 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import SvgIcon from '@mui/material/SvgIcon';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import DashboardOutlined from '@material-ui/icons/DashboardOutlined';
 import AccountBalanceWalletOutlined from '@material-ui/icons/AccountBalanceWalletOutlined';
-import NotificationsNoneOutlined from '@material-ui/icons/NotificationsNoneOutlined';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { withStyles, withTheme } from "@mui/styles";
+import { withStyles } from "@mui/styles";
 import Unlock from "../unlock";
 import TransactionQueue from "../transactionQueue";
 
@@ -181,6 +178,19 @@ const Header = () => {
   const [chainInvalid, setChainInvalid] = useState(false);
   const [loading, setLoading] = useState(false);
   const [transactionQueueLength, setTransactionQueueLength] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  const listenScrollEvent = (e) => {
+    if (window.scrollY > 200) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', listenScrollEvent)
+  })
 
   useEffect(() => {
     const accountConfigure = () => {
@@ -276,7 +286,7 @@ const Header = () => {
   const { appTheme } = useAppThemeContext();
 
   return (
-    <AppBar position="static" className={style.headermenu}>
+          <AppBar position="static" className={`${style.headermenu} ${isScrolled && style.headerScroll}`}>
       <Container maxWidth="xl" className={style.headerContainer}>
         <Toolbar disableGutters>
           <Typography
