@@ -386,7 +386,7 @@ export default function PoolsRow({
                   </Grid>
 
                   <Grid xs={12} lg={1.5} className={style.tableBox2} style={{marginLeft: '10px'}} >
-                    <span className={style.tableInlineText} >TVL</span> :
+                    <span className={style.tableInlineText} >TVL :</span>
                     <Typography variant="p" className={style.tableBox2text}>
                       {poolStaked[index] &&
                         formatCurrency(
@@ -396,7 +396,7 @@ export default function PoolsRow({
                    
                   </Grid>
                   <Grid xs={12} lg={1.5} className={style.tableBox2}>
-                  <span className={style.tableInlineText} >APR</span> :
+                  <span className={style.tableInlineText} >APR :</span>
                     <Typography variant="p" className={style.tableBox2text}>
                       {poolStaked[index] &&
                         formatCurrency(
@@ -406,7 +406,7 @@ export default function PoolsRow({
                    
                   </Grid>
                   <Grid xs={12} lg={1.5} className={style.tableBox2}>
-                  <span className={style.tableInlineText} >Your Deposit</span> :
+                  <span className={style.tableInlineText} >Your Deposit :</span>
                     <Typography variant="p" className={style.tableBox2text}  >
                       ${poolStaked[index] &&
                         formatCurrency(
@@ -417,7 +417,7 @@ export default function PoolsRow({
                   </Grid>
                   
                   <Grid xs={12} lg={2} className={clx(style.tableBox2, style.leftSpace)} >
-                   <span className={style.tableInlineText} >Your Earning</span> :
+                   <span className={style.tableInlineText} >Your Earning :</span>
                     <Box style={{ marginLeft: "7px" }}>
                       
                       <Typography variant="p" className={style.tableBox2text}>

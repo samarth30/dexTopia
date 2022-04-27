@@ -603,28 +603,29 @@ console.log( selectDropdown.id,"idii")
                     </Typography>
                   </Grid>
                   <Grid lg={1.5} item>
-                    <Typography variant="h6">APR</Typography>
+                    <Typography variant="h6" className={style.tableheaderGText} >APR</Typography>
                   </Grid>
                   <Grid lg={1.7} item>
-                    <Typography variant="h6">Your Staked Dextopia</Typography>
+                    <Typography variant="h6" className={style.tableheaderGText} >Your Staked Dextopia</Typography>
                   </Grid>
                   <Grid lg={1.7} item>
-                    <Typography variant="h6">Your Earning</Typography>
+                    <Typography variant="h6" className={style.tableheaderGText} >Your Earning</Typography>
                   </Grid>
+                  <Grid lg={2.1} item className={style.tableheaderGText}></Grid>
                 </Container>
                 <Paper elevation={1} className={style.tableRow}>
                   <Box className={style.tableRowInner}>
                     <Container className={style.tableBoxes}>
                       <Grid item xs={12} lg={2}>
-                        <Typography variant="p"  style={{maxWidth: '200px'}} >Staked Dextopia</Typography>
+                        <Typography variant="p" className={style.tablebodyText} >Staked Dextopia</Typography>
                       </Grid>
-                      <Grid item xs={12} lg={1.75}>
+                      <Grid item xs={12} lg={1.75} className={style.tablebodyText} >
                         <Typography variant="p">6,656,064.4</Typography>
                       </Grid>
-                      <Grid item xs={12} lg={1.75}>
+                      <Grid item xs={12} lg={1.75} className={style.tablebodyText} >
                         <Typography variant="p">26.1%</Typography>
                       </Grid>
-                      <Grid item xs={12} lg={1.75}>
+                      <Grid item xs={12} lg={1.75} className={style.tablebodyText} >
                         <Typography variant="p">
 
                           {stakingRewardStaked &&
@@ -635,7 +636,7 @@ console.log( selectDropdown.id,"idii")
                             )}
                         </Typography>
                       </Grid>
-                      <Grid item xs={6} lg={1.5}>
+                      <Grid item xs={6} lg={1.5} className={style.tablebodyText} >
                         <Typography variant="p">
                           {stakingRewardStaked  &&
                             formatCurrency(
@@ -646,7 +647,7 @@ console.log( selectDropdown.id,"idii")
                           dystopia{" "}
                         </Typography>
                         <br></br>
-                        <Typography variant="p">
+                        <Typography variant="p" >
                           {stakingRewardStaked !== "undefined" &&
                             formatCurrency(
                               BigNumber(stakingRewardStaked?.topiaEarning).div(

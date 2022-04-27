@@ -389,6 +389,25 @@
   align-items: center;
 }
 
+.tableheaderGText {
+  font-size: 0.9rem !important;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px !important;
+  width: 115px;
+  text-align: left;
+}
+
+.tablebodyText {
+  width: 115px;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+} 
+.tablebodyText:nth-child(5) {
+  width: 150px;
+}
+
 .bottomContainer .bottomTable {
   box-sizing: border-box;
   padding-top: 24px;
@@ -403,9 +422,10 @@
   box-sizing: border-box;
   display: flex;
   flex-flow: row wrap;
+  gap: 45px;
   width: 100%;
   padding-bottom: 8px;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   color: #fff;
 }
 
@@ -442,6 +462,7 @@
   align-items: center;
   display: flex;
   justify-content: space-around;
+  gap: 20px;
 }
 
 /* media query */
