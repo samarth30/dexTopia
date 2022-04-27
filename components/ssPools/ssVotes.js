@@ -30,9 +30,9 @@ export default function ssPools() {
   const [token, setToken] = useState(null)
   const [vestNFTs, setVestNFTs] = useState([])
   const [search, setSearch] = useState('');
-  const [TvlData , setTvlData] = useState();
-  const [TotalValueLocked,setTotalValueLocked] = useState(0)
-  const [YourDepositTotal,setYourDepositTotal] = useState(0);
+  const [TvlData, setTvlData] = useState();
+  const [TotalValueLocked, setTotalValueLocked] = useState(0)
+  const [YourDepositTotal, setYourDepositTotal] = useState(0);
 
   const [modelTabs, setModeltabs] = useState(0);
 
@@ -57,8 +57,8 @@ export default function ssPools() {
     };
   }
 
-const [ssUpdateDone,setssUpdateDone] = useState(false);
-let ssupdateDone = false;
+  const [ssUpdateDone, setssUpdateDone] = useState(false);
+  let ssupdateDone = false;
   const ssUpdated = () => {
     setVeToken(stores.stableSwapStore.getStore('veToken'))
     const as = stores.stableSwapStore.getStore('pairs');
@@ -66,17 +66,17 @@ let ssupdateDone = false;
     const filteredAssets = as.filter((asset) => {
       return asset.gauge && asset.gauge.address
     })
-    if(filteredAssets.length > 0 && !ssupdateDone){
+    if (filteredAssets.length > 0 && !ssupdateDone) {
       console.log('hell')
-      console.log(filteredAssets,"hellllll")
+      console.log(filteredAssets, "hellllll")
       ssupdateDone = true;
       setssUpdateDone(true);
       setGauges(filteredAssets)
     }
-    let realfilteredassets = filteredAssets.map((object)=>{
+    let realfilteredassets = filteredAssets.map((object) => {
       return object.address
     })
-    
+
     const poolRewards = stores.dispatcher.dispatch({ type: ACTIONS.POOLREWARDS, content: { filteredAssets } })
     const tvldataas = stores.dispatcher.dispatch({ type: ACTIONS.TVL_DATA_POOLS, content: { realfilteredassets } })
 
@@ -85,22 +85,22 @@ let ssupdateDone = false;
     setPoolReward(ass)
 
     const asss = stores.stableSwapStore.getStore("poolStakedBalance");
-    console.log(asss, "pipp"  )
+    console.log(asss, "pipp")
     setPoolStaked(asss);
 
     const tvldata = stores.stableSwapStore.getStore("tvls");
 
-    let tvlsum = tvldata.map((object)=>{
+    let tvlsum = tvldata.map((object) => {
       return object.tvl;
     })
     tvlsum = tvlsum.reduce((a, b) => a + b, 0)
 
-    let yourDepositsTotal = asss.map((object,i)=>{
-      console.log(object,"object")
-      if(object){
-        return object && Number(BigNumber(tvldata[i].lpBalanceInAPool).div((BigNumber(object).div(10 ** 18))))*tvldata[i]?.tvl
+    let yourDepositsTotal = asss.map((object, i) => {
+      console.log(object, "object")
+      if (object) {
+        return object && Number(BigNumber(tvldata[i].lpBalanceInAPool).div((BigNumber(object).div(10 ** 18)))) * tvldata[i]?.tvl
       }
-      
+
     })
     yourDepositsTotal = yourDepositsTotal.reduce((a, b) => a + b, 0)
 
@@ -112,7 +112,7 @@ let ssupdateDone = false;
 
     const tockenLockerDatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA, content: {} })
 
-    
+
     const nfts = stores.stableSwapStore.getStore('vestNFTs');
     setVestNFTs(nfts)
 
@@ -235,10 +235,44 @@ let ssupdateDone = false;
     )
   }
 
+  console.log("Hey i am gauges", gauges)
+  const [filter, setFilter] = useState("")
+  const [gaugeItems, setGaugeItems] = useState([])
+
+
+
+  const updateGauges = async () => {
+    if (filter.trim().length <= 0) {
+      return null
+    }
+
+    let newGauges;
+    if (filter === "reset") {
+      newGauges = gauges
+    } else if (filter === "stable") {
+      newGauges = gaugeItems?.filter(item => item.isStable === true)
+    } else if (filter === "volatile") {
+      // newGauges = gauges.filter(item => )
+    } else if (filter === "mine") {
+
+    }
+    setGaugeItems(newGauges || [])
+
+  }
+
+  useEffect(() => {
+    setGaugeItems(gauges || [])
+  },[gauges])
+
+  useEffect(() => {
+    updateGauges()
+  }, [filter])
+
+  console.log("hey its gaguges", gauges)
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
+
     return (
       <div
         role="tabpanel"
@@ -258,35 +292,35 @@ let ssupdateDone = false;
 
   return (
     <>
-    <Container id="main" className={style.mainContainer}>
-      <Box id="mainContainer" className={style.mainContainerInner}>
-        <Box className={style.containerTop}>
-          <Box className={style.topContainer}>
-            <Grid item className={style.topGrid1} lg={4}>
-              <Typography variant="h1" className={style.mainText}>Pools</Typography>
-            </Grid>
-            <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-              <Paper elevation={1} className={style.topGrid2Inner}>
-                <Typography className={style.topGrid2Innertext1}>Total Value Locked</Typography>
-                <Typography className={style.topGrid2InnerPrice}>${TotalValueLocked.toLocaleString() }</Typography>
-              </Paper>
-            </Grid>
-            <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-              <Paper elevation={1} className={style.topGrid2Inner}>
-                <Typography className={style.topGrid2Innertext1}>Your Total Deposits</Typography>
-                {console.log(YourDepositTotal,"parsefloat")}
-                <Typography className={style.topGrid2InnerPrice}>${YourDepositTotal && parseFloat(YourDepositTotal) > 0 && YourDepositTotal < 100000000000000000 ? YourDepositTotal.toLocaleString() : 0}</Typography>
-              </Paper>
-            </Grid>
-          </Box>
-          <Box className={style1.bottomContainer}>
-            <Box className={style1.bottomTopBar}>
+      <Container id="main" className={style.mainContainer}>
+        <Box id="mainContainer" className={style.mainContainerInner}>
+          <Box className={style.containerTop}>
+            <Box className={style.topContainer}>
+              <Grid item className={style.topGrid1} lg={4}>
+                <Typography variant="h1" className={style.mainText}>Pools</Typography>
+              </Grid>
+              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+                <Paper elevation={1} className={style.topGrid2Inner}>
+                  <Typography className={style.topGrid2Innertext1}>Total Value Locked</Typography>
+                  <Typography className={style.topGrid2InnerPrice}>${TotalValueLocked.toLocaleString()}</Typography>
+                </Paper>
+              </Grid>
+              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+                <Paper elevation={1} className={style.topGrid2Inner}>
+                  <Typography className={style.topGrid2Innertext1}>Your Total Deposits</Typography>
+                  {console.log(YourDepositTotal, "parsefloat")}
+                  <Typography className={style.topGrid2InnerPrice}>${YourDepositTotal && parseFloat(YourDepositTotal) > 0 && YourDepositTotal < 100000000000000000 ? YourDepositTotal.toLocaleString() : 0}</Typography>
+                </Paper>
+              </Grid>
+            </Box>
+            <Box className={style1.bottomContainer}>
+              <Box className={style1.bottomTopBar}>
                 <Typography sx={{ color: 'white' }} variant="h3">Filter</Typography>
-              <Box className={style1.left}>
-                <Button className={style1.btn}>ALL</Button>
-                <Button className={style1.btn}>STABLE</Button>
-                <Button className={style1.btn}>Volatile</Button>
-                <Button className={style1.btn}>My Deposits</Button>
+                <Box className={style1.left}>
+                  <Button className={style1.btn} onClick={() => setFilter("reset")} > ALL</Button>
+                <Button className={style1.btn} onClick={() => setFilter("stable")} >STABLE</Button>
+                <Button className={style1.btn} onClick={() => setFilter("volatile")} >Volatile</Button>
+                <Button className={style1.btn} onClick={() => setFilter("mine")} >My Deposits</Button>
               </Box>
               <Box className={style1.right}>
                 <Box className={style1.rightInput}>
@@ -336,31 +370,31 @@ let ssupdateDone = false;
                 </Box>
               </Grid>
 
-<div>
-{
-  gauges.length > 0 && ssUpdateDone && 
+              <div>
+                {
+                  gaugeItems.length > 0 && ssUpdateDone &&
 
-              <PoolsRow
-                gauges={gauges.filter((pair) => {
-                  if (!search || search === '') {
-                    return true
-                  }
+                  <PoolsRow
+                    gauges={gaugeItems.filter((pair) => {
+                      if (!search || search === '') {
+                        return true
+                      }
 
-                  const searchLower = search.toLowerCase()
+                      const searchLower = search.toLowerCase()
 
-                  if (pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
-                    pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
-                    pair.token1.symbol.toLowerCase().includes(searchLower) || pair.token1.address.toLowerCase().includes(searchLower) || pair.token1.name.toLowerCase().includes(searchLower)) {
-                    return true
-                  }
+                      if (pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
+                        pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
+                        pair.token1.symbol.toLowerCase().includes(searchLower) || pair.token1.address.toLowerCase().includes(searchLower) || pair.token1.name.toLowerCase().includes(searchLower)) {
+                        return true
+                      }
 
-                  return false
+                      return false
 
-                })}
-                setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked}
-                TvlData={TvlData}
-              />
-              }
+                    })}
+                    setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked}
+                    TvlData={TvlData}
+                  />
+                }
               </div>
               <TablePagination
                 component="div"
