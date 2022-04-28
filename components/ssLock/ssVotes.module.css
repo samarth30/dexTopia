@@ -637,3 +637,9 @@
     max-width: 100%;
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .topGrid2Inner {
+    width: 90% !important;
+  }
+}
