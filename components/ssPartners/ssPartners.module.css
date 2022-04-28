@@ -500,6 +500,9 @@
     .bottomTable .bottomTableInner {
       display: none !important;
     }
+    .topGrid2Inner {
+      width: 90% !important;
+    }
   }
   
   @media only screen and (min-width: 900px) {
