@@ -162,9 +162,7 @@ color: white !important;
 display: none;
 }
 
-.tableBox2text {
-  white-space: nowrap;
-}
+
 
 @media only screen and(min-width: 0px) {
 .tableRowInner {
@@ -230,7 +228,6 @@ display: none;
   font-size: 15px;
   width: 135px;
   text-align: left;
-  white-space: nowrap;
 }
 .tableBox1, .tableBox2, .tableBox3 {
   display: flex;
@@ -239,8 +236,5 @@ display: none;
 }
 .tableBox2text {
   margin: 5px 10px !important;
-}
-.tableBoxInnerTop {
-  white-space: nowrap;
 }
 }

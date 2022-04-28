@@ -242,20 +242,22 @@ export default function ssPools() {
 
 
   const updateGauges = async () => {
-    if (filter.trim().length <= 0) {
+    if (!filter && filter === "") {
       return null
     }
-
+    console.log(filter)
     let newGauges;
     if (filter === "reset") {
       newGauges = gauges
     } else if (filter === "stable") {
-      newGauges = gaugeItems?.filter(item => item.isStable === true)
+      newGauges = gauges?.filter(item => item.isStable === true)
     } else if (filter === "volatile") {
-      newGauges = gaugeItems?.filter(item => item.isStable === false)
+      newGauges = gauges?.filter(item => item.isStable === false)
+      console.log("Im valotile", newGauges)
     } else if (filter === "mine") {
-      // TODO: on which based?
+      newGauges = gauges?.filter(item => parseFloat(item.balance) > 0)
     }
+
     setGaugeItems(newGauges || [])
 
   }

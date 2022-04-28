@@ -14,6 +14,8 @@ import stores from "../stores/index.js";
 import { ACTIONS } from "../stores/constants";
 import "../styles/global.css";
 import "../styles/variables.css";
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function MyApp({ Component, pageProps }) {
