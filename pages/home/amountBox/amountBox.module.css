@@ -17,7 +17,7 @@
   }
 
   .mainAmountContainer {
-    width: 350px;
+    width: 360px;
     margin-right: 1rem !important;
   }
   
@@ -52,3 +52,9 @@
     margin-bottom: 30px !important;
   }
   
+
+  @media only screen and (max-width: 815px) {
+    .mainAmountContainer {
+      width: 100%;
+    }
+  }

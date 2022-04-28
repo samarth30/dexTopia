@@ -242,27 +242,28 @@ export default function ssPools() {
 
 
   const updateGauges = async () => {
-    if (filter.trim().length <= 0) {
+    if (!filter && filter === "") {
       return null
     }
-
     let newGauges;
     if (filter === "reset") {
       newGauges = gauges
     } else if (filter === "stable") {
-      newGauges = gaugeItems?.filter(item => item.isStable === true)
+      newGauges = gauges?.filter(item => item.isStable === true)
     } else if (filter === "volatile") {
-      newGauges = gaugeItems?.filter(item => item.isStable === false)
+      newGauges = gauges?.filter(item => item.isStable === false)
+      console.log("Im valotile", newGauges)
     } else if (filter === "mine") {
-      // TODO: on which based?
+      newGauges = gauges?.filter(item => parseFloat(item.balance) > 0)
     }
+
     setGaugeItems(newGauges || [])
 
   }
 
   useEffect(() => {
     setGaugeItems(gauges || [])
-  },[gauges])
+  }, [gauges])
 
   useEffect(() => {
     updateGauges()
@@ -318,100 +319,114 @@ export default function ssPools() {
                 <Typography sx={{ color: 'white' }} variant="h3">Filter</Typography>
                 <Box className={style1.left}>
                   <Button className={style1.btn} onClick={() => setFilter("reset")} > ALL</Button>
-                <Button className={style1.btn} onClick={() => setFilter("stable")} >STABLE</Button>
-                <Button className={style1.btn} onClick={() => setFilter("volatile")} >Volatile</Button>
-                <Button className={style1.btn} onClick={() => setFilter("mine")} >My Deposits</Button>
-              </Box>
-              <Box className={style1.right}>
-                <Box className={style1.rightInput}>
-                  <Input placeholder="Search Pools" value={search} onChange={onSearchChanged} className={style1.inputBox}></Input>
-                  <img src="/images/search.svg" className={style1.searchIcon} alt="search" />
+                  <Button className={style1.btn} onClick={() => setFilter("stable")} >STABLE</Button>
+                  <Button className={style1.btn} onClick={() => setFilter("volatile")} >Volatile</Button>
+                  <Button className={style1.btn} onClick={() => setFilter("mine")} >My Deposits</Button>
                 </Box>
-                <Button className={style1.btn} >Claim All Earnings</Button>
+                <Box className={style1.right}>
+                  <Box className={style1.rightInput}>
+                    <Input placeholder="Search Pools" value={search} onChange={onSearchChanged} className={style1.inputBox}></Input>
+                    <img src="/images/search.svg" className={style1.searchIcon} alt="search" />
+                  </Box>
+                  <Button className={style1.btn} >Claim All Earnings</Button>
+                </Box>
               </Box>
+              {/* // main */}
+
+              <Container item xs={12} className={style1.tableMainBox}>
+                <Grid xs={12} item className={style1.tableHeader}>
+                  <Box className={style1.tableHeaderInner}>
+                    {gaugeItems.length > 0 &&
+                      <Container className={style1.tableHeaderInnerBoxes}>
+                        <Grid item xs={2.5} className={style1.box1}></Grid>
+                        <Grid item xs={1.5} className={style1.box2}>
+                          <Button>
+                            <Typography variant="h6" className={style1.h3text}>
+                              TVL
+                            </Typography>
+                          </Button>
+
+                        </Grid>
+                        <Grid item xs={1.5} className={style1.box2}>
+                          <Button>
+                            <Typography variant="h6" className={style1.h3text}>
+                              APR
+                            </Typography>
+                          </Button>
+                        </Grid>
+                        <Grid item xs={1.5} className={style1.box2}>
+                          <Button>
+                            <Typography variant="h6" className={style1.h3text}>
+                              Your Deposits
+                            </Typography>
+                          </Button>
+                        </Grid>
+                        <Grid item xs={2} className={style1.box2}>
+                          <Button>
+                            <Typography variant="h6" className={style1.h3text}>
+                              Your Earnings
+                            </Typography>
+                          </Button>
+                        </Grid>
+                      </Container>
+                    }
+                  </Box>
+                </Grid>
+
+                <div>
+                  {
+                    gaugeItems.length > 0 && ssUpdateDone &&
+
+                    <PoolsRow
+                      gauges={gaugeItems.filter((pair) => {
+                        if (!search || search === '') {
+                          return true
+                        }
+
+                        const searchLower = search.toLowerCase()
+
+                        if (pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
+                          pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
+                          pair.token1.symbol.toLowerCase().includes(searchLower) || pair.token1.address.toLowerCase().includes(searchLower) || pair.token1.name.toLowerCase().includes(searchLower)) {
+                          return true
+                        }
+
+                        return false
+
+                      })}
+                      setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked}
+                      TvlData={TvlData}
+                    />
+                  }
+                </div>
+                <div>
+                  {
+                    gaugeItems.length === 0 && filter !== "" &&
+                    <Paper
+                      elevation={0}
+                      className={style1.tableRow}
+                    >
+                      <p className={style1.tableRowInfo} >No result found </p>
+                    </Paper>
+                  }
+
+                </div>
+                <TablePagination
+                  component="div"
+                  className={style1.pagination}
+                  count={10}
+                  page={10}
+                  onPageChange={null}
+                  rowsPerPage={10}
+                  onRowsPerPageChange={null}
+                />
+
+              </Container>
             </Box>
-            {/* // main */}
-
-            <Container item xs={12} className={style1.tableMainBox}>
-              <Grid xs={12} item className={style1.tableHeader}>
-                <Box className={style1.tableHeaderInner}>
-                  <Container className={style1.tableHeaderInnerBoxes}>
-                    <Grid item xs={2.5} className={style1.box1}></Grid>
-                    <Grid item xs={1.5} className={style1.box2}>
-                      <Button>
-                        <Typography variant="h6" className={style1.h3text}>
-                          TVL
-                        </Typography>
-                      </Button>
-
-                    </Grid>
-                    <Grid item xs={1.5} className={style1.box2}>
-                      <Button>
-                        <Typography variant="h6" className={style1.h3text}>
-                          APR
-                        </Typography>
-                      </Button>
-                    </Grid>
-                    <Grid item xs={1.5} className={style1.box2}>
-                      <Button>
-                        <Typography variant="h6" className={style1.h3text}>
-                          Your Deposits
-                        </Typography>
-                      </Button>
-                    </Grid>
-                    <Grid item xs={2} className={style1.box2}>
-                      <Button>
-                        <Typography variant="h6" className={style1.h3text}>
-                          Your Earnings
-                        </Typography>
-                      </Button>
-                    </Grid>
-                  </Container>
-                </Box>
-              </Grid>
-
-              <div>
-                {
-                  gaugeItems.length > 0 && ssUpdateDone &&
-
-                  <PoolsRow
-                    gauges={gaugeItems.filter((pair) => {
-                      if (!search || search === '') {
-                        return true
-                      }
-
-                      const searchLower = search.toLowerCase()
-
-                      if (pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
-                        pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
-                        pair.token1.symbol.toLowerCase().includes(searchLower) || pair.token1.address.toLowerCase().includes(searchLower) || pair.token1.name.toLowerCase().includes(searchLower)) {
-                        return true
-                      }
-
-                      return false
-
-                    })}
-                    setParentSliderValues={setVotes} defaultVotes={votes} veToken={veToken} token={token} poolReward={poolReward} poolStaked={poolStaked}
-                    TvlData={TvlData}
-                  />
-                }
-              </div>
-              <TablePagination
-                component="div"
-                className={style1.pagination}
-                count={10}
-                page={10}
-                onPageChange={null}
-                rowsPerPage={10}
-                onRowsPerPageChange={null}
-              />
-
-            </Container>
           </Box>
         </Box>
-      </Box>
-    </Container>
-    
+      </Container>
+
     </>
   );
 }
