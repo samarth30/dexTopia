@@ -665,4 +665,7 @@
     flex-direction: column !important;
     gap: 1rem;
   }
+  .topGrid2Inner {
+    width: 90% !important;
+  }
 }
