@@ -291,6 +291,30 @@ export default function ssPools() {
     );
   }
 
+const getSearchResult =  () => {
+  const res = gauges?.filter((pair) => {
+    if (!search || search?.trim() === '') {
+      return true
+    }
+
+    const searchLower = search?.trim().toLowerCase()
+
+    if (pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
+      pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
+      pair.token1.symbol.toLowerCase().includes(searchLower) || pair.token1.address.toLowerCase().includes(searchLower) || pair.token1.name.toLowerCase().includes(searchLower)) {
+      return true
+    }
+
+    return false
+
+  })
+  setGaugeItems(res)
+}
+
+useEffect(() => {
+  getSearchResult()
+},[search])
+
   return (
     <>
       <Container id="main" className={style.mainContainer}>
@@ -336,7 +360,7 @@ export default function ssPools() {
               <Container item xs={12} className={style1.tableMainBox}>
                 <Grid xs={12} item className={style1.tableHeader}>
                   <Box className={style1.tableHeaderInner}>
-                    {gaugeItems.length > 0 &&
+                    {gaugeItems?.length > 0 &&
                       <Container className={style1.tableHeaderInnerBoxes}>
                         <Grid item xs={2.5} className={style1.box1}></Grid>
                         <Grid item xs={1.5} className={style1.box2}>
@@ -375,15 +399,15 @@ export default function ssPools() {
 
                 <div>
                   {
-                    gaugeItems.length > 0 && ssUpdateDone &&
+                    gaugeItems?.length > 0 && ssUpdateDone &&
 
                     <PoolsRow
-                      gauges={gaugeItems.filter((pair) => {
-                        if (!search || search === '') {
+                      gauges={gaugeItems?.filter((pair) => {
+                        if (!search || search?.trim() === '') {
                           return true
                         }
 
-                        const searchLower = search.toLowerCase()
+                        const searchLower = search?.trim().toLowerCase()
 
                         if (pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
                           pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
@@ -401,7 +425,7 @@ export default function ssPools() {
                 </div>
                 <div>
                   {
-                    gaugeItems.length === 0 && filter !== "" &&
+                    gaugeItems?.length === 0 && (filter !== "" || search !== "") &&
                     <Paper
                       elevation={0}
                       className={style1.tableRow}

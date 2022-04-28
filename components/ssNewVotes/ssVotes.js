@@ -213,6 +213,7 @@ export default function Vote() {
     const [orderBy, setOrderBy] = useState('totalVotes');
     const [sliderValues, setSliderValues] = useState(votes)
     const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [gaugeItems, setGaugeItems] = useState([])
     const [page, setPage] = useState(0);
 
     useEffect(() => {
@@ -397,7 +398,36 @@ export default function Vote() {
         );
       }
 
-      console.log("votes page", votes)
+
+      const getSearchResult =  () => {
+        const res = gauges?.filter((pair) => {
+          if (!search || search?.trim() === '') {
+            return true
+          }
+      
+          const searchLower = search?.trim().toLowerCase()
+      
+          if (pair.symbol.toLowerCase().includes(searchLower) || pair.address.toLowerCase().includes(searchLower) ||
+            pair.token0.symbol.toLowerCase().includes(searchLower) || pair.token0.address.toLowerCase().includes(searchLower) || pair.token0.name.toLowerCase().includes(searchLower) ||
+            pair.token1.symbol.toLowerCase().includes(searchLower) || pair.token1.address.toLowerCase().includes(searchLower) || pair.token1.name.toLowerCase().includes(searchLower)) {
+            return true
+          }
+      
+          return false
+      
+        })
+        setGaugeItems(res)
+      }
+
+      useEffect(() => {
+        setGaugeItems(gauges || [])
+      }, [gauges])
+      
+      useEffect(() => {
+        getSearchResult()
+      },[search])
+
+
 
     return (
             <Container id="main" className={style.mainContainer}>
@@ -431,8 +461,8 @@ export default function Vote() {
                                                 <Input 
                                                     value={search}  
                                                     placeholder="Search pools" 
-                                                    className={voteStyle.inputBox}>
-                                                    onChange={onSearchChanged}
+                                                    className={voteStyle.inputBox}
+                                                    onChange={onSearchChanged} >
                                                 </Input>
                                                 <img src="/images/search.svg" alt="search" className={voteStyle.searchIcon} srcSet="" />
                                             </Box>
@@ -468,7 +498,7 @@ export default function Vote() {
                                     <Box className={voteStyle.header4}>
                                         <Container className={voteStyle.header4Inner}>
                                             <Grid xs={12} item className={voteStyle.hederBox}>
-                                              {gauges.map((gauge, index) => {
+                                              {gaugeItems?.map((gauge, index) => {
                                                   if (!gauge) {
                                                     return null;
                                                   }
@@ -537,8 +567,18 @@ export default function Vote() {
                                                 </Grid>
                                                 )
                                               })}
-                                            </Grid>
-
+                      </Grid>
+                      <div>
+                        {
+                          gaugeItems?.length === 0 && search !== "" &&
+                          <Paper
+                            elevation={0}
+                            className={voteStyle.tableRow}
+                          >
+                            <p className={voteStyle.tableRowInfo} >No result found </p>
+                          </Paper>
+                        }
+                      </div>
                                             <Box style={{ width: '100%' }}>
                                                 <TablePagination
                                                     className={voteStyle.pagination}

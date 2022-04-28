@@ -1,30 +1,52 @@
+.tableRow {
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  background: rgb(32, 39, 43) none repeat scroll 0% 0% !important;
+  box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px !important;
+  border: 1px solid rgb(2, 119, 250);
+  display: flex;
+  flex-direction: row;
+  -moz-box-align: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.tableRowInfo {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  opacity: 0.8
+}
+
 .bottomContainer .btn {
-    display: inline-flex;
-    -moz-box-align: center;
-    align-items: center;
-    -moz-box-pack: center;
-    justify-content: center;
-    position: relative;
-    box-sizing: border-box;
-    outline: currentcolor none 0px;
-    margin: 0px;
-    user-select: none;
-    vertical-align: middle;
-    appearance: none;
-    text-decoration: none;
-    font-family: "Titillium Web",sans-serif;
-    line-height: 1.75;
-    padding: 6px 16px;
-    border-radius: 4px;
-    min-width: 90px;
-    font-size: 14px;
-    color: black !important;
-    width: 250px;
-    font-weight: bold;
-    background: rgb(2,119,250) none repeat scroll 0% 0%;
-    transition: all 0.2s ease 0s;
-    backface-visibility: hidden;
-    text-transform: none;
+  display: inline-flex;
+  -moz-box-align: center;
+  align-items: center;
+  -moz-box-pack: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  outline: currentcolor none 0px;
+  margin: 0px;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.75;
+  padding: 6px 16px;
+  border-radius: 4px;
+  min-width: 90px;
+  font-size: 14px;
+  color: black !important;
+  width: 250px;
+  font-weight: bold;
+  background: rgb(2, 119, 250) none repeat scroll 0% 0%;
+  transition: all 0.2s ease 0s;
+  backface-visibility: hidden;
+  text-transform: none;
 }
 
 .bottomContainer {
@@ -35,7 +57,7 @@
   margin-top: 30px;
 }
 
-.bottomContainer > .MuiGrid-item {
+.bottomContainer>.MuiGrid-item {
   padding-top: 24px;
 }
 
@@ -158,6 +180,7 @@
   flex-grow: 0;
   max-width: 100%;
 }
+
 .headertext {
   margin: 0px;
   font-family: "Titillium Web", sans-serif;
@@ -194,7 +217,7 @@
   flex: end;
 }
 
-.multiBoxes > div {
+.multiBoxes>div {
   display: flex;
   -moz-box-align: center;
   align-items: center;
@@ -236,6 +259,7 @@
   right: 5px;
   top: 10px;
 }
+
 .multiBoxes .boxes .right .like {
   display: inline-flex;
   border-radius: 4px;
@@ -261,70 +285,71 @@
   color: rgb(255, 255, 255);
 }
 
-.header5{
-    width: 100%;
+.header5 {
+  width: 100%;
 }
 
 
-.bottomContainer .bottomVoteInnnerContainer{
-    width: 100% !important;
-    transition: box-shadow 300ms cubic-bezier(0.4,0,0.2,1) 0ms;
-    border-radius: 4px;
-    color: rgb(255,255,255);
-    background: rgb(32,39,43) none repeat scroll 0% 0%;
-    padding: 24px 32px;
-    box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px;
-    border: 1px solid rgb(2,119,250);
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: left;
-    min-height: 80px;
-    margin-bottom: 24px;
-    max-width: 100% !important;
+.bottomContainer .bottomVoteInnnerContainer {
+  width: 100% !important;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  background: rgb(32, 39, 43) none repeat scroll 0% 0%;
+  padding: 24px 32px;
+  box-shadow: rgb(2 119 250 / 20%) 0px 0px 0px 9px;
+  border: 1px solid rgb(2, 119, 250);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: left;
+  min-height: 80px;
+  margin-bottom: 24px;
+  max-width: 100% !important;
 }
 
-.bottomVoteList{
-    width: 100% !important;
-    margin-top: 10px;
+.bottomVoteList {
+  width: 100% !important;
+  margin-top: 10px;
 }
 
-.bottomVoteListColumn{
-    display: flex;
-    flex-direction: column;
+.bottomVoteListColumn {
+  display: flex;
+  flex-direction: column;
 }
 
 
 .bottomVoteListColumn .bottomVoteListData {
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: row wrap;
-    width: 100% !important;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100% !important;
 }
 
-.bottomVoteListColumn .bottomVoteListData .bottomVoteListBox{
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-flow: row wrap;
-    width: 100%;
-    padding: 10px;
-    border-bottom: 1px solid rgb(2,119,250);
-    -moz-box-align: center;
-    align-items: center;
+.bottomVoteListColumn .bottomVoteListData .bottomVoteListBox {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid rgb(2, 119, 250);
+  -moz-box-align: center;
+  align-items: center;
 }
 
-.textData{
-    color: #fff !important;
+.textData {
+  color: #fff !important;
 }
-.bottomVoteListBox .textData{
-    margin: 0px;
-    color: #fff !important;
-    font-family: "Titillium Web",sans-serif;
-    line-height: 1.5;
-    font-size: 22px;
-    font-weight: 700;
+
+.bottomVoteListBox .textData {
+  margin: 0px;
+  color: #fff !important;
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.5;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 /* previous ui  */
@@ -382,7 +407,8 @@
     width: calc(100% + 8px);
     margin-left: -8px;
   }
-  .bottomContainer > .MuiGrid-item {
+
+  .bottomContainer>.MuiGrid-item {
     padding-left: 8px;
   }
 }
@@ -392,15 +418,18 @@
     width: calc(100% + 24px);
     margin-left: -24px;
   }
-  .bottomContainer > .MuiGrid-item {
+
+  .bottomContainer>.MuiGrid-item {
     padding-left: 24px;
   }
+
   .bottomContainer .topContainerInner {
     flex-basis: 100%;
     -moz-box-flex: 0;
     flex-grow: 0;
     max-width: 100%;
   }
+
   .multiBoxes {
     flex-basis: 24.1667%;
     -moz-box-flex: 0;
@@ -414,9 +443,11 @@
     width: calc(100% + 16px);
     margin-left: -16px;
   }
-  .bottomContainer > .MuiGrid-item {
+
+  .bottomContainer>.MuiGrid-item {
     padding-left: 16px;
   }
+
   .bottomContainer .topContainerInner {
     flex-basis: 100%;
     -moz-box-flex: 0;
@@ -432,6 +463,7 @@
     flex-grow: 0;
     max-width: 100%;
   }
+
   .multiBoxes {
     flex-basis: 24.1667%;
     -moz-box-flex: 0;
@@ -456,13 +488,13 @@
 }
 
 @media only screen and (max-width: 700px) {
-  .topContainerBox .header1{
+  .topContainerBox .header1 {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 
-  .hederBox .hederBoxInner{
+  .hederBox .hederBoxInner {
     display: flex;
     flex-direction: column;
     gap: 1rem;
