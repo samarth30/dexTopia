@@ -343,7 +343,9 @@ export default function PoolsRow({
                 key={row?.gauge?.address}
               >
                 <Container className={style.tableRowInner}>
-                  <Grid xs={12} lg={2.5} className={style.tableBox1}>
+
+
+                  <Grid className={style.tableBox1}>
                     <Box className={style.tableBox1Inner}>
                       <Box className={style.tableBoxInnerTop}>
                         <Box className={style.left}>
@@ -394,15 +396,15 @@ export default function PoolsRow({
                     </Box>
                   </Grid>
 
-                  <Grid xs={12} lg={1.5} className={style.tableBox2} style={{marginLeft: '10px'}} >
-                    <span className={style.tableInlineText} >TVL :</span>
+                  <Grid className={style.tableBox2} >
+                    <span className={style.tableInlineText} >TVL</span>
                     <Typography variant="p" className={style.tableBox2text}>
-                    {TvlData[index] && (TvlData[index]?.tvl).toLocaleString()}$
+                    { 10000 || TvlData[index] && (TvlData[index]?.tvl).toLocaleString()}$
                     </Typography>
                    
                   </Grid>
-                  <Grid xs={12} lg={1.5} className={style.tableBox2}>
-                  <span className={style.tableInlineText} >APR :</span>
+                  <Grid className={style.tableBox2}>
+                  <span className={style.tableInlineText} >APR </span>
                     <Typography variant="p" className={style.tableBox2text}>
                       {poolStaked[index] &&
                         formatCurrency(
@@ -411,16 +413,16 @@ export default function PoolsRow({
                     </Typography>
                    
                   </Grid>
-                  <Grid xs={12} lg={1.5} className={style.tableBox2}>
-                  <span className={style.tableInlineText} >Your Deposit :</span>
+                  <Grid  className={style.tableBox2}>
+                  <span className={style.tableInlineText} >Your Deposit</span>
                     <Typography variant="p" className={style.tableBox2text}  >
                     ${poolStaked[index] && TvlData[index] && poolStaked[index][0] > 0  ? Number(BigNumber(TvlData[index].lpBalanceInAPool).div((BigNumber(poolStaked[index][0]).div(10 ** 18))))*TvlData[index]?.tvl : 0 }
                     </Typography>
                    
                   </Grid>
                   
-                  <Grid xs={12} lg={2} className={clx(style.tableBox2, style.leftSpace)} >
-                   <span className={style.tableInlineText} >Your Earning :</span>
+                  <Grid  className={clx(style.tableBox2, style.leftSpace)} >
+                   <span className={style.tableInlineText} >Your Earning</span>
                     <Box style={{ marginLeft: "7px" }}>
                       
                       <Typography variant="p" className={style.tableBox2text}>

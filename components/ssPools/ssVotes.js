@@ -364,7 +364,7 @@ useEffect(() => {
                       <Container className={style1.tableHeaderInnerBoxes}>
                         <Grid item xs={2.5} className={style1.box1}></Grid>
                         <Grid item xs={1.5} className={style1.box2}>
-                          <Button>
+                          <Button classname={style1.tableCellButton} > 
                             <Typography variant="h6" className={style1.h3text}>
                               TVL
                             </Typography>
@@ -372,21 +372,21 @@ useEffect(() => {
 
                         </Grid>
                         <Grid item xs={1.5} className={style1.box2}>
-                          <Button>
+                          <Button classname={style1.tableCellButton} >
                             <Typography variant="h6" className={style1.h3text}>
                               APR
                             </Typography>
                           </Button>
                         </Grid>
                         <Grid item xs={1.5} className={style1.box2}>
-                          <Button>
+                          <Button classname={style1.tableCellButton} >
                             <Typography variant="h6" className={style1.h3text}>
                               Your Deposits
                             </Typography>
                           </Button>
                         </Grid>
                         <Grid item xs={2} className={style1.box2}>
-                          <Button>
+                          <Button classname={style1.tableCellButton} >
                             <Typography variant="h6" className={style1.h3text}>
                               Your Earnings
                             </Typography>

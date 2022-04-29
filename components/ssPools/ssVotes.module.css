@@ -19,7 +19,7 @@
   -moz-box-align: center;
   align-items: center;
   padding: 50px 20px;
-  }
+}
 
 .tableRowInfo {
   width: 100%;
@@ -92,6 +92,7 @@
   display: flex;
   align-items: center;
 }
+
 .bottomContainer .bottomTopBar .right {
   display: flex;
   -moz-box-align: center;
@@ -143,20 +144,20 @@
   color: #fff;
 }
 
-.bottomContainer .tableMainBox > .MuiGrid-item {
+.bottomContainer .tableMainBox>.MuiGrid-item {
   padding-top: 8px;
 }
 
-.tableMainBox{
+.tableMainBox {
   margin-top: 15px;
 }
 
-.bottomContainer .tableMainBox > div {
+.bottomContainer .tableMainBox>div {
   margin-top: 12px;
   margin-bottom: 12px;
 }
 
-.tableMainBox > div:first-of-type {
+.tableMainBox>div:first-of-type {
   margin-top: unset;
   margin-bottom: unset;
 }
@@ -198,6 +199,8 @@
   -moz-box-flex: 0;
   flex-grow: 0;
   max-width: 12.5%;
+  justify-content: center;
+  display: flex;
 }
 
 .tableHeaderInnerBoxes .box2 .h3text {
@@ -209,10 +212,18 @@
 
 .pagination {
   overflow: auto;
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
   font-size: 20px;
   font-weight: 600;
   margin-top: 16px;
+}
+
+.tableCellButton {
+  
+}
+
+.h3text {
+  text-align: center !important;
 }
 
 /* media query */
@@ -221,25 +232,30 @@
   .bottomContainer {
     margin-top: 24px;
   }
+
   .bottomContainer .bottomTopBar {
     flex-direction: column;
   }
+
   .bottomTopBar {
     width: 100%;
     margin-bottom: 24px;
   }
-  .tableMainBox > .MuiGrid-item {
+
+  .tableMainBox>.MuiGrid-item {
     padding-left: 24px;
   }
+
   .tableHeader {
     display: none;
   }
 }
 
 @media only screen and (min-width: 900px) {
-  .tableMainBox > .MuiGrid-item {
+  .tableMainBox>.MuiGrid-item {
     padding-left: 24px;
   }
+
   .tableHeaderInner .tableHeaderInnerBoxes {
     width: calc(100% + 24px);
     margin-left: -24px;
@@ -250,13 +266,16 @@
   .bottomContainer {
     margin-top: 0px;
   }
+
   .bottomContainer .bottomTopBar {
     flex-direction: row;
   }
+
   .bottomTopBar {
     width: 50%;
     margin-bottom: 0px;
   }
+
   .bottomContainer .bottomTopBar .left {
     width: 50%;
     margin-bottom: 0px;
@@ -265,12 +284,15 @@
   .bottomContainer .bottomTopBar .right {
     width: 50%;
   }
-  .tableMainBox > .MuiGrid-item {
+
+  .tableMainBox>.MuiGrid-item {
     padding-left: 24px;
   }
+
   .tableHeader {
     display: block;
   }
+
   .tableHeaderInner .tableHeaderInnerBoxes {
     width: calc(100% + 16px);
     margin-left: -16px;
@@ -300,16 +322,33 @@
     gap: 1rem !important;
   }
 
-  .bottomContainer .bottomTopBar .left{
+  .bottomContainer .bottomTopBar .left {
     /* flex-direction: column; */
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 !important;
     gap: .5rem;
   }
-  .tableHeaderInner{
+
+  .tableHeaderInner {
     padding: 0 !important;
   }
-  
+
 }
 
+@media (min-width: 1200px) {
+
+  .css-1oqqzyl-MuiContainer-root {
+    max-width: 1275px !important;
+  }
+}
+
+
+@media only screen and (max-width: 1080px) {
+ .tableHeaderInnerBoxes {
+   display: none;
+ }
+ .tableMainBox>div:first-of-type {
+  display: none;
+} 
+}
