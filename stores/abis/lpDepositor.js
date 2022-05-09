@@ -387,12 +387,12 @@ export const lpDepositor = [
           "components": [
             {
               "internalType": "uint256",
-              "name": "solid",
+              "name": "dyst",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "sex",
+              "name": "topia",
               "type": "uint256"
             }
           ],
@@ -423,12 +423,12 @@ export const lpDepositor = [
       "outputs": [
         {
           "internalType": "uint256",
-          "name": "solid",
+          "name": "dyst",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "sex",
+          "name": "topia",
           "type": "uint256"
         }
       ],
@@ -452,12 +452,12 @@ export const lpDepositor = [
       "outputs": [
         {
           "internalType": "uint256",
-          "name": "solid",
+          "name": "dyst",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "sex",
+          "name": "topia",
           "type": "uint256"
         }
       ],

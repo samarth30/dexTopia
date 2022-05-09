@@ -14,9 +14,9 @@ export const VE_TOKEN_DECIMALS = 18
 export const VE_TOKEN_LOGO = ''
 export const VE_TOKEN_ABI = abis.veTokenABI
 
-export const WFTM_ADDRESS = '0xe02f20bb33f8bfb48eb907523435ca886e139a08'
+export const WFTM_ADDRESS = '0xe02f20BB33F8Bfb48eB907523435CA886e139A08'
 export const WFTM_NAME = 'Wrapped MATIC'
-export const WFTM_SYMBOL = 'WAVAX'
+export const WFTM_SYMBOL = 'WMATIC'
 export const WFTM_DECIMALS = 18
 export const WFTM_LOGO = 'https://res.cloudinary.com/sushi-cdn/image/fetch/w_32,f_auto,q_auto,fl_sanitize/https://raw.githubusercontent.com/sushiswap/icons/master/token/polygon.jpg'
 export const WFTM_ABI = abis.wftmABI
@@ -30,22 +30,22 @@ export const FTM_LOGO = 'https://res.cloudinary.com/sushi-cdn/image/fetch/w_32,f
 export const FACTORY_ADDRESS = '0xE519A553DCA0Aed38110783Bf61E1B184c478472'
 export const FACTORY_ABI = abis.factoryABI
 
-export const LP_DEPOSITER = '0xD6e2fe7A4B9574e4bC4f1F8D178463C3Ec4F5612'
+export const LP_DEPOSITER = '0xE17C4502663a7C322a9682f8a9fA758F58DC7FA4'
 export const LP_DEPOSITER_ABI = abis.lpDepositor
 
-export const DEXTOPIA_VE_DEPOSITER = '0x0cf2437472E535895022ab17115CE7d1603504b3'
+export const DEXTOPIA_VE_DEPOSITER = '0xf80399D6e9C55976e0e792856f6567Ce6260d18c'
 export const DEXTOPIA_VE_DEPOSITER_ABI = abis.dexTopiaVeDepositor
 
-export const DEXTOPIA_TOKEN = '0xE4c0181856C63400456400681C1843690Be1c991'
+export const DEXTOPIA_TOKEN = '0x76eF263C4A754Dbb280EAc8a9bd148AeECf566Ef'
 export const DEXTOPIA_TOKEN_ABI = abis.erc20ABI
 
-export const DEXTOPIA_TOKENLOCKER = "0x59b60b41C91612230Cbc74D64C508F03f9dc075D";
+export const DEXTOPIA_TOKENLOCKER = "0xe2d36f4D0c7ba4b3259a39Db6389a780F12609f8";
 export const DEXTOPIA_TOKENLOCKER_ABI = abis.dexTopiaTockenLocker;
 
-export const DEXTOPIA_TOPIAPARTNER = "0x1441976E16c9bAB588d364a8E4fc3f136C64CED9"
+export const DEXTOPIA_TOPIAPARTNER = "0x570dD5C85a99DC605B67D60f19A9d63c8bE407B7"
 export const DEXTOPIA_TOPIAPARTNER_ABI = abis.dexTopiaPartners;
 
-export const DEXTOPIA_STAKINGREWARDS = "0x3F9E32E8B4DEb0A4296C0E13006f0929a6070702";
+export const DEXTOPIA_STAKINGREWARDS = "0xFA29948103bfd73dda2a381bcE4FE83745871032";
 export const DEXTOPIA_STAKINGREWARDS_ABI = abis.dexTopiaStakingRewards;
 
 export const ROUTER_ADDRESS = '0x091517199B04a386C72DBe9F985b1df93A0c1A17'

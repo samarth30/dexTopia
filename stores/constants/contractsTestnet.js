@@ -16,7 +16,7 @@ export const VE_TOKEN_ABI = abis.veTokenABI
 
 export const WFTM_ADDRESS = '0xe02f20bb33f8bfb48eb907523435ca886e139a08'
 export const WFTM_NAME = 'Wrapped MATIC'
-export const WFTM_SYMBOL = 'WAVAX'
+export const WFTM_SYMBOL = 'WMATIC'
 export const WFTM_DECIMALS = 18
 export const WFTM_LOGO = 'https://res.cloudinary.com/sushi-cdn/image/fetch/w_32,f_auto,q_auto,fl_sanitize/https://raw.githubusercontent.com/sushiswap/icons/master/token/polygon.jpg'
 export const WFTM_ABI = abis.wftmABI
@@ -30,19 +30,22 @@ export const FTM_LOGO = 'https://res.cloudinary.com/sushi-cdn/image/fetch/w_32,f
 export const FACTORY_ADDRESS = '0xE519A553DCA0Aed38110783Bf61E1B184c478472'
 export const FACTORY_ABI = abis.factoryABI
 
-export const LP_DEPOSITER = '0xD6e2fe7A4B9574e4bC4f1F8D178463C3Ec4F5612'
+export const LP_DEPOSITER = '0xD63A8CBE0E27Aa8487844FDCF7190D9578857195'
 export const LP_DEPOSITER_ABI = abis.lpDepositor
 
-export const DEXTOPIA_VE_DEPOSITER = '0x0cf2437472E535895022ab17115CE7d1603504b3'
+export const DEXTOPIA_VE_DEPOSITER = '0x28Ca2879c51C4D1D5F9355aA858F242Bf26DB247'
 export const DEXTOPIA_VE_DEPOSITER_ABI = abis.dexTopiaVeDepositor
 
-export const DEXTOPIA_TOKEN = '0xE4c0181856C63400456400681C1843690Be1c991'
+export const DEXTOPIA_TOKEN = '0x8c0Da663aBD4fE5224701b982961888e606aaCE9'
 export const DEXTOPIA_TOKEN_ABI = abis.erc20ABI
 
-export const DEXTOPIA_TOKENLOCKER = "0x59b60b41C91612230Cbc74D64C508F03f9dc075D";
+export const DEXTOPIA_TOKENLOCKER = "0x9cfDe376763e9b79bf18a5deCD1db8cce7516803";
 export const DEXTOPIA_TOKENLOCKER_ABI = abis.dexTopiaTockenLocker;
 
-export const DEXTOPIA_STAKINGREWARDS = "0x3F9E32E8B4DEb0A4296C0E13006f0929a6070702";
+export const DEXTOPIA_TOPIAPARTNER = "0x6b56aF8E340B0995339D36C71fD7DC9D42F7040C"
+export const DEXTOPIA_TOPIAPARTNER_ABI = abis.dexTopiaPartners;
+
+export const DEXTOPIA_STAKINGREWARDS = "0x04C09606F690102b704b78360A9cf4bDE425D388";
 export const DEXTOPIA_STAKINGREWARDS_ABI = abis.dexTopiaStakingRewards;
 
 export const ROUTER_ADDRESS = '0x091517199B04a386C72DBe9F985b1df93A0c1A17'

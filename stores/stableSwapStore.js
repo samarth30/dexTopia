@@ -629,7 +629,7 @@ class Store {
                 dexTopiaPartners.methods.totalMinted(),
                 dexTopiaPartners.methods.partnerCount(),
                 dexTopiaPartners.methods.userData(account.address),
-                dexTopiaPartners.methods.isEarlyPartner(),
+                dexTopiaPartners.methods.isEarlyPartner(account.address),
               ]);
            
         }
@@ -6884,7 +6884,7 @@ class Store {
     }
   };
 
-  // sex partner deposit ve dyst
+  // topia partner deposit ve dyst
     // ve depositor deposit token
     veDystTransfertoTopiaPartners = async (payload) => {
       try {
@@ -6907,6 +6907,7 @@ class Store {
         const { id } = payload.content;
   
         let depositTXID = this.getTXUUID();
+        // let approveTXID = this.getTXUUID();
   
         //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
       
@@ -6915,6 +6916,11 @@ class Store {
           type: "Liquidity",
           verb: "Liquidity Deposit",
           transactions: [
+            // {
+            //   uuid: approveTXID,
+            //   description: `Approving VeDyst to TopiaPartners`,
+            //   status: "WAITING",
+            // },
             {
               uuid: depositTXID,
               description: `Transfer VeDyst to Topia Partners`,
@@ -6925,14 +6931,14 @@ class Store {
   
         const gasPrice = await stores.accountStore.getGasPrice();
   
-        const dexTopiaPartners = new web3.eth.Contract(
-          CONTRACTS.DEXTOPIA_TOPIAPARTNER_ABI,
-          CONTRACTS.DEXTOPIA_TOPIAPARTNER
+        const veDystNft = new web3.eth.Contract(
+          CONTRACTS.VE_TOKEN_ABI,
+          CONTRACTS.VE_TOKEN_ADDRESS
         );
   
         this._callContractWait(
           web3,
-          dexTopiaPartners,
+          veDystNft,
           "safeTransferFrom",
           [account.address,CONTRACTS.DEXTOPIA_TOPIAPARTNER,id],
           account,

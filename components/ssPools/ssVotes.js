@@ -98,7 +98,7 @@ export default function ssPools() {
     let yourDepositsTotal = asss.map((object, i) => {
       console.log(object, "object")
       if (object) {
-        return object && Number(BigNumber(tvldata[i].lpBalanceInAPool).div((BigNumber(object).div(10 ** 18)))) * tvldata[i]?.tvl
+        return object && tvldata[i] && Number(BigNumber(tvldata[i].lpBalanceInAPool).div((BigNumber(object).div(10 ** 18)))) * tvldata[i]?.tvl
       }
 
     })

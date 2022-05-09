@@ -172,6 +172,7 @@ export default function ssPartners() {
 
     const topiapartnersdatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_DATA, content: {} }) 
     const topiaParntersdata =  stores.stableSwapStore.getStore('topiaPartnersData');
+    console.log(topiaParntersdata,"partner")
     setTopiaPartnerData(topiaParntersdata)
 
     if (
@@ -416,13 +417,13 @@ export default function ssPartners() {
               <Grid item className={style.topGrid2} xs={6} lg={2.25}>
                 <Paper elevation={1} className={style.topGrid2Inner}>
                   <Typography className={style.topGrid2Innertext1}>Early Partner Deadline</Typography>
-                  <Typography className={style.topGrid2InnerPrice}>{`${new Date(parseFloat(1651046763 * 1000)).toDateString()}`}</Typography>
+                  <Typography className={style.topGrid2InnerPrice}>{`${new Date(parseFloat(parseFloat(topiaPartnerData?.earlyPartnerDeadline) * 1000)).toDateString()}`}</Typography>
                 </Paper>
               </Grid>
               <Grid item className={style.topGrid2} xs={6} lg={2.25}>
                 <Paper elevation={1} className={style.topGrid2Inner}>
                   <Typography className={style.topGrid2Innertext1}>Final Partner Deadline</Typography>
-                  <Typography className={style.topGrid2InnerPrice}> {`${new Date(parseFloat(1651046763 * 1000)).toDateString()}`}</Typography>
+                  <Typography className={style.topGrid2InnerPrice}> {`${new Date(parseFloat(parseFloat(topiaPartnerData?.finalPartnerDeadline) * 1000)).toDateString()}`}</Typography>
                 </Paper>
               </Grid>
             </Container>
@@ -438,7 +439,7 @@ export default function ssPartners() {
                 <Paper elevation={1} className={style.bottomContainerLeftInner}>
                   <Box className={style.bottomContainerLeftInnerTop}>
                     <Typography variant='h3' className={style.h3text}>
-                      Convert Dystopia NFTs into DexTopia To Become Early Partner
+                      Convert your VeDyst Nfts into VeTopia To Become Early Partner and Gain Maximum Yield
                     </Typography>
                   </Box>
 
@@ -446,22 +447,22 @@ export default function ssPartners() {
                     <Box className={style.bottomContainerpannelTop}>
                       <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
                         <Tabs value={value} onChange={handleChange} className={style.tabs}>
-                          <Tab label="Solid Token" {...a11yProps(0, "page")} className={style.tab} />
+                          <Tab label="VeDysts" {...a11yProps(0, "page")} className={style.tab} />
                         </Tabs>
                       </Box>
                     </Box>
                     <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={value} index={0}>
                       <Box className={style.tabPannel1}>
-                        <Box className={style.tabPannelrow1}>
+                        {/* <Box className={style.tabPannelrow1}>
                           <Typography variant="h6" className={style.h6Text}>
                             This process is irreversible
                           </Typography>
-                        </Box>
-                        <Box className={style.tabPannelrow2}>
+                        </Box> */}
+                        {/* <Box className={style.tabPannelrow2}>
                           <Typography variant='p' className={style.balancep}>
                             Balance: 0 SOLID
                           </Typography>
-                        </Box>
+                        </Box> */}
                         <Box className={style.tabPannelrow3}>
                           <Box className={style.tabPannelrow3Left}>
                             <Box className={style.tabPannelrow3LeftInner}>
@@ -548,8 +549,13 @@ export default function ssPartners() {
                         <Typography>
                           Only Available to early partners
                         </Typography>
+                        <Typography>
+                        {topiaPartnerData&& topiaPartnerData?.isEarlyPartner ? "you are a early partner" : "you are not a early partner"}
+                        </Typography>
                       </Box>
                 </Box>
+               
+               
                 <Box style={{background: "#1f272b", padding: "1.5rem", margin: "1rem 0", width: "30%", border: "4px solid #194172"}}>
                     <Typography variant='h4' color='common.white'>
                       Partner Claim
@@ -561,7 +567,9 @@ export default function ssPartners() {
                      {formatCurrency(BigNumber(topiaPartnerData?.claimable).div(10**18))}
                     </Typography>
                     <Button variant="contained">claim</Button>
+                    
                 </Box>
+               
               </Grid>
             </Container>
 

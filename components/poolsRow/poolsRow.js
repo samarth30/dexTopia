@@ -410,7 +410,7 @@ export default function PoolsRow({
                       <Typography variant="p" className={style.tableBox2text}>
                         {poolReward[index] &&
                           formatCurrency(
-                            BigNumber(poolReward[index][0][0][0]?.sex).div(
+                            BigNumber(poolReward[index][0][0][0]?.topia).div(
                               10 ** 18
                             )
                           )}{" "}

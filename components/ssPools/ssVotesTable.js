@@ -541,11 +541,11 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                   <TableCell className={classes.cell} align="right">
                     <div className={ classes.inlineEnd }>
                     {console.log(index,"pipppp")}
-                    {/* {console.log(poolReward[index][0][0][0]?.sex,"pipppp")}
+                    {/* {console.log(poolReward[index][0][0][0]?.topia,"pipppp")}
                     {console.log(poolReward[index][0][0][0]?.solid,"pipppp")} */}
                     {/* {console.log(poolReward[index][0],"pipppp")} */}
                       <Typography variant='h2' className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
-                        {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.solid).div(10**18))}
+                        {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.dyst).div(10**18))}
                       </Typography>
                       <Typography variant='h5' className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                         DYSTOPIA token
@@ -553,7 +553,7 @@ export default function EnhancedTable({ gauges, setParentSliderValues, defaultVo
                     </div>
                     <div className={ classes.inlineEnd }>
                       <Typography variant='h5' className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
-                        {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.sex).div(10**18))}
+                        {poolReward[index] && formatCurrency(BigNumber(poolReward[index][0][0][0]?.topia).div(10**18))}
                       </Typography>
                       <Typography variant='h5' className={`${classes.textSpaced} ${styles.votes__colorTypography}`}>
                         Topia TOken
