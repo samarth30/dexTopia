@@ -1,13 +1,13 @@
 import abis from "../abis";
 
-export const GOV_TOKEN_ADDRESS = '0x31941a766ee0F7815A0cFC0Ee27e74D849F661c1'
+export const GOV_TOKEN_ADDRESS = '0x6E511b6fAce2c5094163A1F420135a4D70a5ecd7'
 export const GOV_TOKEN_NAME = 'Dystopia'
 export const GOV_TOKEN_SYMBOL = 'Dyst'
 export const GOV_TOKEN_DECIMALS = 18
 export const GOV_TOKEN_LOGO = ''
 export const GOV_TOKEN_ABI = abis.tokenABI
 
-export const VE_TOKEN_ADDRESS = '0x7D00ef3ab59d8CD36398a8d10CaEe78e4ac68C90'
+export const VE_TOKEN_ADDRESS = '0x043074eaAf5DCca960601b7B464FCd2bEC34df1D'
 export const VE_TOKEN_NAME = 'veDyst'
 export const VE_TOKEN_SYMBOL = 'veDyst'
 export const VE_TOKEN_DECIMALS = 18
@@ -27,7 +27,7 @@ export const FTM_SYMBOL = 'MATIC'
 export const FTM_DECIMALS = 18
 export const FTM_LOGO = 'https://res.cloudinary.com/sushi-cdn/image/fetch/w_32,f_auto,q_auto,fl_sanitize/https://raw.githubusercontent.com/sushiswap/icons/master/token/polygon.jpg'
 
-export const FACTORY_ADDRESS = '0xE519A553DCA0Aed38110783Bf61E1B184c478472'
+export const FACTORY_ADDRESS = '0xD0692d6C30cd7a383f227Ba1cB28EeCE2F050926'
 export const FACTORY_ABI = abis.factoryABI
 
 export const LP_DEPOSITER = '0xE17C4502663a7C322a9682f8a9fA758F58DC7FA4'

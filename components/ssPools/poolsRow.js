@@ -417,7 +417,7 @@ export default function PoolsRow({
                   <Grid  className={style.tableBox2}>
                   <span className={style.tableInlineText} >Your Deposit</span>
                     <Typography variant="p" className={style.tableBox2text}  >
-                    ${poolStaked[index] && TvlData[index] && poolStaked[index][0] > 0  ? numeral(Number(BigNumber(TvlData[index].lpBalanceInAPool).div((BigNumber(poolStaked[index][0]).div(10 ** 18))))*TvlData[index]?.tvl).format('($ 0.00 a)') : 0 }
+                    {poolStaked[index] && TvlData[index] && poolStaked[index][0] > 0  ? numeral(Number(BigNumber(TvlData[index].lpBalanceInAPool).div((BigNumber(poolStaked[index][0]).div(10 ** 18))))*TvlData[index]?.tvl).format('($ 0.00 a)') : 0 }
                     </Typography>
                    
                   </Grid>

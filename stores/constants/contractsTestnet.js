@@ -1,20 +1,20 @@
 import abis from "../abis";
 
-export const GOV_TOKEN_ADDRESS = '0x31941a766ee0F7815A0cFC0Ee27e74D849F661c1'
+export const GOV_TOKEN_ADDRESS = '0x6E511b6fAce2c5094163A1F420135a4D70a5ecd7'
 export const GOV_TOKEN_NAME = 'Dystopia'
 export const GOV_TOKEN_SYMBOL = 'Dyst'
 export const GOV_TOKEN_DECIMALS = 18
 export const GOV_TOKEN_LOGO = ''
 export const GOV_TOKEN_ABI = abis.tokenABI
 
-export const VE_TOKEN_ADDRESS = '0x7D00ef3ab59d8CD36398a8d10CaEe78e4ac68C90'
+export const VE_TOKEN_ADDRESS = '0x043074eaAf5DCca960601b7B464FCd2bEC34df1D'
 export const VE_TOKEN_NAME = 'veDyst'
 export const VE_TOKEN_SYMBOL = 'veDyst'
 export const VE_TOKEN_DECIMALS = 18
 export const VE_TOKEN_LOGO = ''
 export const VE_TOKEN_ABI = abis.veTokenABI
 
-export const WFTM_ADDRESS = '0xe02f20bb33f8bfb48eb907523435ca886e139a08'
+export const WFTM_ADDRESS = '0xe02f20BB33F8Bfb48eB907523435CA886e139A08'
 export const WFTM_NAME = 'Wrapped MATIC'
 export const WFTM_SYMBOL = 'WMATIC'
 export const WFTM_DECIMALS = 18
@@ -27,25 +27,28 @@ export const FTM_SYMBOL = 'MATIC'
 export const FTM_DECIMALS = 18
 export const FTM_LOGO = 'https://res.cloudinary.com/sushi-cdn/image/fetch/w_32,f_auto,q_auto,fl_sanitize/https://raw.githubusercontent.com/sushiswap/icons/master/token/polygon.jpg'
 
-export const FACTORY_ADDRESS = '0xE519A553DCA0Aed38110783Bf61E1B184c478472'
+export const FACTORY_ADDRESS = '0xD0692d6C30cd7a383f227Ba1cB28EeCE2F050926'
 export const FACTORY_ABI = abis.factoryABI
 
-export const LP_DEPOSITER = '0xD63A8CBE0E27Aa8487844FDCF7190D9578857195'
+export const LP_DEPOSITER = '0xE17C4502663a7C322a9682f8a9fA758F58DC7FA4'
 export const LP_DEPOSITER_ABI = abis.lpDepositor
 
-export const DEXTOPIA_VE_DEPOSITER = '0x28Ca2879c51C4D1D5F9355aA858F242Bf26DB247'
+export const DEXTOPIA_VE_DEPOSITER = '0xf80399D6e9C55976e0e792856f6567Ce6260d18c'
 export const DEXTOPIA_VE_DEPOSITER_ABI = abis.dexTopiaVeDepositor
 
-export const DEXTOPIA_TOKEN = '0x8c0Da663aBD4fE5224701b982961888e606aaCE9'
+export const DEXTOPIA_TOKEN = '0x76eF263C4A754Dbb280EAc8a9bd148AeECf566Ef'
 export const DEXTOPIA_TOKEN_ABI = abis.erc20ABI
 
-export const DEXTOPIA_TOKENLOCKER = "0x9cfDe376763e9b79bf18a5deCD1db8cce7516803";
+export const DEXTOPIA_TOKENLOCKER = "0xe2d36f4D0c7ba4b3259a39Db6389a780F12609f8";
 export const DEXTOPIA_TOKENLOCKER_ABI = abis.dexTopiaTockenLocker;
 
-export const DEXTOPIA_TOPIAPARTNER = "0x6b56aF8E340B0995339D36C71fD7DC9D42F7040C"
+export const DEXTOPIA_TOPIAPARTNER = "0x570dD5C85a99DC605B67D60f19A9d63c8bE407B7"
 export const DEXTOPIA_TOPIAPARTNER_ABI = abis.dexTopiaPartners;
 
-export const DEXTOPIA_STAKINGREWARDS = "0x04C09606F690102b704b78360A9cf4bDE425D388";
+export const DEXTOPIA_TOPIAVOTER = "0xCdc41EEBcb259F99148B60110ce8c4EA62169009";
+export const DEXTOPIA_TOPIAVOTER_ABI = abis.dexTopiaVoter;
+
+export const DEXTOPIA_STAKINGREWARDS = "0xFA29948103bfd73dda2a381bcE4FE83745871032";
 export const DEXTOPIA_STAKINGREWARDS_ABI = abis.dexTopiaStakingRewards;
 
 export const ROUTER_ADDRESS = '0x091517199B04a386C72DBe9F985b1df93A0c1A17'

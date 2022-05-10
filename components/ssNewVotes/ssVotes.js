@@ -210,6 +210,16 @@ export default function Vote() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [gaugeItems, setGaugeItems] = useState([]);
   const [page, setPage] = useState(0);
+  const [topiaVoterData, setTopiaVoterData] = useState({
+    availableVotes: 0,
+    getWeek: 0,
+    getPoolProtectionData: 0,
+    startTime: 0,
+    userVotes: 0,
+    poolVotesForWeekDatas: 0,
+  });
+
+  const [totalVotesDoneinWeek, setTotalVotesDoneinWeek] = useState(0);
 
   useEffect(() => {
     setSliderValues(votes);
@@ -223,6 +233,26 @@ export default function Vote() {
       return asset.gauge && asset.gauge.address;
     });
     setGauges(filteredAssets);
+
+    const poolRewards = stores.dispatcher.dispatch({
+      type: ACTIONS.VOTEDATA,
+      content: { filteredAssets },
+    });
+
+    const topiaVotersDatas = stores.stableSwapStore.getStore("topiaVotersData");
+
+    setTopiaVoterData(topiaVotersDatas);
+
+    let tvlsum =
+      topiaVotersDatas &&
+      topiaVotersDatas.poolVotesForWeekDatas &&
+      topiaVotersDatas.poolVotesForWeekDatas.map((object) => {
+        return object && object[0];
+      });
+
+    tvlsum =
+      tvlsum && tvlsum.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
+    setTotalVotesDoneinWeek(tvlsum);
 
     const nfts = stores.stableSwapStore.getStore("vestNFTs");
     setVestNFTs(nfts);
@@ -510,10 +540,12 @@ export default function Vote() {
             <Grid item className={style.topGrid2} xs={6} lg={2.25}>
               <Paper elevation={1} className={style.topGrid2Inner}>
                 <Typography className={style.topGrid2Innertext1}>
-                  Total Deposits
+                Remaining vote weight
                 </Typography>
                 <Typography className={style.topGrid2InnerPrice}>
-                  0.00/0.00
+                 {topiaVoterData && topiaVoterData?.availableVotes && topiaVoterData?.userVotes && topiaVoterData?.availableVotes} 
+                /{topiaVoterData && topiaVoterData?.availableVotes && topiaVoterData?.userVotes && (parseFloat(topiaVoterData?.availableVotes)+parseFloat(topiaVoterData?.userVotes))}
+        
                 </Typography>
               </Paper>
             </Grid>
@@ -549,7 +581,8 @@ export default function Vote() {
 
                 <Box className={voteStyle.header2}>
                   <Typography variant="p" className={voteStyle.textRow2}>
-                    Voted this week: 10,922,147 vlSEX (14.9% of locked)
+                    Voted this week: {totalVotesDoneinWeek} vlTOPIA
+                    {/* (14.9% of locked) */}
                   </Typography>
                 </Box>
 
@@ -723,39 +756,38 @@ export default function Vote() {
               </Box>
               <Box className={voteStyle.bottomVoteList}>
                 <Box className={voteStyle.bottomVoteListColumn}>
-                  {/* list */}
-                  <Box className={voteStyle.bottomVoteListData}>
-                    <Box className={voteStyle.bottomVoteListBox}>
-                      <Typography className={voteStyle.textData}>
-                        USDC/OXD (Volatile)
-                      </Typography>
-                      <Typography className={voteStyle.textData}>
-                        3,392,968
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  <Box className={voteStyle.bottomVoteListData}>
-                    <Box className={voteStyle.bottomVoteListBox}>
-                      <Typography className={voteStyle.textData}>
-                        USDC/OXD (Volatile)
-                      </Typography>
-                      <Typography className={voteStyle.textData}>
-                        3,392,968
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  <Box className={voteStyle.bottomVoteListData}>
-                    <Box className={voteStyle.bottomVoteListBox}>
-                      <Typography className={voteStyle.textData}>
-                        USDC/OXD (Volatile)
-                      </Typography>
-                      <Typography className={voteStyle.textData}>
-                        3,392,968
-                      </Typography>
-                    </Box>
-                  </Box>
+                  {gaugeItems?.map((gauge, index) => {
+                    if (!gauge) {
+                      return null;
+                    }
+                    let sliderValue = sliderValues.find(
+                      (el) => el.address === gauge?.address
+                    )?.value;
+                    if (sliderValue) {
+                      sliderValue = BigNumber(sliderValue).toNumber(0);
+                    } else {
+                      sliderValue = 0;
+                    }
+                    {
+                      console.log(sliderValue);
+                    }
+                    return (
+                      <Box className={voteStyle.bottomVoteListData} key={index}>
+                        <Box className={voteStyle.bottomVoteListBox}>
+                          <Typography className={voteStyle.textData}>
+                            {gauge.symbol}
+                          </Typography>
+                          <Typography className={voteStyle.textData}>
+                            {topiaVoterData &&
+                              topiaVoterData?.poolVotesForWeekDatas &&
+                              topiaVoterData?.poolVotesForWeekDatas[index]}
+                          </Typography>
+                        </Box>
+                      </Box>
+                      
+                    );
+                  })}
+                  
 
                   <Box style={{ width: "100%", marginTop: "50px" }}>
                     <TablePagination
@@ -780,10 +812,11 @@ export default function Vote() {
             <div className={voteStyle.infoSection}>
               <Typography color="common.white">Voting Power Used: </Typography>
               <Typography
-                className={`${BigNumber(totalVotes).gt(100)
+                className={`${
+                  BigNumber(totalVotes).gt(100)
                     ? voteStyle.errorText
                     : voteStyle.helpText
-                  }`}
+                }`}
               >
                 {totalVotes} %
               </Typography>

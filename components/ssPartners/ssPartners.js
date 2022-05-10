@@ -85,7 +85,7 @@ export default function ssPartners() {
   };
 
   const sendVedysttoTopiaPartners = async ()=>{
-    window.alert(selectDropdown.id)
+    // window.alert(selectDropdown.id)
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_EARLY_PARTNER_SENDVENFT,
       content: { id: selectDropdown.id },
@@ -566,7 +566,15 @@ export default function ssPartners() {
                     <Typography variant='h3' color='common.white'>
                      {formatCurrency(BigNumber(topiaPartnerData?.claimable).div(10**18))}
                     </Typography>
-                    <Button variant="contained">claim</Button>
+                    {/* <Typography variant='h6' color='common.white'>
+                      Total Claimed
+                    </Typography>
+                    <Typography variant='h3' color='common.white'>
+                     {formatCurrency(BigNumber(topiaPartnerData?.userd).div(10**18))}
+                    </Typography> */}
+                    <Button variant="contained" onClick={topiaPartnerData&& topiaPartnerData?.isEarlyPartner ? earlyPartnerClaim : claimPartners}>
+                    {topiaPartnerData&& topiaPartnerData?.isEarlyPartner ? "early partner claim" : "claim"}
+                    </Button>
                     
                 </Box>
                

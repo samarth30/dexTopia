@@ -677,6 +677,7 @@ class Store {
       CONTRACTS.LP_DEPOSITER_ABI,
       CONTRACTS.LP_DEPOSITER
     );
+    const BLOCKS_PER_YEAR = new BigNumber(15768000);
 
     const ps = await Promise.all(
       address.content.realfilteredassets.map(async (object) => {
@@ -686,9 +687,17 @@ class Store {
         try {
          const pair = poolsdata[parseInt(a)]; 
          let tvl = 0;
+         let tvlofrewards = 0;
+         let apyforpool = 0;
+         let temporarystartdate = 1652194039;
          
          let lpBalanceInAPool = await lpDepositorContract.methods.totalBalances(pair.address).call();
          lpBalanceInAPool = web3.utils.fromWei(lpBalanceInAPool,'ether');
+         let totalRewardDistributed = await lpDepositorContract.methods.rewardIntegral(pair.address).call();
+         let dystTotalRewards = totalRewardDistributed && totalRewardDistributed?.dyst;
+         let topiaTotalRewards = totalRewardDistributed && totalRewardDistributed?.topia;
+         dystTotalRewards = web3.utils.fromWei(dystTotalRewards,'ether');
+         topiaTotalRewards = web3.utils.fromWei(topiaTotalRewards,'ether');
 
          const LpBalanceRatioo = BigNumber(lpBalanceInAPool).div(BigNumber(pair.totalSupply));
          const totalVolumeInUsdInReserve0 =  BigNumber(pair.reserve0).multipliedBy(BigNumber(pair.token0Price))
@@ -696,7 +705,20 @@ class Store {
        
          const totalVolumeInUsd = Number(totalVolumeInUsdInReserve0) + Number(totalVolumeInUsdInReserve1);
          tvl = BigNumber(totalVolumeInUsd).multipliedBy(BigNumber(LpBalanceRatioo));
-         console.log({lpBalanceInAPool,price1 :pair.token0Price ,price2: pair.token1Price, balance1 :pair.reserve0 , balance2: pair.reserve1,LpBalanceRatioo : Number(LpBalanceRatioo),totalVolumeInUsdInReserve0:Number(totalVolumeInUsdInReserve0),totalVolumeInUsdInReserve1:Number(totalVolumeInUsdInReserve1),totalVolumeInUsd:Number(totalVolumeInUsd), tvl : Number(tvl)},"tvl")
+         dystTotalRewards = BigNumber(dystTotalRewards).multipliedBy(BigNumber(pair.token0Price))
+         topiaTotalRewards = BigNumber(topiaTotalRewards).multipliedBy(BigNumber(pair.token1Price))
+
+         tvlofrewards = Number(dystTotalRewards) + Number(topiaTotalRewards);
+         const nowtime = new Date();
+         let timereal = nowtime.getTime();
+         timereal = Math.round(timereal / 1000);
+
+         let TotalValuerewardPerSecond = tvlofrewards / (timereal - temporarystartdate);
+         let totalrewardinayear = BigNumber(TotalValuerewardPerSecond).multipliedBy(BLOCKS_PER_YEAR);
+         apyforpool = totalrewardinayear.div(BigNumber(tvl))
+         apyforpool = apyforpool.multipliedBy(BigNumber(100));
+         console.log(Number(apyforpool),"apyforpool"); 
+         console.log({lpBalanceInAPool ,tvlofrewards ,price1 :pair.token0Price ,price2: pair.token1Price, balance1 :pair.reserve0 , balance2: pair.reserve1,LpBalanceRatioo : Number(LpBalanceRatioo),totalVolumeInUsdInReserve0:Number(totalVolumeInUsdInReserve0),totalVolumeInUsdInReserve1:Number(totalVolumeInUsdInReserve1),totalVolumeInUsd:Number(totalVolumeInUsd), tvl : Number(tvl)},"tvl")
          return {lpBalanceInAPool ,price1 :pair.token0Price ,price2: pair.token1Price, balance1 :pair.reserve0 , balance2: pair.reserve1,LpBalanceRatioo : Number(LpBalanceRatioo),totalVolumeInUsdInReserve0:Number(totalVolumeInUsdInReserve0),totalVolumeInUsdInReserve1:Number(totalVolumeInUsdInReserve1),totalVolumeInUsd:Number(totalVolumeInUsd), tvl : Number(tvl)}
 
         }catch(e){
@@ -738,36 +760,51 @@ class Store {
     
   
     
-    let totalMintPct = 0, claimable=0, earlyPartnerDeadline=0, finalPartnerDeadline=0, totalMinted=0,partnerCount=0,isEarlyPartner=false , userData;
+    let availableVotes = 0, getWeek=0, getPoolProtectionData=0, startTime=0,  userVotes  ,poolVotesForWeekDatas;
      
 
         try {
-          const dexTopiaPartners = new web3.eth.Contract(
-            CONTRACTS.DEXTOPIA_TOPIAPARTNER_ABI,
-            CONTRACTS.DEXTOPIA_TOPIAPARTNER
+          const dexTopiaVoter = new web3.eth.Contract(
+            CONTRACTS.DEXTOPIA_TOPIAVOTER_ABI,
+            CONTRACTS.DEXTOPIA_TOPIAVOTER
           );
+          getWeek = await dexTopiaVoter.methods.getWeek().call();
 
-           [totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner] =
+          [availableVotes,getPoolProtectionData, startTime,userVotes] =
               await multicall.aggregate([
-                dexTopiaPartners.methods.totalMintPct(),
-                dexTopiaPartners.methods.claimable(account.address),
-                dexTopiaPartners.methods.earlyPartnerDeadline(),
-                dexTopiaPartners.methods.finalPartnerDeadline(),
-                dexTopiaPartners.methods.totalMinted(),
-                dexTopiaPartners.methods.partnerCount(),
-                dexTopiaPartners.methods.userData(account.address),
-                dexTopiaPartners.methods.isEarlyPartner(account.address),
+                dexTopiaVoter.methods.availableVotes(account.address),
+                dexTopiaVoter.methods.getPoolProtectionData(account.address),
+                dexTopiaVoter.methods.startTime(),
+                dexTopiaVoter.methods.userVotes(account.address,getWeek)
               ]);
+
+               poolVotesForWeekDatas = await Promise.all(
+                address.content.filteredAssets.map(async (pair) => {
+                  try {
+                    console.log(pair.address,"donefree")
+                    const poolvotesforweek =
+                      await multicall.aggregate([
+                        dexTopiaVoter.methods.poolVotes(pair.address,getWeek)
+                      ]);
+                      
+                      return poolvotesforweek
+                  }
+                  catch(e){
+                    console.log(e ,"allsetbro");
+                  }
+                })
+              )
+              
            
         }
         catch(e){
           console.log(e ,"allsetbro");
         }
    
-    this.setStore({topiaVotersData: {totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner}});
-    console.log({totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner},"pippppp")
+    this.setStore({topiaVotersData: {availableVotes , getWeek, getPoolProtectionData, startTime,  userVotes , poolVotesForWeekDatas}});
+    console.log({availableVotes , getWeek, getPoolProtectionData, startTime,  userVotes , poolVotesForWeekDatas},"donefree")
 
-   return {totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner};
+   return {availableVotes , getWeek, getPoolProtectionData, startTime,  userVotes , poolVotesForWeekDatas};
       
   }
 
@@ -7025,7 +7062,6 @@ class Store {
         this.emitter.emit(ACTIONS.ERROR, ex);
       }
     };
-
 
 
   withdrawLpDepositor = async (payload) => {
