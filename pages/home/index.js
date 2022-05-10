@@ -56,9 +56,9 @@ export default function Home() {
           </Box>
 
           <Box className={homeStyle.section2} display='flex' flexWrap='wrap' container >
-            <AmountBox text1="dextopia TVL" text2="$535.95m" text3="63% dominance" />
-            <AmountBox text1="Total vetopia locked on dextopia" text2="13.79m" text3="31.7% of total locked" />
-            <AmountBox text1="Total Topia locked" text2="5.08m" text3="74% of total supply locked" />
+            <AmountBox text1="dextopia TVL" text2="$0m" text3="0% dominance" />
+            <AmountBox text1="Total vetopia locked on dextopia" text2="0m" text3="0% of total locked" />
+            <AmountBox text1="Total Topia locked" text2="0m" text3="0% of total supply locked" />
           </Box>
 
           {/* company */}
@@ -180,20 +180,20 @@ export default function Home() {
               <Card variant='outlined' className={homeStyle.featureCard}>
                 <CardContent>
                   <Typography className={homeStyle.featureCardHeading} variant='h5' align='center'>
-                    LIQUIDITY PROVIDERS
+                    Early Partners
                   </Typography>
                   <Typography variant='h6' color='common.white' align='center'>
-                    Get a bigger boost and earn <br /> higher yield on your liquidity.
+                    Get a bigger boost and earn <br /> They get 10 % of the topia token minted.
                   </Typography>
                 </CardContent>
               </Card>
               <Card variant='outlined' className={homeStyle.featureCard}>
                 <CardContent>
                   <Typography className={homeStyle.featureCardHeading} variant='h5' align='center'>
-                    LIQUIDITY PROVIDERS
+                    Topia Locker
                   </Typography>
                   <Typography variant='h6' color='common.white' align='center'>
-                    Get a bigger boost and earn <br /> higher yield on your liquidity.
+                    They can Lock Tocken upto 16 weeks <br /> instead of Years to vote for boosted reward pools.
                   </Typography>
                 </CardContent>
               </Card>

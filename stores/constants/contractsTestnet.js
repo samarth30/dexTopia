@@ -1,20 +1,20 @@
 import abis from "../abis";
 
-export const GOV_TOKEN_ADDRESS = '0x6E511b6fAce2c5094163A1F420135a4D70a5ecd7'
+export const GOV_TOKEN_ADDRESS = '0x5093868fBc3f96FF07A840D3b03Aa807dA05e2EF'
 export const GOV_TOKEN_NAME = 'Dystopia'
 export const GOV_TOKEN_SYMBOL = 'Dyst'
 export const GOV_TOKEN_DECIMALS = 18
 export const GOV_TOKEN_LOGO = ''
 export const GOV_TOKEN_ABI = abis.tokenABI
 
-export const VE_TOKEN_ADDRESS = '0x043074eaAf5DCca960601b7B464FCd2bEC34df1D'
+export const VE_TOKEN_ADDRESS = '0x0841097f62a82c2Fef8aA943a2f80b59773E5e02'
 export const VE_TOKEN_NAME = 'veDyst'
 export const VE_TOKEN_SYMBOL = 'veDyst'
 export const VE_TOKEN_DECIMALS = 18
 export const VE_TOKEN_LOGO = ''
 export const VE_TOKEN_ABI = abis.veTokenABI
 
-export const WFTM_ADDRESS = '0xe02f20BB33F8Bfb48eB907523435CA886e139A08'
+export const WFTM_ADDRESS = '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270'
 export const WFTM_NAME = 'Wrapped MATIC'
 export const WFTM_SYMBOL = 'WMATIC'
 export const WFTM_DECIMALS = 18
@@ -27,7 +27,7 @@ export const FTM_SYMBOL = 'MATIC'
 export const FTM_DECIMALS = 18
 export const FTM_LOGO = 'https://res.cloudinary.com/sushi-cdn/image/fetch/w_32,f_auto,q_auto,fl_sanitize/https://raw.githubusercontent.com/sushiswap/icons/master/token/polygon.jpg'
 
-export const FACTORY_ADDRESS = '0xD0692d6C30cd7a383f227Ba1cB28EeCE2F050926'
+export const FACTORY_ADDRESS = '0x1d21Db6cde1b18c7E47B0F7F42f4b3F68b9beeC9'
 export const FACTORY_ABI = abis.factoryABI
 
 export const LP_DEPOSITER = '0xE17C4502663a7C322a9682f8a9fA758F58DC7FA4'
@@ -51,10 +51,10 @@ export const DEXTOPIA_TOPIAVOTER_ABI = abis.dexTopiaVoter;
 export const DEXTOPIA_STAKINGREWARDS = "0xFA29948103bfd73dda2a381bcE4FE83745871032";
 export const DEXTOPIA_STAKINGREWARDS_ABI = abis.dexTopiaStakingRewards;
 
-export const ROUTER_ADDRESS = '0x091517199B04a386C72DBe9F985b1df93A0c1A17'
+export const ROUTER_ADDRESS = '0xbE75Dd16D029c6B32B7aD57A0FD9C1c20Dd2862e'
 export const ROUTER_ABI = abis.routerABI
 
-export const VE_DIST_ADDRESS = '0x3EE7dDd47f2b0e2E34e3D349A63AB7c08F2Ba8Bb'
+export const VE_DIST_ADDRESS = '0xBB5b65FE42B1965eD412fDe45B9b336a2cFba43b'
 export const VE_DIST_ABI = abis.veDistABI
 
 export const VOTER_ADDRESS = '0x4C90BE89567555cc460c173D0B30447fB7B8203D'
@@ -66,4 +66,4 @@ export const GAUGE_ABI = abis.gaugeABI
 export const BRIBE_ABI = abis.bribeABI
 export const TOKEN_ABI = abis.tokenABI
 
-export const MULTICALL_ADDRESS = '0x08411ADd0b5AA8ee47563b146743C13b3556c9Cc'
+export const MULTICALL_ADDRESS = '0x11ce4B23bD875D7F5C6a31084f55fDe1e9A87507'

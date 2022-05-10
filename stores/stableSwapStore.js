@@ -7013,7 +7013,7 @@ class Store {
         //DOD A CHECK FOR IF THE POOL ALREADY EXISTS
       
         this.emitter.emit(ACTIONS.TX_ADDED, {
-          title: `Transfer VeDyst to Topia Partners`,
+          title: `Transfer VeDyst to Topia Partners to Become a early partner`,
           type: "Liquidity",
           verb: "Liquidity Deposit",
           transactions: [

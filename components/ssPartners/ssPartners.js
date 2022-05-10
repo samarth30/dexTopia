@@ -411,19 +411,22 @@ export default function ssPartners() {
               <Grid item className={style.topGrid2}>
                 <Paper elevation={1} className={style.topGrid2Inner}>
                 <Typography className={style.topGrid2Innertext1}>Partners</Typography>
-                  <Typography className={style.topGrid2InnerPrice}>{topiaPartnerData?.partnerCount}/15</Typography>
+                  <Typography className={style.topGrid2InnerPrice}>{topiaPartnerData && topiaPartnerData?.partnerCount}/20</Typography>
                 </Paper>
               </Grid>
               <Grid item className={style.topGrid2} xs={6} lg={2.25}>
                 <Paper elevation={1} className={style.topGrid2Inner}>
                   <Typography className={style.topGrid2Innertext1}>Early Partner Deadline</Typography>
-                  <Typography className={style.topGrid2InnerPrice}>{`${new Date(parseFloat(parseFloat(topiaPartnerData?.earlyPartnerDeadline) * 1000)).toDateString()}`}</Typography>
+                  <Typography className={style.topGrid2InnerPrice}>{`${new Date(parseFloat(parseFloat(1652832000) * 1000)).toDateString()}`}</Typography>
                 </Paper>
               </Grid>
+              {/* 1652313600 */}
+              {/* parseFloat(topiaPartnerData?.earlyPartnerDeadline) */}
+              {/* parseFloat(topiaPartnerData?.finalPartnerDeadline) */}
               <Grid item className={style.topGrid2} xs={6} lg={2.25}>
                 <Paper elevation={1} className={style.topGrid2Inner}>
                   <Typography className={style.topGrid2Innertext1}>Final Partner Deadline</Typography>
-                  <Typography className={style.topGrid2InnerPrice}> {`${new Date(parseFloat(parseFloat(topiaPartnerData?.finalPartnerDeadline) * 1000)).toDateString()}`}</Typography>
+                  <Typography className={style.topGrid2InnerPrice}> {`${new Date(parseFloat(parseFloat(1653523200) * 1000)).toDateString()}`}</Typography>
                 </Paper>
               </Grid>
             </Container>
