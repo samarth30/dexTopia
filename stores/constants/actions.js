@@ -175,3 +175,6 @@ export const DEXTOPIA_TOPIA_PARTNER_EARLY_PARTNER_SENDVENFT = "DEXTOPIA_TOPIA_PA
 
 // special data
 export const TVL_DATA_POOLS = "TVL_DATA_POOLS"
+
+// Topia voter 
+export const VOTEDATA = "VOTEDATA"

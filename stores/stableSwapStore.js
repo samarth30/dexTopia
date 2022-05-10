@@ -117,6 +117,7 @@ class Store {
       stakingRewardStakedBalance : [],
       tockenLockerData : [],
       topiaPartnersData :[],
+      topiaVotersData :[],
       veDepositorData:[],
       tvls:[]
     };
@@ -200,6 +201,9 @@ class Store {
           //VOTE
           case ACTIONS.VOTE:
             this.vote(payload);
+            break;
+          case ACTIONS.VOTEDATA:
+            this.dexTopiaVoteData(payload);
             break;
           case ACTIONS.GET_VEST_VOTES:
             this.getVestVotes(payload);
@@ -706,6 +710,64 @@ class Store {
     this.setStore({tvls: ps});
     
    return {ps};
+      
+  }
+
+
+  dexTopiaVoteData = async(address) =>{
+    const topiaVotersDatas = this.store.topiaVotersData;
+    const multicall = await stores.accountStore.getMulticall();
+    const web3 = await stores.accountStore.getWeb3Provider();
+    if (!web3) {
+      console.warn("web3 not found");
+      return null;
+    }
+    const account = stores.accountStore.getStore("account");
+    if (!account) {
+      console.warn("account not found");
+      return null;
+    }
+
+    let poolReward = [];
+
+    if (topiaVotersDatas) {
+      poolReward = topiaVotersDatas;
+    } else {
+      poolReward = this.getStore("topiaVotersData");
+    }
+    
+  
+    
+    let totalMintPct = 0, claimable=0, earlyPartnerDeadline=0, finalPartnerDeadline=0, totalMinted=0,partnerCount=0,isEarlyPartner=false , userData;
+     
+
+        try {
+          const dexTopiaPartners = new web3.eth.Contract(
+            CONTRACTS.DEXTOPIA_TOPIAPARTNER_ABI,
+            CONTRACTS.DEXTOPIA_TOPIAPARTNER
+          );
+
+           [totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner] =
+              await multicall.aggregate([
+                dexTopiaPartners.methods.totalMintPct(),
+                dexTopiaPartners.methods.claimable(account.address),
+                dexTopiaPartners.methods.earlyPartnerDeadline(),
+                dexTopiaPartners.methods.finalPartnerDeadline(),
+                dexTopiaPartners.methods.totalMinted(),
+                dexTopiaPartners.methods.partnerCount(),
+                dexTopiaPartners.methods.userData(account.address),
+                dexTopiaPartners.methods.isEarlyPartner(account.address),
+              ]);
+           
+        }
+        catch(e){
+          console.log(e ,"allsetbro");
+        }
+   
+    this.setStore({topiaVotersData: {totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner}});
+    console.log({totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner},"pippppp")
+
+   return {totalMintPct, claimable, earlyPartnerDeadline, finalPartnerDeadline, totalMinted,partnerCount , userData,isEarlyPartner};
       
   }
 
@@ -5353,13 +5415,13 @@ class Store {
       }
 
       const govToken = this.getStore("govToken");
-      const { tokenID, votes } = payload.content;
-
+      const {  votes } = payload.content;
+      console.log(votes,"votes")
       // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
       let voteTXID = this.getTXUUID();
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
-        title: `Cast vote using token #${tokenID}`,
+        title: `Cast votes for boosted rewards`,
         verb: "Votes Cast",
         transactions: [
           {
@@ -5373,10 +5435,12 @@ class Store {
       const gasPrice = await stores.accountStore.getGasPrice();
 
       // SUBMIT INCREASE TRANSACTION
-      const gaugesContract = new web3.eth.Contract(
-        CONTRACTS.VOTER_ABI,
-        CONTRACTS.VOTER_ADDRESS
+      const topiaVoter = new web3.eth.Contract(
+        CONTRACTS.DEXTOPIA_TOPIAVOTER_ABI,
+        CONTRACTS.DEXTOPIA_TOPIAVOTER
       );
+      const availableVotesOfUser = await topiaVoter.methods.availableVotes(account.address).call();
+      console.log(availableVotesOfUser,"availableVotesOfUser")
 
       let onlyVotes = votes.filter((vote) => {
         return BigNumber(vote.value).gt(0) || BigNumber(vote.value).lt(0);
@@ -5387,14 +5451,14 @@ class Store {
       });
 
       let voteCounts = onlyVotes.map((vote) => {
-        return BigNumber(vote.value).times(100).toFixed(0);
+        return BigNumber(BigNumber(vote.value).multipliedBy(BigNumber(availableVotesOfUser))).div(100).toFixed(0);
       });
-
+      console.log(voteCounts,"availableVotesOfUser")
       this._callContractWait(
         web3,
-        gaugesContract,
-        "vote",
-        [tokenID, tokens, voteCounts],
+        topiaVoter,
+        "voteForPools",
+        [tokens, voteCounts],
         account,
         gasPrice,
         null,

@@ -45,6 +45,9 @@ export const DEXTOPIA_TOKENLOCKER_ABI = abis.dexTopiaTockenLocker;
 export const DEXTOPIA_TOPIAPARTNER = "0x570dD5C85a99DC605B67D60f19A9d63c8bE407B7"
 export const DEXTOPIA_TOPIAPARTNER_ABI = abis.dexTopiaPartners;
 
+export const DEXTOPIA_TOPIAVOTER = "0xCdc41EEBcb259F99148B60110ce8c4EA62169009";
+export const DEXTOPIA_TOPIAVOTER_ABI = abis.dexTopiaVoter;
+
 export const DEXTOPIA_STAKINGREWARDS = "0xFA29948103bfd73dda2a381bcE4FE83745871032";
 export const DEXTOPIA_STAKINGREWARDS_ABI = abis.dexTopiaStakingRewards;
 
