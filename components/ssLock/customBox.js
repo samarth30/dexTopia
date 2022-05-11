@@ -121,6 +121,7 @@ export default function CustomBox({
                 <StyledTableCell>Amount</StyledTableCell>
                 <StyledTableCell>Expiry</StyledTableCell>
                 <StyledTableCell>Weeks</StyledTableCell>
+                <StyledTableCell></StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
