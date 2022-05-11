@@ -437,7 +437,7 @@ export default function ssPartners() {
 
           <Container className={style.topContainer}>
             <Box className={style.boxStyle}>
-              <Typography color="common.white" style={{ fontSize: "1.5rem" }}>First 15 Protocols to convert their NFT. Become a Partner!. Find out More</Typography>
+              <Typography color="common.white" style={{ fontSize: "1.5rem" }}>First 20 Protocols to convert their NFT. Become a Partner!. Find out More</Typography>
             </Box>
           </Container>
 
