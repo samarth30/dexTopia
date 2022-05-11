@@ -70,140 +70,140 @@ export default function ssPartners() {
 
 
   return (
-      <Container id="main" className={style.mainContainer}>
-        <Box id="mainContainer" className={style.mainContainerInner}>
-          <Box className={style.containerTop}>
-            <Container className={style.topContainer}>
-              <Grid item className={style.topGrid1} lg={4}>
-                <Typography variant="h1" className={style.mainText}>Partner</Typography>
-              </Grid>
-              <Grid item className={style.topGrid2}>
-                <Paper elevation={1} className={style.topGrid2Inner}>
+    <Container id="main" className={style.mainContainer}>
+      <Box id="mainContainer" className={style.mainContainerInner}>
+        <Box className={style.containerTop}>
+          <Container className={style.topContainer}>
+            <Grid item className={style.topGrid1} lg={4}>
+              <Typography variant="h1" className={style.mainText}>Partner</Typography>
+            </Grid>
+            <Grid item className={style.topGrid2}>
+              <Paper elevation={1} className={style.topGrid2Inner}>
                 <Typography className={style.topGrid2Innertext1}>Partners</Typography>
-                  <Typography className={style.topGrid2InnerPrice}>8/15</Typography>
-                </Paper>
-              </Grid>
-              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-                <Paper elevation={1} className={style.topGrid2Inner}>
-                  <Typography className={style.topGrid2Innertext1}>Early Partner Deadline</Typography>
-                  <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
-                </Paper>
-              </Grid>
-              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-                <Paper elevation={1} className={style.topGrid2Inner}>
-                  <Typography className={style.topGrid2Innertext1}>Final Partner Deadline</Typography>
-                  <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
-                </Paper>
-              </Grid>
-            </Container>
-            
-            <Container className={style.topContainer}>
-              <Box style={{border: "2px solid #1c6de0", background: "#194172", color: "white", padding: "1rem 1rem", width: "100%", textAlign: "center"}}>
-                <Typography color="common.white" style={{fontSize: "1.5rem"}}>First 15 Protocols to convert their NFT. Become a Partner!. Find out More</Typography>
-              </Box>
-            </Container>
+                <Typography className={style.topGrid2InnerPrice}>8/15</Typography>
+              </Paper>
+            </Grid>
+            <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+              <Paper elevation={1} className={style.topGrid2Inner}>
+                <Typography className={style.topGrid2Innertext1}>Early Partner Deadline</Typography>
+                <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+              </Paper>
+            </Grid>
+            <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+              <Paper elevation={1} className={style.topGrid2Inner}>
+                <Typography className={style.topGrid2Innertext1}>Final Partner Deadline</Typography>
+                <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+              </Paper>
+            </Grid>
+          </Container>
 
-            <Container className={style.bottomContainer}>
-              <Grid item xs={12} lg={9.5} className={style.bottomContainerLeft}>
-                <Paper elevation={1} className={style.bottomContainerLeftInner}>
-                  <Box className={style.bottomContainerLeftInnerTop}>
-                    <Typography variant='h3' className={style.h3text}>
+          <Container className={style.topContainer}>
+            <Box className={style.boxStyle}>
+              <Typography color="common.white" style={{ fontSize: "1.5rem" }}>First 15 Protocols to convert their NFT. Become a Partner!. Find out More</Typography>
+            </Box>
+          </Container>
+
+          <Container className={style.bottomContainer}>
+            <Grid item xs={12} lg={9.5} className={style.bottomContainerLeft}>
+              <Paper elevation={1} className={style.bottomContainerLeftInner}>
+                <Box className={style.bottomContainerLeftInnerTop}>
+                  <Typography variant='h3' className={style.h3text}>
                     Convert & stake Dystopia NFTs/Tokens into VeTopia
-                    </Typography>
-                  </Box>
+                  </Typography>
+                </Box>
 
-                  <Box className={style.bottomContainerLeftBottom}>
-                    <Box className={style.bottomContainerpannelTop}>
-                      <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
-                        <Tabs value={value} onChange={handleChange} className={style.tabs}>
-                          <Tab label="Solid Token" {...a11yProps(0, "page")} className={style.tab} />
-                        </Tabs>
-                      </Box>
+                <Box className={style.bottomContainerLeftBottom}>
+                  <Box className={style.bottomContainerpannelTop}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
+                      <Tabs value={value} onChange={handleChange} className={style.tabs}>
+                        <Tab label="Solid Token" {...a11yProps(0, "page")} className={style.tab} />
+                      </Tabs>
                     </Box>
-                    <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={value} index={0}>
-                      <Box className={style.tabPannel1}>
-                        <Box className={style.tabPannelrow1}>
-                          <Typography variant="h6" className={style.h6Text}>
-                            This process is irreversible
-                          </Typography>
-                        </Box>
-                        <Box className={style.tabPannelrow2}>
-                          <Typography variant='p' className={style.balancep}>
-                            Balance: 0 SOLID
-                          </Typography>
-                        </Box>
-                        <Box className={style.tabPannelrow3}>
-                          <Box className={style.tabPannelrow3Left}>
-                            <Box className={style.tabPannelrow3LeftInner}>
-                              <Box className={style.marginTop}>
-                                <FormControl sx={{ m: 1, minWidth: 200 }}>
-                                  <InputLabel style={{ color: '#fff' }} id="demo-multiple-chip-label">Select Token ID</InputLabel>
-                                  <Select
-                                    labelId="demo-multiple-chip-label"
-                                    id="demo-multiple-chip"
-                                    className={style.tabinputFieldsSelection}
-                                    value={null}
-                                    onChange={null}
-                                  >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
-                                  </Select>
-                                </FormControl>
-                              </Box>
+                  </Box>
+                  <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={value} index={0}>
+                    <Box className={style.tabPannel1}>
+                      <Box className={style.tabPannelrow1}>
+                        <Typography variant="h6" className={style.h6Text}>
+                          This process is irreversible
+                        </Typography>
+                      </Box>
+                      <Box className={style.tabPannelrow2}>
+                        <Typography variant='p' className={style.balancep}>
+                          Balance: 0 SOLID
+                        </Typography>
+                      </Box>
+                      <Box className={style.tabPannelrow3}>
+                        <Box className={style.tabPannelrow3Left}>
+                          <Box className={style.tabPannelrow3LeftInner}>
+                            <Box className={style.marginTop}>
+                              <FormControl sx={{ m: 1, minWidth: 200 }}>
+                                <InputLabel style={{ color: '#fff' }} id="demo-multiple-chip-label">Select Token ID</InputLabel>
+                                <Select
+                                  labelId="demo-multiple-chip-label"
+                                  id="demo-multiple-chip"
+                                  className={style.tabinputFieldsSelection}
+                                  value={null}
+                                  onChange={null}
+                                >
+                                  <MenuItem value={10}>Ten</MenuItem>
+                                  <MenuItem value={20}>Twenty</MenuItem>
+                                  <MenuItem value={30}>Thirty</MenuItem>
+                                </Select>
+                              </FormControl>
                             </Box>
                           </Box>
                         </Box>
-                        <Box className={style.tabPannelrow3Right}>
-                          <Button className={style.approveBtn}>
-                            Convert tokens
-                          </Button>
-                        </Box>
-                        <Box className={style.tabPannelrow4}>
-                          <Typography variant='p' className={style.balancep}>
-                            Converting 0 SOLID Tokens From the selected SOLID NFT to 0 SOLIDDsex
-                          </Typography>
-                        </Box>
                       </Box>
-                    </TabPanel>
-                  </Box>
-                </Paper>
-                <Box style={{ display: "flex", flexWrap: "wrap", margin: "1rem 0", background: "transparent", justifyContent: "space-between" }}>
-                      <Box style={{ width: "45%", margin: '0 0.5rem', padding: "1.5rem", color: "white", background: "#1f272b", border: "4px solid #194172" }}>
-                        <Typography>
-                          Negative Vote Protection
-                        </Typography>
-                        <Typography>
-                          Only Available to early partners
+                      <Box className={style.tabPannelrow3Right}>
+                        <Button className={style.approveBtn}>
+                          Convert tokens
+                        </Button>
+                      </Box>
+                      <Box className={style.tabPannelrow4}>
+                        <Typography variant='p' className={style.balancep}>
+                          Converting 0 SOLID Tokens From the selected SOLID NFT to 0 SOLIDDsex
                         </Typography>
                       </Box>
-                      <Box style={{ width: "45%", margin: '0 0.5rem', padding: "1.5rem", color: "white", background: "#1f272b", border: "4px solid #194172" }}>
-                        <Typography>
-                          Partners whitelist token
-                        </Typography>
-                        <Typography>
-                          Only Available to early partners
-                        </Typography>
-                      </Box>
+                    </Box>
+                  </TabPanel>
                 </Box>
-                <Box style={{background: "#1f272b", padding: "1.5rem", margin: "1rem 0", width: "30%", border: "4px solid #194172"}}>
-                    <Typography variant='h4' color='common.white'>
-                      Partner Claim
-                    </Typography>
-                    <Typography variant='h6' color='common.white'>
-                      Claimable Sex
-                    </Typography>
-                    <Typography variant='h3' color='common.white'>
-                      0
-                    </Typography>
-                    <Button variant="contained">claim</Button>
+              </Paper>
+              <Box style={{ display: "flex", flexWrap: "wrap", margin: "1rem 0", background: "transparent", justifyContent: "space-between" }}>
+                <Box className={style.boxStyle2}>
+                  <Typography>
+                    Negative Vote Protection
+                  </Typography>
+                  <Typography>
+                    Only Available to early partners
+                  </Typography>
                 </Box>
-              </Grid>
-            </Container>
+                <Box className={style.boxStyle2}>
+                  <Typography>
+                    Partners whitelist token
+                  </Typography>
+                  <Typography>
+                    Only Available to early partners
+                  </Typography>
+                </Box>
+              </Box>
+              <Box className={style.boxStyle3}>
+                <Typography variant='h4' color='common.white'>
+                  Partner Claim
+                </Typography>
+                <Typography variant='h6' color='common.white'>
+                  Claimable Sex
+                </Typography>
+                <Typography variant='h3' color='common.white'>
+                  0
+                </Typography>
+                <Button style={{ background: '#800080' }} variant="contained">claim</Button>
+              </Box>
+            </Grid>
+          </Container>
 
-          </Box>
-        </Box >
-      </Container >
+        </Box>
+      </Box >
+    </Container >
 
   )
 }

@@ -30,9 +30,9 @@ export default function ssPartners() {
   const [token, setToken] = useState(null)
   const [vestNFTs, setVestNFTs] = useState([])
   const [search, setSearch] = useState('');
-  const [TvlData , setTvlData] = useState();
-  const [TotalValueLocked,setTotalValueLocked] = useState(0)
-  const [YourDepositTotal,setYourDepositTotal] = useState(0);
+  const [TvlData, setTvlData] = useState();
+  const [TotalValueLocked, setTotalValueLocked] = useState(0)
+  const [YourDepositTotal, setYourDepositTotal] = useState(0);
 
   const [modelTabs, setModeltabs] = useState(0);
 
@@ -57,8 +57,8 @@ export default function ssPartners() {
     };
   }
 
-const [ssUpdateDone,setssUpdateDone] = useState(false);
-let ssupdateDone = false;
+  const [ssUpdateDone, setssUpdateDone] = useState(false);
+  let ssupdateDone = false;
   const ssUpdated = () => {
     setVeToken(stores.stableSwapStore.getStore('veToken'))
     const as = stores.stableSwapStore.getStore('pairs');
@@ -66,17 +66,17 @@ let ssupdateDone = false;
     const filteredAssets = as.filter((asset) => {
       return asset.gauge && asset.gauge.address
     })
-    if(filteredAssets.length > 0 && !ssupdateDone){
+    if (filteredAssets.length > 0 && !ssupdateDone) {
       console.log('hell')
-      console.log(filteredAssets,"hellllll")
+      console.log(filteredAssets, "hellllll")
       ssupdateDone = true;
       setssUpdateDone(true);
       setGauges(filteredAssets)
     }
-    let realfilteredassets = filteredAssets.map((object)=>{
+    let realfilteredassets = filteredAssets.map((object) => {
       return object.address
     })
-    
+
     const poolRewards = stores.dispatcher.dispatch({ type: ACTIONS.POOLREWARDS, content: { filteredAssets } })
     const tvldataas = stores.dispatcher.dispatch({ type: ACTIONS.TVL_DATA_POOLS, content: { realfilteredassets } })
 
@@ -85,22 +85,22 @@ let ssupdateDone = false;
     setPoolReward(ass)
 
     const asss = stores.stableSwapStore.getStore("poolStakedBalance");
-    console.log(asss, "pipp"  )
+    console.log(asss, "pipp")
     setPoolStaked(asss);
 
     const tvldata = stores.stableSwapStore.getStore("tvls");
 
-    let tvlsum = tvldata.map((object)=>{
+    let tvlsum = tvldata.map((object) => {
       return object.tvl;
     })
     tvlsum = tvlsum.reduce((a, b) => a + b, 0)
 
-    let yourDepositsTotal = asss.map((object,i)=>{
-      console.log(object,"object")
-      if(object){
-        return object && Number(BigNumber(tvldata[i].lpBalanceInAPool).div((BigNumber(object).div(10 ** 18))))*tvldata[i]?.tvl
+    let yourDepositsTotal = asss.map((object, i) => {
+      console.log(object, "object")
+      if (object) {
+        return object && Number(BigNumber(tvldata[i].lpBalanceInAPool).div((BigNumber(object).div(10 ** 18)))) * tvldata[i]?.tvl
       }
-      
+
     })
     yourDepositsTotal = yourDepositsTotal.reduce((a, b) => a + b, 0)
 
@@ -112,9 +112,9 @@ let ssupdateDone = false;
 
     const tockenLockerDatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOCKEN_LOCKER_DATA, content: {} })
 
-    const topiapartnersdatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_DATA, content: {} }) 
-    const topiaParntersdata =  stores.stableSwapStore.getStore('topiaPartnersData');
-    console.log(topiaParntersdata,"partnerdata")
+    const topiapartnersdatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_DATA, content: {} })
+    const topiaParntersdata = stores.stableSwapStore.getStore('topiaPartnersData');
+    console.log(topiaParntersdata, "partnerdata")
     const nfts = stores.stableSwapStore.getStore('vestNFTs');
     setVestNFTs(nfts)
 
@@ -240,7 +240,7 @@ let ssupdateDone = false;
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
+
     return (
       <div
         role="tabpanel"
@@ -260,7 +260,7 @@ let ssupdateDone = false;
 
   return (
     <>
-    <Container id="main" className={style.mainContainer}>
+      <Container id="main" className={style.mainContainer}>
         <Box id="mainContainer" className={style.mainContainerInner}>
           <Box className={style.containerTop}>
             <Container className={style.topContainer}>
@@ -269,7 +269,7 @@ let ssupdateDone = false;
               </Grid>
               <Grid item className={style.topGrid2}>
                 <Paper elevation={1} className={style.topGrid2Inner}>
-                <Typography className={style.topGrid2Innertext1}>Partners</Typography>
+                  <Typography className={style.topGrid2Innertext1}>Partners</Typography>
                   <Typography className={style.topGrid2InnerPrice}>8/15</Typography>
                 </Paper>
               </Grid>
@@ -286,10 +286,10 @@ let ssupdateDone = false;
                 </Paper>
               </Grid>
             </Container>
-            
+
             <Container className={style.topContainer}>
-              <Box style={{border: "2px solid #1c6de0", background: "#194172", color: "white", padding: "1rem 1rem", width: "100%", textAlign: "center"}}>
-                <Typography color="common.white" style={{fontSize: "1.5rem"}}>First 15 Protocols to convert their NFT. Become a Partner!. Find out More</Typography>
+              <Box className={style.boxStyle}>
+                <Typography color="common.white" style={{ fontSize: "1.5rem" }}>First 15 Protocols to convert their NFT. Become a Partner!. Find out More</Typography>
               </Box>
             </Container>
 
@@ -359,34 +359,34 @@ let ssupdateDone = false;
                   </Box>
                 </Paper>
                 <Box style={{ display: "flex", flexWrap: "wrap", margin: "1rem 0", background: "transparent", justifyContent: "space-between" }}>
-                      <Box style={{ width: "45%", margin: '0 0.5rem', padding: "1.5rem", color: "white", background: "#1f272b", border: "4px solid #194172" }}>
-                        <Typography>
-                          Negative Vote Protection
-                        </Typography>
-                        <Typography>
-                          Only Available to early partners
-                        </Typography>
-                      </Box>
-                      <Box style={{ width: "45%", margin: '0 0.5rem', padding: "1.5rem", color: "white", background: "#1f272b", border: "4px solid #194172" }}>
-                        <Typography>
-                          Partners whitelist token
-                        </Typography>
-                        <Typography>
-                          Only Available to early partners
-                        </Typography>
-                      </Box>
+                  <Box className={style.boxStyle2}>
+                    <Typography>
+                      Negative Vote Protection
+                    </Typography>
+                    <Typography>
+                      Only Available to early partners
+                    </Typography>
+                  </Box>
+                  <Box className={style.boxStyle2}>
+                    <Typography>
+                      Partners whitelist token
+                    </Typography>
+                    <Typography>
+                      Only Available to early partners
+                    </Typography>
+                  </Box>
                 </Box>
-                <Box style={{background: "#1f272b", padding: "1.5rem", margin: "1rem 0", width: "30%", border: "4px solid #194172"}}>
-                    <Typography variant='h4' color='common.white'>
-                      Partner Claim
-                    </Typography>
-                    <Typography variant='h6' color='common.white'>
-                      Claimable Sex
-                    </Typography>
-                    <Typography variant='h3' color='common.white'>
-                      0
-                    </Typography>
-                    <Button variant="contained">claim</Button>
+                <Box className={style.boxStyle3}>
+                  <Typography variant='h4' color='common.white'>
+                    Partner Claim
+                  </Typography>
+                  <Typography variant='h6' color='common.white'>
+                    Claimable Sex
+                  </Typography>
+                  <Typography variant='h3' color='common.white'>
+                    0
+                  </Typography>
+                  <Button style={{ background: '#800080' }} variant="contained">claim</Button>
                 </Box>
               </Grid>
             </Container>
@@ -395,7 +395,7 @@ let ssupdateDone = false;
         </Box >
       </Container >
 
-    
+
     </>
   );
 }
