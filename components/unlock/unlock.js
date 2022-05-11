@@ -101,13 +101,13 @@ class Unlock extends Component {
   }
 
   error = err => {
-    this.setState({loading: false, error: err});
+    this.setState({ loading: false, error: err });
   };
 
   connectionConnected = () => {
     stores.dispatcher.dispatch({
       type: CONFIGURE_SS,
-      content: {connected: true},
+      content: { connected: true },
     });
 
     if (this.props.closeModal != null) {
@@ -118,7 +118,7 @@ class Unlock extends Component {
   connectionDisconnected = () => {
     stores.dispatcher.dispatch({
       type: CONFIGURE_SS,
-      content: {connected: false},
+      content: { connected: false },
     });
     if (this.props.closeModal != null) {
       this.props.closeModal();
@@ -126,13 +126,13 @@ class Unlock extends Component {
   };
 
   render() {
-    const {classes, closeModal} = this.props;
+    const { classes, closeModal } = this.props;
 
     return (
       <div className={classes.root}>
         <div className={classes.contentContainer}>
           <Web3ReactProvider getLibrary={getLibrary}>
-            <MyComponent closeModal={closeModal}/>
+            <MyComponent closeModal={closeModal} />
           </Web3ReactProvider>
         </div>
       </div>
@@ -164,7 +164,7 @@ function onDeactivateClicked(deactivate, connector) {
   if (connector && connector.close) {
     connector.close();
   }
-  stores.accountStore.setStore({account: {}, web3context: null});
+  stores.accountStore.setStore({ account: {}, web3context: null });
   stores.emitter.emit(CONNECTION_DISCONNECTED);
 }
 
@@ -186,7 +186,7 @@ function MyComponent(props) {
   } = context;
   var connectorsByName = stores.accountStore.getStore("connectorsByName");
 
-  const {closeModal} = props;
+  const { closeModal } = props;
 
   const [activatingConnector, setActivatingConnector] = React.useState();
   React.useEffect(() => {
@@ -198,7 +198,7 @@ function MyComponent(props) {
   React.useEffect(() => {
     if (account && active && library) {
       stores.accountStore.setStore({
-        account: {address: account},
+        account: { address: account },
         web3context: context,
       });
       stores.emitter.emit(CONNECTION_CONNECTED);
@@ -207,7 +207,7 @@ function MyComponent(props) {
   }, [account, active, closeModal, context, library]);
 
   const width = window.innerWidth;
-  const {appTheme} = useAppThemeContext();
+  const { appTheme } = useAppThemeContext();
 
   return (
     <div
@@ -269,8 +269,10 @@ function MyComponent(props) {
               style={{
                 width: width > 576 ? "400px" : "calc(100vw - 100px)",
                 padding: '10px 20px',
-                backgroundColor: appTheme === "dark" ? '#24292D' : '#CFE5F2',
-                border: appTheme === "dark" ? '1px solid #5F7285' : '1px solid #86B9D6',
+                // backgroundColor: appTheme === "dark" ? '#24292D' : '#CFE5F2',
+                backgroundColor: appTheme === "dark" ? '#24292D' : 'transparent',
+                // border: appTheme === "dark" ? '1px solid #5F7285' : '1px solid #c616dc8f',
+                border: appTheme === "dark" ? '1px solid #5F7285' : '1px solid #f5f5f5',
                 borderRadius: 0,
                 color: "rgba(108,108,123,1)",
               }}
@@ -308,7 +310,7 @@ function MyComponent(props) {
                       alignItems: "center",
                     }}>
                     {activating && (
-                      <CircularProgress size={15} style={{marginRight: "10px"}}/>
+                      <CircularProgress size={15} style={{ marginRight: "10px" }} />
                     )}
 
                     <Typography
@@ -336,7 +338,9 @@ function MyComponent(props) {
                   <Typography
                     style={{
                       paddingTop: '10px',
-                      borderTop: appTheme === "dark" ? '1px solid #5F7285' : '1px solid #86B9D6',
+                      // borderTop: appTheme === "dark" ? '1px solid #5F7285' : '1px solid #86B9D6',
+                      // borderTop: appTheme === "dark" ? '1px solid #5F7285' : '1px solid #c616dc8f',
+                      borderTop: appTheme === "dark" ? '1px solid #5F7285' : '1px solid #f5f5f5',
                       textAlign: 'left',
                       fontSize: '18px',
                       color: appTheme === "dark" ? '#C6CDD2' : '#325569',

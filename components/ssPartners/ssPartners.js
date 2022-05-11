@@ -35,19 +35,19 @@ export default function ssPartners() {
     topiaEarning: "0",
   });
 
-  const [topiaPartnerData,setTopiaPartnerData] = useState({
-    totalMintPct : 0,
-    claimable:0, 
-    earlyPartnerDeadline:0,
-    finalPartnerDeadline:0, 
-    totalMinted:0,
-    partnerCount:0,
-    isEarlyPartner:false , 
-    userData : 0
+  const [topiaPartnerData, setTopiaPartnerData] = useState({
+    totalMintPct: 0,
+    claimable: 0,
+    earlyPartnerDeadline: 0,
+    finalPartnerDeadline: 0,
+    totalMinted: 0,
+    partnerCount: 0,
+    isEarlyPartner: false,
+    userData: 0
   })
 
   const [veTopiaBalance, setveTopiaBalance] = useState("0");
-  const [dystopiaBalance,setDystopiaBalance] = useState("0");
+  const [dystopiaBalance, setDystopiaBalance] = useState("0");
   const [voteLoading, setVoteLoading] = useState(false);
   const [votes, setVotes] = useState([]);
   const [veToken, setVeToken] = useState(null);
@@ -84,7 +84,7 @@ export default function ssPartners() {
     setModeltabs(newValue);
   };
 
-  const sendVedysttoTopiaPartners = async ()=>{
+  const sendVedysttoTopiaPartners = async () => {
     // window.alert(selectDropdown.id)
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_EARLY_PARTNER_SENDVENFT,
@@ -92,20 +92,20 @@ export default function ssPartners() {
     });
   }
 
-  const claimPartners = async ()=>{
+  const claimPartners = async () => {
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_CLAIM,
-      content: {  },
+      content: {},
     });
   }
 
-  const earlyPartnerClaim = async ()=>{
+  const earlyPartnerClaim = async () => {
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_EARLY_PARTNER_CLAIM,
-      content: {  },
+      content: {},
     });
   }
-// console.log( selectDropdown,"idii")
+  // console.log( selectDropdown,"idii")
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
@@ -170,9 +170,9 @@ export default function ssPartners() {
     }
 
 
-    const topiapartnersdatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_DATA, content: {} }) 
-    const topiaParntersdata =  stores.stableSwapStore.getStore('topiaPartnersData');
-    console.log(topiaParntersdata,"partner")
+    const topiapartnersdatas = stores.dispatcher.dispatch({ type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_DATA, content: {} })
+    const topiaParntersdata = stores.stableSwapStore.getStore('topiaPartnersData');
+    console.log(topiaParntersdata, "partner")
     setTopiaPartnerData(topiaParntersdata)
 
     if (
@@ -203,24 +203,24 @@ export default function ssPartners() {
 
   const onInputDepositStakeVtopia = async (e) => {
     console.log("siflskjfklsdlja", e);
-   setDepositInputVeTopia(e.target.value);
+    setDepositInputVeTopia(e.target.value);
   };
 
-  const onInputDepositDyst = async (e)=>{
+  const onInputDepositDyst = async (e) => {
     setDepositInput(e.target.value);
   }
 
-  function reverseFormatNumber(val,locale){
+  function reverseFormatNumber(val, locale) {
     var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, '');
     var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, '');
     var reversedVal = val.replace(new RegExp('\\' + group, 'g'), '');
     reversedVal = reversedVal.replace(new RegExp('\\' + decimal, 'g'), '.');
-    return Number.isNaN(reversedVal)?0:reversedVal;
-}
+    return Number.isNaN(reversedVal) ? 0 : reversedVal;
+  }
 
   const onDepositVeTopia = async () => {
 
-    console.log(reverseFormatNumber(depositInputveTopia),"alow")
+    console.log(reverseFormatNumber(depositInputveTopia), "alow")
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT,
       content: { amount: reverseFormatNumber(depositInputveTopia) },
@@ -401,188 +401,188 @@ export default function ssPartners() {
   }
 
   return (
-       <Container id="main" className={style.mainContainer}>
-        <Box id="mainContainer" className={style.mainContainerInner}>
-          <Box className={style.containerTop}>
-            <Container className={style.topContainer}>
-              <Grid item className={style.topGrid1} lg={4}>
-                <Typography variant="h1" className={style.mainText}>Partner</Typography>
-              </Grid>
-              <Grid item className={style.topGrid2}>
-                <Paper elevation={1} className={style.topGrid2Inner}>
+    <Container id="main" className={style.mainContainer}>
+      <Box id="mainContainer" className={style.mainContainerInner}>
+        <Box className={style.containerTop}>
+          <Container className={style.topContainer}>
+            <Grid item className={style.topGrid1} lg={4}>
+              <Typography variant="h1" className={style.mainText}>Partner</Typography>
+            </Grid>
+            <Grid item className={style.topGrid2}>
+              <Paper elevation={1} className={style.topGrid2Inner}>
                 <Typography className={style.topGrid2Innertext1}>Partners</Typography>
-                  <Typography className={style.topGrid2InnerPrice}>{topiaPartnerData?.partnerCount}/15</Typography>
-                </Paper>
-              </Grid>
-              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-                <Paper elevation={1} className={style.topGrid2Inner}>
-                  <Typography className={style.topGrid2Innertext1}>Early Partner Deadline</Typography>
-                  <Typography className={style.topGrid2InnerPrice}>{`${new Date(parseFloat(parseFloat(topiaPartnerData?.earlyPartnerDeadline) * 1000)).toDateString()}`}</Typography>
-                </Paper>
-              </Grid>
-              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-                <Paper elevation={1} className={style.topGrid2Inner}>
-                  <Typography className={style.topGrid2Innertext1}>Final Partner Deadline</Typography>
-                  <Typography className={style.topGrid2InnerPrice}> {`${new Date(parseFloat(parseFloat(topiaPartnerData?.finalPartnerDeadline) * 1000)).toDateString()}`}</Typography>
-                </Paper>
-              </Grid>
-            </Container>
-            
-            <Container className={style.topContainer}>
-              <Box style={{border: "2px solid #1c6de0", background: "#194172", color: "white", padding: "1rem 1rem", width: "100%", textAlign: "center"}}>
-                <Typography color="common.white" style={{fontSize: "1.5rem"}}>First 15 Protocols to convert their NFT. Become a Partner!. Find out More</Typography>
-              </Box>
-            </Container>
+                <Typography className={style.topGrid2InnerPrice}>{topiaPartnerData?.partnerCount}/15</Typography>
+              </Paper>
+            </Grid>
+            <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+              <Paper elevation={1} className={style.topGrid2Inner}>
+                <Typography className={style.topGrid2Innertext1}>Early Partner Deadline</Typography>
+                <Typography className={style.topGrid2InnerPrice}>{`${new Date(parseFloat(parseFloat(topiaPartnerData?.earlyPartnerDeadline) * 1000)).toDateString()}`}</Typography>
+              </Paper>
+            </Grid>
+            <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+              <Paper elevation={1} className={style.topGrid2Inner}>
+                <Typography className={style.topGrid2Innertext1}>Final Partner Deadline</Typography>
+                <Typography className={style.topGrid2InnerPrice}> {`${new Date(parseFloat(parseFloat(topiaPartnerData?.finalPartnerDeadline) * 1000)).toDateString()}`}</Typography>
+              </Paper>
+            </Grid>
+          </Container>
 
-            <Container className={style.bottomContainer}>
-              <Grid item xs={12} lg={9.5} className={style.bottomContainerLeft}>
-                <Paper elevation={1} className={style.bottomContainerLeftInner}>
-                  <Box className={style.bottomContainerLeftInnerTop}>
-                    <Typography variant='h3' className={style.h3text}>
-                      Convert your VeDyst Nfts into VeTopia To Become Early Partner and Gain Maximum Yield
-                    </Typography>
-                  </Box>
+          <Container className={style.topContainer}>
+            <Box className={style.boxStyle}>
+              <Typography color="common.white" style={{ fontSize: "1.5rem" }}>First 15 Protocols to convert their NFT. Become a Partner!. Find out More</Typography>
+            </Box>
+          </Container>
 
-                  <Box className={style.bottomContainerLeftBottom}>
-                    <Box className={style.bottomContainerpannelTop}>
-                      <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
-                        <Tabs value={value} onChange={handleChange} className={style.tabs}>
-                          <Tab label="VeDysts" {...a11yProps(0, "page")} className={style.tab} />
-                        </Tabs>
-                      </Box>
+          <Container className={style.bottomContainer}>
+            <Grid item xs={12} lg={9.5} className={style.bottomContainerLeft}>
+              <Paper elevation={1} className={style.bottomContainerLeftInner}>
+                <Box className={style.bottomContainerLeftInnerTop}>
+                  <Typography variant='h3' className={style.h3text}>
+                    Convert your VeDyst Nfts into VeTopia To Become Early Partner and Gain Maximum Yield
+                  </Typography>
+                </Box>
+
+                <Box className={style.bottomContainerLeftBottom}>
+                  <Box className={style.bottomContainerpannelTop}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className={style.tabBox}>
+                      <Tabs value={value} onChange={handleChange} className={style.tabs}>
+                        <Tab label="VeDysts" {...a11yProps(0, "page")} className={style.tab} />
+                      </Tabs>
                     </Box>
-                    <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={value} index={0}>
-                      <Box className={style.tabPannel1}>
-                        {/* <Box className={style.tabPannelrow1}>
+                  </Box>
+                  <TabPanel style={{ backgroundColor: 'rgb(32 39 43)' }} value={value} index={0}>
+                    <Box className={style.tabPannel1}>
+                      {/* <Box className={style.tabPannelrow1}>
                           <Typography variant="h6" className={style.h6Text}>
                             This process is irreversible
                           </Typography>
                         </Box> */}
-                        {/* <Box className={style.tabPannelrow2}>
+                      {/* <Box className={style.tabPannelrow2}>
                           <Typography variant='p' className={style.balancep}>
                             Balance: 0 SOLID
                           </Typography>
                         </Box> */}
-                        <Box className={style.tabPannelrow3}>
-                          <Box className={style.tabPannelrow3Left}>
-                            <Box className={style.tabPannelrow3LeftInner}>
-                              <Box className={style.marginTop}>
-                                  <FormControl sx={{ m: 1, minWidth: 200 }}>
-                                  <InputLabel
-                                    style={{ color: "#fff" }}
-                                    id="demo-multiple-chip-label"
-                                  >
-                                    Select Token ID
-                                  </InputLabel>
-                                  <Select
-                                    labelId="demo-multiple-chip-label"
-                                    id="demo-multiple-chip"
-                                    className={style.tabinputFieldsSelection}
-                                    value={selectDropdown}
-                                    onChange={(e) => {
-                                      setSelectDropdown(e.target.value);
-                                    }}
-                                    style={{ color: "#fff !important" }}
-                                  >
-                                    {vestNFTs &&
-                                      vestNFTs.map((vest) => {
-                                        return (
-                                          <MenuItem key={vest.id} value={vest}>
-                                            <div className={style.menuOption}>
-                                              <Typography>
-                                                Token #{vest.id}
+                      <Box className={style.tabPannelrow3}>
+                        <Box className={style.tabPannelrow3Left}>
+                          <Box className={style.tabPannelrow3LeftInner}>
+                            <Box className={style.marginTop}>
+                              <FormControl sx={{ m: 1, minWidth: 200 }}>
+                                <InputLabel
+                                  style={{ color: "#fff" }}
+                                  id="demo-multiple-chip-label"
+                                >
+                                  Select Token ID
+                                </InputLabel>
+                                <Select
+                                  labelId="demo-multiple-chip-label"
+                                  id="demo-multiple-chip"
+                                  className={style.tabinputFieldsSelection}
+                                  value={selectDropdown}
+                                  onChange={(e) => {
+                                    setSelectDropdown(e.target.value);
+                                  }}
+                                  style={{ color: "#fff !important" }}
+                                >
+                                  {vestNFTs &&
+                                    vestNFTs.map((vest) => {
+                                      return (
+                                        <MenuItem key={vest.id} value={vest}>
+                                          <div className={style.menuOption}>
+                                            <Typography>
+                                              Token #{vest.id}
+                                            </Typography>
+                                            <div>
+                                              <Typography
+                                                align="right"
+                                                className={style.smallerText}
+                                              >
+                                                {formatCurrency(
+                                                  vest.lockValue
+                                                )}
                                               </Typography>
-                                              <div>
-                                                <Typography
-                                                  align="right"
-                                                  className={style.smallerText}
-                                                >
-                                                  {formatCurrency(
-                                                    vest.lockValue
-                                                  )}
-                                                </Typography>
-                                                <Typography
-                                                  color="textSecondary"
-                                                  className={style.smallerText}
-                                                >
-                                                  {veToken?.symbol}
-                                                </Typography>
-                                              </div>
+                                              <Typography
+                                                color="textSecondary"
+                                                className={style.smallerText}
+                                              >
+                                                {veToken?.symbol}
+                                              </Typography>
                                             </div>
-                                          </MenuItem>
-                                        );
-                                      })}
-                                  </Select>
-                                </FormControl>
-               
-                              </Box>
+                                          </div>
+                                        </MenuItem>
+                                      );
+                                    })}
+                                </Select>
+                              </FormControl>
+
                             </Box>
                           </Box>
                         </Box>
-                        <Box className={style.tabPannelrow3Right}>
-                          <Button className={style.approveBtn} onClick={()=>{sendVedysttoTopiaPartners()}}>
-                            Convert tokens
-                          </Button>
-                        </Box>
-                        {/* <Box className={style.tabPannelrow4}>
+                      </Box>
+                      <Box className={style.tabPannelrow3Right}>
+                        <Button className={style.approveBtn} onClick={() => { sendVedysttoTopiaPartners() }}>
+                          Convert tokens
+                        </Button>
+                      </Box>
+                      {/* <Box className={style.tabPannelrow4}>
                           <Typography variant='p' className={style.balancep}>
                             Converting 0 SOLID Tokens From the selected SOLID NFT to 0 SOLIDDsex
                           </Typography>
                         </Box> */}
-                      </Box>
-                    </TabPanel>
-                  </Box>
-                </Paper>
-                <Box style={{ display: "flex", flexWrap: "wrap", margin: "1rem 0", background: "transparent", justifyContent: "space-between" }}>
-                      <Box style={{ width: "45%", margin: '0 0.5rem', padding: "1.5rem", color: "white", background: "#1f272b", border: "4px solid #194172" }}>
-                        <Typography>
-                          Negative Vote Protection
-                        </Typography>
-                        <Typography>
-                          Only Available to early partners
-                        </Typography>
-                      </Box>
-                      <Box style={{ width: "45%", margin: '0 0.5rem', padding: "1.5rem", color: "white", background: "#1f272b", border: "4px solid #194172" }}>
-                        <Typography>
-                          Partners whitelist token
-                        </Typography>
-                        <Typography>
-                          Only Available to early partners
-                        </Typography>
-                        <Typography>
-                        {topiaPartnerData&& topiaPartnerData?.isEarlyPartner ? "you are a early partner" : "you are not a early partner"}
-                        </Typography>
-                      </Box>
+                    </Box>
+                  </TabPanel>
                 </Box>
-               
-               
-                <Box style={{background: "#1f272b", padding: "1.5rem", margin: "1rem 0", width: "30%", border: "4px solid #194172"}}>
-                    <Typography variant='h4' color='common.white'>
-                      Partner Claim
-                    </Typography>
-                    <Typography variant='h6' color='common.white'>
-                      Claimable Topia
-                    </Typography>
-                    <Typography variant='h3' color='common.white'>
-                     {formatCurrency(BigNumber(topiaPartnerData?.claimable).div(10**18))}
-                    </Typography>
-                    {/* <Typography variant='h6' color='common.white'>
+              </Paper>
+              <Box style={{ display: "flex", flexWrap: "wrap", margin: "1rem 0", background: "transparent", justifyContent: "space-between" }}>
+                <Box className={style.boxStyle2}>
+                  <Typography>
+                    Negative Vote Protection
+                  </Typography>
+                  <Typography>
+                    Only Available to early partners
+                  </Typography>
+                </Box>
+                <Box className={style.boxStyle2}>
+                  <Typography>
+                    Partners whitelist token
+                  </Typography>
+                  <Typography>
+                    Only Available to early partners
+                  </Typography>
+                  <Typography>
+                    {topiaPartnerData && topiaPartnerData?.isEarlyPartner ? "you are a early partner" : "you are not a early partner"}
+                  </Typography>
+                </Box>
+              </Box>
+
+
+              <Box className={style.boxStyle3}>
+                <Typography variant='h4' color='common.white'>
+                  Partner Claim
+                </Typography>
+                <Typography variant='h6' color='common.white'>
+                  Claimable Topia
+                </Typography>
+                <Typography variant='h3' color='common.white'>
+                  {formatCurrency(BigNumber(topiaPartnerData?.claimable).div(10 ** 18))}
+                </Typography>
+                {/* <Typography variant='h6' color='common.white'>
                       Total Claimed
                     </Typography>
                     <Typography variant='h3' color='common.white'>
                      {formatCurrency(BigNumber(topiaPartnerData?.userd).div(10**18))}
                     </Typography> */}
-                    <Button variant="contained" onClick={topiaPartnerData&& topiaPartnerData?.isEarlyPartner ? earlyPartnerClaim : claimPartners}>
-                    {topiaPartnerData&& topiaPartnerData?.isEarlyPartner ? "early partner claim" : "claim"}
-                    </Button>
-                    
-                </Box>
-               
-              </Grid>
-            </Container>
+                <Button style={{ background: '#800080' }} variant="contained" onClick={topiaPartnerData && topiaPartnerData?.isEarlyPartner ? earlyPartnerClaim : claimPartners}>
+                  {topiaPartnerData && topiaPartnerData?.isEarlyPartner ? "early partner claim" : "claim"}
+                </Button>
 
-          </Box>
-        </Box >
-      </Container >
+              </Box>
+
+            </Grid>
+          </Container>
+
+        </Box>
+      </Box >
+    </Container >
   );
 }

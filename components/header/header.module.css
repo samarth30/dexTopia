@@ -196,7 +196,8 @@
 .userMenuIcon {
   padding: 0 !important;
   margin-right: -30px;
-  color: #06d3d7 !important;
+  /* color: #06d3d7 !important; */
+  color: #A020F0 !important;
 }
 
 .walletPointContainer {
@@ -247,13 +248,17 @@
 }
 
 .switchNetworkBtn {
-  background: rgba(6, 211, 215, 0.3) !important;
-  color: rgba(6, 211, 215, 1) !important;
+  /* background: rgba(6, 211, 215, 0.3) !important; */
+  background: rgba(128, 0, 128, 0.3) !important;
+  /* color: rgba(6, 211, 215, 1) !important; */
+  /* color: rgba(128, 0, 128, 1) !important; */
+  color: white !important;
   border-radius: 60px !important;
   padding: 12px 24px 14px 24px !important;
   font-weight: 700 !important;
   text-transform: none !important;
-  border: 1px solid rgba(6, 211, 215, 1) !important;
+  /* border: 1px solid rgba(6, 211, 215, 1) !important; */
+  border: 1px solid rgba(128, 0, 128, 1) !important;
   margin-top: 30px !important;
   transform: scale(0.9);
   -webkit-transition: all 300ms ease-out;
@@ -264,10 +269,13 @@
 }
 
 .switchNetworkBtn:hover {
-  background: rgba(6, 211, 215, 1) !important;
-  color: #111729 !important;
+  /* background: rgba(6, 211, 215, 1) !important; */
+  background: white !important;
+  /* color: #111729 !important; */
+  color: #000 !important;
   text-transform: none !important;
-  border: 1px solid rgba(6, 211, 215, 1) !important;
+  /* border: 1px solid rgba(6, 211, 215, 1) !important; */
+  border: 1px solid rgba(128, 0, 128, 1) !important;
   transform: scale(0.9);
   -webkit-transition: all 300ms ease-out;
   -moz-transition: all 300ms ease-out;

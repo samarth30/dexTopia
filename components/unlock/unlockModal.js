@@ -9,9 +9,9 @@ function Transition(props) {
 }
 
 export default function UnlockModal(props) {
-  const {closeModal, modalOpen} = props;
+  const { closeModal, modalOpen } = props;
   const fullScreen = window.innerWidth < 576;
-  const {appTheme} = useAppThemeContext();
+  const { appTheme } = useAppThemeContext();
 
   return (
     <Dialog
@@ -21,11 +21,13 @@ export default function UnlockModal(props) {
       maxWidth="false"
       TransitionComponent={Transition}
       fullScreen={fullScreen}
-      style={{borderRadius: 0}}
+      style={{ borderRadius: 0 }}
     >
       <div style={{
         width: 460,
-        background: appTheme === "dark" ? '#151718' : '#DBE6EC',
+        backgroundImage: 'linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%)',
+        // background: appTheme === "dark" ? '#151718' : '#DBE6EC',
+        backgroundColor: appTheme === "dark" ? '#151718' : '#f9c5d1',
         border: appTheme === "dark" ? '1px solid #5F7285' : '1px solid #86B9D6',
         borderRadius: 0,
       }}>
@@ -53,7 +55,7 @@ export default function UnlockModal(props) {
                 cursor: 'pointer',
                 color: appTheme === "dark" ? '#ffffff' : '#0A2C40'
               }}
-              onClick={closeModal}/>
+              onClick={closeModal} />
           </div>
         </DialogTitle>
 
@@ -61,7 +63,7 @@ export default function UnlockModal(props) {
           padding: 30,
           paddingBottom: 20,
         }}>
-          <Unlock closeModal={closeModal}/>
+          <Unlock closeModal={closeModal} />
         </DialogContent>
       </div>
     </Dialog>
