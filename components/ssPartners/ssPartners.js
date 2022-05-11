@@ -411,7 +411,9 @@ export default function ssPartners() {
               <Grid item className={style.topGrid2}>
                 <Paper elevation={1} className={style.topGrid2Inner}>
                 <Typography className={style.topGrid2Innertext1}>Partners</Typography>
-                  <Typography className={style.topGrid2InnerPrice}>{topiaPartnerData && topiaPartnerData?.partnerCount}/20</Typography>
+                {
+                  <Typography className={style.topGrid2InnerPrice}>{topiaPartnerData && topiaPartnerData?.partnerCount ? topiaPartnerData?.partnerCount : 0}/20</Typography>
+                }  
                 </Paper>
               </Grid>
               <Grid item className={style.topGrid2} xs={6} lg={2.25}>
