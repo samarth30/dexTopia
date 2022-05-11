@@ -46,7 +46,7 @@ export default function ssConvert() {
   });
 
   const [veTopiaBalance, setveTopiaBalance] = useState("0");
-  const [dystopiaBalance,setDystopiaBalance] = useState("0");
+  const [dystopiaBalance, setDystopiaBalance] = useState("0");
   const [voteLoading, setVoteLoading] = useState(false);
   const [votes, setVotes] = useState([]);
   const [veToken, setVeToken] = useState(null);
@@ -83,13 +83,13 @@ export default function ssConvert() {
     setModeltabs(newValue);
   };
 
-  const convertVeDystToVeTopia = async ()=>{
+  const convertVeDystToVeTopia = async () => {
     await stores.dispatcher.dispatch({
       type: ACTIONS.VE_TRANSFER_TO_DEPOSITOR,
       content: { id: selectDropdown.id },
     });
   }
-// console.log( selectDropdown,"idii")
+  // console.log( selectDropdown,"idii")
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
@@ -181,24 +181,24 @@ export default function ssConvert() {
 
   const onInputDepositStakeVtopia = async (e) => {
     console.log("siflskjfklsdlja", e);
-   setDepositInputVeTopia(e.target.value);
+    setDepositInputVeTopia(e.target.value);
   };
 
-  const onInputDepositDyst = async (e)=>{
+  const onInputDepositDyst = async (e) => {
     setDepositInput(e.target.value);
   }
 
-  function reverseFormatNumber(val,locale){
+  function reverseFormatNumber(val, locale) {
     var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, '');
     var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, '');
     var reversedVal = val.replace(new RegExp('\\' + group, 'g'), '');
     reversedVal = reversedVal.replace(new RegExp('\\' + decimal, 'g'), '.');
-    return Number.isNaN(reversedVal)?0:reversedVal;
-}
+    return Number.isNaN(reversedVal) ? 0 : reversedVal;
+  }
 
   const onDepositVeTopia = async () => {
 
-    console.log(reverseFormatNumber(depositInputveTopia),"alow")
+    console.log(reverseFormatNumber(depositInputveTopia), "alow")
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_STAKING_REWARD_DEPOSIT,
       content: { amount: reverseFormatNumber(depositInputveTopia) },
@@ -380,474 +380,477 @@ export default function ssConvert() {
 
   return (
     <>
-      <Container id="main" className={style.mainContainer}>
-        <Box id="mainContainer" className={style.mainContainerInner}>
-          <Box className={style.containerTop}>
-            <Container className={style.topContainer}>
-              <Grid item className={style.topGrid1} lg={4}>
-                <Typography variant="h1" className={style.mainText}>
-                  Convert
-                </Typography>
-              </Grid>
-              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-                <Paper elevation={1} className={style.topGrid2Inner}>
-                  <Typography className={style.topGrid2Innertext1}>
-                    Total Deposits
-                  </Typography>
-                  <Typography className={style.topGrid2InnerPrice}>
-                    $0.00
-                  </Typography>
-                </Paper>
-              </Grid>
-              <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-                <Paper elevation={1} className={style.topGrid2Inner}>
-                  <Typography className={style.topGrid2Innertext1}>
-                    Total Deposits
-                  </Typography>
-                  <Typography className={style.topGrid2InnerPrice}>
-                    $0.00
-                  </Typography>
-                </Paper>
-              </Grid>
-            </Container>
-
-            <Container className={style.bottomContainer}>
-              <Grid item xs={12} lg={9.5} className={style.bottomContainerLeft}>
-                <Paper elevation={1} className={style.bottomContainerLeftInner}>
-                  <Box className={style.bottomContainerLeftInnerTop}>
-                    <Typography variant="h3" className={style.h3text}>
-                      Convert & stake dextopia NFTs/Tokens into Dextopia
-                    </Typography>
-                  </Box>
-
-                  <Box className={style.bottomContainerLeftBottom}>
-                    <Box className={style.bottomContainerpannelTop}>
-                      <Box
-                        sx={{ borderBottom: 1, borderColor: "divider" }}
-                        className={style.tabBox}
-                      >
-                        <Tabs
-                          value={value}
-                          onChange={handleChanges}
-                          className={style.tabs}
-                        >
-                          <Tab
-                            label="Solid Token"
-                            {...a11yProps(0, "page")}
-                            className={style.tab}
-                          />
-                          <Tab
-                            label="Solid NFT"
-                            {...a11yProps(1, "page")}
-                            className={style.tab}
-                          />
-                        </Tabs>
-                      </Box>
-                    </Box>
-                    <TabPanel
-                      style={{ backgroundColor: "rgb(32 39 43)" }}
-                      value={value}
-                      index={0}
-                    >
-                      <Box className={style.tabPannel1}>
-                        <Box className={style.tabPannelrow1}>
-                          <Typography variant="h6" className={style.h6Text}>
-                            This process is irreversible
-                          </Typography>
-                        </Box>
-                        <Box className={style.tabPannelrow2}>
-                          <Typography variant="p" className={style.balancep}>
-                            Balance: {formatCurrency(
-                              BigNumber(dystopiaBalance).div(
-                                10 ** 18
-                              )
-                            )}  dystopia
-                          </Typography>
-                        </Box>
-                        <Box className={style.tabPannelrow3}>
-                          <Box className={style.tabPannelrow3Left}>
-                            <Box className={style.tabPannelrow3LeftInner}>
-                              <Box className={style.tabinputFields}>
-                                <Input
-                                  autoFocus="autoFocus"
-                                  placeholder="Enter Amount"
-                                  className={style.AmountInput}
-                                  onChange={onInputDepositDyst}
-                                  value={depositInput}
-                                />
-                                <Button className={style.buttontop} onClick={()=>{setDepositInput(formatCurrency(
-                              BigNumber(dystopiaBalance).div(
-                                10 ** 18
-                              )
-                            ,15)) }}>Max</Button>
-                              </Box>
-                            </Box>
-                          </Box>
-                          <Box className={style.tabPannelrow3Right}>
-                            {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }} onClick={() => onDeposit()}>
-                          Approve
-                        </Button> */}
-                            <Button
-                              className={style.approveBtn}
-                              onClick={() => onDeposit(depositInput)}
-                            >
-                              Convert tokens
-                            </Button>
-                          </Box>
-                        </Box>
-                        <Box className={style.tabPannelrow4}>
-                          <Typography variant="p" className={style.balancep}>
-                            Converting {depositInput} dystopia Tokens to {depositInput} Topia
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </TabPanel>
-                    <TabPanel
-                      style={{ backgroundColor: "rgb(32 39 43)" }}
-                      value={value}
-                      index={1}
-                    >
-                      <Box className={style.tabPannel1}>
-                        <Box className={style.tabPannelrow1}>
-                          <Typography variant="h6" className={style.h6Text}>
-                            This process is irreversible
-                          </Typography>
-                        </Box>
-                        <Box className={style.tabPannelrow2}>
-                          {/* <Typography variant="p" className={style.balancep}>
-                          Balance: {formatCurrency(
-                              BigNumber(dystopiaBalance).div(
-                                10 ** 18
-                              )
-                            )}  dystopia in all nfts ?
-                          </Typography> */}
-                        </Box>
-                        <Box className={style.tabPannelrow3}>
-                          <Box className={style.tabPannelrow3Left}>
-                            <Box className={style.tabPannelrow3LeftInner}>
-                              <Box className={style.marginTop}>
-                                <FormControl sx={{ m: 1, minWidth: 200 }}>
-                                  <InputLabel
-                                    style={{ color: "#fff" }}
-                                    id="demo-multiple-chip-label"
-                                  >
-                                    Select Token ID
-                                  </InputLabel>
-                                  <Select
-                                    labelId="demo-multiple-chip-label"
-                                    id="demo-multiple-chip"
-                                    className={style.tabinputFieldsSelection}
-                                    value={selectDropdown}
-                                    onChange={(e) => {
-                                      setSelectDropdown(e.target.value);
-                                    }}
-                                    style={{ color: "#fff !important" }}
-                                  >
-                                    {vestNFTs &&
-                                      vestNFTs.map((vest) => {
-                                        return (
-                                          <MenuItem key={vest.id} value={vest}>
-                                            <div className={style.menuOption}>
-                                              <Typography>
-                                                Token #{vest.id}
-                                              </Typography>
-                                              <div>
-                                                <Typography
-                                                  align="right"
-                                                  className={style.smallerText}
-                                                >
-                                                  {formatCurrency(
-                                                    vest.lockValue
-                                                  )}
-                                                </Typography>
-                                                <Typography
-                                                  color="textSecondary"
-                                                  className={style.smallerText}
-                                                >
-                                                  {veToken?.symbol}
-                                                </Typography>
-                                              </div>
-                                            </div>
-                                          </MenuItem>
-                                        );
-                                      })}
-                                  </Select>
-                                </FormControl>
-                              </Box>
-                            </Box>
-                          </Box>
-                          <Box
-                            className={style.tabPannelrow3Right}
-                            style={{ height: "60px" }}
-                          >
-                            <Button className={style.approveBtn} onClick={()=>{convertVeDystToVeTopia()}}>
-                              Convert tokens
-                            </Button>
-                          </Box>
-                        </Box>
-                        <Box className={style.tabPannelrow4}>
-                          <Typography variant="p" className={style.balancep}>
-                            Converting veDyst From the selected
-                            Dystopia NFT to {selectDropdown ? parseFloat(selectDropdown?.lockAmount).toFixed(2) : 0} veTopia
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </TabPanel>
-                  </Box>
-                </Paper>
-              </Grid>
-
-              {/* <Grid item xs={2.5}>
-          <Paper elevation={1} className={style.topGrid2Inner}>
-              <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
-              <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
-            </Paper>
-          </Grid> */}
-
-              <Grid item xs={12} className={style.bottomTable}>
-                <Container className={style.bottomTableInner}>
-                  <Grid lg={2.1} item className={style.tableheaderGText}></Grid>
-                  <Grid lg={1.85} item>
-                    <Typography variant="h6" className={style.tableheaderGText}>
-                      TVL
-                    </Typography>
-                  </Grid>
-                  <Grid lg={1.5} item>
-                    <Typography variant="h6">APR</Typography>
-                  </Grid>
-                  <Grid lg={1.7} item>
-                    <Typography variant="h6">Your Staked Dextopia</Typography>
-                  </Grid>
-                  <Grid lg={1.7} item>
-                    <Typography variant="h6">Your Earning</Typography>
-                  </Grid>
-                </Container>
-                <Paper elevation={1} className={style.tableRow}>
-                  <Box className={style.tableRowInner}>
-                    <Container className={style.tableBoxes}>
-                      <Grid item xs={12} lg={2}>
-                        <Typography variant="p"  style={{maxWidth: '200px'}} >Staked Dextopia</Typography>
-                      </Grid>
-                      <Grid item xs={12} lg={1.75}>
-                        <Typography variant="p">6,656,064.4</Typography>
-                      </Grid>
-                      <Grid item xs={12} lg={1.75}>
-                        <Typography variant="p">26.1%</Typography>
-                      </Grid>
-                      <Grid item xs={12} lg={1.75}>
-                        <Typography variant="p">
-
-                          {stakingRewardStaked &&
-                            formatCurrency(
-                              BigNumber(stakingRewardStaked?.stakedBalance).div(
-                                10 ** 18
-                              )
-                            )}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6} lg={1.5}>
-                        <Typography variant="p">
-                          {stakingRewardStaked  &&
-                            formatCurrency(
-                              BigNumber(
-                                stakingRewardStaked?.dysTopiaEarning
-                              ).div(10 ** 18)
-                            )}{" "}
-                          dystopia{" "}
-                        </Typography>
-                        <br></br>
-                        <Typography variant="p">
-                          {stakingRewardStaked !== "undefined" &&
-                            formatCurrency(
-                              BigNumber(stakingRewardStaked?.topiaEarning).div(
-                                10 ** 18
-                              )
-                            )}{" "}
-                          Topia
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6} lg={1.5}>
-                        <Button
-                          className={style.approveBtn}
-                          onClick={()=> openModel()}
-                        >
-                          Manage
-                        </Button>
-                      </Grid>
-                      <Grid item xs={6} lg={1.5}>
-                        <Button
-                          className={style.approveBtn}
-                          onClick={() => onClaimVeTopia()}
-                        >
-                          Claim Earnings
-                        </Button>
-                      </Grid>
-                    </Container>
-                  </Box>
-                </Paper>
-              </Grid>
-            </Container>
-          </Box>
-        </Box>
-      </Container>
-      {open && (
-        <Mymodel text="Manage veTopia Staker" open={open} handleClose={handleClose}>
-          <Box className={style.bottomContainerLeftBottom}>
-            <Box className={style.bottomContainerpannelTop}>
-              <Box
-                sx={{ borderBottom: 1, borderColor: "divider" }}
-                className={style.tabBox}
-              >
-                <Tabs
-                  value={modelTabs}
-                  onChange={handleChangeModeltab}
-                  className={style.tabs}
-                >
-                  <Tab
-                    label="Stake"
-                    {...a11yProps(0, "model")}
-                    className={style.tab}
-                  />
-                  <Tab
-                    label="Withdraw"
-                    {...a11yProps(1, "model")}
-                    className={style.tab}
-                  />
-                </Tabs>
-              </Box>
-            </Box>
-            <Typography className="convertModal__p" pt={3} sx={{paddingLeft: "24px"}}>
-            your vetopia balance : {formatCurrency(
-                              BigNumber(veTopiaBalance).div(
-                                10 ** 18
-                              )
-                            )}
-                            <br></br>
-                            your vetopai staked balance : {formatCurrency(
-                              BigNumber(stakingRewardStaked?.stakedBalance).div(
-                                10 ** 18
-                              )
-                            )}
-            </Typography>
-            <TabPanel
-              style={{ backgroundColor: "rgb(32 39 43)" }}
-              value={modelTabs}
-              index={0}
-            >
-              <Box className={style.tabPannel1}>
-                
-                <Box className={style.tabPannelrow3}>
-                  <Box className={style.tabPannelrow3Left}>
-                    <Box className={style.tabPannelrow3LeftInner}>
-                    
-                      <Box className={style.tabinputFields}>
-                        
-                        <Input
-                          autoFocus="autoFocus"
-                          placeholder="Enter Amount"
-                          // autoFocus="autoFocus"
-                          className={style.AmountInput}
-                          value={depositInputveTopia}
-                          onChange={(e) => onInputDepositStakeVtopia(e)}
-                        />
-                        <Button className={style.buttontop} onClick={()=>{setDepositInputVeTopia(formatCurrency(
-                              BigNumber(veTopiaBalance).div(
-                                10 ** 18
-                              )
-                            ,15))}}>Max</Button>
-                      </Box>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box
-                  className={`${style.modelButtons}`}
-                  style={{
-                    display: "flex",
-                    flexFlow: "row wrap",
-                    marginLeft: "0px !important",
-                    marginTop: "20px",
-                  }}
-                >
-                  {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }}>
-                      Approve
-                    </Button> */}
-                  <Button
-                    className={style.approveBtn}
-                    style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
-                     onClick={() => onDepositVeTopia(depositInputveTopia)}
-                  >
-                    Convert tokens
-                  </Button>
-                </Box>
-              </Box>
-            </TabPanel>
-            <TabPanel
-              style={{ backgroundColor: "rgb(32 39 43)" }}
-              value={modelTabs}
-              index={1}
-            >
-              <Box className={`${style.tabPannel1} ${style.tabPannel1Modell}`}>
-                <Box className={style.tabPannelrow3}>
-                  <Box className={style.tabPannelrow3Left}>
-                    <Box className={style.tabPannelrow3LeftInner}>
-                      <Box className={style.marginTop}>
-                        <Box className={style.tabPannelrow3LeftInner}>
-                          <Box className={style.tabinputFields}>
-                            <Input
-                              autoFocus="autoFocus"
-                              placeholder="Enter Amount"
-                              // autoFocus="autoFocus"
-                              className={style.AmountInput}
-                              value={depositInputveTopia}
-                              onChange={(e) => onInputDepositStakeVtopia(e)}
-                            />
-                             <Button className={style.buttontop} onClick={()=>{setDepositInputVeTopia(formatCurrency(
-                              BigNumber(stakingRewardStaked?.stakedBalance).div(
-                                10 ** 18
-                              )
-                            ,15))}}>Max</Button>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box
-                  className={`${style.modelButtons}`}
-                  style={{
-                    display: "flex",
-                    flexFlow: "row wrap",
-                    marginLeft: "0px !important",
-                    marginTop: "20px",
-                  }}
-                >
-                  <Button
-                    className={style.approveBtn}
-                    style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
-                    onClick={() => {
-                      onWithdrawVeTopia()
-                    }}
-                  >
-                    Withdraw
-                  </Button>
-                </Box>
-              </Box>
-            </TabPanel>
-          </Box>
-
-          <Typography
-            id="modal-modal-description"
-            style={{
-              textAlign: "center",
-              borderTop: "1px solid rgb(2, 119, 250)",
-              paddingTop: "10px",
-            }}
-            sx={{ mt: 2 }}
-          >
-            {/* Please Approve the contract */}
-          </Typography>
-        </Mymodel>
-      )}
+      <Typography style={{ textAlign: 'center' }} variant="h1" className={style.mainText}>Coming Soon</Typography>
     </>
+    // <>
+    //   <Container id="main" className={style.mainContainer}>
+    //     <Box id="mainContainer" className={style.mainContainerInner}>
+    //       <Box className={style.containerTop}>
+    //         <Container className={style.topContainer}>
+    //           <Grid item className={style.topGrid1} lg={4}>
+    //             <Typography variant="h1" className={style.mainText}>
+    //               Convert
+    //             </Typography>
+    //           </Grid>
+    //           <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+    //             <Paper elevation={1} className={style.topGrid2Inner}>
+    //               <Typography className={style.topGrid2Innertext1}>
+    //                 Total Deposits
+    //               </Typography>
+    //               <Typography className={style.topGrid2InnerPrice}>
+    //                 $0.00
+    //               </Typography>
+    //             </Paper>
+    //           </Grid>
+    //           <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+    //             <Paper elevation={1} className={style.topGrid2Inner}>
+    //               <Typography className={style.topGrid2Innertext1}>
+    //                 Total Deposits
+    //               </Typography>
+    //               <Typography className={style.topGrid2InnerPrice}>
+    //                 $0.00
+    //               </Typography>
+    //             </Paper>
+    //           </Grid>
+    //         </Container>
+
+    //         <Container className={style.bottomContainer}>
+    //           <Grid item xs={12} lg={9.5} className={style.bottomContainerLeft}>
+    //             <Paper elevation={1} className={style.bottomContainerLeftInner}>
+    //               <Box className={style.bottomContainerLeftInnerTop}>
+    //                 <Typography variant="h3" className={style.h3text}>
+    //                   Convert & stake dextopia NFTs/Tokens into Dextopia
+    //                 </Typography>
+    //               </Box>
+
+    //               <Box className={style.bottomContainerLeftBottom}>
+    //                 <Box className={style.bottomContainerpannelTop}>
+    //                   <Box
+    //                     sx={{ borderBottom: 1, borderColor: "divider" }}
+    //                     className={style.tabBox}
+    //                   >
+    //                     <Tabs
+    //                       value={value}
+    //                       onChange={handleChanges}
+    //                       className={style.tabs}
+    //                     >
+    //                       <Tab
+    //                         label="Solid Token"
+    //                         {...a11yProps(0, "page")}
+    //                         className={style.tab}
+    //                       />
+    //                       <Tab
+    //                         label="Solid NFT"
+    //                         {...a11yProps(1, "page")}
+    //                         className={style.tab}
+    //                       />
+    //                     </Tabs>
+    //                   </Box>
+    //                 </Box>
+    //                 <TabPanel
+    //                   style={{ backgroundColor: "rgb(32 39 43)" }}
+    //                   value={value}
+    //                   index={0}
+    //                 >
+    //                   <Box className={style.tabPannel1}>
+    //                     <Box className={style.tabPannelrow1}>
+    //                       <Typography variant="h6" className={style.h6Text}>
+    //                         This process is irreversible
+    //                       </Typography>
+    //                     </Box>
+    //                     <Box className={style.tabPannelrow2}>
+    //                       <Typography variant="p" className={style.balancep}>
+    //                         Balance: {formatCurrency(
+    //                           BigNumber(dystopiaBalance).div(
+    //                             10 ** 18
+    //                           )
+    //                         )}  dystopia
+    //                       </Typography>
+    //                     </Box>
+    //                     <Box className={style.tabPannelrow3}>
+    //                       <Box className={style.tabPannelrow3Left}>
+    //                         <Box className={style.tabPannelrow3LeftInner}>
+    //                           <Box className={style.tabinputFields}>
+    //                             <Input
+    //                               autoFocus="autoFocus"
+    //                               placeholder="Enter Amount"
+    //                               className={style.AmountInput}
+    //                               onChange={onInputDepositDyst}
+    //                               value={depositInput}
+    //                             />
+    //                             <Button className={style.buttontop} onClick={()=>{setDepositInput(formatCurrency(
+    //                           BigNumber(dystopiaBalance).div(
+    //                             10 ** 18
+    //                           )
+    //                         ,15)) }}>Max</Button>
+    //                           </Box>
+    //                         </Box>
+    //                       </Box>
+    //                       <Box className={style.tabPannelrow3Right}>
+    //                         {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }} onClick={() => onDeposit()}>
+    //                       Approve
+    //                     </Button> */}
+    //                         <Button
+    //                           className={style.approveBtn}
+    //                           onClick={() => onDeposit(depositInput)}
+    //                         >
+    //                           Convert tokens
+    //                         </Button>
+    //                       </Box>
+    //                     </Box>
+    //                     <Box className={style.tabPannelrow4}>
+    //                       <Typography variant="p" className={style.balancep}>
+    //                         Converting {depositInput} dystopia Tokens to {depositInput} Topia
+    //                       </Typography>
+    //                     </Box>
+    //                   </Box>
+    //                 </TabPanel>
+    //                 <TabPanel
+    //                   style={{ backgroundColor: "rgb(32 39 43)" }}
+    //                   value={value}
+    //                   index={1}
+    //                 >
+    //                   <Box className={style.tabPannel1}>
+    //                     <Box className={style.tabPannelrow1}>
+    //                       <Typography variant="h6" className={style.h6Text}>
+    //                         This process is irreversible
+    //                       </Typography>
+    //                     </Box>
+    //                     <Box className={style.tabPannelrow2}>
+    //                       {/* <Typography variant="p" className={style.balancep}>
+    //                       Balance: {formatCurrency(
+    //                           BigNumber(dystopiaBalance).div(
+    //                             10 ** 18
+    //                           )
+    //                         )}  dystopia in all nfts ?
+    //                       </Typography> */}
+    //                     </Box>
+    //                     <Box className={style.tabPannelrow3}>
+    //                       <Box className={style.tabPannelrow3Left}>
+    //                         <Box className={style.tabPannelrow3LeftInner}>
+    //                           <Box className={style.marginTop}>
+    //                             <FormControl sx={{ m: 1, minWidth: 200 }}>
+    //                               <InputLabel
+    //                                 style={{ color: "#fff" }}
+    //                                 id="demo-multiple-chip-label"
+    //                               >
+    //                                 Select Token ID
+    //                               </InputLabel>
+    //                               <Select
+    //                                 labelId="demo-multiple-chip-label"
+    //                                 id="demo-multiple-chip"
+    //                                 className={style.tabinputFieldsSelection}
+    //                                 value={selectDropdown}
+    //                                 onChange={(e) => {
+    //                                   setSelectDropdown(e.target.value);
+    //                                 }}
+    //                                 style={{ color: "#fff !important" }}
+    //                               >
+    //                                 {vestNFTs &&
+    //                                   vestNFTs.map((vest) => {
+    //                                     return (
+    //                                       <MenuItem key={vest.id} value={vest}>
+    //                                         <div className={style.menuOption}>
+    //                                           <Typography>
+    //                                             Token #{vest.id}
+    //                                           </Typography>
+    //                                           <div>
+    //                                             <Typography
+    //                                               align="right"
+    //                                               className={style.smallerText}
+    //                                             >
+    //                                               {formatCurrency(
+    //                                                 vest.lockValue
+    //                                               )}
+    //                                             </Typography>
+    //                                             <Typography
+    //                                               color="textSecondary"
+    //                                               className={style.smallerText}
+    //                                             >
+    //                                               {veToken?.symbol}
+    //                                             </Typography>
+    //                                           </div>
+    //                                         </div>
+    //                                       </MenuItem>
+    //                                     );
+    //                                   })}
+    //                               </Select>
+    //                             </FormControl>
+    //                           </Box>
+    //                         </Box>
+    //                       </Box>
+    //                       <Box
+    //                         className={style.tabPannelrow3Right}
+    //                         style={{ height: "60px" }}
+    //                       >
+    //                         <Button className={style.approveBtn} onClick={()=>{convertVeDystToVeTopia()}}>
+    //                           Convert tokens
+    //                         </Button>
+    //                       </Box>
+    //                     </Box>
+    //                     <Box className={style.tabPannelrow4}>
+    //                       <Typography variant="p" className={style.balancep}>
+    //                         Converting veDyst From the selected
+    //                         Dystopia NFT to {selectDropdown ? parseFloat(selectDropdown?.lockAmount).toFixed(2) : 0} veTopia
+    //                       </Typography>
+    //                     </Box>
+    //                   </Box>
+    //                 </TabPanel>
+    //               </Box>
+    //             </Paper>
+    //           </Grid>
+
+    //           {/* <Grid item xs={2.5}>
+    //       <Paper elevation={1} className={style.topGrid2Inner}>
+    //           <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+    //           <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+    //         </Paper>
+    //       </Grid> */}
+
+    //           <Grid item xs={12} className={style.bottomTable}>
+    //             <Container className={style.bottomTableInner}>
+    //               <Grid lg={2.1} item className={style.tableheaderGText}></Grid>
+    //               <Grid lg={1.85} item>
+    //                 <Typography variant="h6" className={style.tableheaderGText}>
+    //                   TVL
+    //                 </Typography>
+    //               </Grid>
+    //               <Grid lg={1.5} item>
+    //                 <Typography variant="h6">APR</Typography>
+    //               </Grid>
+    //               <Grid lg={1.7} item>
+    //                 <Typography variant="h6">Your Staked Dextopia</Typography>
+    //               </Grid>
+    //               <Grid lg={1.7} item>
+    //                 <Typography variant="h6">Your Earning</Typography>
+    //               </Grid>
+    //             </Container>
+    //             <Paper elevation={1} className={style.tableRow}>
+    //               <Box className={style.tableRowInner}>
+    //                 <Container className={style.tableBoxes}>
+    //                   <Grid item xs={12} lg={2}>
+    //                     <Typography variant="p"  style={{maxWidth: '200px'}} >Staked Dextopia</Typography>
+    //                   </Grid>
+    //                   <Grid item xs={12} lg={1.75}>
+    //                     <Typography variant="p">6,656,064.4</Typography>
+    //                   </Grid>
+    //                   <Grid item xs={12} lg={1.75}>
+    //                     <Typography variant="p">26.1%</Typography>
+    //                   </Grid>
+    //                   <Grid item xs={12} lg={1.75}>
+    //                     <Typography variant="p">
+
+    //                       {stakingRewardStaked &&
+    //                         formatCurrency(
+    //                           BigNumber(stakingRewardStaked?.stakedBalance).div(
+    //                             10 ** 18
+    //                           )
+    //                         )}
+    //                     </Typography>
+    //                   </Grid>
+    //                   <Grid item xs={6} lg={1.5}>
+    //                     <Typography variant="p">
+    //                       {stakingRewardStaked  &&
+    //                         formatCurrency(
+    //                           BigNumber(
+    //                             stakingRewardStaked?.dysTopiaEarning
+    //                           ).div(10 ** 18)
+    //                         )}{" "}
+    //                       dystopia{" "}
+    //                     </Typography>
+    //                     <br></br>
+    //                     <Typography variant="p">
+    //                       {stakingRewardStaked !== "undefined" &&
+    //                         formatCurrency(
+    //                           BigNumber(stakingRewardStaked?.topiaEarning).div(
+    //                             10 ** 18
+    //                           )
+    //                         )}{" "}
+    //                       Topia
+    //                     </Typography>
+    //                   </Grid>
+    //                   <Grid item xs={6} lg={1.5}>
+    //                     <Button
+    //                       className={style.approveBtn}
+    //                       onClick={()=> openModel()}
+    //                     >
+    //                       Manage
+    //                     </Button>
+    //                   </Grid>
+    //                   <Grid item xs={6} lg={1.5}>
+    //                     <Button
+    //                       className={style.approveBtn}
+    //                       onClick={() => onClaimVeTopia()}
+    //                     >
+    //                       Claim Earnings
+    //                     </Button>
+    //                   </Grid>
+    //                 </Container>
+    //               </Box>
+    //             </Paper>
+    //           </Grid>
+    //         </Container>
+    //       </Box>
+    //     </Box>
+    //   </Container>
+    //   {open && (
+    //     <Mymodel text="Manage veTopia Staker" open={open} handleClose={handleClose}>
+    //       <Box className={style.bottomContainerLeftBottom}>
+    //         <Box className={style.bottomContainerpannelTop}>
+    //           <Box
+    //             sx={{ borderBottom: 1, borderColor: "divider" }}
+    //             className={style.tabBox}
+    //           >
+    //             <Tabs
+    //               value={modelTabs}
+    //               onChange={handleChangeModeltab}
+    //               className={style.tabs}
+    //             >
+    //               <Tab
+    //                 label="Stake"
+    //                 {...a11yProps(0, "model")}
+    //                 className={style.tab}
+    //               />
+    //               <Tab
+    //                 label="Withdraw"
+    //                 {...a11yProps(1, "model")}
+    //                 className={style.tab}
+    //               />
+    //             </Tabs>
+    //           </Box>
+    //         </Box>
+    //         <Typography className="convertModal__p" pt={3} sx={{paddingLeft: "24px"}}>
+    //         your vetopia balance : {formatCurrency(
+    //                           BigNumber(veTopiaBalance).div(
+    //                             10 ** 18
+    //                           )
+    //                         )}
+    //                         <br></br>
+    //                         your vetopai staked balance : {formatCurrency(
+    //                           BigNumber(stakingRewardStaked?.stakedBalance).div(
+    //                             10 ** 18
+    //                           )
+    //                         )}
+    //         </Typography>
+    //         <TabPanel
+    //           style={{ backgroundColor: "rgb(32 39 43)" }}
+    //           value={modelTabs}
+    //           index={0}
+    //         >
+    //           <Box className={style.tabPannel1}>
+
+    //             <Box className={style.tabPannelrow3}>
+    //               <Box className={style.tabPannelrow3Left}>
+    //                 <Box className={style.tabPannelrow3LeftInner}>
+
+    //                   <Box className={style.tabinputFields}>
+
+    //                     <Input
+    //                       autoFocus="autoFocus"
+    //                       placeholder="Enter Amount"
+    //                       // autoFocus="autoFocus"
+    //                       className={style.AmountInput}
+    //                       value={depositInputveTopia}
+    //                       onChange={(e) => onInputDepositStakeVtopia(e)}
+    //                     />
+    //                     <Button className={style.buttontop} onClick={()=>{setDepositInputVeTopia(formatCurrency(
+    //                           BigNumber(veTopiaBalance).div(
+    //                             10 ** 18
+    //                           )
+    //                         ,15))}}>Max</Button>
+    //                   </Box>
+    //                 </Box>
+    //               </Box>
+    //             </Box>
+    //             <Box
+    //               className={`${style.modelButtons}`}
+    //               style={{
+    //                 display: "flex",
+    //                 flexFlow: "row wrap",
+    //                 marginLeft: "0px !important",
+    //                 marginTop: "20px",
+    //               }}
+    //             >
+    //               {/* <Button className={style.approveBtn} style={{ marginRight: '10px' }}>
+    //                   Approve
+    //                 </Button> */}
+    //               <Button
+    //                 className={style.approveBtn}
+    //                 style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
+    //                  onClick={() => onDepositVeTopia(depositInputveTopia)}
+    //               >
+    //                 Convert tokens
+    //               </Button>
+    //             </Box>
+    //           </Box>
+    //         </TabPanel>
+    //         <TabPanel
+    //           style={{ backgroundColor: "rgb(32 39 43)" }}
+    //           value={modelTabs}
+    //           index={1}
+    //         >
+    //           <Box className={`${style.tabPannel1} ${style.tabPannel1Modell}`}>
+    //             <Box className={style.tabPannelrow3}>
+    //               <Box className={style.tabPannelrow3Left}>
+    //                 <Box className={style.tabPannelrow3LeftInner}>
+    //                   <Box className={style.marginTop}>
+    //                     <Box className={style.tabPannelrow3LeftInner}>
+    //                       <Box className={style.tabinputFields}>
+    //                         <Input
+    //                           autoFocus="autoFocus"
+    //                           placeholder="Enter Amount"
+    //                           // autoFocus="autoFocus"
+    //                           className={style.AmountInput}
+    //                           value={depositInputveTopia}
+    //                           onChange={(e) => onInputDepositStakeVtopia(e)}
+    //                         />
+    //                          <Button className={style.buttontop} onClick={()=>{setDepositInputVeTopia(formatCurrency(
+    //                           BigNumber(stakingRewardStaked?.stakedBalance).div(
+    //                             10 ** 18
+    //                           )
+    //                         ,15))}}>Max</Button>
+    //                       </Box>
+    //                     </Box>
+    //                   </Box>
+    //                 </Box>
+    //               </Box>
+    //             </Box>
+    //             <Box
+    //               className={`${style.modelButtons}`}
+    //               style={{
+    //                 display: "flex",
+    //                 flexFlow: "row wrap",
+    //                 marginLeft: "0px !important",
+    //                 marginTop: "20px",
+    //               }}
+    //             >
+    //               <Button
+    //                 className={style.approveBtn}
+    //                 style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
+    //                 onClick={() => {
+    //                   onWithdrawVeTopia()
+    //                 }}
+    //               >
+    //                 Withdraw
+    //               </Button>
+    //             </Box>
+    //           </Box>
+    //         </TabPanel>
+    //       </Box>
+
+    //       <Typography
+    //         id="modal-modal-description"
+    //         style={{
+    //           textAlign: "center",
+    //           borderTop: "1px solid rgb(2, 119, 250)",
+    //           paddingTop: "10px",
+    //         }}
+    //         sx={{ mt: 2 }}
+    //       >
+    //         {/* Please Approve the contract */}
+    //       </Typography>
+    //     </Mymodel>
+    //   )}
+    // </>
   );
 }

@@ -57,6 +57,18 @@
   display: none;
 }
 
+.mainText{
+  margin: 0px;
+  font-family: "Changa", sans-serif;
+  font-weight: 600;
+  color: rgb(245, 253, 255);
+  text-shadow: rgb(32 39 41) 6.48936px 6.48936px 0px;
+  font-size: 6rem;
+  line-height: 1.167;
+  text-align: left;
+  padding-top: 16px;
+}
+
 .mainHeadingNC {
   text-align: center !important;
   font-size: 30px !important;
