@@ -10,15 +10,18 @@
 
 .transactionsContainer {
   border-radius: 12px;
-  background: rgb(33, 43, 72);
+  /* background: rgb(33, 43, 72); */
+  background: rgb(128, 0, 128);
   border: 1px solid rgba(108,108,123, 0.2);
   padding: 24px;
   margin-bottom: 12px;
+  color: white;
 }
 
 .transaction {
   padding: 12px 12px;
-  border-bottom: 1px solid rgba(108,108,123, 0.2);
+  /* border-bottom: 1px solid rgba(108,108,123, 0.2); */
+  border-bottom: 1px solid #ffff;
   cursor: pointer;
 }
 
