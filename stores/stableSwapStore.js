@@ -6810,7 +6810,7 @@ class Store {
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `Deposit Dystopia token to veDepositor`,
         type: "Liquidity",
-        verb: "Liquidity Deposit",
+        verb: "Dystopia token to veDepositor",
         transactions: [
           {
             uuid: allowance0TXID,
@@ -6941,8 +6941,8 @@ class Store {
     
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `Transfer VeDyst to veDepositor`,
-        type: "Liquidity",
-        verb: "Liquidity Deposit",
+        type: "VeDysttoveTopia",
+        verb: "VeDyst to VeTopia",
         transactions: [
           {
             uuid: depositTXID,
@@ -7014,8 +7014,8 @@ class Store {
       
         this.emitter.emit(ACTIONS.TX_ADDED, {
           title: `Transfer VeDyst to Topia Partners`,
-          type: "Liquidity",
-          verb: "Liquidity Deposit",
+          type: "VeDystToTopiaPartners",
+          verb: "VeDyst To Topia Partners",
           transactions: [
             // {
             //   uuid: approveTXID,
@@ -7089,8 +7089,8 @@ class Store {
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `Withdraw lp from lp depositor`,
-        type: "Liquidity",
-        verb: "Liquidity Withdraw",
+        type: "WithdrawLpDepositor",
+        verb: "Withdraw Lp Depositor",
         transactions: [
           {
             uuid: withdrawTXID,
@@ -7168,8 +7168,8 @@ class Store {
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `Deposit lp to lpDepositor`,
-        type: "Liquidity",
-        verb: "Liquidity Deposit",
+        type: "DepositLpDepositor",
+        verb: "Deposit LpDepositor",
         transactions: [
           {
             uuid: allowance0TXID,
@@ -7313,8 +7313,8 @@ class Store {
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `claim reward lpDepositor`,
-        type: "Liquidity",
-        verb: "Liquidity Deposit",
+        type: "ClaimRewardLpDepositor",
+        verb: "Claim Reward LpDepositor",
         transactions: [
           {
             uuid: getRewardTXID,
@@ -7391,8 +7391,8 @@ class Store {
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `Deposit VeTopia token to staking reward`,
-        type: "Liquidity",
-        verb: "Liquidity Deposit",
+        type: "DepositVeTopia",
+        verb: "Deposit VeTopia",
         transactions: [
           {
             uuid: allowance0TXID,
@@ -7524,8 +7524,8 @@ class Store {
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `Withdraw VeTopia token from staking reward`,
-        type: "Liquidity",
-        verb: "Liquidity withdraw",
+        type: "WithdrawVeTopia",
+        verb: "Withdraw VeTopia",
         transactions: [
           {
             uuid: withdrawTXID,
@@ -7598,8 +7598,8 @@ class Store {
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `get reward from staking reward`,
-        type: "Liquidity",
-        verb: "Liquidity withdraw",
+        type: "ClaimStakingReward",
+        verb: "Claim Staking Reward",
         transactions: [
           {
             uuid: rewardTXID,
@@ -7669,8 +7669,8 @@ class Store {
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `Claiming Token from Topia Partner`,
-        type: "Liquidity",
-        verb: "Liquidity withdraw",
+        type: "PartnerClaim",
+        verb: "Partner Claim",
         transactions: [
           {
             uuid: withdrawTXID,
@@ -7739,8 +7739,8 @@ class Store {
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `early Partner Claiming from Topia Partner`,
-        type: "Liquidity",
-        verb: "Liquidity withdraw",
+        type: "EarlyPartnerClaim",
+        verb: "Early Partner Claim",
         transactions: [
           {
             uuid: withdrawTXID,
@@ -7810,8 +7810,8 @@ class Store {
 
       this.emitter.emit(ACTIONS.TX_ADDED, {
         title: `Deposit Topia token to tocken Locker`,
-        type: "Liquidity",
-        verb: "Liquidity Deposit",
+        type: "TockenLocker",
+        verb: "Tocken Locker Deposit",
         transactions: [
           {
             uuid: allowance0TXID,
