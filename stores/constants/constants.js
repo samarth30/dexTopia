@@ -3,7 +3,7 @@ import * as contractsTestnet from './contractsTestnet'
 import * as contracts from './contracts'
 import * as actions from './actions'
 
-let isTestnet = process.env.NEXT_PUBLIC_CHAINID == 4002
+let isTestnet = process.env.NEXT_PUBLIC_CHAINID == 80001
 
 // URLS
 let scan = 'https://polygonscan.com/'
