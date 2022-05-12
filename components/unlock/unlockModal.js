@@ -21,7 +21,7 @@ export default function UnlockModal(props) {
       maxWidth="false"
       TransitionComponent={Transition}
       fullScreen={fullScreen}
-      style={{ borderRadius: 0 }}
+      style={{ borderRadius: 0, background: 'transparent !important' }}
     >
       <div style={{
         width: 460,

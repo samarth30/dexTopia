@@ -99,18 +99,18 @@ export default function MyApp({ Component, pageProps }) {
             content="minimum-scale=1, initial-scale=1, width=device-width"
           />
         </Head>
-        <AppThemeProvider value={{appTheme, setAppTheme}}>
+        <AppThemeProvider value={{ appTheme, setAppTheme }}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline/>
+          <CssBaseline />
           {validateConfigured() && (
             <>
-            <div className="jss7">
-            <Layout>
-            <div className="jss8">
-              <Component {...pageProps} changeTheme={changeTheme}/>
-            </div>
-            </Layout>
-            </div>
+              <div className="jss7">
+                <Layout>
+                  <div className="jss8">
+                    <Component {...pageProps} changeTheme={changeTheme} />
+                  </div>
+                </Layout>
+              </div>
             </>
           )}
           {!validateConfigured() && <Configure {...pageProps} />}
