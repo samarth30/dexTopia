@@ -62,6 +62,7 @@ export default function UnlockModal(props) {
         <DialogContent style={{
           padding: 30,
           paddingBottom: 20,
+          background: 'transparent'
         }}>
           <Unlock closeModal={closeModal} />
         </DialogContent>
