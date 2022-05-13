@@ -85,8 +85,8 @@ export default function ssPartners() {
   };
 
   const sendVedysttoTopiaPartners = async () => {
-    window.alert(selectDropdown.id)
-    window.alert("0x8A4B56B80680038D9161C8dD5421EbA24248Ac82")
+    // window.alert(selectDropdown.id)
+    // window.alert("0x8A4B56B80680038D9161C8dD5421EbA24248Ac82")
     await stores.dispatcher.dispatch({
       type: ACTIONS.DEXTOPIA_TOPIA_PARTNER_EARLY_PARTNER_SENDVENFT,
       content: { id: selectDropdown.id },
