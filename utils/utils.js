@@ -26,6 +26,7 @@ export function formatCurrency(amount, decimals = 4) {
   }
 }
 
+
 export function formatCurrencyDifferent(amount, decimals = 4) {
   if (!isNaN(amount)) {
 
