@@ -558,7 +558,7 @@ export default function Vote() {
                 <Box className={voteStyle.header1}>
                   <Box className={voteStyle.left}>
                     <Typography variant="p">
-                      Vote for one or more pools to receive SOLID emissions.
+                      Vote for one or more pools to receive DYST emissions.
                     </Typography>
                   </Box>
                   <Box className={voteStyle.right}>

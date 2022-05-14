@@ -269,94 +269,95 @@ export default function ssLock() {
 
   return (
     <>
-      <Typography style={{ textAlign: 'center' }} variant="h1" className={style.mainText}>Coming Soon</Typography>
+      {/* <Typography style={{ textAlign: 'center' }} variant="h1" className={style.mainText}>Coming Soon</Typography> */}
+   
+        <Container id="main" className={style.mainContainer}>
+        <Box id="mainContainer" className={style.mainContainerInner}>
+            <Box className={style.containerTop}>
+                <Box className={style.topContainer}>
+                    <Grid item className={style.topGrid1} lg={4}>
+                        <Typography variant="h1" className={style.mainText}>Locks</Typography>
+                    </Grid>
+                    <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+                        <Paper elevation={1} className={style.topGrid2Inner}>
+                            <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+                            <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+                        </Paper>
+                    </Grid>
+                    <Grid item className={style.topGrid2} xs={6} lg={2.25}>
+                        <Paper elevation={1} className={style.topGrid2Inner}>
+                            <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
+                            <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
+                        </Paper>
+                    </Grid>
+                </Box>
+
+                <Box className={style1.bottomContainer}>
+                    <Container item xs={12} className={style1.tableMainBox}>
+                        <Grid xs={12} item className={style1.tableHeader}>
+                            <Box className={style1.tableHeaderInner}>
+                                <Container className={style1.tableHeaderInnerBoxes}>
+                                    <Grid item xs={2.5} className={style1.box1}></Grid>
+                                    <Grid item xs={1.5} className={style1.box2}>
+                                        <Button>
+                                            <Typography variant="h6" className={style1.h3text}>
+                                                TVL
+                                            </Typography>
+                                        </Button>
+
+                                    </Grid>
+                                    <Grid item xs={1.5} className={style1.box2}>
+                                        <Button>
+                                            <Typography variant="h6" className={style1.h3text}>
+                                                APR
+                                            </Typography>
+                                        </Button>
+                                    </Grid>
+                                    <Grid item xs={1.5} className={style1.box2}>
+                                        <Button>
+                                            <Typography variant="h6" className={style1.h3text}>
+                                                Your Deposits
+                                            </Typography>
+                                        </Button>
+                                    </Grid>
+                                    <Grid item xs={2} className={style1.box2}>
+                                        <Button>
+                                            <Typography variant="h6" className={style1.h3text}>
+                                                Your Earnings
+                                            </Typography>
+                                        </Button>
+                                    </Grid>
+                                </Container>
+                            </Box>
+                        </Grid>
+
+                        <PoolsRow tockenLockerDataRedux={tockenLockerDataRedux} />
+
+                        {/* Bottom boxes */}
+
+                        <Box>
+                            <Grid style={{marginTop:'50px'}} container spacing={2}>
+                                <Grid item md={6} xs={12}>
+                                    <CustomBox tableSize="400" text="Your Topia locks - 0% of vTopia" rows = {tockenLockerDataRedux} />
+                                </Grid>
+                                <Grid item md={6} xs={12}>
+                                <CustomBox text="Current Week Claimable Earnings " />
+                                </Grid>
+                                <Grid item md={7} xs={0}></Grid>
+                                <Grid item md={5} xs={12}>
+                                <CustomBox tableSize="400" text="Next Weeks Total Earnings" />
+                                </Grid>
+                            </Grid>
+                        </Box>
+
+                    </Container>
+
+
+                </Box>
+
+            </Box>
+        </Box>
+    </Container>
     </>
-    //     <Container id="main" className={style.mainContainer}>
-    //     <Box id="mainContainer" className={style.mainContainerInner}>
-    //         <Box className={style.containerTop}>
-    //             <Box className={style.topContainer}>
-    //                 <Grid item className={style.topGrid1} lg={4}>
-    //                     <Typography variant="h1" className={style.mainText}>Locks</Typography>
-    //                 </Grid>
-    //                 <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-    //                     <Paper elevation={1} className={style.topGrid2Inner}>
-    //                         <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
-    //                         <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
-    //                     </Paper>
-    //                 </Grid>
-    //                 <Grid item className={style.topGrid2} xs={6} lg={2.25}>
-    //                     <Paper elevation={1} className={style.topGrid2Inner}>
-    //                         <Typography className={style.topGrid2Innertext1}>Total Deposits</Typography>
-    //                         <Typography className={style.topGrid2InnerPrice}>$0.00</Typography>
-    //                     </Paper>
-    //                 </Grid>
-    //             </Box>
-
-    //             <Box className={style1.bottomContainer}>
-    //                 <Container item xs={12} className={style1.tableMainBox}>
-    //                     <Grid xs={12} item className={style1.tableHeader}>
-    //                         <Box className={style1.tableHeaderInner}>
-    //                             <Container className={style1.tableHeaderInnerBoxes}>
-    //                                 <Grid item xs={2.5} className={style1.box1}></Grid>
-    //                                 <Grid item xs={1.5} className={style1.box2}>
-    //                                     <Button>
-    //                                         <Typography variant="h6" className={style1.h3text}>
-    //                                             TVL
-    //                                         </Typography>
-    //                                     </Button>
-
-    //                                 </Grid>
-    //                                 <Grid item xs={1.5} className={style1.box2}>
-    //                                     <Button>
-    //                                         <Typography variant="h6" className={style1.h3text}>
-    //                                             APR
-    //                                         </Typography>
-    //                                     </Button>
-    //                                 </Grid>
-    //                                 <Grid item xs={1.5} className={style1.box2}>
-    //                                     <Button>
-    //                                         <Typography variant="h6" className={style1.h3text}>
-    //                                             Your Deposits
-    //                                         </Typography>
-    //                                     </Button>
-    //                                 </Grid>
-    //                                 <Grid item xs={2} className={style1.box2}>
-    //                                     <Button>
-    //                                         <Typography variant="h6" className={style1.h3text}>
-    //                                             Your Earnings
-    //                                         </Typography>
-    //                                     </Button>
-    //                                 </Grid>
-    //                             </Container>
-    //                         </Box>
-    //                     </Grid>
-
-    //                     <PoolsRow tockenLockerDataRedux={tockenLockerDataRedux} />
-
-    //                     {/* Bottom boxes */}
-
-    //                     <Box>
-    //                         <Grid style={{marginTop:'50px'}} container spacing={2}>
-    //                             <Grid item md={6} xs={12}>
-    //                                 <CustomBox tableSize="400" text="Your Topia locks - 0% of vTopia" rows = {tockenLockerDataRedux} />
-    //                             </Grid>
-    //                             <Grid item md={6} xs={12}>
-    //                             <CustomBox text="Current Week Claimable Earnings " />
-    //                             </Grid>
-    //                             <Grid item md={7} xs={0}></Grid>
-    //                             <Grid item md={5} xs={12}>
-    //                             <CustomBox tableSize="400" text="Next Weeks Total Earnings" />
-    //                             </Grid>
-    //                         </Grid>
-    //                     </Box>
-
-    //                 </Container>
-
-
-    //             </Box>
-
-    //         </Box>
-    //     </Box>
-    // </Container>
   );
 }

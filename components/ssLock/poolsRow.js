@@ -304,13 +304,13 @@ export default function PoolsRow({ gauges, setParentSliderValues, defaultVotes, 
 
                         <Grid xs={12} lg={1.5} className={style.tableBox2}>
                             <Typography variant="p" className={style.tableBox2text}>
-                                $121.88m
+                                $0m
                             </Typography>
                             {/* <img src={symbolcircle} className={style.svgIcon} alt="symbol" srcSet="" /> */}
                         </Grid>
                         <Grid xs={12} lg={1.5} className={style.tableBox2}>
                             <Typography variant="p" className={style.tableBox2text}>
-                                14.5%
+                                99784%
                             </Typography>
                         </Grid>
                         <Grid xs={12} lg={1.5} className={style.tableBox2}>
