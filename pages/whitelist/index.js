@@ -44,33 +44,33 @@ function Vesting({ changeTheme }) {
   };
 
   return (
-    <>
-      <Typography style={{ textAlign: 'center' }} variant="h1" className={classes.mainText}>Coming Soon</Typography>
-    </>
-    // <div className={classes.ffContainer}>
-    //   {account && account.address ?
-    //     <div className={classes.connected}>
-    //       <WhitelistTokens />
-    //     </div>
-    //   :
-    //     <Paper className={classes.notConnectedContent}>
-    //       <div className={classes.sphere}></div>
-    //       <div className={classes.contentFloat}>
-    //         <Typography className={classes.mainHeadingNC} variant='h1'>Whitelist Tokens</Typography>
-    //         <Typography className={classes.mainDescNC} variant='body2'>Whitelist tokens to be used in Dystopia Gauges.</Typography>
-    //         <Button
-    //           disableElevation
-    //           className={classes.buttonConnect}
-    //           variant="contained"
-    //           onClick={onAddressClicked}>
-    //             {account && account.address && <div className={`${classes.accountIcon} ${classes.metamask}`}></div>}
-    //             <Typography>Connect Wallet to Continue</Typography>
-    //         </Button>
-    //       </div>
-    //     </Paper>
-    //   }
-    //   {unlockOpen && <Unlock modalOpen={unlockOpen} closeModal={closeUnlock} />}
-    // </div>
+    // <>
+    //   <Typography style={{ textAlign: 'center' }} variant="h1" className={classes.mainText}>Coming Soon</Typography>
+    // </>
+    <div className={classes.ffContainer}>
+      {account && account.address ?
+        <div className={classes.connected}>
+          <WhitelistTokens />
+        </div>
+      :
+        <Paper className={classes.notConnectedContent}>
+          <div className={classes.sphere}></div>
+          <div className={classes.contentFloat}>
+            <Typography className={classes.mainHeadingNC} variant='h1'>Whitelist Tokens</Typography>
+            <Typography className={classes.mainDescNC} variant='body2'>Whitelist tokens to be used in Dystopia Gauges.</Typography>
+            <Button
+              disableElevation
+              className={classes.buttonConnect}
+              variant="contained"
+              onClick={onAddressClicked}>
+                {account && account.address && <div className={`${classes.accountIcon} ${classes.metamask}`}></div>}
+                <Typography>Connect Wallet to Continue</Typography>
+            </Button>
+          </div>
+        </Paper>
+      }
+      {unlockOpen && <Unlock modalOpen={unlockOpen} closeModal={closeUnlock} />}
+    </div>
   );
 }
 

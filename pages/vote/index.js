@@ -40,36 +40,36 @@ function Vote({ changeTheme }) {
   };
 
   return (
-    <>
-      <Typography style={{ textAlign: 'center' }} variant="h1" className={classes.mainText}>Coming Soon</Typography>
-    </>
-    // <div className={classes.ffContainer}>
+    // <>
+    //   <Typography style={{ textAlign: 'center' }} variant="h1" className={classes.mainText}>Coming Soon</Typography>
+    // </>
+    <div className={classes.ffContainer}>
 
-    //   {account && account.address ?
-    //     <div className={classes.connected}>
-    //       <Gauges />
-    //     </div>
-    //     :
-    //     <Paper className={classes.notConnectedContent}>
-    //       <div className={classes.sphere}></div>
-    //       <div className={classes.contentFloat}>
-    //       <Typography className={classes.mainHeadingNC} variant='h1'>Vote</Typography>
-    //       <Typography className={classes.mainDescNC} color='common.white' variant='body2'>
-    //         Use your veDyst to vote for your selected liquidity pair’s rewards distribution or create a bribe to encourage others to do the same.
-    //       </Typography>
-    //       <Button
-    //         disableElevation
-    //         className={classes.buttonConnect}
-    //         variant="contained"
-    //         onClick={onAddressClicked}>
-    //           {account && account.address && <div className={`${classes.accountIcon} ${classes.metamask}`}></div>}
-    //           <Typography>Connect Wallet to Continue</Typography>
-    //       </Button>
-    //       </div>
-    //     </Paper>
-    //    }
-    //    {unlockOpen && <Unlock modalOpen={unlockOpen} closeModal={closeUnlock} />}
-    // </div>
+      {account && account.address ?
+        <div className={classes.connected}>
+          <Gauges />
+        </div>
+        :
+        <Paper className={classes.notConnectedContent}>
+          <div className={classes.sphere}></div>
+          <div className={classes.contentFloat}>
+          <Typography className={classes.mainHeadingNC} variant='h1'>Vote</Typography>
+          <Typography className={classes.mainDescNC} color='common.white' variant='body2'>
+            Use your veDyst to vote for your selected liquidity pair’s rewards distribution or create a bribe to encourage others to do the same.
+          </Typography>
+          <Button
+            disableElevation
+            className={classes.buttonConnect}
+            variant="contained"
+            onClick={onAddressClicked}>
+              {account && account.address && <div className={`${classes.accountIcon} ${classes.metamask}`}></div>}
+              <Typography>Connect Wallet to Continue</Typography>
+          </Button>
+          </div>
+        </Paper>
+       }
+       {unlockOpen && <Unlock modalOpen={unlockOpen} closeModal={closeUnlock} />}
+    </div>
   );
 }
 
