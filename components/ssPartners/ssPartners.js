@@ -414,7 +414,7 @@ export default function ssPartners() {
                 <Typography className={style.topGrid2Innertext1}>Partners</Typography>
                 {
                   <Typography className={style.topGrid2InnerPrice}>{topiaPartnerData && topiaPartnerData?.partnerCount ? topiaPartnerData?.partnerCount : 0}/20</Typography>
-                }  
+                }
               </Paper>
             </Grid>
             <Grid item className={style.topGrid2} xs={6} lg={2.25}>
@@ -422,21 +422,21 @@ export default function ssPartners() {
                 <Typography className={style.topGrid2Innertext1}>Early Partner Deadline</Typography>
                 <Typography className={style.topGrid2InnerPrice}>{`${new Date(parseFloat(parseFloat(1652832000) * 1000)).toDateString()}`}</Typography>
               </Paper>
-              
+
             </Grid>
-              {/* 1652313600 */}
-              {/* parseFloat(topiaPartnerData?.earlyPartnerDeadline) */}
-              {/* parseFloat(topiaPartnerData?.finalPartnerDeadline) */}
+            {/* 1652313600 */}
+            {/* parseFloat(topiaPartnerData?.earlyPartnerDeadline) */}
+            {/* parseFloat(topiaPartnerData?.finalPartnerDeadline) */}
             <Grid item className={style.topGrid2} xs={6} lg={2.25}>
               <Paper elevation={1} className={style.topGrid2Inner}>
                 <Typography className={style.topGrid2Innertext1}>Final Partner Deadline</Typography>
                 <Typography className={style.topGrid2InnerPrice}> {`${new Date(parseFloat(parseFloat(1653523200) * 1000)).toDateString()}`}</Typography>
               </Paper>
             </Grid>
-           
+
           </Container>
 
-          <Container className={style.topContainer}>
+          <Container style={{ marginTop: '12px', marginBottom: '12px' }} className={style.topContainer}>
             <Box className={style.boxStyle}>
               <Typography color="common.white" style={{ fontSize: "1.5rem" }}>First 20 Protocols to convert their NFT. Become a Partner!. Find out More</Typography>
             </Box>
@@ -541,7 +541,7 @@ export default function ssPartners() {
                   </TabPanel>
                 </Box>
               </Paper>
-              <Box style={{ display: "flex", flexWrap: "wrap", margin: "1rem 0", background: "transparent", justifyContent: "space-between" }}>
+              <Box className={style.negativeContainer}>
                 <Box className={style.boxStyle2}>
                   <Typography>
                     Negative Vote Protection

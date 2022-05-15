@@ -67,6 +67,17 @@ export default function ssConvert() {
     setVestNFTs(nfts);
   }, []);
 
+  const [width, setWidth] = useState(window.innerWidth)
+  useEffect(() => {
+    const handleWindowResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleWindowResize);
+
+
+    return () => window.removeEventListener("resize", handleWindowResize)
+  }, [])
+
+  console.log(width)
+
   const openModel = () => {
     setOpen(true);
   };
@@ -478,11 +489,13 @@ export default function ssConvert() {
                                   onChange={onInputDepositDyst}
                                   value={depositInput}
                                 />
-                                <Button className={style.buttontop} onClick={()=>{setDepositInput(formatCurrency(
-                              BigNumber(dystopiaBalance).div(
-                                10 ** 18
-                              )
-                            ,15)) }}>Max</Button>
+                                <Button className={style.buttontop} onClick={() => {
+                                  setDepositInput(formatCurrency(
+                                    BigNumber(dystopiaBalance).div(
+                                      10 ** 18
+                                    )
+                                    , 15))
+                                }}>Max</Button>
                               </Box>
                             </Box>
                           </Box>
@@ -583,7 +596,7 @@ export default function ssConvert() {
                             className={style.tabPannelrow3Right}
                             style={{ height: "60px" }}
                           >
-                            <Button className={style.approveBtn} onClick={()=>{convertVeDystToVeTopia()}}>
+                            <Button className={style.approveBtn} onClick={() => { convertVeDystToVeTopia() }}>
                               Convert tokens
                             </Button>
                           </Box>
@@ -609,7 +622,11 @@ export default function ssConvert() {
 
               <Grid item xs={12} className={style.bottomTable}>
                 <Container className={style.bottomTableInner}>
-                  <Grid lg={2.1} item className={style.tableheaderGText}></Grid>
+                  <Typography variant="h6" style={{ marginLeft: '50px' }}>TVL</Typography>
+                  <Typography variant="h6" style={{ marginLeft: '54px' }}>APR</Typography>
+                  <Typography variant="h6" style={{ marginLeft: '89px', width: 'min-content', textAlign: 'center' }}>Staked Dextopia</Typography>
+                  <Typography variant="h6" style={{ marginLeft: '22px' }}>Your Earning</Typography>
+                  {/* <Grid lg={2.1} item className={style.tableheaderGText}></Grid>
                   <Grid lg={1.85} item>
                     <Typography variant="h6" className={style.tableheaderGText}>
                       TVL
@@ -623,23 +640,29 @@ export default function ssConvert() {
                   </Grid>
                   <Grid lg={1.7} item>
                     <Typography variant="h6">Your Earning</Typography>
-                  </Grid>
+                  </Grid> */}
                 </Container>
                 <Paper elevation={1} className={style.tableRow}>
                   <Box className={style.tableRowInner}>
                     <Container className={style.tableBoxes}>
                       <Grid item xs={12} lg={2}>
-                        <Typography variant="p"  style={{maxWidth: '200px'}} >Staked Dextopia</Typography>
+                        <Typography variant="p" style={{ maxWidth: '200px' }} >Staked Dextopia</Typography>
                       </Grid>
-                      <Grid item xs={12} lg={1.75}>
-                        <Typography variant="p">0 m</Typography>
+                      <Grid className={style.tableItems} item xs={12} lg={1.75}>
+                        {width < 900 ? (
+                          <Typography variant="h6" className={style.tableheaderGText}>
+                            TVL:
+                          </Typography>
+                        ) : null}
+                        <Typography variant="h6">0 m</Typography>
                       </Grid>
-                      <Grid item xs={12} lg={1.75}>
-                        <Typography variant="p">1000.1%</Typography>
+                      <Grid className={style.tableItems} item xs={12} lg={1.75}>
+                        {width < 900 ? (<Typography variant="h6">APR: </Typography>) : null}
+                        <Typography variant="h6">1000.1%</Typography>
                       </Grid>
-                      <Grid item xs={12} lg={1.75}>
-                        <Typography variant="p">
-
+                      <Grid className={style.tableItems} style={{ textAlign: 'center', flexDirection: 'column' }} item xs={12} lg={1.75}>
+                        {width < 900 ? (<Typography variant="h6">Your Staked Dextopia: </Typography>) : null}
+                        <Typography variant="h6">
                           {stakingRewardStaked &&
                             formatCurrency(
                               BigNumber(stakingRewardStaked?.stakedBalance).div(
@@ -649,8 +672,9 @@ export default function ssConvert() {
                         </Typography>
                       </Grid>
                       <Grid item xs={6} lg={1.5}>
+                        {width < 900 ? (<Typography variant="h6">Your Earning: </Typography>) : null}
                         <Typography variant="p">
-                          {stakingRewardStaked  &&
+                          {stakingRewardStaked &&
                             formatCurrency(
                               BigNumber(
                                 stakingRewardStaked?.dysTopiaEarning
@@ -671,15 +695,17 @@ export default function ssConvert() {
                       </Grid>
                       <Grid item xs={6} lg={1.5}>
                         <Button
-                          className={style.approveBtn}
-                          onClick={()=> openModel()}
+                          // className={style.approveBtn}
+                          style={{ backgroundColor: '#842fb9', color: 'white' }}
+                          onClick={() => openModel()}
                         >
                           Manage
                         </Button>
                       </Grid>
                       <Grid item xs={6} lg={1.5}>
                         <Button
-                          className={style.approveBtn}
+                          // className={style.approveBtn}
+                          style={{ backgroundColor: '#842fb9', color: 'white' }}
                           onClick={() => onClaimVeTopia()}
                         >
                           Claim Earnings
@@ -719,18 +745,18 @@ export default function ssConvert() {
                 </Tabs>
               </Box>
             </Box>
-            <Typography className="convertModal__p" pt={3} sx={{paddingLeft: "24px"}}>
-            your vetopia balance : {formatCurrency(
-                              BigNumber(veTopiaBalance).div(
-                                10 ** 18
-                              )
-                            )}
-                            <br></br>
-                            your vetopai staked balance : {formatCurrency(
-                              BigNumber(stakingRewardStaked?.stakedBalance).div(
-                                10 ** 18
-                              )
-                            )}
+            <Typography className="convertModal__p" pt={3} sx={{ paddingLeft: "24px" }}>
+              your vetopia balance : {formatCurrency(
+                BigNumber(veTopiaBalance).div(
+                  10 ** 18
+                )
+              )}
+              <br></br>
+              your vetopai staked balance : {formatCurrency(
+                BigNumber(stakingRewardStaked?.stakedBalance).div(
+                  10 ** 18
+                )
+              )}
             </Typography>
             <TabPanel
               style={{ backgroundColor: "rgb(32 39 43)" }}
@@ -753,11 +779,13 @@ export default function ssConvert() {
                           value={depositInputveTopia}
                           onChange={(e) => onInputDepositStakeVtopia(e)}
                         />
-                        <Button className={style.buttontop} onClick={()=>{setDepositInputVeTopia(formatCurrency(
-                              BigNumber(veTopiaBalance).div(
-                                10 ** 18
-                              )
-                            ,15))}}>Max</Button>
+                        <Button className={style.buttontop} onClick={() => {
+                          setDepositInputVeTopia(formatCurrency(
+                            BigNumber(veTopiaBalance).div(
+                              10 ** 18
+                            )
+                            , 15))
+                        }}>Max</Button>
                       </Box>
                     </Box>
                   </Box>
@@ -777,7 +805,7 @@ export default function ssConvert() {
                   <Button
                     className={style.approveBtn}
                     style={{ background: "rgb(2, 119, 250)", color: "#fff" }}
-                     onClick={() => onDepositVeTopia(depositInputveTopia)}
+                    onClick={() => onDepositVeTopia(depositInputveTopia)}
                   >
                     Convert tokens
                   </Button>
@@ -804,11 +832,13 @@ export default function ssConvert() {
                               value={depositInputveTopia}
                               onChange={(e) => onInputDepositStakeVtopia(e)}
                             />
-                             <Button className={style.buttontop} onClick={()=>{setDepositInputVeTopia(formatCurrency(
-                              BigNumber(stakingRewardStaked?.stakedBalance).div(
-                                10 ** 18
-                              )
-                            ,15))}}>Max</Button>
+                            <Button className={style.buttontop} onClick={() => {
+                              setDepositInputVeTopia(formatCurrency(
+                                BigNumber(stakingRewardStaked?.stakedBalance).div(
+                                  10 ** 18
+                                )
+                                , 15))
+                            }}>Max</Button>
                           </Box>
                         </Box>
                       </Box>
